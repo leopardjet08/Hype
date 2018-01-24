@@ -65,7 +65,9 @@
                 </div> 
             </div>
         </nav>
-        <form id="form2" runat="server">
+
+
+        <%--<form id="form2" runat="server">
              <div class="container well well-lg" style="height: 1000px">
                  <br /><br />
                  <fieldset>
@@ -100,7 +102,9 @@
 
                   </fieldset>
              </div>              
-        </form>
+        </form>--%>
+
+
     <div id="footer" class="navbar navbar-light" style="padding:25px 0 25px 0; margin-bottom:0px; border:none; bottom:0; text-align:center; font-size:14px; background-color: #f5f5f5;">
              
         Niagara Catholic District School Board - Copyright © 2018
