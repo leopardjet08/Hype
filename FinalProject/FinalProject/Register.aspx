@@ -18,7 +18,7 @@
 <body>
     <form id="form1" runat="server">
         <div style="padding-top: 150px">
-           <div class="container well well-lg" style="width: 471px; margin-top:150px; height: 491px;";>
+           <div class="container well well-lg" style="width: 471px; height: 383px;";>
                    <div class="titlehead" style="text-align: center">
                         <h3>Register New User:</h3>
                    </div>
@@ -29,14 +29,14 @@
                                     <br />
                                     Username:</td>
                                 <td>
-                                    <asp:TextBox class="form-control" ID="txtRegUsername" runat="server" TabIndex="1" OnTextChanged="txtRegUsername_TextChanged"></asp:TextBox>
+                                    <asp:TextBox class="form-control" ID="txtRegUsername" runat="server" TabIndex="1"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="auto-style2">
                                     <br />
-                                    Password:<br />
-                               <br />
+                                    Password:
+                                    <br />
                                 </td>
                                 <td class="auto-style1"><asp:TextBox class="form-control" ID="txtRegPassword" runat="server" TabIndex="2" TextMode="Password"></asp:TextBox></td>
                             </tr>
@@ -52,12 +52,12 @@
                        </table>
                     <asp:Label ID="lblRegStatus" runat="server" ForeColor="#006600"></asp:Label>
                    <br />
-                    <asp:Button ID="btnRegister" style="display:inline-block" Text="Register" class="btn btn-info" runat="server" OnClick="btnRegister_Click"/>
+                    <asp:Button ID="btnRegister" style="display:inline-block" Text="Register" class="btn btn-info" runat="server"/>
                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
                
                     <a href="javascript: history.go(-1);">Back</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <a href="Login.aspx">Login</a>
-                   <br />
+                 
                </div>
                </div>
     </form>

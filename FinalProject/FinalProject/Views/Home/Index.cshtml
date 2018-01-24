@@ -2,30 +2,56 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+
+<div class="container well well-lg" style="height: 1000px; margin-top:100px;">
+    <br /><br />
+    <fieldset style="margin-bottom:100px">
+        <legend style="text-align:center; font-size:30px; color:#337ab7;">Niagara Catholic District School Board</legend>
+        <h3 style="padding-top:20px; border:none; text-align:center;">Search Job Postings:</h3>&nbsp;&nbsp;
+        <div class="SearchTextBox ">              
+            <asp:TextBox ID="TextBox1" class="form-control" style="padding-bottom:20px; margin:0 auto; width:400px;" runat="server"></asp:TextBox>
+        </div>      
+    </fieldset>
+      
+    <div class="row" style="text-align:center; margin:0 auto";>
+    <div class="col-md-4">  
+        <p>
+            <a href="#"><img src="comments.png" style="height:100px"/></a>
+        </p>
+        <h4>Comments</h4>
+        
+    </div>
+
+    <div class="col-md-4">    
+        <p>
+            <a href="#"><img src="FAQ.png" style="height:100px"/></a>
+        </p>
+        <h4>Frequently Asked Questions</h4>     
+    </div>
+
+    <div class="col-md-4">     
+        <p>
+            <a href="#"><img src="AboutUs.png" style="height:100px"/></a>
+        </p>
+        <h4>About Us</h4>
+    </div>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
+    <p style="padding-top:100px;">
+        Follow us on social media:
+    </p>
+
+    <div style="padding-top:20px;">
         <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+            <a href="https://www.facebook.com/NiagaraCatholicDSB/"><img src="facebook.png" style="height:30px;" /></a>&nbsp;&nbsp;
+            <a href="https://twitter.com/niagaracatholic"><img src="twitter.png" style="height:30px;" /></a>&nbsp;&nbsp;
+            <a href="https://www.youtube.com/user/NiagaraCatholicDSB"><img src="youtube.png" style="height:30px;" /></a><br />
         </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+    
+
+
+
+</div>          
+
+
