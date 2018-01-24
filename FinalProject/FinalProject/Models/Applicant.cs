@@ -49,7 +49,7 @@ namespace FinalProject.Models
         [Required(ErrorMessage = "Please select Province.")]
         public int ProvinceID { get; set; }
 
-        public virtual Province Provinces { get; set; }
+        public virtual Province Province { get; set; }
         public ICollection<Application> Applications { get; set; }
     }
 }

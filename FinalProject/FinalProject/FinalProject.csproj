@@ -216,9 +216,11 @@
     <Compile Include="Models\Applicant.cs" />
     <Compile Include="Models\Application.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Job.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Posting.cs" />
     <Compile Include="Models\Province.cs" />
+    <Compile Include="Models\Qualification.cs" />
     <Compile Include="Models\School.cs" />
     <Compile Include="Models\SchoolFamily.cs" />
     <Compile Include="Models\SchoolLevel.cs" />

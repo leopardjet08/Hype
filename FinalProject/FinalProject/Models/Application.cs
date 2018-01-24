@@ -22,8 +22,8 @@ namespace FinalProject.Models
         [Required(ErrorMessage = "Please specify the school you applied for.")]
         public int SchoolID { get; set; }
 
-        public virtual Applicant Applicants { get; set; }
-        public virtual Posting Postings { get; set; }
-        public virtual School Schools { get; set; }
+        public virtual Applicant Applicant { get; set; }
+        public virtual Posting Posting { get; set; }
+        public virtual School School { get; set; }
     }
 }

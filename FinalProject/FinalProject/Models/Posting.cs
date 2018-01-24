@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace FinalProject.Models
@@ -12,6 +9,7 @@ namespace FinalProject.Models
         public Posting()
         {
             this.Applications = new HashSet<Application>();
+            this.Qualifications = new HashSet<Qualification>();
         }
 
         public int ID { get; set; }
@@ -35,8 +33,13 @@ namespace FinalProject.Models
         [Required(ErrorMessage = "Please Select the school for this job posting.")]
         public int SchoolID { get; set; }
 
-        public virtual School Schools { get; set; }
+        [Required(ErrorMessage ="Please provide the Job for this posting")]
+        public int JobID { get; set; }
+
+        public virtual School School { get; set; }
+        public virtual Job Job { get; set; }
         public ICollection<Application> Applications { get; set; }
+        public ICollection<Qualification> Qualifications { get; set; }
 
 
 
