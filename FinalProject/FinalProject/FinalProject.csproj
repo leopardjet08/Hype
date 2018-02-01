@@ -202,22 +202,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PortfolioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="HomePage.aspx.cs">
-      <DependentUpon>HomePage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="HomePage.aspx.designer.cs">
-      <DependentUpon>HomePage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Login.aspx.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Login.aspx.designer.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Applicant.cs" />
@@ -227,6 +214,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Job.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Portfolio.cs" />
     <Compile Include="Models\Posting.cs" />
     <Compile Include="Models\Province.cs" />
     <Compile Include="Models\Qualification.cs" />
@@ -235,36 +223,26 @@
     <Compile Include="Models\SchoolLevel.cs" />
     <Compile Include="Models\SchoolLocation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Register.aspx.cs">
-      <DependentUpon>Register.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Register.aspx.designer.cs">
-      <DependentUpon>Register.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AboutUs.png" />
-    <Content Include="comments.png" />
-    <Content Include="CompanyLogo.png" />
+    <Content Include="Images\AboutUs.png" />
+    <Content Include="Images\comments.png" />
+    <Content Include="Images\CompanyLogo.png" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="facebook.png" />
-    <Content Include="FAQ.png" />
-    <Content Include="favicon.ico" />
+    <Content Include="Images\facebook.png" />
+    <Content Include="Images\FAQ.png" />
+    <Content Include="Images\favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="HomePage.aspx" />
-    <Content Include="Login.aspx" />
-    <Content Include="Register.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="youtube.png" />
+    <Content Include="Images\youtube.png" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -276,7 +254,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="twitter.png" />
+    <Content Include="Images\twitter.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -311,6 +289,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Home\Portfolio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
