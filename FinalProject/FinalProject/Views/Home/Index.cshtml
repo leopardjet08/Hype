@@ -2,30 +2,100 @@
     ViewBag.Title = "Home Page";
 }
 
+<div class="navbar navbar-light navbar-fixed-top" style="border-bottom:10px solid white; background-color: #f5f5f5;">
+    <div class="container">
 
-<div class="container well well-lg" style="height: 1000px; margin-top:100px;">
+
+        <!-- Logo -->
+        <div class="navbar-header">
+
+            <img src="Images/CompanyLogo.png" alt="Logo" style="height:50%; width:50%; padding-top:10px; padding-bottom:10px;" />
+        </div>
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+        </div>
+
+        <!-- Menu Items -->
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="http://www.niagaracatholic.ca/"><h3>Home</h3></a></li>
+                <li><a href="#"><h3>Main</h3></a></li>
+
+                <!-- Dropdown Menu Template1 -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><h3> Applications <span class="caret"></span></h3></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><h4>View All Applications</h4></a></li>
+                        <li><a href="#"><h4>Search Applications</h4></a></li>
+                    </ul>
+                </li>
+
+                <!-- Dropdown Menu Template2 -->
+                <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><h3> Postings <span class="caret"></span></h3></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><h4>View All Postings</h4></a></li>
+                        <li><a href="#"><h4>Create Posting</h4></a></li>
+                    </ul>
+                </li>
+                <!-- Dropdown Menu Template3 -->
+                <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><h3> Portfolio</h3></a>
+                </li>
+            </ul>
+
+            @Html.Partial("_LoginPartial")
+        </div>
+    </div>
+</div>
+
+
+<div class="container well well-lg" style=" margin-top:100px; margin-bottom:50px;">
     <br /><br />
     <fieldset style="margin-bottom:100px">
         <legend style="text-align:center; font-size:30px; color:#337ab7;">Niagara Catholic District School Board</legend>
-        <h3 style="padding-top:20px; border:none; text-align:center;">Search Job Postings:</h3>&nbsp;&nbsp;
+        <h3 style="padding-top:20px; border:none; text-align:center;">
+            Search Job Postings:
+        </h3>&nbsp;&nbsp;
+
         <div class="SearchTextBox " style="padding-bottom:20px">              
-            <asp:TextBox ID="txtPostingSearch" class="form-control" style="padding-bottom:20px; margin:0 auto; width:400px;" runat="server"></asp:TextBox>
-        </div>   
+            @Html.TextBox("txtPostingSearch", null, new { @class = "form-control", @style = "margin:0 auto; width:700px", @runat="server" })  
+        </div>  
+        
         <div style="padding-top:10px; margin:0 auto; text-align:center;">
+
             @using (Html.BeginForm("Action", "Controller", FormMethod.Post))
             {
                 <button ID="btnPostingSearch" style="border: 2px solid black;" class="btn btn-info-outline" type="submit">Search</button>
             }
+
         </div>
 
-    </fieldset>
+        <div style="padding-top:60px; margin:0 auto; text-align:center;">
 
+            @Html.Label("lblPostingsResults", "... results found.", new { @style = "color:green" })
+            
+            @Html.ListBox("lstPostingSearchResults", new List<SelectListItem>(), new { @class = "form-control", @style = "margin:0 auto" })
 
-      
+            @using (Html.BeginForm("Action", "Controller", FormMethod.Post))
+            {
+                <button ID="btnViewPosting" style="border: 2px solid black; margin-top:30px" class="btn btn-info-outline" type="submit">View</button>
+            }
+
+        </div>
+           
+</fieldset>
+   
     <div class="row" style="text-align:center; margin:0 auto";>
     <div class="col-md-4">  
         <p>
-            <a href="#"><img src="comments.png" style="height:100px"/></a>
+            <a href="#"><img src="Images/comments.png" style="height:100px"/></a>
         </p>
         <h4>Comments</h4>
         
@@ -33,14 +103,14 @@
 
     <div class="col-md-4">    
         <p>
-            <a href="#"><img src="FAQ.png" style="height:100px"/></a>
+            <a href="#"><img src="Images/FAQ.png" style="height:100px"/></a>
         </p>
         <h4>Frequently Asked Questions</h4>     
     </div>
 
     <div class="col-md-4">     
         <p>
-            <a href="#"><img src="AboutUs.png" style="height:100px"/></a>
+            <a href="#"><img src="Images/AboutUs.png" style="height:100px"/></a>
         </p>
         <h4>About Us</h4>
     </div>
@@ -52,15 +122,11 @@
 
     <div style="padding-top:20px;">
         <p>
-            <a href="https://www.facebook.com/NiagaraCatholicDSB/"><img src="facebook.png" style="height:30px;" /></a>&nbsp;&nbsp;
-            <a href="https://twitter.com/niagaracatholic"><img src="twitter.png" style="height:30px;" /></a>&nbsp;&nbsp;
-            <a href="https://www.youtube.com/user/NiagaraCatholicDSB"><img src="youtube.png" style="height:30px;" /></a><br />
+            <a href="https://www.facebook.com/NiagaraCatholicDSB/"><img src="Images/facebook.png" style="height:30px;" /></a>&nbsp;&nbsp;
+            <a href="https://twitter.com/niagaracatholic"><img src="Images/twitter.png" style="height:30px;" /></a>&nbsp;&nbsp;
+            <a href="https://www.youtube.com/user/NiagaraCatholicDSB"><img src="Images/youtube.png" style="height:30px;" /></a><br />
         </p>
     </div>
-    
-
-
-
 </div>          
 
 
