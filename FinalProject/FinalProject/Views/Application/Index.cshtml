@@ -5,13 +5,41 @@
    
 }
 
-<h2>Application</h2>
+<div class="container well well-lg" margin-bottom:50px;">
+    <br /><br />
+    <fieldset style="margin-bottom:100px">
+        <legend style="text-align:center; font-size:30px; color:#337ab7;">Niagara Catholic District School Board</legend>
+        <h3 style="padding-top:20px; border:none; text-align:center;">
+            Search Applications:
+        </h3>&nbsp;&nbsp;
 
+        <div class="SearchTextBox " style="padding-bottom:20px">
+            @Html.TextBox("txtApplicationSearch", null, new { @class = "form-control", @style = "margin:0 auto; width:700px", @runat = "server" })
+        </div>
 
-Search Applications
+        <div style="padding-top:10px; margin:0 auto; text-align:center;">
 
+            @using (Html.BeginForm("Action", "Controller", FormMethod.Post))
+            {
+                <button ID="btnApplicationSearch" style="border: 2px solid black;" class="btn btn-info-outline" type="submit">Search</button>
+            }
 
-View All Applications
+        </div>
 
+        <div style="padding-top:60px; margin:0 auto; text-align:center;">
+
+            @Html.Label("lblApplicationResults", "... results found.", new { @style = "color:green" })
+
+            @Html.ListBox("lstApplicationSearchResults", new List<SelectListItem>(), new { @class = "form-control", @style = "margin:0 auto" })
+
+            @using (Html.BeginForm("Action", "Controller", FormMethod.Post))
+            {
+                <button ID="btnViewApplication" style="border: 2px solid black; margin-top:30px" class="btn btn-info-outline" type="submit">View</button>
+            }
+
+        </div>
+
+    </fieldset>
+</div>
 
 
