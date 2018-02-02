@@ -9,7 +9,6 @@ namespace FinalProject.Models
         public Posting()
         {
             this.Applications = new HashSet<Application>();
-            this.Qualifications = new HashSet<Qualification>();
         }
 
         public int ID { get; set; }
@@ -30,7 +29,7 @@ namespace FinalProject.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? StartDate { get; set; }
 
-        [Required(ErrorMessage = "Please Select the school for this job posting.")]
+        [Required(ErrorMessage = "Please specify the school you applied for.")]
         public int SchoolID { get; set; }
 
         [Required(ErrorMessage ="Please provide the Job for this posting")]
@@ -39,10 +38,7 @@ namespace FinalProject.Models
         public virtual School School { get; set; }
         public virtual Job Job { get; set; }
         public ICollection<Application> Applications { get; set; }
-        public ICollection<Qualification> Qualifications { get; set; }
-
-
-
+        
         // Validation for date
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
