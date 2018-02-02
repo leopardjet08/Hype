@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FinalProject.Models.DataModel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace FinalProject.Models
         public Job()
         {
             this.Postings = new HashSet<Posting>();
+            this.Requirements = new HashSet<Requirement>();
         }
 
         public int ID { get; set; }
@@ -27,5 +29,6 @@ namespace FinalProject.Models
         public string JobSummary { get; set; }
 
         public ICollection<Posting> Postings { get; set; }
+        public ICollection<Requirement> Requirements { get; set; }
     }
 }

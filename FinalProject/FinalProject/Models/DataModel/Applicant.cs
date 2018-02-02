@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using FinalProject.Models.DataModel;
 
 namespace FinalProject.Models
 {
@@ -14,7 +15,7 @@ namespace FinalProject.Models
             this.Applications = new HashSet<Application>();
         }
 
-        public string ID { get; set; }
+        public int ID { get; set; }
 
         [Display(Name = "First Name")]
         [Required(ErrorMessage = "First Name Required.")]
@@ -41,15 +42,14 @@ namespace FinalProject.Models
         [StringLength(80, ErrorMessage = "Character Length Exceeded.")]
         public string Address { get; set; }
 
-        [Display(Name = "City")]
-        [Required(ErrorMessage = "Required.")]
-        [StringLength(50, ErrorMessage = "Character Length Exceeded.")]
-        public string City { get; set; }
-
         [Required(ErrorMessage = "Please select Province.")]
         public int ProvinceID { get; set; }
 
+        [Required(ErrorMessage = "Please select City.")]
+        public int CityID { get; set; }
+
         public virtual Province Province { get; set; }
+        public virtual City City { get; set; }
         public ICollection<Application> Applications { get; set; }
     }
 }

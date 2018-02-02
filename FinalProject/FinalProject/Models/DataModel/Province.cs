@@ -14,6 +14,7 @@ namespace FinalProject.Models
         {
             this.Applicants = new HashSet<Applicant>();
         }
+
         public int ID { get; set; }
 
         [StringLength(50, ErrorMessage = "Cannot exceed 50 characters.")]

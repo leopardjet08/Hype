@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FinalProject.Models.DataModel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -19,11 +20,14 @@ namespace FinalProject.Models
         [Index("IX_Unique_Application", Order = 2, IsUnique = true)]
         public int ApplicantID { get; set; }
 
-        [Required(ErrorMessage = "Please specify the school you applied for.")]
-        public int SchoolID { get; set; }
+        // Value 1 if approved, set Default value is 0
+        public int Approved { get; set; } = 0;
+
+        public int ApprovedAppsID { get; set; } 
 
         public virtual Applicant Applicant { get; set; }
         public virtual Posting Posting { get; set; }
-        public virtual School School { get; set; }
+        public virtual ApprovedApps ApprovedApps { get; set; }
+
     }
 }

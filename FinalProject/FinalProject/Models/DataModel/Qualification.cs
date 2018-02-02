@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FinalProject.Models.DataModel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,11 +10,6 @@ namespace FinalProject.Models
 {
     public class Qualification
     {
-        public Qualification()
-        {
-            this.Postings = new HashSet<Posting>();
-        }
-
         public int ID { get; set; }
 
         [Display(Name = "Qualifications")]
@@ -22,6 +18,6 @@ namespace FinalProject.Models
         [Index("IX_Unique_Skill", IsUnique = true)]
         public string QualificationName { get; set; }
 
-        public virtual ICollection<Posting> Postings { get; set; }
+        public virtual Requirement Requirement { get; set; }
     }
 }
