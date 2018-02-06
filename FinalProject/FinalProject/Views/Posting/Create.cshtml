@@ -1,7 +1,7 @@
-﻿@model FinalProject.Models.CreatePosting
+﻿@model FinalProject.Models.Posting
 
 @{
-    Layout = null;
+    ViewBag.Title = "Posting";
 }
 
 <!DOCTYPE html>
@@ -15,25 +15,124 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     
-    
-    @using (Html.BeginForm()) 
-    {
-        @Html.AntiForgeryToken()
-        
-        <div class="form-horizontal">
-            <h4>CreatePosting</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+    <div class="container well well-lg" margin-bottom:50px;">
+
+      
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        <h3>Create Posting:</h3>
+                        <hr />
+
+                        <table style="width:50%;">
+                            <tr>
+                                <td>
+                                    <h4 style="display:inline-block">Job Title:</h4>
+                                </td>
+                                <td>
+                                    @Html.TextBox("txtJobTitle", null, new { @class = "form-control", @style = "width:150px", @runat = "server" })
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4 style="display:inline-block">School:</h4>
+                                </td>
+                                <td>
+                                    @Html.DropDownList("ddlSchool", Enumerable.Empty<SelectListItem>(), "-- Select --", new { @class = "form-control", @style = "width:150px" })
+
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <h4 style="display:inline-block">Location</h4>
+                                </td>
+                                <td>
+                                    @Html.TextBox("txtLocation", null, new { @class = "form-control", @style = "width:150px", @placeholder = "eg. 14 First Avenue, Welland", @runat = "server" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4 style="display:inline-block">Postal Code:</h4>
+                                </td>
+                                <td>
+                                    @Html.TextBox("txtPostalCode", null, new { @class = "form-control", @style = "width:150px", @runat = "server" })
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <h4 style="display:inline-block">Closing Date:</h4>
+                                </td>
+                                <td>
+                                    @Html.TextBox("txtClosingDate", null, new { @class = "form-control", @style = "width:150px", @placeholder = "yyyy-mm-dd", @runat = "server" })
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4 style="display:inline-block">Start Date:</h4>
+                                </td>
+                                <td>
+                                    @Html.TextBox("txtStartDate", null, new { @class = "form-control", @style = "width:150px", @placeholder = "yyyy-mm-dd", @runat = "server" })
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <h4 style="display:inline-block">Job Description:</h4>
+                                </td>
+                                <td>
+                                    @Html.TextArea("txtJobDescription", null, new { @class = "form-control", @rows = "2", @cols = "20", @style = "width:150px", @placeholder = "Enter text here...", @runat = "server" })
+
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <h4 style="display:inline-block">Qualifications:</h4>
+                                </td>
+                                <td> 
+                                    @Html.CheckBox("chkQualifications", new { @class = "form-control", @runat = "server" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4 style="display:inline-block">Requirements:</h4>
+                                </td>
+                                <td>
+                                    @Html.CheckBox("chkQualifications", new { @class = "form-control", @runat = "server" })
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <h4 style="display:inline-block">Number of Openings:</h4>
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control" min="0" max="50" step="1" value="1" style="width:75px">
+                                </td>
+                            </tr>
+                        </table>
+
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <br />
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Save Posting" class="btn btn-default" />
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <div>
+                    @Html.ActionLink("Back", "Index")
                 </div>
             </div>
-        </div>
-    }
-    
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
 </body>
 </html>
