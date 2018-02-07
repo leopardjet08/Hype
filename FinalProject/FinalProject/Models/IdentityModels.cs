@@ -29,5 +29,17 @@ namespace FinalProject.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<FinalProject.Models.Application> Applications { get; set; }
+
+        public System.Data.Entity.DbSet<FinalProject.Models.Applicant> Applicants { get; set; }
+
+        public System.Data.Entity.DbSet<FinalProject.Models.DataModel.ApprovedApps> ApprovedApps { get; set; }
+
+        public System.Data.Entity.DbSet<FinalProject.Models.Posting> Postings { get; set; }
+
+        public System.Data.Entity.DbSet<FinalProject.Models.DataModel.City> Cities { get; set; }
+
+        public System.Data.Entity.DbSet<FinalProject.Models.Province> Provinces { get; set; }
     }
 }

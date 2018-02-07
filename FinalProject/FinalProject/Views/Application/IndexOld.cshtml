@@ -1,0 +1,120 @@
+﻿@model FinalProject.Models.Application
+
+@{
+    ViewBag.Title = "Old Application";
+
+}
+
+<div class="container well well-lg" margin-bottom:50px;">
+    <br /><br />
+    <fieldset>
+        <legend style="text-align:center; font-size:30px; color:#337ab7;">List of all Applications Submitted</legend>
+    </fieldset>
+    <h3 style="padding-top:20px; border:none; font-size:20px;">
+        Search Applications:
+
+        @Html.TextBox("txtApplicationSearch", null, new { @style = "margin:0 auto; width:200px", @runat = "server" })
+
+
+        <button ID="btnApplicationSearch" style="border: 2px solid black;" class="btn btn-info-outline" type="submit">Search</button>
+    </h3>
+    <hr />
+    <hr />
+    @Html.Label("List", "List of All Applications Submitted:  ")
+    @Html.Label("lblResult", " Result found: 6", new { @style = "color:red" })
+
+    <br /><br />
+
+    <div class="container">
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Applied Date</th>
+                    <th>Job Title</th>
+                    <th>Employee</th>
+                    <th>Applicant</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>December 7,2017</td>
+                    <td>Driver</td>
+                    <td>Driver manager</td>
+                    <td>Moralo rortas</td>
+                    <td>@Html.Label("a", "Accepted", new { @style = "color:green" })</td>
+                    <th>
+                        @Html.ActionLink("View", "Details", "Application", null, new { @class = "btn btn-primary btn-large" })
+                        @Html.ActionLink("Delete", "Delete", "Application", null, new { @class = "btn btn-primary btn-large" })
+                    </th>
+
+                </tr>
+                <tr>
+                    <td>January 3,2018</td>
+                    <td>English Teacher</td>
+                    <td>Administrator</td>
+                    <td>wady aedine</td>
+                    <td>@Html.Label("a", "Accepted", new { @style = "color:green" })</td>
+                    <th>
+                        @Html.ActionLink("View", "Details", "Application", null, new { @class = "btn btn-primary btn-large" })
+                        @Html.ActionLink("Delete", "Delete", "Application", null, new { @class = "btn btn-primary btn-large" })
+                    </th>
+
+
+                <tr>
+                    <td>January 21,2018</td>
+                    <td>PE Coach</td>
+                    <td>Administrator</td>
+                    <td>kim jun chan</td>
+                    <td>@Html.Label("b", "Declined", new { @style = "color:red" })</td>
+                    <th>
+                        @Html.ActionLink("View", "Details", "Application", null, new { @class = "btn btn-primary btn-large" })
+                        @Html.ActionLink("Delete", "Delete", "Application", null, new { @class = "btn btn-primary btn-large" })
+                    </th>
+                </tr>
+                <tr>
+                    <td>January 30,2018</td>
+                    <td>Vice-President</td>
+                    <td>Administrator</td>
+                    <td>derrick stewward</td>
+                    <td>@Html.Label("c", "Pending", new { @style = "color:orange" })</td>
+                    <th>
+                        @Html.ActionLink("View", "Details", "Application", null, new { @class = "btn btn-primary btn-large" })
+                        @Html.ActionLink("Delete", "Delete", "Application", null, new { @class = "btn btn-primary btn-large" })
+                    </th>
+                </tr>
+                <tr>
+                    <td>February 5,2018</td>
+                    <td>Principal</td>
+                    <td>Administrator</td>
+                    <td>Julia shituri</td>
+                    <td>@Html.Label("b", "Declined", new { @style = "color:red" })</td>
+                    <th>
+                        @Html.ActionLink("View", "Details", "Application", null, new { @class = "btn btn-primary btn-large" })
+                        @Html.ActionLink("Delete", "Delete", "Application", null, new { @class = "btn btn-primary btn-large" })
+                    </th>
+                </tr>
+                <tr>
+                    <td>February 7,2018</td>
+                    <td>Computer Programmer</td>
+                    <td>IT Department</td>
+                    <td>Lake Aviles</td>
+                    <td>@Html.Label("a", "Accepted", new { @style = "color:green" })</td>
+                    <th>
+                        @Html.ActionLink("View", "Details", "Application", null, new { @class = "btn btn-primary btn-large" })
+                        @Html.ActionLink("Delete", "Delete", "Application", null, new { @class = "btn btn-primary btn-large" })
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr />
+
+
+
+
+</div>
+
