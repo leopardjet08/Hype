@@ -206,8 +206,6 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PortfolioController.cs" />
     <Compile Include="Controllers\PostingController.cs" />
-    <Compile Include="Controllers\ReviewController.cs" />
-    <Compile Include="Controllers\SubscriptionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -306,8 +304,6 @@
     <Content Include="Views\Application\Details.cshtml" />
     <Content Include="Views\Applicant\Details.cshtml" />
     <Content Include="Views\Application\Delete.cshtml" />
-    <Content Include="Views\Subscription\Index.cshtml" />
-    <Content Include="Views\Review\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
