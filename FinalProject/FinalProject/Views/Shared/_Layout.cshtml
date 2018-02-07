@@ -23,7 +23,9 @@
                     <span class="icon-bar"></span>
                 </button>
                 </div>
-           
+
+           <!--- Navbar Menu Items -->
+
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav" style="font-size:25px; margin-top:18px;">
  
@@ -31,18 +33,15 @@
                     <li>@Html.ActionLink("Postings", "Index", "Posting")</li>
 
                     <li class="dropdown">
-                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Application<b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Applications <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("List of Application", "Index", "Application")</li>
-                            <li>@Html.ActionLink("View old Application", "IndexOld", "Application")</li>
-                            
+                            <li style="font-size:18px">@Html.ActionLink("View Applications", "Index", "Application")</li>
+                            <li style="font-size:18px">@Html.ActionLink("Archived Applications", "IndexOld", "Application")</li>
                                 <li class="divider"></li>
-                                        <li>@Html.ActionLink("Applicants List", "Index", "Applicant")</li>
-                            
+                                        <li style="font-size:18px">@Html.ActionLink("Applicants", "Index", "Applicant")</li>  
                         </ul>
                     </li>
-
-
+                    <li>@Html.ActionLink("Review", "Index", "Review")</li>
                     <li>@Html.ActionLink("My Portfolio", "Index", "Portfolio")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
