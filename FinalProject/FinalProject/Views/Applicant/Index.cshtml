@@ -1,0 +1,132 @@
+﻿@model FinalProject.Models.Applicant
+
+@{
+    ViewBag.Title = "Applicant";
+
+}
+
+<div class="container well well-lg" margin-bottom:50px;">
+    <br /><br />
+    <fieldset>
+        <legend style="text-align:center; font-size:30px; color:#337ab7;">List of Applicants</legend>
+    </fieldset>
+    <h3 style="padding-top:20px; border:none; font-size:20px;">
+        Search:
+
+        @Html.TextBox("txtApplicationSearch", null, new { @style = "margin:0 auto; width:200px", @runat = "server" })
+
+
+        <button ID="btnApplicationSearch" style="border: 2px solid black;" class="btn btn-info-outline" type="submit">Search</button>
+    </h3>
+    <hr />
+    <hr />
+   
+    @Html.Label("lblResult", " Result found: 7", new { @style = "color:red" })
+
+    <br /><br />
+
+    <div class="container">
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Date Applied</th>
+                    <th>Phone</th>
+                    <th>Status</th>
+                    <th>City</th>
+                    <th>Last Logged In</th>
+                    <th>View</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Jose Pabalinas</td>
+                    <td>January 3, 2017</td>
+                    <td>9054563678</td>
+                    <td>Hired</td>
+                    <td>Welland</td>
+                    <td>February 5,2018</td>
+                    <th>
+                        @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-primary btn-large" })
+                    </th>
+
+                </tr>
+                <tr>
+                    <td>Mark Aceno</td>
+                    <td>January 26, 2017</td>
+                    <td>2895676569</td>
+                    <td>Hired</td>
+                    <td>St.Catherine</td>
+                    <td>February 2,2018</td>
+                    <th>
+                        @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-primary btn-large" })
+                    </th>
+
+
+                <tr>
+                    <td>John Balili</td>
+                    <td>February 27, 2017</td>
+                    <td>9054511216</td>
+                    <td>Vacation</td>
+                    <td>Welland</td>
+                    <td>January 21,2018</td>
+                    <th>
+                        @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-primary btn-large" })
+                    </th>
+                </tr>
+                <tr>
+                    <td>Joharie Mallo</td>
+                    <td>September 12, 2017</td>
+                    <td>9054565553</td>
+                    <td>Waiting</td>
+                    <td>Hamilton</td>
+                    <td>February 7,2018</td>
+                    <th>
+                        @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-primary btn-large" })
+                    </th>
+                </tr>
+                <tr>
+                    <td>Jake Rocero</td>
+                    <td>January 3, 2017</td>
+                    <td>9054563678</td>
+                    <td>Waiting</td>
+                    <td>St.Catherine</td>
+                    <td>February 2,2018</td>
+                    <th>
+                        @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-primary btn-large" })
+                    </th>
+                    
+                </tr>
+                <tr>
+                    <td>torlan mogas</td>
+                    <td>October 3, 2017</td>
+                    <td>9045563678</td>
+                    <td>Hired</td>
+                    <td>Grimsby</td>
+                    <td>February 2,2018</td>
+                    <th>
+                        @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-primary btn-large" })
+                    </th>
+                </tr>
+                <tr>
+                    <td>rulan qogas</td>
+                    <td>December 17, 2017</td>
+                    <td>9045555678</td>
+                    <td>Vacation</td>
+                    <td>Welland</td>
+                    <td>February 7,2018</td>
+                    <th>
+                        @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-primary btn-large" })
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr />
+
+</div>
+
+
+

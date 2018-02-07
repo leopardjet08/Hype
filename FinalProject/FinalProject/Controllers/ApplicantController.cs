@@ -6,22 +6,14 @@ using System.Web.Mvc;
 
 namespace FinalProject.Controllers
 {
-    public class ApplicationController : Controller
+    public class ApplicantController : Controller
     {
-        // GET: Application
+        // GET: Applicant
         public ActionResult Index()
         {
             return View();
         }
-        public ActionResult IndexOld()
-        {
-            return View();
-        }
         public ActionResult Details()
-        {
-            return View();
-        }
-        public ActionResult Delete()
         {
             return View();
         }
