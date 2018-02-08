@@ -235,9 +235,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\About.png" />
-    <Content Include="Images\CompanyLogo.png" />
+    <Content Include="Images\background1.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Images\CompanyLogo2.png" />
     <Content Include="Images\facebook.png" />
     <Content Include="Images\FAQ.png" />
     <Content Include="Images\favicon.ico" />
@@ -306,7 +307,9 @@
     <Content Include="Views\Application\Details.cshtml" />
     <Content Include="Views\Applicant\Details.cshtml" />
     <Content Include="Views\Application\Delete.cshtml" />
-    <Content Include="Views\Review\Index.cshtml" />
+    <Content Include="Views\Posting\Details.cshtml" />
+    <Content Include="Views\Posting\Edit.cshtml" />
+    <Content Include="Views\Posting\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

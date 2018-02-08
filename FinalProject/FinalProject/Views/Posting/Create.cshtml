@@ -55,6 +55,17 @@
                                     @Html.TextBox("txtLocation", null, new { @class = "form-control", @style = "width:150px", @placeholder = "eg. 14 First Avenue, Welland", @runat = "server" })
                                 </td>
                             </tr>
+
+                            <tr>
+                                <td>
+                                    <h4 style="display:inline-block">City:</h4>
+                                </td>
+                                <td>
+                                    @Html.DropDownList("ddlCity", Enumerable.Empty<SelectListItem>(), "-- Select --", new { @class = "form-control", @style = "width:150px" })
+
+                                </td>
+
+                            </tr>
                             <tr>
                                 <td>
                                     <h4 style="display:inline-block">Postal Code:</h4>
