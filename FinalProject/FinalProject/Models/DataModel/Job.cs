@@ -23,7 +23,6 @@ namespace FinalProject.Models
         public string JobTitle { get; set; }
 
         [Display(Name = "Job Summary")]
-        [Required(ErrorMessage = "You cannot leave the job summary blank.")]
         [StringLength(2000, ErrorMessage = "Summary must be between 20 and 2000 characters", MinimumLength = 20)]
         [DataType(DataType.MultilineText)]
         public string JobSummary { get; set; }
