@@ -2,57 +2,54 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="container well well-lg"  margin-bottom:50px;">
-    <br /><br />
+<script>
+    function toggle_div_hide(id)
+    {
+
+          var divElement = document.getElementById(id);
+
+          if (divElement.style.display == 'none')
+              divElement.style.display = 'block';
+          else
+              divElement.style.display = 'none';
+      }
+</script>
+
+
+<div class="container well well-lg"  style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
     
-    <div class="blue" >
+
+    <p style="text-align:center; font-size:30px; color:#02388a;">Niagara Catholic District School Board</p>
     
- 
-        <p style="text-align:center; font-size:30px; color:#337ab7;">Niagara Catholic District School Board</p>
-        <h3 style="padding-top:20px; border:none; text-align:center;">
-            Search Job Postings:
+    <br />
+
+    <div class="container" style="background-image: url('Images/background1.jpg'); border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
+
+        <h3 style="padding-top:20px; border:none; text-align:center; color:white">
+           <b>Search Job Postings:</b> 
         </h3>&nbsp;&nbsp;
 
-        <p style="text-align:center;">
-            -- this textbox should disappear when "More search options" is selected --
-            -- It should be replaced with other search options -- 
-        </p>
+        <div style="padding-bottom:20px">
+            @Html.TextBox("txtPostingSearch", null, new { @class = "form-control", @style = "margin:0 auto; width:700px", @runat = "server" })
+        </div>
 
-            <div style="padding-bottom:20px">
-                @Html.TextBox("txtPostingSearch", null, new { @class = "form-control", @style = "margin:0 auto; width:700px", @runat = "server" })
-            </div>
+        <div style="padding-top:10px; margin:0 auto; text-align:center;">
+            <button ID="btnPostingSearch" onclick="toggle_div_hide('postingResults')" style="border: 2px solid black;" class="btn btn-info-outline" type="submit">Search</button>
+        </div>
 
-            <div style="padding-top:10px; margin:0 auto; text-align:center;">
+        <div style="text-align:center; padding-top: 20px; padding-bottom:30px">
+            <a href="#">More search options...</a>
+        </div>
 
-                @using (Html.BeginForm("Action", "Controller", FormMethod.Post))
-                {
-                    <button ID="btnPostingSearch"  OnClick="toggle_div_hide('postingResults')" style="border: 2px solid black;" class="btn btn-info-outline" type="submit">Search</button>
-                }
-
-            </div>
-
-            <div style="text-align:center; padding-top: 20px;">
-                <a href="#">More search options...</a>
-            </div>
-
-           
-        </div> <!--End of Blue Section -->
+    </div>  <!--End of Blue Section -->
    
-    <div id="postingResults" style="visibility:hidden">
-
+    <div id="postingResults" style="display:none" >
         <div style="padding-top:60px; margin:0 auto; text-align:center;">
-
-            @Html.Label("lblPostingsResults", "... results found.", new { @style = "color:green" })
-            
+            @Html.Label("lblPostingsResults", "... results found.", new { @style = "color:green" }) 
             @Html.ListBox("lstPostingSearchResults", new List<SelectListItem>(), new { @class = "form-control", @style = "margin:0 auto" })
-
-            @using (Html.BeginForm("Action", "Controller", FormMethod.Post))
-            {
-                <button ID="btnViewPosting" style="border: 2px solid black; margin-top:30px" class="btn btn-info-outline" type="submit">View</button>
-            }
+            <button ID="btnViewPosting" style="display:inline-block; border: 2px solid black; margin-top:30px" class="btn btn-info-outline" type="submit">View</button>   
         </div>
     </div>
-
 
     <div style=" margin-bottom:100px"></div>
            
@@ -61,8 +58,7 @@
         <p>
             <a href="#"><img src="Images/Subscribe.png" style="height:60px"/></a>
         </p>
-        <h4>Subscribe</h4>
-        
+        <h4>Subscribe</h4>   
     </div>
 
     <div class="col-md-4">    

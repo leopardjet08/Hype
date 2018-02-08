@@ -61,8 +61,9 @@ body {
   margin: 0;
 }
 
-
-
+.container {
+    background-image: url('Images/background1.jpg');
+}
 
 
 a:focus {
@@ -1247,7 +1248,7 @@ pre code {
 
 @media (min-width: 1200px) {
   .container {
-    max-width: 1170px;
+    max-width: 10000px;
   }
   .col-lg-1,
   .col-lg-2,
