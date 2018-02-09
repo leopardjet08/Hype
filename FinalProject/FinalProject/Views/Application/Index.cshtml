@@ -5,107 +5,107 @@
    
 }
 
-<div class="container well well-lg" margin-bottom:50px;">
+<div class="container well well-lg" style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
     <br /><br />
-    <fieldset >
+    <fieldset>
         <legend style="text-align:center; font-size:30px; color:#337ab7;">List of Applications</legend>
     </fieldset>
-        <h3 style="padding-top:20px; border:none; font-size:20px;">
-            Search Applications:
+    <h3 style="padding-top:20px; border:none; font-size:20px;">
+        Search Applications:
 
-            @Html.TextBox("txtApplicationSearch", null, new { @style = "margin:0 auto; width:200px", @runat = "server" })
+        @Html.TextBox("txtApplicationSearch", null, new { @style = "margin:0 auto; width:200px", @runat = "server" })
 
 
-            <button ID="btnApplicationSearch" style="border: 2px solid black;" class="btn btn-info-outline" type="submit">Search</button>
-        </h3>
-        <hr />
-        <hr />
-        @Html.Label("lblResult", "Result found: 6", new { @style = "color:red" })
+        <button ID="btnApplicationSearch" style="border: 2px solid black;" class="btn btn-info-outline" type="submit">Search</button>
+    </h3>
+    <hr />
+    <hr />
+    @Html.Label("lblResult", "Result found: 6", new { @style = "color:red" })
 
     <br /><br />
 
-        <div class="container">
+    <div class="container">
 
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Application Date</th>
-                        <th>Job Title</th>
-                        <th>Employee</th>
-                        <th>Applicant</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>December 2,2017</td>
-                        <td>Janitor</td>
-                        <td>Cleaning manager</td>
-                        <td>Mortal mortas</td>
-                        <th>
-                            @Html.ActionLink("View", "Details", "Application", null, new { @class = "btn btn-primary btn-large" })
-                            @Html.ActionLink("Delete", "Delete", "Application", null, new { @class = "btn btn-primary btn-large" })
-                        </th>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Application Date</th>
+                    <th>Job Title</th>
+                    <th>Employee</th>
+                    <th>Applicant</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>December 2,2017</td>
+                    <td>Janitor</td>
+                    <td>Cleaning manager</td>
+                    <td>Mortal mortas</td>
+                    <th>
+                        @Html.ActionLink("View", "Details", "Application", null, new { @class = "btn btn-primary btn-large" })
+                        @Html.ActionLink("Delete", "Delete", "Application", null, new { @class = "btn btn-primary btn-large" })
+                    </th>
 
-                    </tr>
-                    <tr>
-                        <td>January 5,2018</td>
-                        <td>Math Teacher</td>
-                        <td>Administrator</td>
-                        <td>Lady nedine</td>
-                        <th>
-                            @Html.ActionLink("View", "Details", "Application", null, new { @class = "btn btn-primary btn-large" })
-                            @Html.ActionLink("Delete", "Delete", "Application", null, new { @class = "btn btn-primary btn-large" })
-                        </th>
+                </tr>
+                <tr>
+                    <td>January 5,2018</td>
+                    <td>Math Teacher</td>
+                    <td>Administrator</td>
+                    <td>Lady nedine</td>
+                    <th>
+                        @Html.ActionLink("View", "Details", "Application", null, new { @class = "btn btn-primary btn-large" })
+                        @Html.ActionLink("Delete", "Delete", "Application", null, new { @class = "btn btn-primary btn-large" })
+                    </th>
 
 
-                    <tr>
-                        <td>January 21,2018</td>
-                        <td>PE Coach</td>
-                        <td>Administrator</td>
-                        <td>kim jun chan</td>
-                        <th>
-                            @Html.ActionLink("View", "Details", "Application", null, new { @class = "btn btn-primary btn-large" })
-                            @Html.ActionLink("Delete", "Delete", "Application", null, new { @class = "btn btn-primary btn-large" })
-                        </th>
-                    </tr>
-                    <tr>
-                        <td>January 30,2018</td>
-                        <td>Vice-President</td>
-                        <td>Administrator</td>
-                        <td>derrick stewward</td>
-                        <th>
-                            @Html.ActionLink("View", "Details", "Application", null, new { @class = "btn btn-primary btn-large" })
-                            @Html.ActionLink("Delete", "Delete", "Application", null, new { @class = "btn btn-primary btn-large" })
-                        </th>
-                    </tr>
-                    <tr>
-                        <td>February 5,2018</td>
-                        <td>Principal</td>
-                        <td>Administrator</td>
-                        <td>Julia shituri</td>
-                        <th>
-                            @Html.ActionLink("View", "Details", "Application", null, new { @class = "btn btn-primary btn-large" })
-                            @Html.ActionLink("Delete", "Delete", "Application", null, new { @class = "btn btn-primary btn-large" })
-                        </th>
-                    </tr>
-                    <tr>
-                        <td>February 7,2018</td>
-                        <td>Computer Programmer</td>
-                        <td>IT Department</td>
-                        <td>Lake Aviles</td>
-                        <th>
-                            @Html.ActionLink("View", "Details", "Application", null, new { @class = "btn btn-primary btn-large" })
-                            @Html.ActionLink("Delete", "Delete", "Application", null, new { @class = "btn btn-primary btn-large" })
-                        </th>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+                <tr>
+                    <td>January 21,2018</td>
+                    <td>PE Coach</td>
+                    <td>Administrator</td>
+                    <td>kim jun chan</td>
+                    <th>
+                        @Html.ActionLink("View", "Details", "Application", null, new { @class = "btn btn-primary btn-large" })
+                        @Html.ActionLink("Delete", "Delete", "Application", null, new { @class = "btn btn-primary btn-large" })
+                    </th>
+                </tr>
+                <tr>
+                    <td>January 30,2018</td>
+                    <td>Vice-President</td>
+                    <td>Administrator</td>
+                    <td>derrick stewward</td>
+                    <th>
+                        @Html.ActionLink("View", "Details", "Application", null, new { @class = "btn btn-primary btn-large" })
+                        @Html.ActionLink("Delete", "Delete", "Application", null, new { @class = "btn btn-primary btn-large" })
+                    </th>
+                </tr>
+                <tr>
+                    <td>February 5,2018</td>
+                    <td>Principal</td>
+                    <td>Administrator</td>
+                    <td>Julia shituri</td>
+                    <th>
+                        @Html.ActionLink("View", "Details", "Application", null, new { @class = "btn btn-primary btn-large" })
+                        @Html.ActionLink("Delete", "Delete", "Application", null, new { @class = "btn btn-primary btn-large" })
+                    </th>
+                </tr>
+                <tr>
+                    <td>February 7,2018</td>
+                    <td>Computer Programmer</td>
+                    <td>IT Department</td>
+                    <td>Lake Aviles</td>
+                    <th>
+                        @Html.ActionLink("View", "Details", "Application", null, new { @class = "btn btn-primary btn-large" })
+                        @Html.ActionLink("Delete", "Delete", "Application", null, new { @class = "btn btn-primary btn-large" })
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
     <hr />
 
-  
+
 </div>
 
 

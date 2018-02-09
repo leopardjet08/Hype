@@ -12,17 +12,20 @@
               divElement.style.display = 'block';
           else
               divElement.style.display = 'none';
-      }
+    }
+
+</script>
+
+<script type="text/javascript">
+    function confirm_alert(node) {
+        return confirm("I would like to be notified when new jobs are posted.");
+    }
 </script>
 
 
 <div class="container well well-lg"  style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
-    
-
     <p style="text-align:center; font-size:30px; color:#02388a;">Niagara Catholic District School Board</p>
-    
-    <br />
-
+        <br />
     <div class="container" style="background-image: url('Images/background1.jpg'); border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
 
         <h3 style="padding-top:20px; border:none; text-align:center; color:white">
@@ -38,7 +41,7 @@
         </div>
 
         <div style="text-align:center; padding-top: 20px; padding-bottom:30px">
-            <a href="#">More search options...</a>
+            <a href="#" style="color:#02388a; font-size:16px">More search options...</a>
         </div>
 
     </div>  <!--End of Blue Section -->
@@ -56,16 +59,16 @@
     <div class="row" style="text-align:center; margin:0 auto";>
     <div class="col-md-4">  
         <p>
-            <a href="#"><img src="Images/Subscribe.png" style="height:60px"/></a>
+            <a href="#" onclick="return confirm_alert(this)"><img src="Images/Subscribe.png" style="height:60px"/></a>
         </p>
         <h4>Subscribe</h4>   
     </div>
 
-    <div class="col-md-4">    
+    <div class="col-md-4">
         <p>
             <a href="#"><img src="Images/FAQ.png" style="height:60px"/></a>
         </p>
-        <h4>Frequently Asked Questions</h4>     
+        <h4>Frequently Asked Questions</h4>
     </div>
 
     <div class="col-md-4">     
