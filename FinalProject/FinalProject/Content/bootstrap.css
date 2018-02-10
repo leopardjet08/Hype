@@ -57,16 +57,6 @@ html {
       -ms-text-size-adjust: 100%;
 }
 
-#tableColor tr:nth-child(even) {
-    background-color: white;
-}
-
-#tableColor tr:hover {
-    background-color: #ddd;
-}
-
-
-
 body {
   margin: 0;
 }
