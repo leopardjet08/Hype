@@ -29,6 +29,11 @@ namespace FinalProject.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? StartDate { get; set; }
 
+        [Display(Name = "Posting Description")]
+        [StringLength(2000, ErrorMessage = "Description must be between 20 and 2000 characters", MinimumLength = 20)]
+        [DataType(DataType.MultilineText)]
+        public string PostingDescription { get; set; }
+
         [Required(ErrorMessage = "Please specify the school you applied for.")]
         public int SchoolID { get; set; }
 

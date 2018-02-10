@@ -215,9 +215,13 @@
     <Compile Include="Models\DataModel\Application.cs" />
     <Compile Include="Models\DataModel\ApprovedApps.cs" />
     <Compile Include="Models\DataModel\Auditable.cs" />
+    <Compile Include="Models\DataModel\BestCandidate.cs" />
     <Compile Include="Models\DataModel\City.cs" />
     <Compile Include="Models\DataModel\IAuditable.cs" />
     <Compile Include="Models\DataModel\Requirement.cs" />
+    <Compile Include="Models\DataModel\UserPhoto.cs" />
+    <Compile Include="Models\DataModel\UserSavedApps.cs" />
+    <Compile Include="Models\DataModel\UserUploads.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\DataModel\Job.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -246,6 +250,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\Subscribe.png" />
+    <Content Include="Models\DataModel\MigratingCopyPasta.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
