@@ -14,136 +14,118 @@
 <body>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
-    
-    <div class="container well well-lg" margin-bottom:50px;">
 
-      
-                @using (Html.BeginForm())
-                {
-                    @Html.AntiForgeryToken()
+    <div class="container well well-lg" style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
 
-                    <div class="form-horizontal">
-                        <h3>Create Posting:</h3>
-                        <hr />
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-                        <table style="width:50%;">
-                            <tr>
-                                <td>
-                                    <h4 style="display:inline-block">Job Title:</h4>
-                                </td>
-                                <td>
-                                    @Html.TextBox("txtJobTitle", null, new { @class = "form-control", @style = "width:150px", @runat = "server" })
-                                </td>
+            <p style="text-align:center; margin-top:20px; margin-bottom:15px; font-size:30px; color:#02388a;"> Niagara Catholic District School Board</p>
+            <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
+                    <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
+                    <br />
+                    <br />
 
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h4 style="display:inline-block">School:</h4>
-                                </td>
-                                <td>
-                                    @Html.DropDownList("ddlSchool", Enumerable.Empty<SelectListItem>(), "-- Select --", new { @class = "form-control", @style = "width:150px" })
+                    <div class="form-horizontal" style="margin:0 auto">
+                        <div style="text-align:center">
+                            <h3> ∙ &nbsp; Create New Posting&nbsp; ∙</h3>
+                        </div>
 
-                                </td>
+                        <!-- Columns -->
 
-                            </tr>
+                        <div style="margin-top:70px">
+                            <div class="col-md-6" style="width:600px">
+                                <table id="alignTable" style="width:70%;">
+                                    <tr>
+                                        <td>
+                                            <h4 display:inline-block;">Job Title:</h4>
+                                        </td>
+                                        <td>
+                                            @Html.TextBox("txtJobTitle", null, new { @class = "form-control", @style = "width:200px", @runat = "server" })
+                                        </td>
+                                    </tr>
 
-                            <tr>
-                                <td>
-                                    <h4 style="display:inline-block">Location</h4>
-                                </td>
-                                <td>
-                                    @Html.TextBox("txtLocation", null, new { @class = "form-control", @style = "width:150px", @placeholder = "eg. 14 First Avenue, Welland", @runat = "server" })
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <h4 style="display:inline-block">City:</h4>
-                                </td>
-                                <td>
-                                    @Html.DropDownList("ddlCity", Enumerable.Empty<SelectListItem>(), "-- Select --", new { @class = "form-control", @style = "width:150px" })
-
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h4 style="display:inline-block">Postal Code:</h4>
-                                </td>
-                                <td>
-                                    @Html.TextBox("txtPostalCode", null, new { @class = "form-control", @style = "width:150px", @runat = "server" })
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <h4 style="display:inline-block">Closing Date:</h4>
-                                </td>
-                                <td>
-                                    @Html.TextBox("txtClosingDate", null, new { @class = "form-control", @style = "width:150px", @placeholder = "yyyy-mm-dd", @runat = "server" })
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h4 style="display:inline-block">Start Date:</h4>
-                                </td>
-                                <td>
-                                    @Html.TextBox("txtStartDate", null, new { @class = "form-control", @style = "width:150px", @placeholder = "yyyy-mm-dd", @runat = "server" })
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <h4 style="display:inline-block">Job Description:</h4>
-                                </td>
-                                <td>
-                                    @Html.TextArea("txtJobDescription", null, new { @class = "form-control", @rows = "2", @cols = "20", @style = "width:150px", @placeholder = "Enter text here...", @runat = "server" })
-
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <h4 style="display:inline-block">Qualifications:</h4>
-                                </td>
-                                <td> 
-                                    @Html.CheckBox("chkQualifications", new { @class = "form-control", @runat = "server" })
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h4 style="display:inline-block">Requirements:</h4>
-                                </td>
-                                <td>
-                                    @Html.CheckBox("chkQualifications", new { @class = "form-control", @runat = "server" })
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <h4 style="display:inline-block">Number of Openings:</h4>
-                                </td>
-                                <td>
-                                    <input type="number" class="form-control" min="0" max="50" step="1" value="1" style="width:75px">
-                                </td>
-                            </tr>
-                        </table>
-
-
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="form-group">
-                            <br />
-                            <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Save Posting" class="btn btn-default" />
+                                    <tr>
+                                        <td>
+                                            <h4 style="display:inline-block">School:</h4>
+                                        </td>
+                                        <td>
+                                            @Html.DropDownList("ddlSchool", Enumerable.Empty<SelectListItem>(), "-- Select --", new { @class = "form-control", @style = "width:200px" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4 style="display:inline-block">Location:</h4>
+                                        </td>
+                                        <td>
+                                            @Html.TextBox("txtLocation", null, new { @class = "form-control", @style = "width:200px", @placeholder = "eg. 14 First Avenue, Welland", @runat = "server" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4 style="display:inline-block">City:</h4>
+                                        </td>
+                                        <td>
+                                            @Html.DropDownList("ddlCity", Enumerable.Empty<SelectListItem>(), "-- Select --", new { @class = "form-control", @style = "width:200px" })
+                                        </td>
+                                    </tr>
+                                </table>
+                                <br />
+                                <h4>Job Description:</h4>
+                                @Html.TextArea("txtJobDescription", null, new { @class = "form-control", @rows = "2", @cols = "20", @style = "width:430px", @placeholder = "Enter text here...", @runat = "server" })
                             </div>
+
+                            <div class="col-md-6" style="width:600px">
+                                <table id="alignTable" style="width:70%;">
+                                    <tr>
+                                        <td>
+                                            <h4 style="display:inline-block">Closing Date:</h4>
+                                        </td>
+                                        <td>
+                                            @Html.TextBox("txtClosingDate", null, new { @class = "form-control", @style = "width:200px", @placeholder = "yyyy-mm-dd", @runat = "server" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4 style="display:inline-block">Start Date:</h4>
+                                        </td>
+                                        <td>
+                                            @Html.TextBox("txtStartDate", null, new { @class = "form-control", @style = "width:200px", @placeholder = "yyyy-mm-dd", @runat = "server" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4 style="display:inline-block">Requirements:</h4>
+                                        </td>
+                                        <td>
+                                            @Html.TextBox("txtAddReq", null, new { @class = "form-control", @style = "width:200px", @runat = "server" })
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="button" value="Add" class="btn btn-default" />
+                                        </td>
+                                        <td>
+                                            @Html.TextArea("txtAllRequirements", null, new { @class = "form-control", @rows = "2", @cols = "20", @style = "width:200px", @readonly = "readonly", @placeholder = "Requirements...", @runat = "server" })
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <h4>Number of Openings:</h4>
+                                <input type="number" class="form-control" min="0" max="50" step="1" value="1" style="width:75px" />
+                            </div>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                }
+        }
+        <br />
+        @Html.ActionLink("Save Posting", null, null, null, new { @class = "btn btn-primary btn-large", @style = "background-color:#00a203" })
 
-                <div>
-                    @Html.ActionLink("Back", "Index")
-                </div>
-            </div>
+        <div>
+            @Html.ActionLink("Back", "Index")
+        </div>
+    </div>
+
 </body>
 </html>
