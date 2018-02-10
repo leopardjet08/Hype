@@ -65,6 +65,9 @@ html {
     background-color: #ddd;
 }
 
+#alignTable td{
+    height: 60px;
+}
 
 
 body {
