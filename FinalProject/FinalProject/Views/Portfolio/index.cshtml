@@ -5,240 +5,239 @@
    
 }
 
-<div class="container well well-lg" style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
+<h2>Portfolio</h2>
+<script>
 
-    <h2>Portfolio</h2>
-    <script>
+    function GetJobs() {
+        var div = document.getElementById("div_Job");
+       
+        var divProfile = document.getElementById("div_Profile");
 
-        function GetJobs() {
-            var div = document.getElementById("div_Job");
-
-            var divProfile = document.getElementById("div_Profile");
-
-            if (div.style.display !== "none") {
-
-            }
-            else {
-                div.style.display = "block";
-
-                divProfile.style.display = "none";
-            }
+        if (div.style.display !== "none") {
+           
         }
-
-
-
-        function GetProfile() {
-            var div = document.getElementById("div_Profile");
-
-            var divJob = document.getElementById("div_Job");
-
-            if (div.style.display !== "none") {
-                div.style.display = "none";
-            }
-            else {
-                div.style.display = "block";
-                divJob.style.display = "none";
-
-            }
+        else {
+            div.style.display = "block";
+           
+            divProfile.style.display = "none";
         }
+    }
 
+           
+   
+    function GetProfile() {
+        var div = document.getElementById("div_Profile");
+       
+        var divJob = document.getElementById("div_Job");
 
-
-        function GetApplied() {
-            var div = document.getElementById("div_Applied");
-            var divSaved = document.getElementById("div_Saved");
-            var divExpired = document.getElementById("div_Expired");
-
-            if (div.style.display !== "none") {
-
-            }
-            else {
-                div.style.display = "block";
-                divSaved.style.display = "none";
-                divExpired.style.display = "none";
-            }
+        if (div.style.display !== "none") {
+            div.style.display = "none";
         }
-
-        function GetSaved() {
-            var div = document.getElementById("div_Saved");
-            var divApplied = document.getElementById("div_Applied");
-            var divExpired = document.getElementById("div_Expired");
-
-            if (div.style.display !== "none") {
-
-            }
-            else {
-                div.style.display = "block";
-                divApplied.style.display = "none";
-                divExpired.style.display = "none";
-            }
+        else {
+            div.style.display = "block";
+            divJob.style.display = "none";
+           
         }
+    }
 
-        function GetExpired() {
-            var div = document.getElementById("div_Expired");
-            var divApplied = document.getElementById("div_Applied");
-            var divSaved = document.getElementById("div_Saved");
 
-            if (div.style.display !== "none") {
 
-            }
-            else {
-                div.style.display = "block";
-                divApplied.style.display = "none";
-                divSaved.style.display = "none";
-            }
+    function GetApplied() {
+        var div = document.getElementById("div_Applied");
+        var divSaved = document.getElementById("div_Saved");
+        var divExpired = document.getElementById("div_Expired");
+
+        if (div.style.display !== "none") {
+
         }
+        else {
+            div.style.display = "block";
+            divSaved.style.display = "none";
+            divExpired.style.display = "none";
+        }
+    }
 
+    function GetSaved() {
+        var div = document.getElementById("div_Saved");
+        var divApplied = document.getElementById("div_Applied");
+        var divExpired = document.getElementById("div_Expired");
 
+        if (div.style.display !== "none") {
 
-    </script>
-    <hr />
-    <input type="button" onclick="GetJobs()" value="My Job" class="btn btn-default" id="but_jobs" style="width:90px;" />
-    <input type="button" onclick="GetProfile()" value="My Profile" class="btn btn-default" id="profiles" />
-    <hr />
+        }
+        else {
+            div.style.display = "block";
+            divApplied.style.display = "none";
+            divExpired.style.display = "none";
+        }
+    }
 
-    <div id="div_Job">
+    function GetExpired() {
+        var div = document.getElementById("div_Expired");
+        var divApplied = document.getElementById("div_Applied");
+        var divSaved = document.getElementById("div_Saved");
 
-        <input type="button" onclick="GetApplied()" value="Applied" class="btn btn-default" id="applied" style="width:90px;" />
-        <input type="button" onclick="GetSaved()" value="Saved" class="btn btn-default" id="saved" />
-        <input type="button" onclick="GetExpired()" value="Expired" class="btn btn-default" id="expired" />
+        if (div.style.display !== "none") {
 
-        <div id="div_Applied">
+        }
+        else {
+            div.style.display = "block";
+            divApplied.style.display = "none";
+            divSaved.style.display = "none";
+        }
+    }
 
-            <h2>Applied</h2>
-            <hr />
-            <span style="text-decoration: underline;">
-                <Strong> Janitor FullTime</Strong>
-            </span>
-            <p><Strong>Niagara College</Strong></p>
-            <input type="button" value="View" class="btn btn-default" />
+    
 
-            <hr />
-            <span style="text-decoration: underline;">
-                <Strong> Teacher FullTime</Strong>
-            </span>
-            <p><Strong>Brook College</Strong></p>
-            <input type="button" value="View" class="btn btn-default" />
+</script>
+<hr />
+<input type="button" onclick="GetJobs()" value="My Job" class="btn btn-default" id="but_jobs"style="width:90px;" />
+<input type="button" onclick="GetProfile()" value="My Profile" class="btn btn-default" id="profiles" />
+<hr />
 
-            <hr />
-            <span style="text-decoration: underline;">
-                <Strong> Principal FullTime</Strong>
-            </span>
-            <p><Strong>Welland elementary</Strong></p>
-            <input type="button" value="View" class="btn btn-default" />
+<div id="div_Job" >
+   
+    <input type="button" onclick="GetApplied()" value="Applied" class="btn btn-default"  id="applied" style="width:90px;" />
+    <input type="button" onclick="GetSaved()" value="Saved" class="btn btn-default" id="saved" />
+    <input type="button" onclick="GetExpired()" value="Expired" class="btn btn-default" id="expired" />
 
+    <div id="div_Applied">
 
-
-        </div>
-
-        <div id="div_Saved" style="display:none">
-
-            <h2>Saved</h2>
-            <hr />
-            <span style="text-decoration: underline;">
-                <Strong> Programmer Part-Time</Strong>
-            </span>
-            <p><Strong>Rose Highschool</Strong></p>
-            <input type="button" value="Apply" class="btn btn-default" />
-            <input type="button" value="Delete" class="btn btn-default" />
-
-            <hr />
-            <span style="text-decoration: underline;">
-                <Strong> PE Coach</Strong>
-            </span>
-            <p><Strong>Broks Elementary School</Strong></p>
-            <input type="button" value="Apply" class="btn btn-default" />
-            <input type="button" value="Delete" class="btn btn-default" />
-
-            <hr />
-            <span style="text-decoration: underline;">
-                <Strong> Vice-Principal Full-Time</Strong>
-            </span>
-            <p><Strong>West elementary</Strong></p>
-            <input type="button" value="Apply" class="btn btn-default" />
-            <input type="button" value="Delete" class="btn btn-default" />
-
-        </div>
-
-        <div id="div_Expired" style="display:none">
-
-            <h2>Expired</h2>
-            <input type="button" value="Clear All" class="btn btn-default" />
-            <hr />
-            <hr />
-            <span style="text-decoration: underline;">
-                <Strong> Designer Part-Time</Strong>
-            </span>
-            <p><Strong>north Highschool</Strong></p>
-            <input type="button" value="View" class="btn btn-default" />
-            <input type="button" value="Delete" class="btn btn-default" />
-
-            <hr />
-            <span style="text-decoration: underline;">
-                <Strong> Database designer</Strong>
-            </span>
-            <p><Strong>august Elementary School</Strong></p>
-            <input type="button" value="View" class="btn btn-default" />
-            <input type="button" value="Delete" class="btn btn-default" />
-
-            <hr />
-            <span style="text-decoration: underline;">
-                <Strong> Professor Full-Time</Strong>
-            </span>
-            <p><Strong>side elementary</Strong></p>
-            <input type="button" value="View" class="btn btn-default" />
-            <input type="button" value="Delete" class="btn btn-default" />
-
-        </div>
-
-    </div>
-
-
-    <div id="div_Profile" style="display:none">
-
-        <h2>My Profile</h2>
+        <h2>Applied</h2>
         <hr />
+        <span style="text-decoration: underline;">
+            <Strong> Janitor FullTime</Strong> 
+        </span>
+        <p><Strong>Niagara College</Strong></p>
+        <input type="button" value="View" class="btn btn-default"  />
 
-        <div class="card">
-            <img src="https://www.w3schools.com/w3images/team2.jpg" alt="John" style="width:100%">
-            <strong> First name:</strong> <input type="text" name="fname" value="Joe peter"><br>
-            <br>
-            <strong>Last name: </strong><input type="text" name="lname" value="Mortalon"><br>
-            <br>
-            <strong> Address:</strong> <input type="text" name="lname" value="454 Welland street, Ontario"><br>
-            <br>
-            <strong> Email: </strong><input type="text" name="lname" value="johndoe5656@hotmail.ca"><br>
-            <br>
-            <strong> Phone Number: </strong><input type="text" name="lname" value=" 905356457486"><br>
-            <br>
-            <input type="button" value="Edit Profile" class="btn btn-default" />
-            <input type="button" value="Change Picture" class="btn btn-default" />
-        </div>
-        <br>
-        <h1>
-            Resume
-        </h1>
-        <div class="card">
-            <p><strong>Upload Resume:</strong> </p>
-            <input type="file" id="myFile">
-            <br>
-            <input type="button" value="View" class="btn btn-default" />
-            <input type="button" value="Download" class="btn btn-default" />
-            <input type="button" value="Remove" class="btn btn-default" />
-            <input type="button" value="Add" class="btn btn-default" />
-        </div>
+        <hr />
+        <span style="text-decoration: underline;">
+            <Strong> Teacher FullTime</Strong>
+        </span>
+        <p><Strong>Brook College</Strong></p>
+        <input type="button" value="View" class="btn btn-default" />
+
+        <hr />
+        <span style="text-decoration: underline;">
+            <Strong> Principal FullTime</Strong>
+        </span>
+        <p><Strong>Welland elementary</Strong></p>
+        <input type="button" value="View" class="btn btn-default" />
+
+        
+
     </div>
 
-    <hr />
-    <style>
-        .card {
-            box-shadow: 0 9px 8px 0 rgba(0, 0, 0, 0.2);
-            max-width: 500px;
-            margin: auto;
-            font-family: arial;
-        }
-    </style>
+    <div id="div_Saved" style="display:none">
+
+        <h2>Saved</h2>
+        <hr />
+        <span style="text-decoration: underline;">
+            <Strong> Programmer Part-Time</Strong>
+        </span>
+        <p><Strong>Rose Highschool</Strong></p>
+        <input type="button" value="Apply" class="btn btn-default" />
+        <input type="button" value="Delete" class="btn btn-default" />
+
+        <hr />
+        <span style="text-decoration: underline;">
+            <Strong> PE Coach</Strong>
+        </span>
+        <p><Strong>Broks Elementary School</Strong></p>
+        <input type="button" value="Apply" class="btn btn-default" />
+        <input type="button" value="Delete" class="btn btn-default" />
+
+        <hr />
+        <span style="text-decoration: underline;">
+            <Strong> Vice-Principal Full-Time</Strong>
+        </span>
+        <p><Strong>West elementary</Strong></p>
+        <input type="button" value="Apply" class="btn btn-default" />
+        <input type="button" value="Delete" class="btn btn-default" />
+
+    </div>
+
+    <div id="div_Expired" style="display:none">
+
+        <h2>Expired</h2>
+        <input type="button" value="Clear All" class="btn btn-default" />
+        <hr />
+        <hr />
+        <span style="text-decoration: underline;">
+            <Strong> Designer Part-Time</Strong>
+        </span>
+        <p><Strong>north Highschool</Strong></p>
+        <input type="button" value="View" class="btn btn-default" />
+        <input type="button" value="Delete" class="btn btn-default" />
+
+        <hr />
+        <span style="text-decoration: underline;">
+            <Strong> Database designer</Strong>
+        </span>
+        <p><Strong>august Elementary School</Strong></p>
+        <input type="button" value="View" class="btn btn-default" />
+        <input type="button" value="Delete" class="btn btn-default" />
+
+        <hr />
+        <span style="text-decoration: underline;">
+            <Strong> Professor Full-Time</Strong>
+        </span>
+        <p><Strong>side elementary</Strong></p>
+        <input type="button" value="View" class="btn btn-default" />
+        <input type="button" value="Delete" class="btn btn-default" />
+
+    </div>
 
 </div>
+
+
+<div id="div_Profile" style="display:none">
+
+    <h2>My Profile</h2>
+    <hr />
+
+    <div class="card">
+        <img src="https://www.w3schools.com/w3images/team2.jpg" alt="John" style="width:100%">
+        <strong> First name:</strong> <input type="text" name="fname" value="Joe peter"><br>
+        <br>
+        <strong>Last name: </strong><input type="text" name="lname" value="Mortalon"><br>
+        <br>
+        <strong> Address:</strong> <input type="text" name="lname" value="454 Welland street, Ontario"><br>
+        <br>
+        <strong> Email: </strong><input type="text" name="lname" value="johndoe5656@hotmail.ca"><br>
+        <br>
+        <strong> Phone Number: </strong><input type="text" name="lname" value=" 905356457486"><br>
+        <br>
+        <input type="button"  value="Edit Profile" class="btn btn-default"  />
+        <input type="button" value="Change Picture" class="btn btn-default" />
+    </div>
+    <br>
+    <h1>
+        Resume
+    </h1>
+    <div class="card">
+        <p><strong>Upload Resume:</strong> </p>
+        <input type="file" id="myFile">
+        <br>
+        <input type="button" value="View" class="btn btn-default" />
+        <input type="button" value="Download" class="btn btn-default" />
+        <input type="button" value="Remove" class="btn btn-default" />
+        <input type="button" value="Add" class="btn btn-default" />
+</div>
+    </div>
+
+<hr />
+<style>
+    .card {
+        box-shadow: 0 9px 8px 0 rgba(0, 0, 0, 0.2);
+        max-width: 500px;
+        margin: auto;
+        font-family: arial;
+    }
+ 
+
+</style>
+
 
 
