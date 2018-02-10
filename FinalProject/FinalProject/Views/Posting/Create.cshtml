@@ -15,12 +15,17 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     
-    <div class="container well well-lg" margin-bottom:50px;">
+    <div class="container well well-lg" style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
+        
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-      
-                @using (Html.BeginForm())
-                {
-                    @Html.AntiForgeryToken()
+            <p style="text-align:center; margin-top:20px; margin-bottom:15px; font-size:30px; color:#02388a;"> Niagara Catholic District School Board</p>
+                    <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
+                    <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
+                    <br />
+                    <br />
 
                     <div class="form-horizontal">
                         <h3>Create Posting:</h3>
@@ -66,14 +71,6 @@
                                 </td>
 
                             </tr>
-                            <tr>
-                                <td>
-                                    <h4 style="display:inline-block">Postal Code:</h4>
-                                </td>
-                                <td>
-                                    @Html.TextBox("txtPostalCode", null, new { @class = "form-control", @style = "width:150px", @runat = "server" })
-                                </td>
-                            </tr>
 
                             <tr>
                                 <td>
@@ -105,14 +102,6 @@
 
                             <tr>
                                 <td>
-                                    <h4 style="display:inline-block">Qualifications:</h4>
-                                </td>
-                                <td> 
-                                    @Html.CheckBox("chkQualifications", new { @class = "form-control", @runat = "server" })
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
                                     <h4 style="display:inline-block">Requirements:</h4>
                                 </td>
                                 <td>
@@ -139,11 +128,12 @@
                             </div>
                         </div>
                     </div>
-                }
+        }
 
-                <div>
-                    @Html.ActionLink("Back", "Index")
-                </div>
-            </div>
+        <div>
+            @Html.ActionLink("Back", "Index")
+        </div>
+    </div>
+
 </body>
 </html>

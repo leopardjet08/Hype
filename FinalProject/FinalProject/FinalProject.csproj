@@ -233,7 +233,6 @@
     <Compile Include="Models\DataModel\SchoolFamily.cs" />
     <Compile Include="Models\DataModel\SchoolLevel.cs" />
     <Compile Include="Models\DataModel\SchoolLocation.cs" />
-    <Compile Include="Models\Review.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
