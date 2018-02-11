@@ -25,16 +25,16 @@
             <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
                     <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
                     <br />
-                    <br />
+                    
 
-                    <div class="form-horizontal" style="margin:0 auto">
-                        <div style="text-align:center">
+                    <div class="form-horizontal">
+                        <div style="text-align:center; margin-bottom:60px">
                             <h3> ∙ &nbsp; Create New Posting&nbsp; ∙</h3>
                         </div>
 
                         <!-- Columns -->
 
-                        <div style="margin-top:70px">
+                        <div>
                             <div class="col-md-6" style="width:600px">
                                 <table id="alignTable" style="width:70%;">
                                     <tr>
@@ -45,7 +45,6 @@
                                             @Html.TextBox("txtJobTitle", null, new { @class = "form-control", @style = "width:200px", @runat = "server" })
                                         </td>
                                     </tr>
-
                                     <tr>
                                         <td>
                                             <h4 style="display:inline-block">School:</h4>
@@ -71,7 +70,9 @@
                                         </td>
                                     </tr>
                                 </table>
+
                                 <br />
+
                                 <h4>Job Description:</h4>
                                 @Html.TextArea("txtJobDescription", null, new { @class = "form-control", @rows = "2", @cols = "20", @style = "width:430px", @placeholder = "Enter text here...", @runat = "server" })
                             </div>
@@ -110,22 +111,28 @@
                                             @Html.TextArea("txtAllRequirements", null, new { @class = "form-control", @rows = "2", @cols = "20", @style = "width:200px", @readonly = "readonly", @placeholder = "Requirements...", @runat = "server" })
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <td>
+                                            <h4>Number of Openings:</h4>
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control" min="0" max="50" step="1" value="1" style="width:75px" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.ActionLink("Save Posting", null, null, null, new { @class = "btn btn-primary btn-large", @style = "background-color:#00a203" })
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Back", "Index")
+                                        </td>
+                                    </tr>
                                 </table>
-
-                                <h4>Number of Openings:</h4>
-                                <input type="number" class="form-control" min="0" max="50" step="1" value="1" style="width:75px" />
-                            </div>
+                           </div>
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         </div>
                     </div>
-        }
-        <br />
-        @Html.ActionLink("Save Posting", null, null, null, new { @class = "btn btn-primary btn-large", @style = "background-color:#00a203" })
-
-        <div>
-            @Html.ActionLink("Back", "Index")
-        </div>
+         }    
     </div>
-
 </body>
 </html>
