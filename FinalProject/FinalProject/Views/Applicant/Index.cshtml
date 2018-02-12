@@ -5,128 +5,136 @@
 
 }
 
-<div class="container well well-lg" margin-bottom:50px;">
-    <br /><br />
-    <fieldset>
-        <legend style="text-align:center; font-size:30px; color:#337ab7;">List of Applicants</legend>
-    </fieldset>
-    <h3 style="padding-top:20px; border:none; font-size:20px;">
-        Search:
 
-        @Html.TextBox("txtApplicationSearch", null, new { @style = "margin:0 auto; width:200px", @runat = "server" })
+<div class="container well well-lg" style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
+    <br />
+    <div style="margin-bottom:100px; text-align:center">
+        <p style="text-align:center;  margin-bottom:15px; font-size:30px; color:#02388a;"> Niagara Catholic District School Board</p>
+        <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
+        <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
+        <br /> 
+
+        <h3 style="text-align:center; padding-bottom:10px">
+        ∙ &nbsp; All Applicants &nbsp; ∙
+       </h3>
+
+        <div style="padding-bottom:50px;">
+            <h3 style="padding-top:20px; border:none; font-size:20px;">
+                Search Applicants:
+            </h3>
+            @Html.TextBox("txtApplicantSearch", null, new { @class = "form-control", @style = "display:inline-block", @runat = "server" })
+            <button ID="btnApplicantSearch" style="border: 2px solid black;" class="btn btn-sm" type="submit">Search</button>
+        </div>
+
+            @Html.Label("lblResult", " Results found: 7", new { @style = "color:green" })
+            <br /><br />
+            <div class="container">
+                <table class="table table-bordered" style="width:75%; margin:0 auto">
+                    <thead style="color:white; font-size:17px; background-color:#012e72">
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Status</th>
+                            <th>City</th>
+                            <th>Last Logged In</th>
+                            <th>View</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Jose Pabalinas</td>
+
+                            <td>9054563678</td>
+                            <td>Hired</td>
+                            <td>Welland</td>
+                            <td>February 5,2018</td>
+                            <th>
+                                @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-primary btn-large" })
+                            </th>
+
+                        </tr>
+                        <tr>
+                            <td>Mark Aceno</td>
+
+                            <td>2895676569</td>
+                            <td>Hired</td>
+                            <td>St.Catherine</td>
+                            <td>February 2,2018</td>
+                            <th>
+                                @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-primary btn-large" })
+                            </th>
 
 
-        <button ID="btnApplicationSearch" style="border: 2px solid black;" class="btn btn-info-outline" type="submit">Search</button>
-    </h3>
-    <hr />
-    <hr />
-   
-    @Html.Label("lblResult", " Result found: 7", new { @style = "color:red" })
+                        <tr>
+                            <td>John Balili</td>
 
-    <br /><br />
+                            <td>9054511216</td>
+                            <td>Vacation</td>
+                            <td>Welland</td>
+                            <td>January 21,2018</td>
+                            <th>
+                                @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-primary btn-large" })
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>Joharie Mallo</td>
 
-    <div class="container">
+                            <td>9054565553</td>
+                            <td>Waiting</td>
+                            <td>Hamilton</td>
+                            <td>February 7,2018</td>
+                            <th>
+                                @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-primary btn-large" })
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>Jake Rocero</td>
 
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Date Applied</th>
-                    <th>Phone</th>
-                    <th>Status</th>
-                    <th>City</th>
-                    <th>Last Logged In</th>
-                    <th>View</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Jose Pabalinas</td>
-                    <td>January 3, 2017</td>
-                    <td>9054563678</td>
-                    <td>Hired</td>
-                    <td>Welland</td>
-                    <td>February 5,2018</td>
-                    <th>
-                        @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-primary btn-large" })
-                    </th>
+                            <td>9054563678</td>
+                            <td>Waiting</td>
+                            <td>St.Catherine</td>
+                            <td>February 2,2018</td>
+                            <th>
+                                @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-primary btn-large" })
+                            </th>
 
-                </tr>
-                <tr>
-                    <td>Mark Aceno</td>
-                    <td>January 26, 2017</td>
-                    <td>2895676569</td>
-                    <td>Hired</td>
-                    <td>St.Catherine</td>
-                    <td>February 2,2018</td>
-                    <th>
-                        @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-primary btn-large" })
-                    </th>
+                        </tr>
+                        <tr>
+                            <td>Torlan Mogas</td>
+
+                            <td>9045563678</td>
+                            <td>Hired</td>
+                            <td>Grimsby</td>
+                            <td>February 2,2018</td>
+                            <th>
+                                @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-primary btn-large" })
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>Rulan Qogas</td>
+
+                            <td>9045555678</td>
+                            <td>Vacation</td>
+                            <td>Welland</td>
+                            <td>February 7,2018</td>
+                            <th>
+                                @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-primary btn-large" })
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
 
 
-                <tr>
-                    <td>John Balili</td>
-                    <td>February 27, 2017</td>
-                    <td>9054511216</td>
-                    <td>Vacation</td>
-                    <td>Welland</td>
-                    <td>January 21,2018</td>
-                    <th>
-                        @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-primary btn-large" })
-                    </th>
-                </tr>
-                <tr>
-                    <td>Joharie Mallo</td>
-                    <td>September 12, 2017</td>
-                    <td>9054565553</td>
-                    <td>Waiting</td>
-                    <td>Hamilton</td>
-                    <td>February 7,2018</td>
-                    <th>
-                        @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-primary btn-large" })
-                    </th>
-                </tr>
-                <tr>
-                    <td>Jake Rocero</td>
-                    <td>January 3, 2017</td>
-                    <td>9054563678</td>
-                    <td>Waiting</td>
-                    <td>St.Catherine</td>
-                    <td>February 2,2018</td>
-                    <th>
-                        @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-primary btn-large" })
-                    </th>
-                    
-                </tr>
-                <tr>
-                    <td>torlan mogas</td>
-                    <td>October 3, 2017</td>
-                    <td>9045563678</td>
-                    <td>Hired</td>
-                    <td>Grimsby</td>
-                    <td>February 2,2018</td>
-                    <th>
-                        @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-primary btn-large" })
-                    </th>
-                </tr>
-                <tr>
-                    <td>rulan qogas</td>
-                    <td>December 17, 2017</td>
-                    <td>9045555678</td>
-                    <td>Vacation</td>
-                    <td>Welland</td>
-                    <td>February 7,2018</td>
-                    <th>
-                        @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-primary btn-large" })
-                    </th>
-                </tr>
-            </tbody>
-        </table>
-    </div>
 
-    <hr />
+            </div>
+        </div>
+ </div>
 
-</div>
+           
+            
+
+
+           
 
 
 
