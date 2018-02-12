@@ -8,7 +8,7 @@
 
 <div class="container well well-lg" style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
     <br />
-    <div style="margin-bottom:100px; text-align:center">
+    <div style="margin-bottom:100px; text-align:left">
         <p style="text-align:center;  margin-bottom:15px; font-size:30px; color:#02388a;"> Niagara Catholic District School Board</p>
         <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
         <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
@@ -18,19 +18,19 @@
         ∙ &nbsp; All Applicants &nbsp; ∙
        </h3>
 
-        <div style="padding-bottom:50px;">
-            <h3 style="padding-top:20px; border:none; font-size:20px;">
+        <div style="padding-bottom:50px; margin-left:165px">
+            <h3 style="padding-top:20px; padding-bottom:10px; border:none; font-size:20px;">
                 Search Applicants:
             </h3>
             @Html.TextBox("txtApplicantSearch", null, new { @class = "form-control", @style = "display:inline-block", @runat = "server" })
             <button ID="btnApplicantSearch" style="border: 2px solid black;" class="btn btn-sm" type="submit">Search</button>
         </div>
 
-            @Html.Label("lblResult", " Results found: 7", new { @style = "color:green" })
+            @Html.Label("lblResult", " Results found: 7", new { @style = "color:green; margin-left:165px" })
             <br /><br />
             <div class="container">
                 <table class="table table-bordered" style="width:75%; margin:0 auto">
-                    <thead style="color:white; font-size:17px; background-color:#012e72">
+                    <thead style="color:white; font-size:18px; background-color:#012e72">
                         <tr>
                             <th>Name</th>
                             <th>Phone</th>
@@ -40,7 +40,7 @@
                             <th>View</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tableColor" style="font-size:17px; text-align:left">
                         <tr>
                             <td>Jose Pabalinas</td>
 
@@ -49,7 +49,7 @@
                             <td>Welland</td>
                             <td>February 5,2018</td>
                             <th>
-                                @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-primary btn-large" })
+                                @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-default", @style = "border:0px; background-color:#f5f5f5;" })
                             </th>
 
                         </tr>
@@ -58,10 +58,10 @@
 
                             <td>2895676569</td>
                             <td>Hired</td>
-                            <td>St.Catherine</td>
-                            <td>February 2,2018</td>
+                            <td>St. Catharines</td>
+                            <td>February 2, 2018</td>
                             <th>
-                                @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-primary btn-large" })
+                                @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-default", @style = "border:0px;" })
                             </th>
 
 
@@ -71,9 +71,9 @@
                             <td>9054511216</td>
                             <td>Vacation</td>
                             <td>Welland</td>
-                            <td>January 21,2018</td>
+                            <td>January 21, 2018</td>
                             <th>
-                                @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-primary btn-large" })
+                                @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-default", @style = "border:0px; background-color:#f5f5f5;" })
                             </th>
                         </tr>
                         <tr>
@@ -82,9 +82,9 @@
                             <td>9054565553</td>
                             <td>Waiting</td>
                             <td>Hamilton</td>
-                            <td>February 7,2018</td>
+                            <td>February 7, 2018</td>
                             <th>
-                                @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-primary btn-large" })
+                                @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-default", @style = "border:0px;" })
                             </th>
                         </tr>
                         <tr>
@@ -92,10 +92,10 @@
 
                             <td>9054563678</td>
                             <td>Waiting</td>
-                            <td>St.Catherine</td>
-                            <td>February 2,2018</td>
+                            <td>St. Catharines</td>
+                            <td>February 2, 2018</td>
                             <th>
-                                @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-primary btn-large" })
+                                @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-default", @style = "border:0px; background-color:#f5f5f5;" })
                             </th>
 
                         </tr>
@@ -105,9 +105,9 @@
                             <td>9045563678</td>
                             <td>Hired</td>
                             <td>Grimsby</td>
-                            <td>February 2,2018</td>
+                            <td>February 2, 2018</td>
                             <th>
-                                @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-primary btn-large" })
+                                @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-default", @style = "border:0px;" })
                             </th>
                         </tr>
                         <tr>
@@ -116,18 +116,16 @@
                             <td>9045555678</td>
                             <td>Vacation</td>
                             <td>Welland</td>
-                            <td>February 7,2018</td>
+                            <td>February 7, 2018</td>
                             <th>
-                                @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-primary btn-large" })
+                                @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-default", @style = "border:0px; background-color:#f5f5f5;" })
                             </th>
                         </tr>
                     </tbody>
                 </table>
-
-
-
             </div>
         </div>
+    <a href="javascript:void(0);" style="margin-bottom:60px; margin-top:40px;margin-left:165px" onclick="history.go(-1);">Back</a>
  </div>
 
            
