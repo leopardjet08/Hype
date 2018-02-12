@@ -36,7 +36,7 @@
 
                         <div>
                             <div class="col-md-6" style="width:600px">
-                                <table id="alignTable" style="width:70%;">
+                                <table id="alignTable" style="margin:0 auto; width:70%;">
                                     <tr>
                                         <td>
                                             <h4 display:inline-block;">Job Title:</h4>
@@ -69,16 +69,18 @@
                                             @Html.DropDownList("ddlCity", Enumerable.Empty<SelectListItem>(), "-- Select --", new { @class = "form-control", @style = "width:200px" })
                                         </td>
                                     </tr>
+
                                 </table>
 
                                 <br />
 
-                                <h4>Job Description:</h4>
-                                @Html.TextArea("txtJobDescription", null, new { @class = "form-control", @rows = "2", @cols = "20", @style = "width:430px", @placeholder = "Enter text here...", @runat = "server" })
+                                <h4 style="margin-left:85px">Job Description:</h4>
+                               <br />
+                                @Html.TextArea("txtJobDescription", null, new { @class = "form-control", @rows = "2", @cols = "20", @style = "width:430px; margin-left:85px;", @placeholder = "Enter text here...", @runat = "server" })
                             </div>
 
                             <div class="col-md-6" style="width:600px">
-                                <table id="alignTable" style="width:70%;">
+                                <table id="alignTable" style="margin:0 auto; width:70%;">
                                     <tr>
                                         <td>
                                             <h4 style="display:inline-block">Closing Date:</h4>
@@ -120,6 +122,7 @@
                                         </td>
                                     </tr>
                                     <tr>
+                                       
                                         <td>
                                             @Html.ActionLink("Save Posting", null, null, null, new { @class = "btn btn-primary btn-large", @style = "background-color:#00a203" })
                                         </td>
