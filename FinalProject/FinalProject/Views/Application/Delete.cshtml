@@ -1,51 +1,55 @@
 ﻿@model FinalProject.Models.Application
 
-<h2>Delete Application</h2>
+@{
+    ViewBag.Title = "Delete Application";
+}
 
-<h3>Are you sure you want to delete this Job Application?</h3>
-<div>
-    <div class="q">
-        <table class="table">
-            <thead>
+<div class="container well well-lg" style=" text-align:center; width:1288px; padding-bottom:75px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
+
+    <p style="text-align:center; margin-top:20px; margin-bottom:15px; font-size:30px; color:#02388a;"> Niagara Catholic District School Board</p>
+    <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
+    <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
+    <br />
+
+    <h3 style="padding-bottom:30px">
+        ∙ &nbsp; Delete Application &nbsp; ∙
+    </h3>&nbsp;&nbsp;
+
+    <h3>Are you sure you want to delete the following application?</h3>
+    <br />
+    <div style="font-size:18px; margin-top:10px; margin-bottom:30px">
+ 
+            <table style="width:35%; margin:0 auto; text-align:left">
                 <tr>
-
-                    <th></th>
+                    <td style="color:#02388a"><b>Application Number:</b></td>
+                    <td><b>299843454</b></td>
                 </tr>
-            </thead>
-            <tbody>
-
-                <tr class="danger">
-
-                    <td><strong> <u>Application Number: 299843454</u> </strong></td>
-                </tr>
-
                 <tr>
-
-                    <td>Applicant Name:  <strong>Harold morta</strong> </td>
+                    <td style="color:#02388a"><b>Applicant Name:</b></td>
+                    <td><b>Harold Morta</b></td>
                 </tr>
-
                 <tr>
-
-                    <td>Posting title: <strong> Math Teacher Part-time</strong></td>
+                    <td style="color:#02388a"><b>Job ID:</b></td>
+                    <td><b>5493922332</b></td>
                 </tr>
-            </tbody>
-        </table>
+                <tr>
+                    <td style="color:#02388a"><b>Job Title:</b></td>
+                    <td><b>Math Teacher</b></td>
+                </tr>
+            </table>               
     </div>
+    
+        <br />
 
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
+        <input type="submit" style="margin-right:30px; "value="Delete" class="btn btn-danger btn-large" />
+            @Html.ActionLink("Cancel", "Index")
+    }   
 </div>
 
-<style>
-    .q {
-        font-size: 1.2em;
-        text-align: center;
-    }
-</style>
+
+
+   
