@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using FinalProject.Models.DataModel;
 
 namespace FinalProject.Models
 {
@@ -12,7 +13,6 @@ namespace FinalProject.Models
         {
             this.Postings = new HashSet<Posting>();
             this.Applications = new HashSet<Application>();
-            this.SchoolLocations = new HashSet<SchoolLocation>();
         }
 
         public int ID { get; set; }
@@ -25,13 +25,18 @@ namespace FinalProject.Models
         [Required(ErrorMessage = "Please specify the school level.")]
         public int SchoolLevelID { get; set; }
 
+        [Required(ErrorMessage = "Please indicate the school city.")]
+        public int CityID { get; set; }
+
         // For elementary level schools
         public int SchoolFamilyID { get; set; }
 
+        
+
         public virtual SchoolLevel SchoolLevel { get; set; }
         public virtual SchoolFamily SchoolFamily { get; set; }
+        public virtual City City { get; set; }
         public ICollection<Posting> Postings { get; set; }
         public ICollection<Application> Applications { get; set; }
-        public ICollection<SchoolLocation> SchoolLocations { get; set; }
     }
 }

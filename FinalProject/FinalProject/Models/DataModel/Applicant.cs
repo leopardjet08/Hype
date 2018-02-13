@@ -13,6 +13,7 @@ namespace FinalProject.Models
         public Applicant()
         {
             this.Applications = new HashSet<Application>();
+            this.SavedPostings = new HashSet<SavedPosting>();
         }
 
         public int ID { get; set; }
@@ -51,5 +52,6 @@ namespace FinalProject.Models
         public virtual Province Province { get; set; }
         public virtual City City { get; set; }
         public ICollection<Application> Applications { get; set; }
+        public ICollection<SavedPosting> SavedPostings { get; set; }
     }
 }

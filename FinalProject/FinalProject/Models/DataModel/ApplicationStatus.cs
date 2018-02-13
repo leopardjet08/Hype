@@ -5,14 +5,16 @@ using System.Web;
 
 namespace FinalProject.Models.DataModel
 {
-    public class ApprovedApps
+    public class ApplicationStatus
     {
-        public ApprovedApps()
+        public ApplicationStatus()
         {
             this.Applications = new HashSet<Application>();
         }
 
         public int ID { get; set; }
+
+        public string Status { get; set; }
 
         public ICollection<Application> Applications { get; set; }
     }

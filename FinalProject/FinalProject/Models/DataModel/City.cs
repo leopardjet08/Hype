@@ -12,6 +12,7 @@ namespace FinalProject.Models.DataModel
         public City()
         {
             this.Applicants = new HashSet<Applicant>();
+            this.Schools = new HashSet<School>();
         }
 
         public int ID { get; set; }
@@ -23,5 +24,6 @@ namespace FinalProject.Models.DataModel
         public string CityName { get; set; }
 
         public ICollection<Applicant> Applicants { get; set; }
+        public ICollection<School> Schools { get; set; }
     }
 }

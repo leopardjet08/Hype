@@ -20,14 +20,12 @@ namespace FinalProject.Models
         [Index("IX_Unique_Application", Order = 2, IsUnique = true)]
         public int ApplicantID { get; set; }
 
-        // Value 1 if approved, set Default value is 0
-        public int Approved { get; set; } = 0;
-
-        public int ApprovedAppsID { get; set; } 
+        // Value 1 default ID for Pending status
+        public int ApplicationStatusID { get; set; } = 1;
 
         public virtual Applicant Applicant { get; set; }
         public virtual Posting Posting { get; set; }
-        public virtual ApprovedApps ApprovedApps { get; set; }
+        public virtual ApplicationStatus ApplicationStatus { get; set; }
 
     }
 }
