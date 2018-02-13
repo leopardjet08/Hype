@@ -61,18 +61,23 @@
         </div>
     </div>
         
-
-
-        <!--Stary of more search -->
-        <div class="AdvanceSeachContainer">
+        <!--Start of more search -->
+        <div class="AdvanceSeachContainer" style="font-size:14px">
+           
+          
             <div class="row">
                 <div id="filter-panel" class="collapse filter-panel">
+                    
+                    <p style="color:white; font-size:22px">
+                        <b>Search By:</b>
+                    </p>
 
-
-                    <label class="controls" for="pref-search">Job Title:</label>
-                    @Html.TextBox("txtPostingSearch", null, new { @class = "textbox", @runat = "server" })
-
-                    <label class="controls" for="pref-search">Search Location:</label>
+                    <label class="controls" for="pref-search"style="font-size:20px; padding-top:20px; border:none; text-align:center; color:white">        
+                       <b>Job Title:</b>
+                    </label>   
+                    @Html.TextBox("txtPostingSearch", null, new { @class = "textbox", @style = "margin-bottom:5px",  @runat = "server" })
+                    <br />
+                    <label class="controls" for="pref-search" style="font-size:20px; color:white">Location:</label>
                     @Html.TextBox("txtPostingSearch", null, new { @class = "textbox", @runat = "server" })
 
                     @*<select>
@@ -83,8 +88,8 @@
                 <option value="6">Niagara-on-the-lake</option>
 
             </select>*@
-                    <div class="AdvanceSeachContainer">
-                        
+                    <div class="AdvanceSeachContainer" style="width:1000px; margin-left:120px; margin-top:-7px" >
+           
                         <div class="row">
                             <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4">
                                 <div class="fancy-collapse-panel">
@@ -95,7 +100,7 @@
                                             <div class="panel-heading" role="tab" id="headingThree">
                                                 <h4 class="panel-title">
                                                     <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                        Search Qualification
+                                                        Search By Qualification
                                                     </a>
                                                 </h4>
                                             </div>
@@ -145,47 +150,56 @@
 
     </div>  <!--End of Blue Section -->
    
-    <div id="postingResults" style="display:none" >
+    <div id="postingResults" style="display:none; width:75%; margin:0 auto;" >
         <br />
-        @Html.Label("lblResult", " Result found: 3", new { @style = "color:red" })
+        @Html.Label("lblResult", " Result found: 3", new { @style = "color:green; font-size:17px; margin-top:30px; margin-bottom:30px; margin-left:5px" })
         <br />
-        <div id="searchResult">
-            @Html.ActionLink("Math Teacher Full-Time ", "Index")
-            <br />
-            Holy Trinity Elementary School - Welland, ON
-            <br />
-            We are looking for a good teacher. College Graduate and have a degree. Good Communicatin skill
-            Good teaching skill and can handle bunch of kids ha....
-            <br />
-            @Html.ActionLink("Apply", "Details", "Posting", null, new { @class = "btn btn-primary btn-large", @style = "background-color:#00a203" })
-            
-            @Html.ActionLink("Save Job", "", "", null, new { @class = "btn btn-primary btn-large", @style = "background-color:#00a203" })
-        </div>
-        <div id="searchResult">
-            @Html.ActionLink("Vice Principal Full-Time ", "Index")
-            <br />
-            St.Agustine Elementary School - St.Catherine, ON
-            <br />
-            sdf sdfd fpsojgposd dsjpgj fdspogjpdof gfdjgopjfdopgjfdopgj ofdjgop jfdopgj fdopgj ofdpjg
-            kfldskflds dsofkldspfk dskflpkdsplfk dslfpd....
-            <br />
-            @Html.ActionLink("Apply", "Details", "Posting", null, new { @class = "btn btn-primary btn-large", @style = "background-color:#00a203" })
+            <div class="borderVibe" style="border:2px solid gray; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
 
-            @Html.ActionLink("Save Job", "", "", null, new { @class = "btn btn-primary btn-large", @style = "background-color:#00a203" })
-        </div>
-        <div id="searchResult">
-            @Html.ActionLink("IT Department Part-Time ", "Index")
-            <br />
-            Morlan High School - Niagara-on-the-lake, ON
-            <br />
-           jfsdklfjokp jdslkfjkdsjf lkdsjflkdsjfkljds klfjdsklfj kdsljfk ldsjfkldsj dsjflkjdskl
-            jdskfj dksfj kldsfjkdlsfj kdslfjk ldsjfkjd sklfjdsk fkdsl....
-            <br />
-            @Html.ActionLink("Apply", "Details", "Posting", null, new { @class = "btn btn-primary btn-large", @style = "background-color:#00a203" })
+                <div id="searchResult" style="background-color:#f5f5f5; margin-top:20px; margin-left:20px; margin-right:20px; border-bottom:none">
+                    @Html.ActionLink("Math Teacher Full-Time ", "Index")
+                    <br />
+                    Holy Trinity Elementary School - Welland, ON
+                    <br />
+                    We are looking for a good teacher. College Graduate and have a degree. Good Communicatin skill
+                    Good teaching skill and can handle bunch of kids ha....
+                    <br />
+                    @Html.ActionLink("Apply", "Details", "Posting", null, new { @class = "btn btn-primary btn-large", @style = "background-color:#00a203" })
 
-            @Html.ActionLink("Save Job", "", "", null, new { @class = "btn btn-primary btn-large", @style = "background-color:#00a203" })
-        </div>
-        
+                    @Html.ActionLink("Save Job", "", "", null, new { @class = "btn btn-primary btn-large", @style = "background-color:#95cedf" })
+                </div>
+                <br />
+                <div id="searchResult" style="background-color:#f5f5f5; margin-top:20px; margin-left:20px; margin-right:20px; border-bottom:none">
+                    @Html.ActionLink("Vice Principal Full-Time ", "Index")
+                    <br />
+                    St.Agustine Elementary School - St.Catherine, ON
+                    <br />
+                    sdf sdfd fpsojgposd dsjpgj fdspogjpdof gfdjgopjfdopgjfdopgj ofdjgop jfdopgj fdopgj ofdpjg
+                    kfldskflds dsofkldspfk dskflpkdsplfk dslfpd....
+                    <br />
+                    @Html.ActionLink("Apply", "Details", "Posting", null, new { @class = "btn btn-primary btn-large", @style = "background-color:#00a203" })
+
+                    @Html.ActionLink("Save Job", "", "", null, new { @class = "btn btn-primary btn-large", @style = "background-color:#95cedf" })
+                </div>
+                <br />
+                <div id="searchResult" style="background-color:#f5f5f5; margin-top:20px; margin-left:20px; margin-right:20px; margin-bottom:20px;  border-bottom:none">
+                    @Html.ActionLink("IT Department Part-Time ", "Index")
+                    <br />
+                    Morlan High School - Niagara-on-the-lake, ON
+                    <br />
+                    jfsdklfjokp jdslkfjkdsjf lkdsjflkdsjfkljds klfjdsklfj kdsljfk ldsjfkldsj dsjflkjdskl
+                    jdskfj dksfj kldsfjkdlsfj kdslfjk ldsjfkjd sklfjdsk fkdsl....
+                    <br />
+                    @Html.ActionLink("Apply", "Details", "Posting", null, new { @class = "btn btn-primary btn-large", @style = "background-color:#00a203" })
+
+                    @Html.ActionLink("Save Job", "", "", null, new { @class = "btn btn-primary btn-large", @style = "background-color:#95cedf" })
+                </div>
+
+
+
+            </div>
+
+       
 
     </div>
 
