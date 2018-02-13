@@ -14,10 +14,10 @@ namespace FinalProject.Models
 
         [Display(Name = "Qualifications")]
         [Required(ErrorMessage = "You cannot leave the name of the qualification blank.")]
-        [StringLength(50, ErrorMessage = "Name cannot exceed 50 characters.")]
+        [StringLength(255, ErrorMessage = "Qualifications cannot exceed 255 characters.")]
         [Index("IX_Unique_Skill", IsUnique = true)]
-        public string QualificationName { get; set; }
+        public string QualificationSet { get; set; }
 
-        public virtual Requirement Requirement { get; set; }
+        public virtual Job Job { get; set; }
     }
 }

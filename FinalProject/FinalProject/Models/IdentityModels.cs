@@ -34,7 +34,7 @@ namespace FinalProject.Models
 
         public System.Data.Entity.DbSet<FinalProject.Models.Applicant> Applicants { get; set; }
 
-        public System.Data.Entity.DbSet<FinalProject.Models.DataModel.ApprovedApps> ApprovedApps { get; set; }
+        public System.Data.Entity.DbSet<FinalProject.Models.DataModel.ApplicationStatus> ApprovedApps { get; set; }
 
         public System.Data.Entity.DbSet<FinalProject.Models.Posting> Postings { get; set; }
 
