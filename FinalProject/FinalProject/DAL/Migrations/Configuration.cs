@@ -56,10 +56,10 @@ namespace FinalProject.DAL.Migrations
         {
             var applicants = new List<Applicant>
             {
-                new Applicant { FName = "Alex", MName = "Ark",  LName = "Axibeg", eMail="aaxibeg@outlook.com",  },
-                new Applicant { FName = "Boris", MName = "Boyle",  LName = "Burnsworth", eMail="bburnsworth@outlook.com"},
-                new Applicant { FName = "Cathy", LName = "Carlisle", eMail="ccarlisle@outlook.com" },
-                new Applicant { FName = "Derrick", MName = "Dee",  LName = "DaVinci", eMail="ddavincis@outlook.com"}
+                new Applicant { FName = "Alex", MName = "Ark",  LName = "Axibeg", eMail="aaxibeg@outlook.com", Address="45 road street", ProvinceID=1,CityID=2},
+                new Applicant { FName = "Boris", MName = "Boyle",  LName = "Burnsworth", eMail="bburnsworth@outlook.com", Address="55 street", ProvinceID=3,CityID=1},
+                new Applicant { FName = "Cathy", LName = "Carlisle", eMail="ccarlisle@outlook.com" , Address="11 street", ProvinceID=2,CityID=4},
+                new Applicant { FName = "Derrick", MName = "Dee",  LName = "DaVinci", eMail="ddavincis@outlook.com", Address="88 street", ProvinceID=4,CityID=2}
             };
             applicants.ForEach(a => context.Applicants.AddOrUpdate(n => n.eMail, a));
             SaveChanges(context);
@@ -67,11 +67,11 @@ namespace FinalProject.DAL.Migrations
             var applications = new List<Application>
             {
                 new Application {  ApplicantID=(context.Applicants.Where(p=>p.eMail=="aaxibeg@outlook.com").SingleOrDefault().ID),
-                    PostingID =(context.Postings.Where(p=>p.NumberOpen==2).SingleOrDefault().ID) },
+                    PostingID =(context.Postings.Where(p=>p.NumberOpen==2).SingleOrDefault().ID), ApplicationStatusID=1 },
                 new Application {  ApplicantID=(context.Applicants.Where(p=>p.eMail=="bburnsworth@outlook.com").SingleOrDefault().ID),
-                    PostingID =(context.Postings.Where(p=>p.NumberOpen==2).SingleOrDefault().ID) },
+                    PostingID =(context.Postings.Where(p=>p.NumberOpen==2).SingleOrDefault().ID), ApplicationStatusID=2 },
                 new Application {  ApplicantID=(context.Applicants.Where(p=>p.eMail=="ccarlisle@outlook.com").SingleOrDefault().ID),
-                    PostingID =(context.Postings.Where(p=>p.NumberOpen==1).SingleOrDefault().ID) }
+                    PostingID =(context.Postings.Where(p=>p.NumberOpen==1).SingleOrDefault().ID), ApplicationStatusID=3 }
             };
             applications.ForEach(a => context.Applications.AddOrUpdate(n => n.ApplicantID, a));
             SaveChanges(context);
@@ -99,6 +99,14 @@ namespace FinalProject.DAL.Migrations
                 new Province { ProvinceName="Newfoundland and Labrador"}
             };
             provinces.ForEach(a => context.Provinces.AddOrUpdate(n => n.ProvinceName, a));
+            SaveChanges(context);
+
+            var bestCandiate = new List<BestCandidate>
+            {
+                new BestCandidate { ApplicationID=1},
+
+            };
+            bestCandiate.ForEach(a => context.BestCandidates.AddOrUpdate(n => n.ApplicationID, a));
             SaveChanges(context);
 
             var postings = new List<Posting>
@@ -217,10 +225,44 @@ namespace FinalProject.DAL.Migrations
                 new School { SchoolName="St. Philomena",SchoolLevelID=1,CityID=6,SchoolFamilyID=9},
                 new School { SchoolName="St. Theresa",SchoolLevelID=1,CityID=2,SchoolFamilyID=6},
                 new School { SchoolName="St. Therese",SchoolLevelID=1,CityID=10,SchoolFamilyID=9},
-                new School { SchoolName="St. Vincent de Paul",SchoolLevelID=1,CityID=3,SchoolFamilyID=3},
+                new School { SchoolName="St. Vincent de Paul",SchoolLevelID=1,CityID=3,SchoolFamilyID=3}
 
             };
             schoolFamilies.ForEach(a => context.SchoolFamilies.AddOrUpdate(n => n.FamilyName, a));
+            SaveChanges(context);
+
+            var savePosting = new List<SavedPosting>()
+            {
+                new SavedPosting{ ApplicantID=1},
+                new SavedPosting{ ApplicantID=2}
+            };
+            savePosting.ForEach(a => context.SavedPostings.AddOrUpdate(n => n.ApplicantID, a));
+            SaveChanges(context);
+
+            var qualification = new List<Qualification>()
+            {
+                new Qualification{ QualificationSet="Qualification1"},
+                new Qualification{ QualificationSet="Qualification2"},
+                new Qualification{ QualificationSet="Qualification2"},
+                new Qualification{ QualificationSet="Qualification3"},
+                new Qualification{ QualificationSet="Qualification3"},
+                new Qualification{ QualificationSet="Qualification4"},
+                new Qualification{ QualificationSet="Qualification4"},
+            };
+            qualification.ForEach(a => context.Qualifications.AddOrUpdate(n => n.QualificationSet, a));
+            SaveChanges(context);
+
+            var requirements = new List<Requirement>()
+            {
+                new Requirement{ RequirementName="Diploma",JobID=1},
+                new Requirement{ RequirementName="Certificate",JobID=1},
+                new Requirement{ RequirementName="Book",JobID=2},
+                new Requirement{ RequirementName="Pencil",JobID=2},
+                new Requirement{ RequirementName="Shoes",JobID=3},
+                new Requirement{ RequirementName="T-shirt",JobID=3},
+                new Requirement{ RequirementName="Hat",JobID=3},
+            };
+            requirements.ForEach(a => context.Requirements.AddOrUpdate(n => n.RequirementName, a));
             SaveChanges(context);
 
         }
