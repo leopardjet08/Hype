@@ -27,14 +27,16 @@ namespace FinalProject.DAL
         public DbSet<SchoolFamily> SchoolFamilies { get; set; }
         public DbSet<SchoolLevel> SchoolLevels { get; set; }
         public DbSet<UserPhoto> UserPhotos { get; set; }
-       
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+
+
+        }
+
     }
-    //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-    //{
-    //    modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-    //    modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
-
-
-    //}
+    
 
 }
