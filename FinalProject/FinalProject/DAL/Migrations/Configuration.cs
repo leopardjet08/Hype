@@ -228,7 +228,7 @@ namespace FinalProject.DAL.Migrations
                 new School { SchoolName="St. Vincent de Paul",SchoolLevelID=1,CityID=3,SchoolFamilyID=3}
 
             };
-            schoolFamilies.ForEach(a => context.SchoolFamilies.AddOrUpdate(n => n.FamilyName, a));
+            school.ForEach(a => context.Schools.AddOrUpdate(n => n.SchoolName, a));
             SaveChanges(context);
 
             var savePosting = new List<SavedPosting>()
