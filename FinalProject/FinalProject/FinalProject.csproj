@@ -207,6 +207,9 @@
     <Compile Include="Controllers\PortfolioController.cs" />
     <Compile Include="Controllers\PostingController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
+    <Compile Include="DAL\ApplicationDBContext.cs" />
+    <Compile Include="DAL\JobPostingCFEntities.cs" />
+    <Compile Include="DAL\Migrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -317,7 +320,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="DAL\Migrations\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
