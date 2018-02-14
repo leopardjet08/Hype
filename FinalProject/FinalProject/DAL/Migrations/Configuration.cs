@@ -1,9 +1,14 @@
 namespace FinalProject.DAL.Migrations
 {
+    using FinalProject.Models;
+    using FinalProject.Models.DataModel;
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
+    using System.Data.Entity.Validation;
     using System.Linq;
+    using System.Text;
 
     internal sealed class Configuration : DbMigrationsConfiguration<FinalProject.DAL.JobPostingCFEntities>
     {
@@ -13,20 +18,213 @@ namespace FinalProject.DAL.Migrations
             MigrationsDirectory = @"DAL\Migrations";
         }
 
+        private void SaveChanges(DbContext context)
+        {
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                StringBuilder sb = new StringBuilder();
+
+                foreach (var failure in ex.EntityValidationErrors)
+                {
+                    sb.AppendFormat("{0} failed validation\n", failure.Entry.Entity.GetType());
+                    foreach (var error in failure.ValidationErrors)
+                    {
+                        sb.AppendFormat("- {0} : {1}", error.PropertyName, error.ErrorMessage);
+                        sb.AppendLine();
+                    }
+                }
+
+                throw new DbEntityValidationException(
+                    "Entity Validation Failed - errors follow:\n" +
+                    sb.ToString(), ex
+                ); // Add the original exception as the innerException
+            }
+            catch (Exception e)
+            {
+                throw new Exception(
+                     "Seed Failed - errors follow:\n" +
+                     e.InnerException.InnerException.Message.ToString(), e
+                 ); // Add the original exception as the innerException
+            }
+        }
+
         protected override void Seed(FinalProject.DAL.JobPostingCFEntities context)
         {
-            //  This method will be called after migrating to the latest version.
+            var applicants = new List<Applicant>
+            {
+                new Applicant { FName = "Alex", MName = "Ark",  LName = "Axibeg", eMail="aaxibeg@outlook.com",  },
+                new Applicant { FName = "Boris", MName = "Boyle",  LName = "Burnsworth", eMail="bburnsworth@outlook.com"},
+                new Applicant { FName = "Cathy", LName = "Carlisle", eMail="ccarlisle@outlook.com" },
+                new Applicant { FName = "Derrick", MName = "Dee",  LName = "DaVinci", eMail="ddavincis@outlook.com"}
+            };
+            applicants.ForEach(a => context.Applicants.AddOrUpdate(n => n.eMail, a));
+            SaveChanges(context);
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            var applications = new List<Application>
+            {
+                new Application {  ApplicantID=(context.Applicants.Where(p=>p.eMail=="aaxibeg@outlook.com").SingleOrDefault().ID),
+                    PostingID =(context.Postings.Where(p=>p.NumberOpen==2).SingleOrDefault().ID) },
+                new Application {  ApplicantID=(context.Applicants.Where(p=>p.eMail=="bburnsworth@outlook.com").SingleOrDefault().ID),
+                    PostingID =(context.Postings.Where(p=>p.NumberOpen==2).SingleOrDefault().ID) },
+                new Application {  ApplicantID=(context.Applicants.Where(p=>p.eMail=="ccarlisle@outlook.com").SingleOrDefault().ID),
+                    PostingID =(context.Postings.Where(p=>p.NumberOpen==1).SingleOrDefault().ID) }
+            };
+            applications.ForEach(a => context.Applications.AddOrUpdate(n => n.ApplicantID, a));
+            SaveChanges(context);
+
+            var applicationStatuses = new List<ApplicationStatus>
+            {
+                new ApplicationStatus { Status = "Pending" },
+                new ApplicationStatus { Status = "Declined" },
+                new ApplicationStatus { Status = "Accepted" }
+            };
+            applicationStatuses.ForEach(a => context.ApplicationStatus.AddOrUpdate(n => n.Status, a));
+            SaveChanges(context);
+
+
+            var provinces = new List<Province>
+            {
+                new Province { ProvinceName="Ontario"},
+                new Province { ProvinceName="Quebec"},
+                new Province { ProvinceName="Nova Scotia"},
+                new Province { ProvinceName="New Brunswick"},
+                new Province { ProvinceName="Manitoba"},
+                new Province { ProvinceName="British Columbia"},
+                new Province { ProvinceName="Saskatchewan"},
+                new Province { ProvinceName="Alberta"},
+                new Province { ProvinceName="Newfoundland and Labrador"}
+            };
+            provinces.ForEach(a => context.Provinces.AddOrUpdate(n => n.ProvinceName, a));
+            SaveChanges(context);
+
+            var postings = new List<Posting>
+            {
+                new Posting {  NumberOpen=1,ClosingDate=DateTime.Parse("2018-02-20"),StartDate=DateTime.Parse("2018-01-02"),
+                PostingDescription="First posting Description. made by yours trully jetson. spelling is wrong. i suck.",SchoolID=1
+                , JobID=1}
+                
+            };
+            postings.ForEach(a => context.Postings.AddOrUpdate(n => n.ClosingDate, a));
+            SaveChanges(context);
+
+            var jobs = new List<Job>
+            {
+                new Job {  JobTitle="Math Teacher",JobSummary="Math teacher should be good as me. She/he knows how to add,subtract,multiplication and divide. He also know how to do statistic."},
+                new Job {  JobTitle="Librarian",JobSummary="She knows how to read and write. Good reading skills and very knowlegable as me."},
+                new Job {  JobTitle="Janitor",JobSummary="Very good at handling mops and brushes. He should always be around who can adpat very fast in the environment"}
+
+            };
+            jobs.ForEach(a => context.Jobs.AddOrUpdate(n => n.JobTitle, a));
+            SaveChanges(context);
+
+            var schoolLevels = new List<SchoolLevel>
+            {
+                new SchoolLevel { LevelName="Elementary Schools"},
+                new SchoolLevel { LevelName="Secondary Schools"}
+
+
+
+            };
+            schoolLevels.ForEach(a => context.SchoolLevels.AddOrUpdate(n => n.LevelName, a));
+            SaveChanges(context);
+
+            
+
+            var city = new List<City>
+            {
+                new City { CityName="Welland"},
+                new City { CityName="St. Catharines"},
+                new City { CityName="Niagara Falls"},
+                new City { CityName="Thorold"},
+                new City { CityName="Grimsby"},
+                new City { CityName="Fort Erie"},
+                new City { CityName="Pelham"},
+                new City { CityName="Lincoln & W. Lincoln"},
+                new City { CityName="Wainfleet"},
+                new City { CityName="Port Colborne"},
+                new City { CityName="Niagara-on-the-Lake"}
+            };
+            provinces.ForEach(a => context.Provinces.AddOrUpdate(n => n.ProvinceName, a));
+            SaveChanges(context);
+
+            var schoolFamilies = new List<SchoolFamily>
+            {
+                new SchoolFamily { FamilyName="Notre Dame"},
+                new SchoolFamily { FamilyName="Holy Cross"},
+                new SchoolFamily { FamilyName="Saint Paul"},
+                new SchoolFamily { FamilyName="Saint Michael"},
+                new SchoolFamily { FamilyName="Saint Paul"},
+                new SchoolFamily { FamilyName="Denis Morris"},
+                new SchoolFamily { FamilyName="Saint Francis"},
+                new SchoolFamily { FamilyName="Blessed Trinity"},
+                new SchoolFamily { FamilyName="Lakeshore Catholic"}
+
+            };
+            schoolFamilies.ForEach(a => context.SchoolFamilies.AddOrUpdate(n => n.FamilyName, a));
+            SaveChanges(context);
+
+            var school = new List<School>
+            {
+                new School { SchoolName="Alexander Kuska",SchoolLevelID=1,CityID=1,SchoolFamilyID=1},
+                new School { SchoolName="Assumption",SchoolLevelID=1,CityID=2,SchoolFamilyID=2},
+                new School { SchoolName="Canadian Martyrs",SchoolLevelID=1,CityID=2,SchoolFamilyID=2},
+                new School { SchoolName="Cardinal Newman",SchoolLevelID=1,CityID=3,SchoolFamilyID=3},
+                new School { SchoolName="Father Hennepin",SchoolLevelID=1,CityID=3,SchoolFamilyID=4},
+                new School { SchoolName="Holy Name",SchoolLevelID=1,CityID=1,SchoolFamilyID=1},
+                new School { SchoolName="Loretto Catholic",SchoolLevelID=1,CityID=3,SchoolFamilyID=4},
+                new School { SchoolName="Mary Ward",SchoolLevelID=1,CityID=3,SchoolFamilyID=3},
+                new School { SchoolName="Monsignor Clancy",SchoolLevelID=1,CityID=4,SchoolFamilyID=6},
+                new School { SchoolName="Mother Teresa",SchoolLevelID=1,CityID=2,SchoolFamilyID=7},
+                new School { SchoolName="Notre Dame",SchoolLevelID=1,CityID=3,SchoolFamilyID=3},
+                new School { SchoolName="Our Lady of Fatima",SchoolLevelID=1,CityID=5,SchoolFamilyID=8},
+                new School { SchoolName="Our Lady of Fatima",SchoolLevelID=1,CityID=2,SchoolFamilyID=2},
+                new School { SchoolName="Our Lady of Mount Carmel",SchoolLevelID=1,CityID=3,SchoolFamilyID=4},
+                new School { SchoolName="Our Lady of Victory",SchoolLevelID=1,CityID=6,SchoolFamilyID=9},
+                new School { SchoolName="Sacred Heart",SchoolLevelID=1,CityID=3,SchoolFamilyID=4},
+                new School { SchoolName="St. Alexander",SchoolLevelID=1,CityID=7,SchoolFamilyID=1},
+                new School { SchoolName="St. Alfred",SchoolLevelID=1,CityID=2,SchoolFamilyID=2},
+                new School { SchoolName="St. Andrew",SchoolLevelID=1,CityID=1,SchoolFamilyID=1},
+                new School { SchoolName="St. Ann",SchoolLevelID=1,CityID=7,SchoolFamilyID=1},
+                new School { SchoolName="St. Ann",SchoolLevelID=1,CityID=2,SchoolFamilyID=7},
+                new School { SchoolName="St. Anthony",SchoolLevelID=1,CityID=2,SchoolFamilyID=6},
+                new School { SchoolName="St. Augustine",SchoolLevelID=1,CityID=1,SchoolFamilyID=1},
+                new School { SchoolName="St. Charles",SchoolLevelID=1,CityID=4,SchoolFamilyID=6},
+                new School { SchoolName="St. Christopher",SchoolLevelID=1,CityID=2,SchoolFamilyID=6},
+                new School { SchoolName="St. Denis",SchoolLevelID=1,CityID=2,SchoolFamilyID=7},
+                new School { SchoolName="St. Edward",SchoolLevelID=1,CityID=8,SchoolFamilyID=8},
+                new School { SchoolName="St. Elizabeth",SchoolLevelID=1,CityID=9,SchoolFamilyID=9},
+                new School { SchoolName="St. Gabriel Lalemant",SchoolLevelID=1,CityID=3,SchoolFamilyID=3},
+                new School { SchoolName="St. George",SchoolLevelID=1,CityID=6,SchoolFamilyID=9},
+                new School { SchoolName="St. James",SchoolLevelID=1,CityID=2,SchoolFamilyID=7},
+                new School { SchoolName="St. John",SchoolLevelID=1,CityID=8,SchoolFamilyID=8},
+                new School { SchoolName="St. John Bosco",SchoolLevelID=1,CityID=10,SchoolFamilyID=9},
+                new School { SchoolName="St. Joseph",SchoolLevelID=1,CityID=6,SchoolFamilyID=9},
+                new School { SchoolName="St. Joseph",SchoolLevelID=1,CityID=5,SchoolFamilyID=8},
+                new School { SchoolName="St. Kevin",SchoolLevelID=1,CityID=1,SchoolFamilyID=1},
+                new School { SchoolName="St. Mark",SchoolLevelID=1,CityID=8,SchoolFamilyID=8},
+                new School { SchoolName="St. Martin",SchoolLevelID=1,CityID=8,SchoolFamilyID=8},
+                new School { SchoolName="St. Mary",SchoolLevelID=1,CityID=3,SchoolFamilyID=3},
+                new School { SchoolName="St. Mary",SchoolLevelID=1,CityID=1,SchoolFamilyID=1},
+                new School { SchoolName="St. Michael",SchoolLevelID=1,CityID=11,SchoolFamilyID=2},
+                new School { SchoolName="St. Nicholas",SchoolLevelID=1,CityID=2,SchoolFamilyID=6},
+                new School { SchoolName="St. Patrick",SchoolLevelID=1,CityID=3,SchoolFamilyID=3},
+                new School { SchoolName="St. Patrick",SchoolLevelID=1,CityID=10,SchoolFamilyID=9},
+                new School { SchoolName="St. Peter",SchoolLevelID=1,CityID=2,SchoolFamilyID=6},
+                new School { SchoolName="St. Philomena",SchoolLevelID=1,CityID=6,SchoolFamilyID=9},
+                new School { SchoolName="St. Theresa",SchoolLevelID=1,CityID=2,SchoolFamilyID=6},
+                new School { SchoolName="St. Therese",SchoolLevelID=1,CityID=10,SchoolFamilyID=9},
+                new School { SchoolName="St. Vincent de Paul",SchoolLevelID=1,CityID=3,SchoolFamilyID=3},
+
+            };
+            schoolFamilies.ForEach(a => context.SchoolFamilies.AddOrUpdate(n => n.FamilyName, a));
+            SaveChanges(context);
+
         }
+
     }
 }
+
