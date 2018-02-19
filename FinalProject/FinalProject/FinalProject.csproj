@@ -209,6 +209,10 @@
     <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="DAL\ApplicationDBContext.cs" />
     <Compile Include="DAL\JobPostingCFEntities.cs" />
+    <Compile Include="DAL\Migrations\201802191828301_Initial-Create.cs" />
+    <Compile Include="DAL\Migrations\201802191828301_Initial-Create.Designer.cs">
+      <DependentUpon>201802191828301_Initial-Create.cs</DependentUpon>
+    </Compile>
     <Compile Include="DAL\Migrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -335,6 +339,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DAL\Migrations\201802191828301_Initial-Create.resx">
+      <DependentUpon>201802191828301_Initial-Create.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
