@@ -1,10 +1,8 @@
-﻿@model FinalProject.Models.Posting
-
-@{
-    ViewBag.Title = "Posting";
-
-}
-
+﻿
+@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<FinalProject.Models.Posting>
+<link href="~/Content/PagedList.css" rel="stylesheet" />
 
 
 <div class="container well well-lg" style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
@@ -23,88 +21,61 @@
             ∙ &nbsp; All Listed Job Postings &nbsp; ∙
         </h3>&nbsp;&nbsp;
         <div class="container">
-            <table class="table table-bordered" style="width:75%; margin:0 auto">
-                <thead style="color:white; font-size:17px; background-color:#012e72">
-                    <tr>
-                        <th>Job Title</th>
-                        <th>City</th>
-                        <th>Closing Date</th>
-                        <th>Start Date</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody id="tableColor" style="font-size:17px; text-align:left">
-                    <tr>
-                        <td>Janitor</td>
-                        <td>Welland</td>
-                        <td>February 28, 2018</td>
-                        <td>March 15, 2018</td>
-                        <th>
-                            @Html.ActionLink("Details", "Details", "Posting", null, new { @class = "btn btn-default", @style = "border:0px; background-color:#f5f5f5;" })
-                            @Html.ActionLink("Edit", "Edit", "Posting", null, new { @class = "btn btn-default", @style = "border:0px; background-color:#f5f5f5;" })
-                            @Html.ActionLink("Delete", "Delete", "Posting", null, new { @class = "btn btn-default", @style = "border:0px; background-color:#f5f5f5; color:red" })
-                        </th>
 
-                    </tr>
+            <table class="table table-bordered" style="width:95%; margin:0 auto">
+                
                     <tr>
-                        <td>Teacher</td>
-                        <td>Waterloo</td>
-                        <td>March 1, 2018</td>
-                        <td>March 23, 2018</td>
                         <th>
-                            @Html.ActionLink("Details", "Details", "Posting", null, new { @class = "btn btn-default", @style = "border:0px" })
-                            @Html.ActionLink("Edit", "Edit", "Posting", null, new { @class = "btn btn-default", @style = "border:0px" })
-                            @Html.ActionLink("Delete", "Delete", "Posting", null, new { @class = "btn btn-default", @style = "border:0px; color:red" })
+                            Job Title
                         </th>
+                        <th>
+                            Start Date
+                        </th>
+                        <th>
+                            Closing Date
+                        </th>
+                        <th>
+                            Number Openning
+                        </th>
+                        <th>
+                            Posting Description
+                        </th>
+                        
+                        <th></th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
 
+                        <tr>
+                            <td>
+                                @Html.ActionLink(item.Job.JobTitle, "Details", "Posting", new { Id = item.JobID })
+                            </td>
+                            <td class="company">
+                                @Html.DisplayFor(modelItem => item.StartDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ClosingDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NumberOpen)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PostingDescription)
+                            </td>
+                            
 
-                    <tr>
-                        <td>Programmer</td>
-                        <td>Grimsby</td>
-                        <td>February 27, 2018</td>
-                        <td>April 1, 2018</td>
-                        <th>
-                            @Html.ActionLink("Details", "Details", "Posting", null, new { @class = "btn btn-default", @style = "border:0px; background-color:#f5f5f5;" })
-                            @Html.ActionLink("Edit", "Edit", "Posting", null, new { @class = "btn btn-default", @style = "border:0px; background-color:#f5f5f5;" })
-                            @Html.ActionLink("Delete", "Delete", "Posting", null, new { @class = "btn btn-default", @style = "border:0px; background-color:#f5f5f5; color:red" })
-                        </th>
-                    </tr>
-                    <tr>
-                        <td>Designer</td>
-                        <td>Hamilton</td>
-                        <td>February 25, 2018</td>
-                        <td>March 30, 2018</td>
-                        <th>
-                            @Html.ActionLink("Details", "Details", "Posting", null, new { @class = "btn btn-default", @style = "border:0px" })
-                            @Html.ActionLink("Edit", "Edit", "Posting", null, new { @class = "btn btn-default", @style = "border:0px" })
-                            @Html.ActionLink("Delete", "Delete", "Posting", null, new { @class = "btn btn-default", @style = "border:0px; color:red" })
-                        </th>
-                    </tr>
-                    <tr>
-                        <td>Principal</td>
-                        <td>Beamsville</td>
-                        <td>March 08, 2018</td>
-                        <td>March 11, 2018</td>
-                        <th>
-                            @Html.ActionLink("Details", "Details", "Posting", null, new { @class = "btn btn-default", @style = "border:0px; background-color:#f5f5f5;" })
-                            @Html.ActionLink("Edit", "Edit", "Posting", null, new { @class = "btn btn-default", @style = "border:0px; background-color:#f5f5f5;" })
-                            @Html.ActionLink("Delete", "Delete", "Posting", null, new { @class = "btn btn-default", @style = "border:0px; background-color:#f5f5f5; color:red" })
-                        </th>
-                    </tr>
-                    <tr>
-                        <td>Vice-President</td>
-                        <td>St.Catherine</td>
-                        <td>March 19, 2018</td>
-                        <td>March 26, 2018</td>
-                        <th>
-                            @Html.ActionLink("Details", "Details", "Posting", null, new { @class = "btn btn-default", @style = "border:0px" })
-                            @Html.ActionLink("Edit", "Edit", "Posting", null, new { @class = "btn btn-default", @style = "border:0px" })
-                            @Html.ActionLink("Delete", "Delete", "Posting", null, new { @class = "btn btn-default", @style = "border:0px; color:red" })
-                        </th>
-                    </tr>
-                </tbody>
+                            <td>
+                                @Html.ActionLink("View", "Details", new { id = item.JobID }, new { @class = "btn btn-info" })
+                                @*@Html.ActionLink("Apply Now", "Create", "Apply", new { id = item.JobId }, new { @class = "btn btn-success" })*@
+                                @Html.ActionLink("Delete", "Delete",  new { id = item.JobID }, new { @class = "btn btn-primary" })
+                            </td>
+                        </tr>
+                    }
+
+               
             </table>
         </div>
+
     </div>
 
 </div>
