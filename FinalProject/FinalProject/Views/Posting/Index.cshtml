@@ -3,117 +3,127 @@
 @using PagedList.Mvc;
 @model IPagedList<FinalProject.Models.Posting>
 <link href="~/Content/PagedList.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "Posting List";
+}
 
-
-<div class="container well well-lg" style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
-    <br />
-    <div style="margin-bottom:100px; text-align:center">
-        <p style="text-align:center;  margin-bottom:15px; font-size:30px; color:#02388a;"> Niagara Catholic District School Board</p>
-        <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
-        <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
-        <br />
-        <br />
-        @Html.ActionLink("Create New Posting", "Create", "Posting", null, new { @class = "btn btn-primary btn-large", @style = "background-color:#00a203" })
-
-        <br /><br />
-
-        <h3 style="padding-top:20px; text-align:center;">
-            ∙ &nbsp; All Listed Job Postings &nbsp; ∙
-        </h3>&nbsp;&nbsp;
-        <div class="container">
-
-           
-                <label>Search Job title: </label>
-                @Html.TextBox("searchName", null)
-
-              <input type="submit" name="actionButton" value="Search" class="btn btn-default" /> @Html.ActionLink("Clear", "Index")
-               
-           
-
-            <table class="table table-bordered" style="width:95%; margin:0 auto">
-                
-                    <tr>
-                        <th>
-                            <input type="submit" name="actionButton" value="Job Title" class="btn btn-link" />
-                        </th>
-                        <th>
-                            <input type="submit" name="actionButton" value="Start Date" class="btn btn-link" />
-                        </th>
-                        <th>
-                            <input type="submit" name="actionButton" value="Closing Date" class="btn btn-link" />
-                        </th>
-                        <th>
-                            <input type="submit" name="actionButton" value="Number of Openings" class="btn btn-link" />
-                        </th>
-                        <th>
-                            <input type="submit" name="actionButton" value="Posting Description" class="btn btn-link" />
-                        </th>
-                        
-                        <th></th>
-                    </tr>
-                    @foreach (var item in Model)
-                    {
-
-                        <tr>
-                            <td>
-                                @Html.ActionLink(item.Job.JobTitle, "Details", "Posting", new { Id = item.JobID })
-                            </td>
-                            <td class="company">
-                                @Html.DisplayFor(modelItem => item.StartDate)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ClosingDate)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.NumberOpen)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.PostingDescription)
-                            </td>
-                            
-
-                            <td>
-                                @Html.ActionLink("View", "Details", new { id = item.JobID }, new { @class = "btn btn-info" })
-                                @*@Html.ActionLink("Apply Now", "Create", "Apply", new { id = item.JobId }, new { @class = "btn btn-success" })*@
-                                @Html.ActionLink("Delete", "Delete",  new { id = item.JobID }, new { @class = "btn btn-primary" })
-                            </td>
-                        </tr>
-                    }
-            </table>
-            <span id="filterMessage" class="text-danger">@((Model.Count() == 0) ? "Zero postings found.  No records match your criteria." : "")</span>
-            <input type="hidden" name="sortDirection" value="@ViewBag.sortDirection" />
-            <input type="hidden" name="sortField" value="@ViewBag.sortField" />
-            <br />
-           Page:  @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-
-
-            @Html.PagedListPager(Model, page => Url.Action("Index",
-    new
+<div>
+    @using (Html.BeginForm())
     {
-        page,
-        sortDirection = ViewBag.sortDirection,
-        sortField = ViewBag.sortField,
-        searchName = ViewBag.searchName
-    }))
-            
+        <div class="container well well-lg" style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
+            <br />
+            <div style="margin-bottom:100px; text-align:center">
+                <p style="text-align:center;  margin-bottom:15px; font-size:30px; color:#02388a;"> Niagara Catholic District School Board</p>
+                <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
+                <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
+                <br />
+                <br />
+                @Html.ActionLink("Create New Posting", "Create", "Posting", null, new { @class = "btn btn-primary btn-large", @style = "background-color:#00a203" })
+
+                <br /><br />
+
+                <h3 style="padding-top:20px; text-align:center;">
+                    ∙ &nbsp; All Listed Job Postings &nbsp; ∙
+                </h3>&nbsp;&nbsp;
+                <div class="container">
+
+                    @* Search function  *@
+                    <label>Search Job title: </label>
+                    @Html.TextBox("searchName", null)
+
+                    <input type="submit" name="actionButton" value="Search" class="btn btn-default" /> @Html.ActionLink("Clear", "Index")
+
+
+                    @* Posting list in the table *@
+                    <table class="table table-bordered">
+
+                        @* Title in the table *@
+                        <tr>
+                            <th>
+                                <input type="submit" name="actionButton" value="Job Title" class="btn btn-link" />
+                            </th>
+                            <th>
+                                <input type="submit" name="actionButton" value="Start Date" class="btn btn-link" />
+                            </th>
+                            <th>
+                                <input type="submit" name="actionButton" value="Closing Date" class="btn btn-link" />
+                            </th>
+                            <th>
+                                <input type="submit" name="actionButton" value="Number of Openings" class="btn btn-link" />
+                            </th>
+                            <th>
+                                <input type="submit" name="actionButton" value="Posting Description" class="btn btn-link" />
+                            </th>
+
+                            <th></th>
+                        </tr>
+                        @* Data in the table *@
+                        @foreach (var item in Model)
+                        {
+
+                            <tr>
+                                <td>
+                                    @Html.ActionLink(item.Job.JobTitle, "Details", "Posting", new { Id = item.ID })
+                                </td>
+                                <td class="company">
+                                    @Html.DisplayFor(modelItem => item.StartDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ClosingDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NumberOpen)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PostingDescription)
+                                </td>
+
+                                @* Buttons in the table *@
+                                <td>
+                                    @Html.ActionLink("View", "Details", new { id = item.ID }, new { @class = "btn btn-info" })
+                                    @*@Html.ActionLink("Apply Now", "Create", "Apply", new { id = item.JobId }, new { @class = "btn btn-success" })*@
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "btn btn-primary" })
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                    @* Page counts  *@
+                    <span id="filterMessage" class="text-danger">@((Model.Count() == 0) ? "Zero postings found.  No records match your criteria." : "")</span>
+                    <input type="hidden" name="sortDirection" value="@ViewBag.sortDirection" />
+                    <input type="hidden" name="sortField" value="@ViewBag.sortField" />
+                    <br />
+                    Page:  @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+
+                    @Html.PagedListPager(Model, page => Url.Action("Index",
+new
+{
+    page,
+    sortDirection = ViewBag.sortDirection,
+    sortField = ViewBag.sortField,
+    searchName = ViewBag.searchName
+}))
+
+                </div>
+
+            </div>
+
+        </div>
+    }
         </div>
 
-    </div>
-
-</div>
 
 
 
-
-<style>
-    a.classname {
-        background: url(../Images/image.gif) no-repeat top left;
-        display: block;
-        width: 150px;
-        height: 150px;
-        text-indent: -9999px;
-    }
-</style>
+        <style>
+            a.classname {
+                background: url(../Images/image.gif) no-repeat top left;
+                display: block;
+                width: 150px;
+                height: 150px;
+                text-indent: -9999px;
+            }
+        </style>
 
 
 

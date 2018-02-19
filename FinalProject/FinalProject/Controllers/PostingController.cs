@@ -37,7 +37,7 @@ namespace FinalProject.Controllers
                 //Reset paging if ANY button was pushed
                 page = 1;
 
-                if (actionButton != "Filter")//Change of sort is requested
+                if (actionButton != "Search")//Change of sort is requested
                 {
                     if (actionButton == sortField) //Reverse order on same field
                     {
@@ -85,6 +85,17 @@ namespace FinalProject.Controllers
                     postings = postings
                         .OrderByDescending(p => p.StartDate);
                 }
+            } else if (sortField == "Posting Description") {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    postings = postings
+                        .OrderBy(p => p.PostingDescription);
+                }
+                else
+                {
+                    postings = postings
+                        .OrderByDescending(p => p.PostingDescription);
+                }
             }
             else //By default sort by Position NAME
             {
@@ -104,7 +115,7 @@ namespace FinalProject.Controllers
             ViewBag.sortField = sortField;
             ViewBag.sortDirection = sortDirection;
 
-            int pageSize = 2;
+            int pageSize = 3;
             int pageNumber = (page ?? 1);
 
             return View(postings.ToPagedList(pageNumber, pageSize));
