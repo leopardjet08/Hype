@@ -3,6 +3,7 @@ using FinalProject.Models;
 using PagedList;
 using System;
 using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 
 namespace FinalProject.Controllers
@@ -127,9 +128,22 @@ namespace FinalProject.Controllers
         }
 
 
-        public ActionResult Details()
+        public ActionResult Details(int? id, string message)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Posting posting = db.Postings
+                .Where(p => p.ID == id).SingleOrDefault();
+            if (posting == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.Message = message;
+            ViewBag.Closed = posting.ClosingDate < DateTime.Today;
+            return View(posting);
+
         }
 
         public ActionResult Edit()

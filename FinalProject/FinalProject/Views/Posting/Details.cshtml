@@ -21,48 +21,46 @@
 
                 <table style="width:70%; margin:0 auto; font-size:18px">
                 <tr>
-                    <td style="color:#02388a"><h4><b>Job Title:</b></h4></td>
-                    <td >Janitor</td>
+                    <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.Job.JobTitle)</b></h4></td>
+                    <td >@Html.DisplayFor(model => model.Job.JobTitle)</td>
                     <td style="width:10px"></td>
-                    <td style="color:#02388a"><h4><b>Closing Date:</b></h4></td>
-                    <td>February 28 2018</td>
+                    <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.ClosingDate)</b></h4></td>
+                    <td>@Html.DisplayFor(model => model.ClosingDate)</td>
                 </tr>
                 
                 <tr style="height:60px">
-                    <td style="color:#02388a"><h4><b>School:</b></h4></td>
-                    <td>Niagara College</td>
+                    <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.School.SchoolName)</b></h4></td>
+                    <td>@Html.DisplayFor(model => model.School.SchoolName)</td>
                     <td style="width:10px"></td>
-                    <td style="color:#02388a"><h4><b>Start Date:</b></h4></td>
-                    <td>March 15 2018</td>
+                    <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.StartDate)</b></h4></td>
+                    <td>@Html.DisplayFor(model => model.StartDate)</td>
                 </tr>
                 <tr>
-                    <td style="color:#02388a"><h4><b>Location:</b></h4></td>
-                    <td>100 James Wood Ave</td>
+                    <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.School.City.CityName)</b></h4></td>
+                    <td>@Html.DisplayFor(model => model.School.City.CityName)</td>
                     <td style="width:10px"></td>
-                    <td style="color:#02388a"><h4><b>Qualifications:</b></h4></td>
-                    <td>High School G.E.D.</td>
+                    <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.Job.Qualifications)</b></h4></td>
+                    <td>@Html.DisplayFor(model => model.Job.Qualifications)</td>
                 </tr>
                 <tr style="height:60px">
-                        <td style="color:#02388a"><h4><b>City:</b></h4></td>
-                        <td>Welland</td>
+                        <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.School.City.CityName)</b></h4></td>
+                        <td>@Html.DisplayFor(model => model.School.City.CityName)</td>
                         <td style="width:10px"></td>
-                        <td style="color:#02388a"><h4><b>Requirements:</b></h4></td>
-                        <td>Patience, Vigilence </td>
+                        <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.Job.Requirements)</b></h4></td>
+                        <td>@Html.DisplayFor(model => model.Job.Requirements) </td>
                  </tr>
                  <tr style="height:50px">
-                     <td style="color:#02388a"><h4><b> Postal Code:</b></h4></td>
-                     <td>L3C 2S6</td>
+                     <td style="color:#02388a"><h4><b> @Html.DisplayNameFor(model => model.School.SchoolFamily.FamilyName)</b></h4></td>
+                     <td>@Html.DisplayFor(model => model.School.SchoolFamily.FamilyName)</td>
                      <td style="color:#f5f5f5; width:10px">spaceeeeeeeeee</td>
-                     <td style="color:#02388a"><h4><b>Number of Openings:</b></h4></td>
-                     <td>2</td>
+                     <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.NumberOpen)</b></h4></td>
+                     <td>@Html.DisplayFor(model => model.NumberOpen)</td>
                     </tr>
              </table><br />
  <div style="margin-left:186px">
-     <h4 style="color:#02388a"><b>Description:</b></h4>
+     <h4 style="color:#02388a"><b>@Html.DisplayNameFor(model => model.PostingDescription)</b></h4>
      <p style="width:900px;  font-size:18px">
-         Keep buildings in clean and orderly condition.
-         Perform heavy cleaning duties, such as cleaning floors, shampooing rugs, washing walls and glass, and removing rubbish.
-         Duties may include tending furnace and boiler, performing routine maintenance activities, notifying management of need for repairs, and cleaning snow or debris from sidewalk.
+         @Html.DisplayFor(model => model.PostingDescription)
      </p>
  </div>
                 
