@@ -1,6 +1,7 @@
 ﻿using FinalProject.DAL;
 using FinalProject.Models;
 using PagedList;
+using System;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -12,22 +13,108 @@ namespace FinalProject.Controllers
 
 
         // GET: Posting
-        public ActionResult Index(int? pageNumber)
+        public ActionResult Index(string sortDirection, string sortField,
+            string actionButton, string searchName, string[] selectedSkills, int? page)
             
         {
+            PopulateDropDownLists();
+            ViewBag.Filtering = ""; //Assume not filtering
+
             var postings = from s in db.Postings select s;
 
-            postings = postings.OrderBy(s => s.NumberOpen);
+            
 
-            ViewBag.Count = postings.Count();
+            //Add as many filters as you want
+            if (!String.IsNullOrEmpty(searchName))
+            {
+                postings = postings.Where(p => p.Job.JobTitle.ToUpper().Contains(searchName.ToUpper()));
+                ViewBag.Filtering = " in";//Flag filtering
+                ViewBag.searchName = searchName;
+            }
 
-            return View(postings.ToList().ToPagedList(pageNumber ?? 1, 5));
+            if (!String.IsNullOrEmpty(actionButton)) //Form Submitted so lets sort!
+            {
+                //Reset paging if ANY button was pushed
+                page = 1;
+
+                if (actionButton != "Filter")//Change of sort is requested
+                {
+                    if (actionButton == sortField) //Reverse order on same field
+                    {
+                        sortDirection = String.IsNullOrEmpty(sortDirection) ? "desc" : "";
+                    }
+                    sortField = actionButton;//Sort by the button clicked
+                }
+            }
+
+            if (sortField == "Number of Openings")//Sorting by Applicant Name
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    postings = postings
+                        .OrderBy(p => p.NumberOpen);
+                }
+                else
+                {
+                    postings = postings
+                        .OrderByDescending(p => p.NumberOpen);
+                }
+            }
+            else if (sortField == "Closing Date")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    postings = postings
+                        .OrderBy(p => p.ClosingDate);
+                }
+                else
+                {
+                    postings = postings
+                        .OrderByDescending(p => p.ClosingDate);
+                }
+            }
+            else if (sortField == "Start Date")
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    postings = postings
+                        .OrderBy(p => p.StartDate);
+                }
+                else
+                {
+                    postings = postings
+                        .OrderByDescending(p => p.StartDate);
+                }
+            }
+            else //By default sort by Position NAME
+            {
+                if (String.IsNullOrEmpty(sortDirection))
+                {
+                    postings = postings
+                        .OrderBy(p => p.Job.JobTitle);
+                }
+                else
+                {
+                    postings = postings
+                        .OrderByDescending(p => p.Job.JobTitle);
+                }
+            }
+
+            //Set sort for next time
+            ViewBag.sortField = sortField;
+            ViewBag.sortDirection = sortDirection;
+
+            int pageSize = 2;
+            int pageNumber = (page ?? 1);
+
+            return View(postings.ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult Create()
         {
             return View();
         }
+
 
         public ActionResult Details()
         {
