@@ -28,6 +28,8 @@ namespace FinalProject.Models
         [DataType(DataType.MultilineText)]
         public string JobSummary { get; set; }
 
+
+
         public ICollection<Posting> Postings { get; set; }
         public ICollection<Requirement> Requirements { get; set; }
         public ICollection<Qualification> Qualifications { get; set; }

@@ -63,7 +63,8 @@
 
                             <tr>
                                 <td>
-                                    @Html.ActionLink(item.Job.JobTitle, "Details", "Posting", new { Id = item.ID })
+                                    @Html.ActionLink(item.Job.JobTitle, "Details", new { id = item.ID })
+                                   
                                 </td>
                                 <td class="company">
                                     @Html.DisplayFor(modelItem => item.StartDate)
@@ -81,7 +82,7 @@
                                 @* Buttons in the table *@
                                 <td>
                                     @Html.ActionLink("View", "Details", new { id = item.ID }, new { @class = "btn btn-info" })
-                                    @*@Html.ActionLink("Apply Now", "Create", "Apply", new { id = item.JobId }, new { @class = "btn btn-success" })*@
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-info" })
                                     @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "btn btn-primary" })
                                 </td>
                             </tr>
