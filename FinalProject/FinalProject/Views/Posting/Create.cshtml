@@ -43,7 +43,7 @@
                                             <h4 style="display:inline-block">@Html.LabelFor(model => model.School.SchoolName, "School: ")</h4>
                                         </td>
                                         <td>
-                                            @Html.DropDownList("SchoolID", null, "Select a School", htmlAttributes: new { @class = "form-control", @style = "width:200px", @runat = "server" })
+                                            @Html.DropDownList("SchoolID", null, "Select a School", htmlAttributes: new { id = "SchoolID", @class = "form-control", @style = "width:200px", @runat = "server" })
                                             @Html.ValidationMessageFor(model => model.SchoolID, "", new { @class = "text-danger" })
                                         </td>
                                     </tr>
@@ -52,8 +52,19 @@
                                             <h4 style="display:inline-block">@Html.LabelFor(model => model.School.City, "City: ")</h4>
                                         </td>
                                         <td>
-                                          
-                                           
+                                            @Scripts.Render("~/bundles/jquery")
+                                           <script type="text/javascript" language="javascript">
+                                               $('#SchoolID').change(function () { ChangeCustomer(); });
+
+                                               function ChangeCustomer() {
+                                                   var selectedValue = $('#SchoolID option:selected').val();
+                                                   
+                                                       GetOrders(selectedValue);
+                                                   
+                                               }
+
+                                           </script>
+
                                         </td>
                                     </tr>
                                     <tr>
@@ -61,7 +72,7 @@
                                             <h4 style="display:inline-block">@Html.LabelFor(model => model.School.City, "City: ")</h4>
                                         </td>
                                         <td>
-                                           @Html.DisplayFor(model => model.School.City.CityName)
+                                          
                                         </td>
                                     </tr>
 
@@ -133,3 +144,46 @@
     </div>
 }
 
+@Scripts.Render("~/bundles/jquery")
+<script type="text/javascript" language="javascript">
+    $(document).ready(function () {
+        $('#Schools').change(function () { ChangeCustomer(); });
+        $('#Orders').change(function () { ChangeOrder(); });
+    });
+
+    function ResetContent() {
+        $('#Customers option:eq(0)').attr('selected', true);
+        $('#Orders').empty();
+    }
+
+    function ChangeCustomer() {
+        var selectedValue = $('#Schools option:selected').val(); 
+            GetCity(selectedValue); 
+    }
+
+    function GetCity(ID) {
+        $.ajax({
+            url: '@Url.Action("Orders", "Posting")',
+            data: { ID: ID },
+            type: 'post',
+            cache: false,
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                if (data.length > 0) {
+                    $('#Orders').empty();
+                    $('#Orders').append($('<option></option>').val('').text('請選擇訂單'));
+                    $.each(data, function (i, item) {
+                        $('#Orders').append($('<option></option>').val(item.Key).text(item.Value));
+                    });
+                }
+            }
+        });
+    }
+
+   
+
+   
+
+   
+</script>

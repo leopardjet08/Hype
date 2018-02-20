@@ -134,13 +134,12 @@ namespace FinalProject.Controllers
         public ActionResult Create()
         {
             PopulateDropDownLists();
+            ViewBag.Message = "School by jet";
+
             var posting = new Posting();
 
             return View();
         }
-
-
-        
 
         // POST: Postings/Create
         //For protection against hacker!!! 
@@ -206,7 +205,7 @@ namespace FinalProject.Controllers
         {
             ViewBag.JobID = new SelectList(db.Jobs.OrderBy(p => p.JobTitle), "ID", "JobTitle", posting?.JobID);
             ViewBag.SchoolID = new SelectList(db.Schools.OrderBy(p => p.SchoolName), "ID", "SchoolName", posting?.SchoolID);
-
         }
+        
     }
 }
