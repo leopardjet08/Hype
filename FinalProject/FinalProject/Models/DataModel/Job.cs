@@ -12,8 +12,6 @@ namespace FinalProject.Models
         public Job()
         {
             this.Postings = new HashSet<Posting>();
-            this.Requirements = new HashSet<Requirement>();
-            this.Qualifications = new HashSet<Qualification>();
         }
 
         public int ID { get; set; }
@@ -28,10 +26,10 @@ namespace FinalProject.Models
         [DataType(DataType.MultilineText)]
         public string JobSummary { get; set; }
 
-
-
         public ICollection<Posting> Postings { get; set; }
-        public ICollection<Requirement> Requirements { get; set; }
-        public ICollection<Qualification> Qualifications { get; set; }
+
+        // Both will generate a new table to store IDs for Many to many relationship
+        public  virtual ICollection<Requirement> Requirements { get; set; }
+        public virtual ICollection<Qualification> Qualifications { get; set; }
     }
 }

@@ -13,11 +13,12 @@ namespace FinalProject.Models
         public int ID { get; set; }
 
         [Display(Name = "Qualifications")]
-        [Required(ErrorMessage = "You cannot leave the name of the qualification blank.")]
+        [Required(ErrorMessage = "You cannot leave the qualification blank.")]
         [StringLength(255, ErrorMessage = "Qualifications cannot exceed 255 characters.")]
-        [Index("IX_Unique_Skill", IsUnique = true)]
+        [Index("IX_Unique_Qualification", IsUnique = true)]
         public string QualificationSet { get; set; }
 
-        public virtual Job Job { get; set; }
+        // generate a new table to store IDs for Many to many relationship
+        public virtual ICollection<Job> Jobs { get; set; }
     }
 }

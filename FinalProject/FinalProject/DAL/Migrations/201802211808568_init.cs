@@ -3,7 +3,7 @@ namespace FinalProject.DAL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class init : DbMigration
     {
         public override void Up()
         {
@@ -93,24 +93,19 @@ namespace FinalProject.DAL.Migrations
                     {
                         ID = c.Int(nullable: false, identity: true),
                         QualificationSet = c.String(nullable: false, maxLength: 255),
-                        Job_ID = c.Int(),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Job", t => t.Job_ID)
-                .Index(t => t.QualificationSet, unique: true, name: "IX_Unique_Skill")
-                .Index(t => t.Job_ID);
+                .Index(t => t.QualificationSet, unique: true, name: "IX_Unique_Qualification");
             
             CreateTable(
                 "dbo.Requirement",
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        RequirementName = c.String(),
-                        JobID = c.Int(nullable: false),
+                        RequirementName = c.String(nullable: false, maxLength: 255),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Job", t => t.JobID)
-                .Index(t => t.JobID);
+                .Index(t => t.RequirementName, unique: true, name: "IX_Unique_Requirement");
             
             CreateTable(
                 "dbo.School",
@@ -200,6 +195,32 @@ namespace FinalProject.DAL.Migrations
                     })
                 .PrimaryKey(t => t.ID);
             
+            CreateTable(
+                "dbo.QualificationJob",
+                c => new
+                    {
+                        Qualification_ID = c.Int(nullable: false),
+                        Job_ID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.Qualification_ID, t.Job_ID })
+                .ForeignKey("dbo.Qualification", t => t.Qualification_ID, cascadeDelete: true)
+                .ForeignKey("dbo.Job", t => t.Job_ID, cascadeDelete: true)
+                .Index(t => t.Qualification_ID)
+                .Index(t => t.Job_ID);
+            
+            CreateTable(
+                "dbo.RequirementJob",
+                c => new
+                    {
+                        Requirement_ID = c.Int(nullable: false),
+                        Job_ID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.Requirement_ID, t.Job_ID })
+                .ForeignKey("dbo.Requirement", t => t.Requirement_ID, cascadeDelete: true)
+                .ForeignKey("dbo.Job", t => t.Job_ID, cascadeDelete: true)
+                .Index(t => t.Requirement_ID)
+                .Index(t => t.Job_ID);
+            
         }
         
         public override void Down()
@@ -214,12 +235,18 @@ namespace FinalProject.DAL.Migrations
             DropForeignKey("dbo.School", "CityID", "dbo.City");
             DropForeignKey("dbo.Applicant", "CityID", "dbo.City");
             DropForeignKey("dbo.Application", "School_ID", "dbo.School");
-            DropForeignKey("dbo.Requirement", "JobID", "dbo.Job");
-            DropForeignKey("dbo.Qualification", "Job_ID", "dbo.Job");
+            DropForeignKey("dbo.RequirementJob", "Job_ID", "dbo.Job");
+            DropForeignKey("dbo.RequirementJob", "Requirement_ID", "dbo.Requirement");
+            DropForeignKey("dbo.QualificationJob", "Job_ID", "dbo.Job");
+            DropForeignKey("dbo.QualificationJob", "Qualification_ID", "dbo.Qualification");
             DropForeignKey("dbo.Posting", "JobID", "dbo.Job");
             DropForeignKey("dbo.Application", "PostingID", "dbo.Posting");
             DropForeignKey("dbo.Application", "ApplicationStatusID", "dbo.ApplicationStatus");
             DropForeignKey("dbo.Application", "ApplicantID", "dbo.Applicant");
+            DropIndex("dbo.RequirementJob", new[] { "Job_ID" });
+            DropIndex("dbo.RequirementJob", new[] { "Requirement_ID" });
+            DropIndex("dbo.QualificationJob", new[] { "Job_ID" });
+            DropIndex("dbo.QualificationJob", new[] { "Qualification_ID" });
             DropIndex("dbo.BestCandidate", new[] { "ApplicationID" });
             DropIndex("dbo.SavedPosting", new[] { "ApplicantID" });
             DropIndex("dbo.Province", "IX_Unique_Province");
@@ -229,9 +256,8 @@ namespace FinalProject.DAL.Migrations
             DropIndex("dbo.School", new[] { "SchoolFamilyID" });
             DropIndex("dbo.School", new[] { "CityID" });
             DropIndex("dbo.School", new[] { "SchoolLevelID" });
-            DropIndex("dbo.Requirement", new[] { "JobID" });
-            DropIndex("dbo.Qualification", new[] { "Job_ID" });
-            DropIndex("dbo.Qualification", "IX_Unique_Skill");
+            DropIndex("dbo.Requirement", "IX_Unique_Requirement");
+            DropIndex("dbo.Qualification", "IX_Unique_Qualification");
             DropIndex("dbo.Posting", new[] { "SavedPosting_ID" });
             DropIndex("dbo.Posting", new[] { "JobID" });
             DropIndex("dbo.Posting", new[] { "SchoolID" });
@@ -242,6 +268,8 @@ namespace FinalProject.DAL.Migrations
             DropIndex("dbo.Applicant", new[] { "CityID" });
             DropIndex("dbo.Applicant", new[] { "ProvinceID" });
             DropIndex("dbo.Applicant", "IX_Unique_Applicant_email");
+            DropTable("dbo.RequirementJob");
+            DropTable("dbo.QualificationJob");
             DropTable("dbo.UserPhoto");
             DropTable("dbo.BestCandidate");
             DropTable("dbo.SavedPosting");

@@ -1,4 +1,4 @@
-namespace FinalProject.DAL.Migrations
+﻿namespace FinalProject.DAL.Migrations
 {
     using FinalProject.Models;
     using FinalProject.Models.DataModel;
