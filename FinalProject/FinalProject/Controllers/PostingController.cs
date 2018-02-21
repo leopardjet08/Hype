@@ -191,14 +191,127 @@ namespace FinalProject.Controllers
 
         }
 
-        public ActionResult Edit()
+        public ActionResult Edit(int? id)
         {
-            return View();
+            Posting posting = db.Postings
+               .Where(p => p.ID == id).SingleOrDefault();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if (posting == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (posting.ClosingDate < DateTime.Today)
+            {
+                return RedirectToAction("Details", new { id = posting.ID });
+            }
+            PopulateDropDownLists(posting);
+            return View(posting);
         }
 
-        public ActionResult Delete()
+        // POST: Postings/Edit/5
+        [HttpPost, ActionName("Edit")]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditPost(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var postingToUpdate = db.Postings
+                .Where(p => p.ID == id).SingleOrDefault();
+            
+            if (TryUpdateModel(postingToUpdate, "",
+               new string[] { "NumberOpen", "ClosingDate", "StartDate", "PositionID" }))
+            {
+                try
+                {
+  
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (RetryLimitExceededException /* dex */)
+                {
+                    ModelState.AddModelError("", "Unable to save changes after multiple attempts. Try again, and if the problem persists, see your system administrator.");
+                }
+                catch (DbUpdateConcurrencyException ex)// Added for concurrency
+                {
+                    var entry = ex.Entries.Single();
+                    var clientValues = (Posting)entry.Entity;
+                    var databaseEntry = entry.GetDatabaseValues();
+                    if (databaseEntry == null)
+                    {
+                        ModelState.AddModelError("",
+                            "Unable to save changes. The Posting was deleted by another user.");
+                    }
+                    else
+                    {
+                        var databaseValues = (Posting)databaseEntry.ToObject();
+                        if (databaseValues.ClosingDate != clientValues.ClosingDate)
+                            ModelState.AddModelError("ClosingDate", "Current value: "
+                                + String.Format("{0:d}", databaseValues.ClosingDate));
+                        if (databaseValues.StartDate != clientValues.StartDate)
+                            ModelState.AddModelError("StartDate", "Current value: "
+                                + String.Format("{0:d}", databaseValues.StartDate));
+                        if (databaseValues.NumberOpen != clientValues.NumberOpen)
+                            ModelState.AddModelError("NumberOpen", "Current value: "
+                                + databaseValues.NumberOpen);
+                    }
+                }
+                catch (DataException)
+                {
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+                }
+            }
+            PopulateDropDownLists(postingToUpdate);
+           
+            return View(postingToUpdate);
+        }
+
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Posting posting = db.Postings.Find(id);
+            if (posting == null)
+            {
+                return HttpNotFound();
+            }
+            return View(posting);
+        }
+        
+        //For protection against hacker!!! 
+        // POST: Postings/Delete
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Posting posting = db.Postings.Find(id);
+            try
+            {
+                db.Postings.Remove(posting);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (DataException dex)
+            {
+                if (dex.InnerException.InnerException.Message.Contains("FK_"))
+                {
+                    ModelState.AddModelError("", "You cannot delete a Posting that has applications in the system.");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+                }
+            }
+            return View(posting);
+
         }
 
         private void PopulateDropDownLists(Posting posting = null)
