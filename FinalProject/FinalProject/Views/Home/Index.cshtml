@@ -34,37 +34,107 @@
             divElement.style.display = 'none';
     }
 
+    function Clear() {
+        document.getElementById("txtMyEmail").value = "";      
+    }
 
 </script>
 
 
+<div class="modal fade" data-backdrop="static" id="subModal" tabindex="-1">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header" style="color:white; background-color:#012e72">
+                <button class="close" style="color:white" onclick="Clear()" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Subscribe</h4>
+            </div>
+            <div class="modal-body">
+                <form  style="margin-top:10px; text-align:center">
+                    <p style="font-size:16px">Subscribe to receive updates and notifications for new job postings.</p>
+                    <br />
+                    @Html.TextBox("txtMyEmail", null, new { @class = "form-control", @style = "margin:0 auto", @placeholder = "Enter email address...", @runat = "server" })
+                </form>
+            </div>
+            <div class="modal-footer" style="border:none; margin-top:0px">
+                <button ID="btnSubmitSub" class="btn btn-default" type="submit">Submit</button>
+                <button ID="btnCancelSub" onclick="Clear()" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 <div class="container well well-lg"  style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
-    
-
-    <p style="text-align:center; font-size:30px; color:#02388a;">Niagara Catholic District School Board</p>
-    
     <br />
-
+    <p style="text-align:center; font-size:30px; color:#02388a;">Niagara Catholic District School Board</p> 
+    <br />
+    <br />
     <div class="container" style="background-image: url('Images/background1.jpg'); border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
     
-    <div id="AdvanceToggle" style="display:block">
+    <div id="AdvanceToggle" style="display:block; text-align:center">
         <h3 style="padding-top:20px; border:none; text-align:center; color:white">
-            <b>Search Job Postings:</b>
+            <b>∙&nbsp; Search Job Postings &nbsp;∙</b>
         </h3>&nbsp;&nbsp;
 
         <div style="padding-bottom:20px">
-            @Html.TextBox("txtPostingSearch", null, new { @class = "form-control", @style = "margin:0 auto", @runat = "server" })
+            @Html.TextBox("txtPostingSearch", null, new { @class = "form-control", @style = "margin:0 auto", @placeholder="Search by title, location, description... ", @runat = "server" })
         </div>
 
-        <div style="padding-top:10px; margin:0 auto; text-align:center;">
-            <button ID="btnPostingSearch" onclick="toggle_div_hide('postingResults')" style="border: 2px solid black;" class="btn btn-info-outline" type="submit">Search</button>
+        <div style="padding-bottom:20px;">
+            <div class="row">
+                <div style="text-align:center";class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4">
+                    <div class="fancy-collapse-panel">
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+                            <div class="panel panel-default" style="width:275px; margin:0 auto" >
+                                <div class="panel-heading" role="tab" id="headingThree">
+                                    <h4 class="panel-title">
+                                        <a class="collapsed" style="color:grey; opacity:0.4" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                            Search By Qualifications
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                    <div class="panel-body">
+
+                                        <input type="checkbox" id="checkbox8">&nbsp; Qualification / Skill
+
+                                        <br />
+                                        <input type="checkbox" id="checkbox8">&nbsp; Qualification / Skill
+
+                                        <br />
+                                        <input type="checkbox" id="checkbox8">&nbsp; Qualification / Skill
+
+                                        <br />
+                                        <input type="checkbox" id="checkbox8">&nbsp; Qualification / Skill
+
+                                        <br />
+                                        <input type="checkbox" id="checkbox8">&nbsp; Qualification / Skill
+
+                                        <br />
+                                        <input type="checkbox" id="checkbox8">&nbsp; Qualification / Skill
+
+                                        <br />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+
+        <div style="padding-top:10px; padding-bottom:40px; margin:0 auto; text-align:center;">
+            <button ID="btnPostingSearch" onclick="toggle_div_hide('postingResults')" style="border: 0px;background-color:#00a203" class="btn btn-primary btn-large" type="submit">Search</button>
+           
         </div>
     </div>
         
         <!--Start of more search -->
-        <div class="AdvanceSeachContainer" style="font-size:14px">
+        @*<div class="AdvanceSeachContainer" style="font-size:14px">
            
-          
             <div class="row">
                 <div id="filter-panel" class="collapse filter-panel">
                     
@@ -80,14 +150,14 @@
                     <label class="controls" for="pref-search" style="font-size:20px; color:white">Location:</label>
                     @Html.TextBox("txtPostingSearch", null, new { @class = "textbox", @runat = "server" })
 
-                    @*<select>
+            ---- <select> --
                 <option >Welland</option>
                 <option value="3">St.Catherine</option>
                 <option value="4">Hamilton</option>
                 <option value="5">Grimsby</option>
                 <option value="6">Niagara-on-the-lake</option>
 
-            </select>*@
+            ---- </select> --
                     <div class="AdvanceSeachContainer" style="width:1000px; margin-left:120px; margin-top:-7px" >
            
                         <div class="row">
@@ -145,7 +215,7 @@
                     <span class="glyphicon glyphicon-cog"></span> Advanced Search
                 </button>
             </div>
-        </div>
+        </div>*@
         <!--End of More Search -->
 
     </div>  <!--End of Blue Section -->
@@ -195,12 +265,7 @@
                     @Html.ActionLink("Save Job", "", "", null, new { @class = "btn btn-primary btn-large", @style = "background-color:#95cedf" })
                 </div>
 
-
-
             </div>
-
-       
-
     </div>
 
     <div style=" margin-bottom:100px"></div>
@@ -208,7 +273,8 @@
     <div class="row" style="text-align:center; margin:0 auto";>
     <div class="col-md-4">  
         <p>
-            <a href="#"><img src="Images/Subscribe.png" style="height:60px"/></a>
+            @*<a href="#" onclick="window.open('some.html', 'yourWindowName', 'width=200,height=150');">Test</a>*@
+            <a href="#" data-target="#subModal" data-toggle="modal"><img src="Images/Subscribe.png" style="height:60px"/></a>
         </p>
         <h4>Subscribe</h4>   
     </div>
