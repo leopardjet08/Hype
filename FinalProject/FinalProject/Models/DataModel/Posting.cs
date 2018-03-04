@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FinalProject.Models
 {
-    public class Posting
+    public class Posting : Auditable, IValidatableObject
     {
         public Posting()
         {
