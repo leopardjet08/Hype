@@ -8,7 +8,7 @@ using FinalProject.Models.DataModel;
 
 namespace FinalProject.Models
 {
-    public class Applicant
+    public class Applicant : Auditable
     {
         public Applicant()
         {

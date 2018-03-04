@@ -17,7 +17,8 @@ namespace FinalProject.Models
         [StringLength(255, ErrorMessage = "Qualifications cannot exceed 255 characters.")]
         [Index("IX_Unique_Skill", IsUnique = true)]
         public string QualificationSet { get; set; }
-
-        public virtual Job Job { get; set; }
+        
+        // this is a comment test for sync
+        public virtual ICollection<Job> Jobs { get; set; }
     }
 }
