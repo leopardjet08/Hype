@@ -54,17 +54,38 @@ namespace FinalProject.DAL.Migrations
 
         protected override void Seed(FinalProject.DAL.JobPostingCFEntities context)
         {
+            //var qualification = new List<Qualification>()
+            //{
+            //    new Qualification{ QualificationSet="Qualification1"},
+            //    new Qualification{ QualificationSet="Qualification2"},
+            //    new Qualification{ QualificationSet="Qualification3"},
+            //    new Qualification{ QualificationSet="Qualification4"},
+            //    new Qualification{ QualificationSet="Qualification5"},
+            //    new Qualification{ QualificationSet="Qualification6"},
+            //    new Qualification{ QualificationSet="Qualification7"},
+            //};
+            //qualification.ForEach(a => context.Qualifications.AddOrUpdate(n => n.QualificationSet, a));
+            //SaveChanges(context);
 
-            var jobs = new List<Job>
-            {
-                new Job {  JobTitle="Math Teacher",JobSummary="Math teacher should be good as me. She/he knows how to add,subtract,multiplication and divide. He also know how to do statistic."},
-                new Job {  JobTitle="Librarian",JobSummary="She knows how to read and write. Good reading skills and very knowlegable as me."},
-                new Job {  JobTitle="Janitor",JobSummary="Very good at handling mops and brushes. He should always be around who can adpat very fast in the environment"}
+            //var requirements = new List<Requirement>()
+            //{
+            //    new Requirement{ RequirementName="Diploma"},
+            //    new Requirement{ RequirementName="Certificate"},
+            //    new Requirement{ RequirementName="Book"},
+            //    new Requirement{ RequirementName="Pencil"},
+            //    new Requirement{ RequirementName="Shoes"},
+            //    new Requirement{ RequirementName="T-shirt"},
+            //    new Requirement{ RequirementName="Hat"},
+            //};
+            //requirements.ForEach(a => context.Requirements.AddOrUpdate(n => n.RequirementName, a));
+            //SaveChanges(context);
 
-            };
-            jobs.ForEach(a => context.Jobs.AddOrUpdate(n => n.JobTitle, a));
-            SaveChanges(context);
 
+            //// Seeding Jobs individually to manually put Qualification and Requirement Seed Data
+            //var job1 = new Job { Qualifications = new List<Qualification>(), Requirements = new List<Requirement>(), JobTitle = "Math Teacher", JobSummary = "Math teacher should be good as me. She/he knows how to add,subtract,multiplication and divide. He also know how to do statistic." };
+            //var job2 = new Job { Qualifications = new List<Qualification>(), Requirements = new List<Requirement>(), JobTitle = "Librarian", JobSummary = "She knows how to read and write. Good reading skills and very knowlegable as me." };
+            //var job3 = new Job { Qualifications = new List<Qualification>(), Requirements = new List<Requirement>(), JobTitle = "Janitor", JobSummary = "Very good at handling mops and brushes. He should always be around who can adpat very fast in the environment" };
+    
             var provinces = new List<Province>
             {
                 new Province { ProvinceName="Ontario"},
@@ -131,32 +152,7 @@ namespace FinalProject.DAL.Migrations
             schoolFamilies.ForEach(a => context.SchoolFamilies.AddOrUpdate(n => n.FamilyName, a));
             SaveChanges(context);
 
-            var qualification = new List<Qualification>()
-            {
-                new Qualification{ QualificationSet="Qualification1"},
-                new Qualification{ QualificationSet="Qualification2"},
-                new Qualification{ QualificationSet="Qualification3"},
-                new Qualification{ QualificationSet="Qualification4"},
-                new Qualification{ QualificationSet="Qualification5"},
-                new Qualification{ QualificationSet="Qualification6"},
-                new Qualification{ QualificationSet="Qualification7"},
-            };
-            qualification.ForEach(a => context.Qualifications.AddOrUpdate(n => n.QualificationSet, a));
-            SaveChanges(context);
-
-            var requirements = new List<Requirement>()
-            {
-                new Requirement{ RequirementName="Diploma",JobID=1},
-                new Requirement{ RequirementName="Certificate",JobID=1},
-                new Requirement{ RequirementName="Book",JobID=2},
-                new Requirement{ RequirementName="Pencil",JobID=2},
-                new Requirement{ RequirementName="Shoes",JobID=3},
-                new Requirement{ RequirementName="T-shirt",JobID=3},
-                new Requirement{ RequirementName="Hat",JobID=3},
-            };
-            requirements.ForEach(a => context.Requirements.AddOrUpdate(n => n.RequirementName, a));
-            SaveChanges(context);
-
+            
             var school = new List<School>
             {
                 new School { SchoolName="Alexander Kuska",SchoolLevelID=1,CityID=1,SchoolFamilyID=1},

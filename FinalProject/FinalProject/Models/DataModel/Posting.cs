@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FinalProject.Models.DataModel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -9,6 +10,7 @@ namespace FinalProject.Models
         public Posting()
         {
             this.Applications = new HashSet<Application>();
+            this.SavedPostings = new HashSet<SavedPosting>();
         }
 
         public int ID { get; set; }
@@ -43,6 +45,7 @@ namespace FinalProject.Models
         public virtual School School { get; set; }
         public virtual Job Job { get; set; }
         public ICollection<Application> Applications { get; set; }
+        public ICollection<SavedPosting> SavedPostings { get; set; }
         
         // Validation for date
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

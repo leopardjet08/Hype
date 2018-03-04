@@ -9,6 +9,11 @@ namespace FinalProject.Models.DataModel
 {
     public class Requirement
     {
+        public Requirement()
+        {
+            this.Jobs = new HashSet<Job>();
+        }
+
         public int ID  { get; set; }
 
         [Display(Name = "Requirement")]
