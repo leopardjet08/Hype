@@ -54,6 +54,7 @@ namespace FinalProject.DAL.Migrations
 
         protected override void Seed(FinalProject.DAL.JobPostingCFEntities context)
         {
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //var qualification = new List<Qualification>()
             //{
             //    new Qualification{ QualificationSet="Qualification1"},
@@ -85,7 +86,26 @@ namespace FinalProject.DAL.Migrations
             //var job1 = new Job { Qualifications = new List<Qualification>(), Requirements = new List<Requirement>(), JobTitle = "Math Teacher", JobSummary = "Math teacher should be good as me. She/he knows how to add,subtract,multiplication and divide. He also know how to do statistic." };
             //var job2 = new Job { Qualifications = new List<Qualification>(), Requirements = new List<Requirement>(), JobTitle = "Librarian", JobSummary = "She knows how to read and write. Good reading skills and very knowlegable as me." };
             //var job3 = new Job { Qualifications = new List<Qualification>(), Requirements = new List<Requirement>(), JobTitle = "Janitor", JobSummary = "Very good at handling mops and brushes. He should always be around who can adpat very fast in the environment" };
-    
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            // Requirement and Qualification Seed Data is in the Job Seed data itself
+            var jobs = new List<Job>
+            {
+                new Job { Qualifications = new List<Qualification> { new Qualification { QualificationSet = "Qualification Set 1"}, new Qualification { QualificationSet = "Qualification Set 2"} },
+                    Requirements = new List<Requirement> { new Requirement { RequirementName = "Critical Thinking" }, new Requirement { RequirementName = "Adaptability" } },
+                    JobTitle ="Math Teacher",JobSummary="Math teacher should be good as me. She/he knows how to add,subtract,multiplication and divide. He also know how to do statistic."},
+                new Job { Qualifications = new List<Qualification> { new Qualification { QualificationSet = "Qualification Set 3"}, new Qualification { QualificationSet = "Qualification Set 4"} },
+                    Requirements = new List<Requirement> {new Requirement { RequirementName = "Charismatic" }, new Requirement { RequirementName = "Integrity" } },
+                    JobTitle ="Librarian",JobSummary="She knows how to read and write. Good reading skills and very knowlegable as me."},
+                new Job { Qualifications = new List<Qualification> { new Qualification { QualificationSet = "Qualification Set 5"} },
+                    Requirements = new List<Requirement> {new Requirement { RequirementName = "Punctuality" } },
+                    JobTitle ="Janitor",JobSummary="Very good at handling mops and brushes. He should always be around who can adpat very fast in the environment"}
+
+            };
+            jobs.ForEach(a => context.Jobs.AddOrUpdate(n => n.JobTitle, a));
+            SaveChanges(context);
+
             var provinces = new List<Province>
             {
                 new Province { ProvinceName="Ontario"},
@@ -208,10 +228,7 @@ namespace FinalProject.DAL.Migrations
             };
             school.ForEach(a => context.Schools.AddOrUpdate(n => n.SchoolName, a));
             SaveChanges(context);
-
-
-
-
+            
             var applicants = new List<Applicant>
             {
                 new Applicant { FName = "Alex", MName = "Ark",  LName = "Axibeg", eMail="aaxibeg@outlook.com", Address="45 road street", ProvinceID=1,CityID=2},
@@ -224,13 +241,13 @@ namespace FinalProject.DAL.Migrations
 
             var postings = new List<Posting>
             {
-                new Posting {  NumberOpen=2,ClosingDate=DateTime.Parse("2018-02-20"),StartDate=DateTime.Parse("2018-01-02"),
+                new Posting {  NumberOpen=2,ClosingDate=DateTime.Parse("2019-02-20"),StartDate=DateTime.Parse("2020-01-02"),
                 PostingDescription="First posting Description. made by yours trully jetson. spelling is wrong. i suck.", SchoolID=2,
                 JobID=2},
-                new Posting {  NumberOpen=1,ClosingDate=DateTime.Parse("2018-05-10"),StartDate=DateTime.Parse("2018-04-02"),
+                new Posting {  NumberOpen=1,ClosingDate=DateTime.Parse("2019-05-10"),StartDate=DateTime.Parse("2020-04-02"),
                 PostingDescription="Second posting Description. dasdsadsadsa.", SchoolID=5,
                 JobID=1},
-                new Posting {  NumberOpen=3,ClosingDate=DateTime.Parse("2018-09-09"),StartDate=DateTime.Parse("2018-08-06"),
+                new Posting {  NumberOpen=3,ClosingDate=DateTime.Parse("2019-09-09"),StartDate=DateTime.Parse("2020-08-06"),
                 PostingDescription="Third posting Description. made by yours trully jetson. spelling is wrong. i suck.", SchoolID=9,
                 JobID=3}
 
@@ -262,8 +279,8 @@ namespace FinalProject.DAL.Migrations
 
             var savePosting = new List<SavedPosting>()
             {
-                new SavedPosting{ ApplicantID=1},
-                new SavedPosting{ ApplicantID=2}
+                new SavedPosting{ ApplicantID=1, PostingID=1},
+                new SavedPosting{ ApplicantID=2, PostingID=2}
             };
             savePosting.ForEach(a => context.SavedPostings.AddOrUpdate(n => n.ApplicantID, a));
             SaveChanges(context);
