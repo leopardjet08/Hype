@@ -10,6 +10,11 @@ namespace FinalProject.Models
 {
     public class Qualification
     {
+        public Qualification()
+        {
+            this.Jobs = new HashSet<Job>();
+        }
+
         public int ID { get; set; }
 
         [Display(Name = "Qualifications")]
@@ -18,7 +23,6 @@ namespace FinalProject.Models
         [Index("IX_Unique_Skill", IsUnique = true)]
         public string QualificationSet { get; set; }
         
-        // this is a comment test for sync
         public virtual ICollection<Job> Jobs { get; set; }
     }
 }

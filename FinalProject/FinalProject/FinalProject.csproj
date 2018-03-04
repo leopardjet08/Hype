@@ -215,9 +215,9 @@
     <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="DAL\ApplicationDBContext.cs" />
     <Compile Include="DAL\JobPostingCFEntities.cs" />
-    <Compile Include="DAL\Migrations\201802191828301_Initial-Create.cs" />
-    <Compile Include="DAL\Migrations\201802191828301_Initial-Create.Designer.cs">
-      <DependentUpon>201802191828301_Initial-Create.cs</DependentUpon>
+    <Compile Include="DAL\Migrations\201803042345153_dgf.cs" />
+    <Compile Include="DAL\Migrations\201803042345153_dgf.Designer.cs">
+      <DependentUpon>201803042345153_dgf.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\Migrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
@@ -238,13 +238,13 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\DataModel\Job.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Portfolio.cs" />
     <Compile Include="Models\DataModel\Posting.cs" />
     <Compile Include="Models\DataModel\Province.cs" />
     <Compile Include="Models\DataModel\Qualification.cs" />
     <Compile Include="Models\DataModel\School.cs" />
     <Compile Include="Models\DataModel\SchoolFamily.cs" />
     <Compile Include="Models\DataModel\SchoolLevel.cs" />
+    <Compile Include="Models\Portfolio.cs" />
     <Compile Include="Models\Review.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -347,12 +347,12 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DAL\Migrations\201802191828301_Initial-Create.resx">
-      <DependentUpon>201802191828301_Initial-Create.cs</DependentUpon>
-    </EmbeddedResource>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
+    <EmbeddedResource Include="DAL\Migrations\201803042345153_dgf.resx">
+      <DependentUpon>201803042345153_dgf.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

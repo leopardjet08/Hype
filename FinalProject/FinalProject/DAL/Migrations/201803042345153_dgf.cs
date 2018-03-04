@@ -3,7 +3,7 @@ namespace FinalProject.DAL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class dgf : DbMigration
     {
         public override void Up()
         {
@@ -19,6 +19,11 @@ namespace FinalProject.DAL.Migrations
                         Address = c.String(nullable: false, maxLength: 80),
                         ProvinceID = c.Int(nullable: false),
                         CityID = c.Int(nullable: false),
+                        CreatedBy = c.String(maxLength: 256),
+                        CreatedOn = c.DateTime(),
+                        UpdatedBy = c.String(maxLength: 256),
+                        UpdatedOn = c.DateTime(),
+                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
                     })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.City", t => t.CityID)
@@ -67,15 +72,17 @@ namespace FinalProject.DAL.Migrations
                         PostingDescription = c.String(maxLength: 2000),
                         SchoolID = c.Int(nullable: false),
                         JobID = c.Int(nullable: false),
-                        SavedPosting_ID = c.Int(),
+                        CreatedBy = c.String(maxLength: 256),
+                        CreatedOn = c.DateTime(),
+                        UpdatedBy = c.String(maxLength: 256),
+                        UpdatedOn = c.DateTime(),
+                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
                     })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.Job", t => t.JobID)
                 .ForeignKey("dbo.School", t => t.SchoolID)
-                .ForeignKey("dbo.SavedPosting", t => t.SavedPosting_ID)
                 .Index(t => t.SchoolID)
-                .Index(t => t.JobID)
-                .Index(t => t.SavedPosting_ID);
+                .Index(t => t.JobID);
             
             CreateTable(
                 "dbo.Job",
@@ -93,24 +100,33 @@ namespace FinalProject.DAL.Migrations
                     {
                         ID = c.Int(nullable: false, identity: true),
                         QualificationSet = c.String(nullable: false, maxLength: 255),
-                        Job_ID = c.Int(),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Job", t => t.Job_ID)
-                .Index(t => t.QualificationSet, unique: true, name: "IX_Unique_Skill")
-                .Index(t => t.Job_ID);
+                .Index(t => t.QualificationSet, unique: true, name: "IX_Unique_Skill");
             
             CreateTable(
                 "dbo.Requirement",
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        RequirementName = c.String(),
-                        JobID = c.Int(nullable: false),
+                        RequirementName = c.String(nullable: false, maxLength: 50),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Job", t => t.JobID)
-                .Index(t => t.JobID);
+                .Index(t => t.RequirementName, unique: true, name: "IX_Unique_Skill");
+            
+            CreateTable(
+                "dbo.SavedPosting",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        ApplicantID = c.Int(nullable: false),
+                        PostingID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.Applicant", t => t.ApplicantID)
+                .ForeignKey("dbo.Posting", t => t.PostingID)
+                .Index(t => t.ApplicantID)
+                .Index(t => t.PostingID);
             
             CreateTable(
                 "dbo.School",
@@ -171,17 +187,6 @@ namespace FinalProject.DAL.Migrations
                 .Index(t => t.ProvinceName, unique: true, name: "IX_Unique_Province");
             
             CreateTable(
-                "dbo.SavedPosting",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        ApplicantID = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Applicant", t => t.ApplicantID)
-                .Index(t => t.ApplicantID);
-            
-            CreateTable(
                 "dbo.BestCandidate",
                 c => new
                     {
@@ -200,13 +205,37 @@ namespace FinalProject.DAL.Migrations
                     })
                 .PrimaryKey(t => t.ID);
             
+            CreateTable(
+                "dbo.QualificationJob",
+                c => new
+                    {
+                        Qualification_ID = c.Int(nullable: false),
+                        Job_ID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.Qualification_ID, t.Job_ID })
+                .ForeignKey("dbo.Qualification", t => t.Qualification_ID, cascadeDelete: true)
+                .ForeignKey("dbo.Job", t => t.Job_ID, cascadeDelete: true)
+                .Index(t => t.Qualification_ID)
+                .Index(t => t.Job_ID);
+            
+            CreateTable(
+                "dbo.RequirementJob",
+                c => new
+                    {
+                        Requirement_ID = c.Int(nullable: false),
+                        Job_ID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.Requirement_ID, t.Job_ID })
+                .ForeignKey("dbo.Requirement", t => t.Requirement_ID, cascadeDelete: true)
+                .ForeignKey("dbo.Job", t => t.Job_ID, cascadeDelete: true)
+                .Index(t => t.Requirement_ID)
+                .Index(t => t.Job_ID);
+            
         }
         
         public override void Down()
         {
             DropForeignKey("dbo.BestCandidate", "ApplicationID", "dbo.Application");
-            DropForeignKey("dbo.Posting", "SavedPosting_ID", "dbo.SavedPosting");
-            DropForeignKey("dbo.SavedPosting", "ApplicantID", "dbo.Applicant");
             DropForeignKey("dbo.Applicant", "ProvinceID", "dbo.Province");
             DropForeignKey("dbo.School", "SchoolLevelID", "dbo.SchoolLevel");
             DropForeignKey("dbo.School", "SchoolFamilyID", "dbo.SchoolFamily");
@@ -214,14 +243,21 @@ namespace FinalProject.DAL.Migrations
             DropForeignKey("dbo.School", "CityID", "dbo.City");
             DropForeignKey("dbo.Applicant", "CityID", "dbo.City");
             DropForeignKey("dbo.Application", "School_ID", "dbo.School");
-            DropForeignKey("dbo.Requirement", "JobID", "dbo.Job");
-            DropForeignKey("dbo.Qualification", "Job_ID", "dbo.Job");
+            DropForeignKey("dbo.SavedPosting", "PostingID", "dbo.Posting");
+            DropForeignKey("dbo.SavedPosting", "ApplicantID", "dbo.Applicant");
+            DropForeignKey("dbo.RequirementJob", "Job_ID", "dbo.Job");
+            DropForeignKey("dbo.RequirementJob", "Requirement_ID", "dbo.Requirement");
+            DropForeignKey("dbo.QualificationJob", "Job_ID", "dbo.Job");
+            DropForeignKey("dbo.QualificationJob", "Qualification_ID", "dbo.Qualification");
             DropForeignKey("dbo.Posting", "JobID", "dbo.Job");
             DropForeignKey("dbo.Application", "PostingID", "dbo.Posting");
             DropForeignKey("dbo.Application", "ApplicationStatusID", "dbo.ApplicationStatus");
             DropForeignKey("dbo.Application", "ApplicantID", "dbo.Applicant");
+            DropIndex("dbo.RequirementJob", new[] { "Job_ID" });
+            DropIndex("dbo.RequirementJob", new[] { "Requirement_ID" });
+            DropIndex("dbo.QualificationJob", new[] { "Job_ID" });
+            DropIndex("dbo.QualificationJob", new[] { "Qualification_ID" });
             DropIndex("dbo.BestCandidate", new[] { "ApplicationID" });
-            DropIndex("dbo.SavedPosting", new[] { "ApplicantID" });
             DropIndex("dbo.Province", "IX_Unique_Province");
             DropIndex("dbo.SchoolLevel", "IX_Unique_LevelName");
             DropIndex("dbo.SchoolFamily", "IX_Unique_FamilyName");
@@ -229,10 +265,10 @@ namespace FinalProject.DAL.Migrations
             DropIndex("dbo.School", new[] { "SchoolFamilyID" });
             DropIndex("dbo.School", new[] { "CityID" });
             DropIndex("dbo.School", new[] { "SchoolLevelID" });
-            DropIndex("dbo.Requirement", new[] { "JobID" });
-            DropIndex("dbo.Qualification", new[] { "Job_ID" });
+            DropIndex("dbo.SavedPosting", new[] { "PostingID" });
+            DropIndex("dbo.SavedPosting", new[] { "ApplicantID" });
+            DropIndex("dbo.Requirement", "IX_Unique_Skill");
             DropIndex("dbo.Qualification", "IX_Unique_Skill");
-            DropIndex("dbo.Posting", new[] { "SavedPosting_ID" });
             DropIndex("dbo.Posting", new[] { "JobID" });
             DropIndex("dbo.Posting", new[] { "SchoolID" });
             DropIndex("dbo.Application", new[] { "School_ID" });
@@ -242,14 +278,16 @@ namespace FinalProject.DAL.Migrations
             DropIndex("dbo.Applicant", new[] { "CityID" });
             DropIndex("dbo.Applicant", new[] { "ProvinceID" });
             DropIndex("dbo.Applicant", "IX_Unique_Applicant_email");
+            DropTable("dbo.RequirementJob");
+            DropTable("dbo.QualificationJob");
             DropTable("dbo.UserPhoto");
             DropTable("dbo.BestCandidate");
-            DropTable("dbo.SavedPosting");
             DropTable("dbo.Province");
             DropTable("dbo.SchoolLevel");
             DropTable("dbo.SchoolFamily");
             DropTable("dbo.City");
             DropTable("dbo.School");
+            DropTable("dbo.SavedPosting");
             DropTable("dbo.Requirement");
             DropTable("dbo.Qualification");
             DropTable("dbo.Job");
