@@ -16,12 +16,9 @@
             ∙ &nbsp; All Applications &nbsp; ∙
         </h3>&nbsp;&nbsp;
 
-        <div style="padding-bottom:50px; margin-left:165px">
-            <h3 style="padding-top:20px; padding-bottom:10px; border:none; font-size:20px;">
-                Search Applications:
-            </h3>
-            @Html.TextBox("txtApplicationSearch", null, new { @class = "form-control", @style = "display:inline-block", @runat = "server" })
-            <button ID="btnApplicationSearch" style="border: 2px solid black;" class="btn btn-sm" type="submit">Search</button>
+        <div style="padding-bottom:50px; margin-left:165px">    
+            @Html.TextBox("txtApplicationSearch", null, new { @class = "form-control", @style = "display:inline-block", @placeholder = "Search Applications...", @runat = "server" })
+            <button ID="btnApplicationSearch" style="border: none; font-weight:bold; color:white; background-color:#00a203;" class="btn-primary btn-sm" type="submit">Search</button>
         </div>
 
         <div style="margin-left:165px">
@@ -48,8 +45,8 @@
                         <td>Mortal Mortas</td>
                         <th style="text-align:center">
 
-                            @Html.ActionLink("View", "Details", "Application", null, new {@style = "border:0px; font-weight:normal" }) &nbsp; 
-                            @Html.ActionLink("Delete", "Delete", "Application", null, new {@style = "border:0px; font-weight:normal; color:red" })
+                            @Html.ActionLink("View", "Details", "Application", null, new {@style = "border:0px; font-weight:normal; font-size:14px" }) &nbsp; 
+                            @Html.ActionLink("Delete", "Delete", "Application", null, new {@style = "border:0px; font-weight:normal; font-size:14px" })
                         </th>
 
                     </tr>
@@ -59,8 +56,8 @@
                         <td>Brock University</td>
                         <td>Lady Nadine</td>
                         <th style="text-align:center">
-                            @Html.ActionLink("View", "Details", "Application", null, new { @style = "border:0px; font-weight:normal;" }) &nbsp; 
-                            @Html.ActionLink("Delete", "Delete", "Application", null, new {@style = "border:0px; font-weight:normal; color:red" })
+                            @Html.ActionLink("View", "Details", "Application", null, new { @style = "border:0px; font-weight:normal; font-size:14px" }) &nbsp; 
+                            @Html.ActionLink("Delete", "Delete", "Application", null, new {@style = "border:0px; font-weight:normal; font-size:14px" })
                         </th>
                     <tr>
                         <td>January 21, 2018</td>
@@ -68,8 +65,8 @@
                         <td>Fanshaw College</td>
                         <td>Kim Wong</td>
                         <th style="text-align:center">
-                            @Html.ActionLink("View", "Details", "Application", null, new { @style = "border:0px; font-weight:normal;" }) &nbsp; 
-                            @Html.ActionLink("Delete", "Delete", "Application", null, new { @style = "border:0px; font-weight:normal; color:red" })
+                            @Html.ActionLink("View", "Details", "Application", null, new { @style = "border:0px; font-weight:normal; font-size:14px" }) &nbsp; 
+                            @Html.ActionLink("Delete", "Delete", "Application", null, new { @style = "border:0px; font-weight:normal; font-size:14px" })
                         </th>
                     </tr>
                     <tr>
@@ -78,8 +75,8 @@
                         <td>Niagara College</td>
                         <td>Derrick Stewward</td>
                         <th style="text-align:center">
-                            @Html.ActionLink("View", "Details", "Application", null, new { @style = "border:0px; font-weight:normal;" }) &nbsp; 
-                            @Html.ActionLink("Delete", "Delete", "Application", null, new { @style = "border:0px; font-weight:normal; color:red" })
+                            @Html.ActionLink("View", "Details", "Application", null, new { @style = "border:0px; font-weight:normal; font-size:14px" }) &nbsp; 
+                            @Html.ActionLink("Delete", "Delete", "Application", null, new { @style = "border:0px; font-weight:normal; font-size:14px" })
                         </th>
                     </tr>
                     <tr>
@@ -88,8 +85,8 @@
                         <td>Mohawk College</td>
                         <td>Julia Shituri</td>
                         <th style="text-align:center">
-                            @Html.ActionLink("View", "Details", "Application", null, new { @style = "border:0px; font-weight:normal;" }) &nbsp; 
-                            @Html.ActionLink("Delete", "Delete", "Application", null, new { @style = "border:0px; font-weight:normal; color:red" })
+                            @Html.ActionLink("View", "Details", "Application", null, new { @style = "border:0px; font-weight:normal; font-size:14px" }) &nbsp; 
+                            @Html.ActionLink("Delete", "Delete", "Application", null, new { @style = "border:0px; font-weight:normal; font-size:14px" })
                         </th>
                     </tr>
                     <tr>
@@ -98,8 +95,8 @@
                         <td>Mohawk College</td>
                         <td>Lake Aviles</td>
                         <th style="text-align:center">
-                            @Html.ActionLink("View", "Details", "Application", null, new { @style = "border:0px; font-weight:normal;" }) &nbsp; 
-                            @Html.ActionLink("Delete", "Delete", "Application", null, new { @style = "border:0px; font-weight:normal; color:red" })
+                            @Html.ActionLink("View", "Details", "Application", null, new { @style = "border:0px; font-weight:normal; font-size:14px" }) &nbsp; 
+                            @Html.ActionLink("Delete", "Delete", "Application", null, new { @style = "border:0px; font-weight:normal; font-size:14px" })
                         </th>
                     </tr>
                 </tbody>

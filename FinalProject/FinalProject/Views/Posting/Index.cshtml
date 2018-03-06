@@ -17,13 +17,8 @@
                 <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
                 <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
                 <br />
-                <br />
-                <div style="margin:0 auto; text-align:center">
-                    @Html.ActionLink("Create New Posting", "Create", "Posting", null, new { @class = "btn btn-primary btn-large", @style = "background-color:#00a203; display:inline-block; border:none; font-size:15px; font-weight:bold" })
-                </div>
                 
-             
-                <h3 style="padding-top:20px; text-align:center;">
+                <h3 style="padding-top:10px; text-align:center;">
                     ∙ &nbsp; All Listed Job Postings &nbsp; ∙
                 </h3>&nbsp;&nbsp;
                 <div class="container">
@@ -31,42 +26,35 @@
                     @* Search function  *@
 
                     <div style="padding-bottom:50px; text-align:center">
-                        <h3 style="padding-top:20px; padding-bottom:10px; border:none; font-size:20px;">
-                            Search Job Title: 
-                        </h3>
-           
-                        @Html.TextBox("searchName", null, new { @class = "form-control", @style = "display:inline-block" })
                         
-                        <input type="submit" name="actionButton" value="Search" style="border: 2px solid black;" class="btn btn-sm"/> 
-                        @Html.ActionLink("Clear", "Index")
+                        @Html.TextBox("searchName", null, new { @class = "form-control", @style="margin:0 auto", @placeholder="Search Job Title..." })
+                        <br />
+                        <input type="submit" name="actionButton" value="Search" style="border: none; font-weight:bold; color:white; background-color:#00a203;" class="btn-primary btn-sm"/>  
                     </div>
                               
-                    
-
                     @* Posting list in the table *@
                     <table class="table table-bordered"  style=" table-layout:fixed; width:70%; margin:0 auto">
                         
                         @* Title in the table *@
                         <thead style="background-color:#012e72;">
                             <tr>
-                                <th>
+                                <th style="text-align:center;">
                                     <input style="color:white; font-size:18px; font-weight:bold" type="submit" name="actionButton" value="Job Title" class="btn btn-link" />
                                 </th>
-                                <th>
+                                <th style="text-align:center;">
                                     <input style="color:white; font-size:18px; font-weight:bold" type="submit" name="actionButton" value="Deadline" class="btn btn-link" />
                                 </th>
-                                <th>
+                                <th style="text-align:center;">
                                     <input style="color:white; font-size:18px; font-weight:bold" type="submit" name="actionButton" value="Start Date" class="btn btn-link" />
                                 </th>
-                                
-                                <th>
+                                <th style="text-align:center;">
                                     <input style="color:white; font-size:18px; font-weight:bold" type="submit" name="actionButton" value="Openings" class="btn btn-link" />
                                 </th>
-                                <th>
+                                <th style="text-align:center;">
                                     <input style="color:white; font-size:18px; font-weight:bold"; type="submit" name="actionButton" value="City" class="btn btn-link" />
                                 </th>
-                                <th>
-                                    <input style="color:white; text-decoration:none; text-align:left; font-size:18px; font-weight:bold";  value="Action" class="btn btn-link" />
+                                <th style="text-align:center;">
+                                    <input style="color:white; text-decoration:none; font-size:18px; font-weight:bold";  type="submit" value="Action" class="btn btn-link" />
                                 </th>
                             </tr>
                         </thead>
@@ -77,28 +65,28 @@
                             {
 
                                 <tr>
-                                    <td>
+                                    <td style="text-align:center;">
                                         @Html.ActionLink(item.Job.JobTitle, "Details", new { id = item.ID })
 
                                     </td>
-                                    <td>
+                                    <td style="text-align:center;">
                                         @Html.DisplayFor(modelItem => item.ClosingDate)
                                     </td>
-                                    <td class="company">
+                                    <td class="company" style="text-align:center;">
                                         @Html.DisplayFor(modelItem => item.StartDate)
                                     </td> 
-                                    <td>
+                                    <td style="text-align:center;">
                                         @Html.DisplayFor(modelItem => item.NumberOpen)
                                     </td>
-                                    <td>
+                                    <td style="text-align:center;">
                                         @Html.DisplayFor(modelItem => item.School.City.CityName)
                                     </td>
                                     
                                     @* Buttons in the table *@
-                                    <td style="text-align:center;">
+                                    <td style="text-align:center; font-size:14px">
                                         @Html.ActionLink("View", "Details", new { id = item.ID }, new { @style = "border:0px;" })
                                         &nbsp;@Html.ActionLink("Edit", "Edit", new { id = item.ID }, new {  @style = "border:0px;" })
-                                        &nbsp;@Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @style = "border:0px; color:red;" })
+                                        &nbsp;@Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @style = "border:0px; " })
                                     </td>
                                 </tr>
                             }
@@ -122,14 +110,10 @@ new
 }))
 
                 </div>
-
             </div>
-
-        </div>
+          </div>
     }
-        </div>
-
-
+       </div>
 
 
         <style>
@@ -140,7 +124,7 @@ new
                 height: 150px;
                 text-indent: -9999px;
             }
-        </style>
+       </style>
 
 
 

@@ -9,9 +9,15 @@ namespace FinalProject.Controllers
     public class ArchiveController : Controller
     {
         // GET: Archive
-        public ActionResult Index()
+        public ActionResult IndexApplications()
         {
             return View();
         }
+
+        public ActionResult IndexPostings()
+        {
+            return View();
+        }
+
     }
 }

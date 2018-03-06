@@ -329,7 +329,8 @@
     <Content Include="Views\Posting\Details.cshtml" />
     <Content Include="Views\Posting\Edit.cshtml" />
     <Content Include="Views\Posting\Delete.cshtml" />
-    <Content Include="Views\Archive\Index.cshtml" />
+    <Content Include="Views\Archive\IndexApplications.cshtml" />
+    <Content Include="Views\Archive\IndexPostings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
