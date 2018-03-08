@@ -53,16 +53,16 @@
                                         </td>
                                         <td>
                                             @Scripts.Render("~/bundles/jquery")
-                                           <script type="text/javascript" language="javascript">
-                                               $('#SchoolID').change(function () { ChangeCustomer(); });
+                                            <script type="text/javascript" language="javascript">
+                                                $('#SchoolID').change(function () { ChangeCustomer(); });
 
-                                               function ChangeCustomer() {
-                                                   var selectedValue = $('#SchoolID option:selected').val();
-                                                   
-                                                       GetOrders(selectedValue); 
-                                               }
+                                                function ChangeCustomer() {
+                                                    var selectedValue = $('#SchoolID option:selected').val();
 
-                                           </script>
+                                                    GetOrders(selectedValue);
+                                                }
+
+                                            </script>
 
                                         </td>
                                     </tr>
@@ -71,7 +71,8 @@
                                             <h4>Number of Openings:</h4>
                                         </td>
                                         <td>
-                                            <input type="number" class="form-control" min="0" max="50" step="1" value="1" style="width:75px" />
+
+                                            @Html.EditorFor(model => model.NumberOpen, new { htmlAttributes = new { @class = "form-control", @style = "width:75px" } })
                                         </td>
                                     </tr>
 
@@ -79,9 +80,9 @@
 
                                 <br />
 
-                                <h4 style="margin-left:85px">Job Description:</h4>
-                               <br />
-                                @Html.TextArea("txtJobDescription", null, new { @class = "form-control", @rows = "2", @cols = "20", @style = "width:430px; height:200px; margin-left:85px;", @placeholder = "Enter text here...", @runat = "server" })
+                                <h4 style="margin-left:85px">Posting Description:</h4>
+                                <br />
+                                @Html.EditorFor(model => model.PostingDescription, new { htmlAttributes = new { @class = "form-control", @rows = "2", @cols = "20", @style = "width:430px; height:200px; margin-left:85px;", @placeholder = "Enter Description here..." } })
                             </div>
 
                             <div class="col-md-6" style="width:600px">
@@ -91,7 +92,7 @@
                                             <h4 style="display:inline-block">Closing Date:</h4>
                                         </td>
                                         <td>
-                                            @Html.TextBox("txtClosingDate", null, new { @class = "form-control", @style = "width:200px", @placeholder = "yyyy-mm-dd", @runat = "server" })
+                                            @Html.EditorFor(model => model.ClosingDate, new { htmlAttributes = new { @class = "form-control", @style = "width:200px", @placeholder = "yyyy-mm-dd" } })
                                         </td>
                                     </tr>
                                     <tr>
@@ -99,7 +100,7 @@
                                             <h4 style="display:inline-block">Start Date:</h4>
                                         </td>
                                         <td>
-                                            @Html.TextBox("txtStartDate", null, new { @class = "form-control", @style = "width:200px", @placeholder = "yyyy-mm-dd", @runat = "server" })
+                                            @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control", @style = "width:200px", @placeholder = "yyyy-mm-dd" } })
                                         </td>
                                     </tr>
                                     <tr>
@@ -107,7 +108,9 @@
                                             <h4 style="display:inline-block">Requirements:</h4>
                                         </td>
                                         <td>
-                                            @Html.TextBox("txtAddReq", null, new { @class = "form-control", @style = "width:200px", @runat = "server" })
+                                           
+                                            code here. it should be automatic when u select job title in dropdown
+
                                         </td>
                                     </tr>
                                     <tr>
@@ -115,7 +118,9 @@
                                             <input type="button" value="Add" class="btn btn-default" />
                                         </td>
                                         <td>
-                                            @Html.TextArea("txtAllRequirements", null, new { @class = "form-control", @rows = "10", @cols = "20", @style = "width:200px", @readonly = "readonly", @placeholder = "Requirements...", @runat = "server" })
+
+                                            code here. it should be automatic when u select job title in dropdown
+                                       
                                         </td>
                                     </tr>
                                     <tr>
