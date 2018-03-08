@@ -227,7 +227,7 @@ namespace FinalProject.Controllers
                 .Where(p => p.ID == id).SingleOrDefault();
 
             if (TryUpdateModel(postingToUpdate, "",
-               new string[] { "NumberOpen", "ClosingDate", "StartDate", "SchoolID", "JobID" }))
+               new string[] { "NumberOpen", "ClosingDate", "StartDate", "SchoolID", "JobID","PostingDescription" }))
             {
                 try
                 {
@@ -267,6 +267,9 @@ namespace FinalProject.Controllers
                         if (databaseValues.Job.JobTitle != clientValues.Job.JobTitle)
                             ModelState.AddModelError("Job Title", "Current Job title: "
                                 + databaseValues.Job.JobTitle);
+                        if (databaseValues.PostingDescription != clientValues.PostingDescription)
+                            ModelState.AddModelError("Posting Description", "Current Description: "
+                                + databaseValues.PostingDescription);
                         ModelState.AddModelError(string.Empty, "The record you attempted to edit "
                                 + "was modified by another user after you received your values. The "
                                 + "edit operation was canceled and the current values in the database "
