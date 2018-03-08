@@ -193,12 +193,14 @@ namespace FinalProject.Controllers
 
         public ActionResult Edit(int? id)
         {
-            Posting posting = db.Postings
-               .Where(p => p.ID == id).SingleOrDefault();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            Posting posting = db.Postings
+               .Where(p => p.ID == id).SingleOrDefault();
+
             if (posting == null)
             {
                 return HttpNotFound();
@@ -215,7 +217,7 @@ namespace FinalProject.Controllers
         // POST: Postings/Edit/5
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult EditPost(int? id)
+        public ActionResult EditPost(int? id, Byte[] rowVersion)
         {
             if (id == null)
             {
@@ -223,13 +225,13 @@ namespace FinalProject.Controllers
             }
             var postingToUpdate = db.Postings
                 .Where(p => p.ID == id).SingleOrDefault();
-            
+
             if (TryUpdateModel(postingToUpdate, "",
-               new string[] { "NumberOpen", "ClosingDate", "StartDate", "PositionID" }))
+               new string[] { "NumberOpen", "ClosingDate", "StartDate", "SchoolID", "JobID" }))
             {
                 try
                 {
-  
+                    db.Entry(postingToUpdate).OriginalValues["RowVersion"] = rowVersion;
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -259,6 +261,18 @@ namespace FinalProject.Controllers
                         if (databaseValues.NumberOpen != clientValues.NumberOpen)
                             ModelState.AddModelError("NumberOpen", "Current value: "
                                 + databaseValues.NumberOpen);
+                        if (databaseValues.School.SchoolName != clientValues.School.SchoolName)
+                            ModelState.AddModelError("SchooName", "Current name: "
+                                + databaseValues.School.SchoolName);
+                        if (databaseValues.Job.JobTitle != clientValues.Job.JobTitle)
+                            ModelState.AddModelError("Job Title", "Current Job title: "
+                                + databaseValues.Job.JobTitle);
+                        ModelState.AddModelError(string.Empty, "The record you attempted to edit "
+                                + "was modified by another user after you received your values. The "
+                                + "edit operation was canceled and the current values in the database "
+                                + "have been displayed. If you still want to save your version of this record, click "
+                                + "the Save button again. Otherwise click the 'Back to List' hyperlink.");
+                        postingToUpdate.RowVersion = databaseValues.RowVersion;
                     }
                 }
                 catch (DataException)
@@ -267,7 +281,7 @@ namespace FinalProject.Controllers
                 }
             }
             PopulateDropDownLists(postingToUpdate);
-           
+
             return View(postingToUpdate);
         }
 
