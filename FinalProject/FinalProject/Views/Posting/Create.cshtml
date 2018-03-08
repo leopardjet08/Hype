@@ -1,4 +1,5 @@
 ﻿@model FinalProject.Models.Posting
+    
 
 @{
     ViewBag.Title = "Posting";
@@ -43,8 +44,35 @@
                                             <h4 style="display:inline-block">@Html.LabelFor(model => model.School.SchoolName, "School: ")</h4>
                                         </td>
                                         <td>
-                                            @Html.DropDownList("SchoolID", null, "Select a School", htmlAttributes: new { id = "SchoolID", @class = "form-control", @style = "width:200px", @runat = "server" })
-                                            @Html.ValidationMessageFor(model => model.SchoolID, "", new { @class = "text-danger" })
+                                            <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+                                            @*@Html.DropDownListFor(x => x.schoolName, null, "--Select--", new { @id = "ddlState" });*@
+
+                                            
+
+                                            @*<script type="text/javascript">
+                                                $(document).ready(function () {
+                                                    $('#ddlState').change(function () {
+                                                        $.ajax({
+                                                            type: "post",
+                                                            url: "/DropDownList/GetDistrict",
+                                                            data: { stateId: $('#ddlState').val() },
+                                                            datatype: "json",
+                                                            traditional: true,
+                                                            success: function (data) {
+                                                                var district = "<select id='ddlDistrict'>";
+                                                                district = district + '<option value="">--Select--</option>';
+                                                                for (var i = 0; i < data.length; i++) {
+                                                                    district = district + '<option value=' + data[i].Value + '>' + data[i].Text + '</option>';
+                                                                }
+                                                                district = district + '</select>';
+                                                                $('#District').html(district);
+                                                            }
+                                                        });
+                                                    });
+                                                });
+                                            </script>*@
+
+
                                         </td>
                                     </tr>
                                     <tr>
@@ -52,30 +80,11 @@
                                             <h4 style="display:inline-block">@Html.LabelFor(model => model.School.City, "City: ")</h4>
                                         </td>
                                         <td>
-                                            @Scripts.Render("~/bundles/jquery")
-                                           <script type="text/javascript" language="javascript">
-                                               $('#SchoolID').change(function () { ChangeCustomer(); });
-
-                                               function ChangeCustomer() {
-                                                   var selectedValue = $('#SchoolID option:selected').val();
-                                                   
-                                                       GetOrders(selectedValue);
-                                                   
-                                               }
-
-                                           </script>
+                                           
 
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            <h4 style="display:inline-block">@Html.LabelFor(model => model.School.City, "City: ")</h4>
-                                        </td>
-                                        <td>
-                                          
-                                        </td>
-                                    </tr>
-
+                                    
                                 </table>
 
                                 <br />

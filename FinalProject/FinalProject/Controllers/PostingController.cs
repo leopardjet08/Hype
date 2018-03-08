@@ -14,20 +14,20 @@ namespace FinalProject.Controllers
 {
     public class PostingController : Controller
     {
-        private JobPostingCFEntities db = new JobPostingCFEntities();
+        public JobPostingCFEntities db = new JobPostingCFEntities();
 
 
         // GET: Posting
         public ActionResult Index(string sortDirection, string sortField,
             string actionButton, string searchName, string[] selectedSkills, int? page)
-            
+
         {
             PopulateDropDownLists();
-            ViewBag.Filtering = ""; 
+            ViewBag.Filtering = "";
 
             var postings = from s in db.Postings select s;
 
-            
+
 
             //Search bar code
 
@@ -134,12 +134,60 @@ namespace FinalProject.Controllers
         public ActionResult Create()
         {
             PopulateDropDownLists();
-            ViewBag.Message = "School by jet";
-
-            var posting = new Posting();
-
+            
+            
             return View();
+
         }
+
+        
+
+        /////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+        //public ActionResult DropdownJet()
+        //{
+
+        //    List<SelectListItem> schoolName = new List<SelectListItem>();
+
+
+        //    List<Posting> school = db.Postings.ToList();
+
+
+        //    school.ForEach(x =>
+        //    {
+        //        schoolName.Add(new SelectListItem
+        //        {
+        //            Text = x.School.SchoolName,
+        //            Value = x.School.CityID.ToString()
+        //        });
+        //    });
+
+        //    return View(school);
+
+        //}   
+
+        //public ActionResult GetDistrict(int ?SchoolID)
+        //{
+        //    int cityId;
+
+        //    if (SchoolID!=null)
+        //    {
+        //        cityId = Convert.ToInt32(SchoolID);
+
+        //        Posting cityName = db.Postings
+        //       .Where(p => p.School.CityID == SchoolID).SingleOrDefault();
+
+
+
+        //    }
+        //    return Json(cityName, JsonRequestBehavior.AllowGet);
+        // }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
         // POST: Postings/Create
         //For protection against hacker!!! 
@@ -149,7 +197,7 @@ namespace FinalProject.Controllers
         {
             try
             {
-                
+
                 if (ModelState.IsValid)
                 {
                     db.Postings.Add(posting);
@@ -193,12 +241,14 @@ namespace FinalProject.Controllers
 
         public ActionResult Edit(int? id)
         {
-            Posting posting = db.Postings
-               .Where(p => p.ID == id).SingleOrDefault();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            Posting posting = db.Postings
+               .Where(p => p.ID == id).SingleOrDefault();
+
             if (posting == null)
             {
                 return HttpNotFound();
@@ -215,7 +265,7 @@ namespace FinalProject.Controllers
         // POST: Postings/Edit/5
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult EditPost(int? id)
+        public ActionResult EditPost(int? id, Byte[] rowVersion)
         {
             if (id == null)
             {
@@ -223,13 +273,13 @@ namespace FinalProject.Controllers
             }
             var postingToUpdate = db.Postings
                 .Where(p => p.ID == id).SingleOrDefault();
-            
+
             if (TryUpdateModel(postingToUpdate, "",
-               new string[] { "NumberOpen", "ClosingDate", "StartDate", "PositionID" }))
+               new string[] { "NumberOpen", "ClosingDate", "StartDate", "SchoolID","JobID" }))
             {
                 try
                 {
-  
+                    db.Entry(postingToUpdate).OriginalValues["RowVersion"] = rowVersion;
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -259,6 +309,18 @@ namespace FinalProject.Controllers
                         if (databaseValues.NumberOpen != clientValues.NumberOpen)
                             ModelState.AddModelError("NumberOpen", "Current value: "
                                 + databaseValues.NumberOpen);
+                        if (databaseValues.School.SchoolName != clientValues.School.SchoolName)
+                            ModelState.AddModelError("SchooName", "Current name: "
+                                + databaseValues.School.SchoolName);
+                        if (databaseValues.Job.JobTitle != clientValues.Job.JobTitle)
+                            ModelState.AddModelError("Job Title", "Current Job title: "
+                                + databaseValues.Job.JobTitle);
+                        ModelState.AddModelError(string.Empty, "The record you attempted to edit "
+                                + "was modified by another user after you received your values. The "
+                                + "edit operation was canceled and the current values in the database "
+                                + "have been displayed. If you still want to save your version of this record, click "
+                                + "the Save button again. Otherwise click the 'Back to List' hyperlink.");
+                        postingToUpdate.RowVersion = databaseValues.RowVersion;
                     }
                 }
                 catch (DataException)
@@ -267,7 +329,7 @@ namespace FinalProject.Controllers
                 }
             }
             PopulateDropDownLists(postingToUpdate);
-           
+
             return View(postingToUpdate);
         }
 
@@ -285,7 +347,7 @@ namespace FinalProject.Controllers
             }
             return View(posting);
         }
-        
+
         //For protection against hacker!!! 
         // POST: Postings/Delete
         [HttpPost, ActionName("Delete")]
@@ -314,11 +376,18 @@ namespace FinalProject.Controllers
 
         }
 
+
+
         private void PopulateDropDownLists(Posting posting = null)
         {
             ViewBag.JobID = new SelectList(db.Jobs.OrderBy(p => p.JobTitle), "ID", "JobTitle", posting?.JobID);
             ViewBag.SchoolID = new SelectList(db.Schools.OrderBy(p => p.SchoolName), "ID", "SchoolName", posting?.SchoolID);
+
+
+
+
         }
-        
+
     }
 }
+
