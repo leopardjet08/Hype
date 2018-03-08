@@ -52,17 +52,9 @@
                                             <h4 style="display:inline-block">@Html.LabelFor(model => model.School.City, "City: ")</h4>
                                         </td>
                                         <td>
-                                            @Scripts.Render("~/bundles/jquery")
-                                            <script type="text/javascript" language="javascript">
-                                                $('#SchoolID').change(function () { ChangeCustomer(); });
+  
 
-                                                function ChangeCustomer() {
-                                                    var selectedValue = $('#SchoolID option:selected').val();
-
-                                                    GetOrders(selectedValue);
-                                                }
-
-                                            </script>
+                                         Code here. it should be automatic the school city when u select school name
 
                                         </td>
                                     </tr>
@@ -115,6 +107,7 @@
                                     </tr>
                                     <tr>
                                         <td style="vertical-align:top">
+                                            <h4 style="display:inline-block">Qualification:</h4>
                                             <input type="button" value="Add" class="btn btn-default" />
                                         </td>
                                         <td>
