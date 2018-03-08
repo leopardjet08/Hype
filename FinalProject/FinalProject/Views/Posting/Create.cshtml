@@ -59,8 +59,7 @@
                                                function ChangeCustomer() {
                                                    var selectedValue = $('#SchoolID option:selected').val();
                                                    
-                                                       GetOrders(selectedValue);
-                                                   
+                                                       GetOrders(selectedValue); 
                                                }
 
                                            </script>
@@ -69,10 +68,10 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <h4 style="display:inline-block">@Html.LabelFor(model => model.School.City, "City: ")</h4>
+                                            <h4>Number of Openings:</h4>
                                         </td>
                                         <td>
-                                          
+                                            <input type="number" class="form-control" min="0" max="50" step="1" value="1" style="width:75px" />
                                         </td>
                                     </tr>
 
@@ -82,7 +81,7 @@
 
                                 <h4 style="margin-left:85px">Job Description:</h4>
                                <br />
-                                @Html.TextArea("txtJobDescription", null, new { @class = "form-control", @rows = "2", @cols = "20", @style = "width:430px; margin-left:85px;", @placeholder = "Enter text here...", @runat = "server" })
+                                @Html.TextArea("txtJobDescription", null, new { @class = "form-control", @rows = "2", @cols = "20", @style = "width:430px; height:200px; margin-left:85px;", @placeholder = "Enter text here...", @runat = "server" })
                             </div>
 
                             <div class="col-md-6" style="width:600px">
@@ -112,19 +111,19 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
+                                        <td style="vertical-align:top">
                                             <input type="button" value="Add" class="btn btn-default" />
                                         </td>
                                         <td>
-                                            @Html.TextArea("txtAllRequirements", null, new { @class = "form-control", @rows = "2", @cols = "20", @style = "width:200px", @readonly = "readonly", @placeholder = "Requirements...", @runat = "server" })
+                                            @Html.TextArea("txtAllRequirements", null, new { @class = "form-control", @rows = "10", @cols = "20", @style = "width:200px", @readonly = "readonly", @placeholder = "Requirements...", @runat = "server" })
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <h4>Number of Openings:</h4>
+                                            
                                         </td>
                                         <td>
-                                            <input type="number" class="form-control" min="0" max="50" step="1" value="1" style="width:75px" />
+                                            
                                         </td>
                                     </tr>
                                     <tr>

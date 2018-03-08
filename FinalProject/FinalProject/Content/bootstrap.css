@@ -51,11 +51,59 @@ audio:not([controls]) {
   display: none;
 }
 
+
 html {
   font-family: sans-serif;
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
+
+
+ul li a:before {
+    content: '';
+    width: 0px;
+    height: 3px;
+    background: #4da6d0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    transition: ease-in-out .3s;
+}
+
+
+ul li a:after {
+    content: '';
+    width: 0px;
+    height: 3px;
+    background: #4da6d0;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    transition: ease-in-out .3s;
+}
+
+ul li:hover a:before
+{
+    width:45%;
+    transform:translateX(100%);
+}
+
+ul li:hover a:after 
+{
+    width: 45%;
+    transform: translateX(-100%);
+}
+
+
+.nav > li > a {
+    color: white;
+    background-color: none;
+}
+
+    .nav > li > a:hover {
+        color: #4da6d0;
+        
+    }
 
 
 #tableColor tr:nth-child(even) {
@@ -3293,12 +3341,12 @@ input[type="button"].btn-block {
   white-space: nowrap;
 }
 
-.dropdown-menu > li > a:hover,
-.dropdown-menu > li > a:focus {
-  color: #ffffff;
-  text-decoration: none;
-  background-color: #428bca;
-}
+    .dropdown-menu > li > a:hover,
+    .dropdown-menu > li > a:focus {
+        color: #ffffff;
+        text-decoration: none;
+        background-color: #00a203;
+    }
 
 .dropdown-menu > .active > a,
 .dropdown-menu > .active > a:hover,
@@ -3839,11 +3887,11 @@ textarea.input-group-sm > .input-group-btn > .btn {
   padding: 10px 15px;
 }
 
-.nav > li > a:hover,
-.nav > li > a:focus {
-  text-decoration: none;
-  background-color: #eeeeee;
-}
+    .nav > li > a:hover,
+    .nav > li > a:focus {
+        text-decoration: none;
+        background-color: #012e72;
+    }
 
 .nav > li.disabled > a {
   color: #999999;
@@ -3857,12 +3905,13 @@ textarea.input-group-sm > .input-group-btn > .btn {
   background-color: transparent;
 }
 
-.nav .open > a,
-.nav .open > a:hover,
-.nav .open > a:focus {
-  background-color: #eeeeee;
-  border-color: #428bca;
-}
+    .nav .open > a,
+    .nav .open > a:hover,
+    .nav .open > a:focus {
+        background-color: none;
+        border-color: #428bca;
+        color: #4da6d0;
+    }
 
 .nav .nav-divider {
   height: 1px;

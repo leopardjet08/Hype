@@ -6,8 +6,11 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.js"></script>
+   
 
-
+    
 </head>
 <body style="margin:0; padding:0px;">
     <div class="navbar navbar-light navbar-relative-top" style="border-top:2px solid white; border-bottom:10px solid white; background-color: #012e72;">
@@ -15,41 +18,47 @@
 
             <!-- Logo -->
             <div class="navbar-header">
-                <img src="/Images/CompanyLogo2.png" alt="Logo" style="height:60%; width:60%; margin-left: -17px; padding-top:-12px; padding-bottom:-12px;" />
-
-
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+                <img src="/Images/CompanyLogo2.png" alt="Logo" style="height:60%; width:60%; margin-left: -17px; padding-top:-12px; padding-bottom:-12px;" /> 
             </div>
 
             <!--- Navbar Menu Items -->
 
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav" style="font-size:23px; margin-top:18px;">
-
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Postings", "Index", "Posting")</li>
-
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Applications <span class="caret"></span></a>
+               <div id="myNav" class="navbar-collapse collapse">
+                <ul id="myNav2" class="nav navbar-nav" style="font-size:23px; margin-top:18px; ">
+                    <li id="home">@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li id="postings" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Postings
+                        </a>
                         <ul class="dropdown-menu">
-                            <li style="font-size:18px">@Html.ActionLink("View Applications", "Index", "Application")</li>
-                            <li style="font-size:18px">@Html.ActionLink("Archived Applications", "IndexOld", "Application")</li>
-                            <li class="divider"></li>
-                            <li style="font-size:18px">@Html.ActionLink("Applicants", "Index", "Applicant")</li>
+                            <li style="font-size:18px">@Html.ActionLink("Create Posting", "Create", "Posting")</li>
+                            <li style="font-size:18px">@Html.ActionLink("View Postings", "Index", "Posting")</li>
                         </ul>
                     </li>
-                    <li>@Html.ActionLink("My Portfolio", "Index", "Portfolio")</li>
+
+                    <li id="applications" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Applications</a>
+                        <ul class="dropdown-menu">
+                            <li style="font-size:18px">@Html.ActionLink("View Applications", "Index", "Application")</li>
+                            <li style="font-size:18px">@Html.ActionLink("Applicant Details", "Index", "Applicant")</li>
+                        </ul>
+                    </li>
+
+                    <li id="portfolio">@Html.ActionLink("My Portfolio", "Index", "Portfolio")</li>
+
+                    <li id="archives" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Archives</a>
+                        <ul class="dropdown-menu">
+                            <li style="font-size:18px">@Html.ActionLink("Applications Archive", "IndexApplications", "Archive")</li>               
+                            <li style="font-size:18px">@Html.ActionLink("Postings Archive", "IndexPostings", "Archive")</li>               
+                        </ul>
+                    </li>
                 </ul>
                 <div>
                     @Html.Partial("_LoginPartial")
                 </div>
-
-
             </div>
+
         </div>
     </div>
 
@@ -67,11 +76,12 @@
 
         </div>
     </footer>
-
-
-
+   
+    
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
+
+
 </html>

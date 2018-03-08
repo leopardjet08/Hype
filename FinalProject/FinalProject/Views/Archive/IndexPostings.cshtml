@@ -1,0 +1,105 @@
+﻿@model FinalProject.Models.Archive
+
+@{
+    ViewBag.Title = "Archived Postings";
+}
+
+<div class="container well well-lg" style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
+    <br />
+    <div style="margin-bottom:60px; text-align:left">
+        <p style="text-align:center;  margin-bottom:15px; font-size:30px; color:#02388a;"> Niagara Catholic District School Board</p>
+        <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
+        <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
+        <br />
+
+        <h3 style="text-align:center; padding-bottom:10px">
+            ∙ &nbsp; Postings Archive&nbsp; ∙
+        </h3>
+        <div style="padding-bottom:50px; margin-left:165px">
+            <h3 style="padding-top:20px; padding-bottom:10px; border:none; font-size:20px;">
+                Search Postings:
+            </h3>
+
+            @Html.TextBox("txtPostingSearch", null, new { @class = "form-control", @style = "display:inline-block", @runat = "server" })
+            <button ID="btnApplicantSearch" style="border: 2px solid black;" class="btn btn-sm" type="submit">Search</button>
+        </div>
+
+        @Html.Label("lblResult", " Result found: 6", new { @style = "color:green; margin-left:165px" })
+
+        <br /><br />
+
+        <div class="container">
+            <table class="table table-bordered" style=" table-layout:fixed; width:70%; margin:0 auto">
+
+                @* Title in the table *@
+                <thead style="background-color:#012e72;">
+                    <tr>
+                        <th style="text-align:center;">
+                            <input style="color:white; font-size:18px; font-weight:bold" type="submit" name="actionButton" value="Job Title" class="btn btn-link" />
+                        </th>
+                        <th style="text-align:center;">
+                            <input style="color:white; font-size:18px; font-weight:bold" type="submit" name="actionButton" value="Deadline" class="btn btn-link" />
+                        </th>
+                        <th style="text-align:center;">
+                            <input style="color:white; font-size:18px; font-weight:bold" type="submit" name="actionButton" value="Start Date" class="btn btn-link" />
+                        </th>
+                        <th style="text-align:center;">
+                            <input style="color:white; font-size:18px; font-weight:bold" type="submit" name="actionButton" value="Openings" class="btn btn-link" />
+                        </th>
+                        <th style="text-align:center;">
+                            <input style="color:white; font-size:18px; font-weight:bold" ; type="submit" name="actionButton" value="City" class="btn btn-link" />
+                        </th>
+                        <th style="text-align:center;">
+                            <input style="color:white; text-decoration:none; font-size:18px; font-weight:bold" ; type="submit" value="Action" class="btn btn-link" />
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody id="tableColor" style="font-size:17px; text-align:left">
+                    @* Data in the table *@
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="text-align:center;">
+                                Job Title
+                            </td>
+                            <td style="text-align:center;">
+                                Date Closed
+                            </td>
+                            <td class="company" style="text-align:center;">
+                                Start Date
+                            </td>
+                            <td style="text-align:center;">
+                                School
+                            </td>
+                            <td style="text-align:center;">
+                                City
+                            </td>
+                            <td style="text-align:center;">
+                                Status
+                            </td>
+                            <td style="text-align:center;">
+                                Requirements
+                            </td>
+                            <td style="text-align:center;">
+                                Description
+                            </td>
+
+                            @* Buttons in the table *@
+                            <td style="text-align:center; font-size:14px">
+                                @Html.ActionLink("View", "Details", new { id = item.ID }, new { @style = "border:0px;" })
+                                &nbsp;@Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @style = "border:0px;" })
+                                &nbsp;@Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @style = "border:0px; " })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+    <a href="javascript:void(0);" style="margin-bottom:60px; margin-top:40px;margin-left:165px" onclick="history.go(-1);">Back</a>
+</div>
+
+
