@@ -124,7 +124,7 @@ namespace FinalProject.Controllers
             ViewBag.sortDirection = sortDirection;
 
             //number of data in the table
-            int pageSize = 3;
+            int pageSize = 9;
             int pageNumber = (page ?? 1);
 
             return View(postings.ToPagedList(pageNumber, pageSize));
