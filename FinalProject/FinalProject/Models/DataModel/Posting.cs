@@ -32,7 +32,7 @@ namespace FinalProject.Models
         public DateTime? StartDate { get; set; }
 
         [Display(Name = "Posting Description")]
-        [StringLength(2000, ErrorMessage = "Description must be between 20 and 2000 characters", MinimumLength = 20)]
+        [StringLength(2000, ErrorMessage = "Description must be between 20 and 2000 characters")]
         [DataType(DataType.MultilineText)]
         public string PostingDescription { get; set; }
 

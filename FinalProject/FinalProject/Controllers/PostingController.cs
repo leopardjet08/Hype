@@ -149,7 +149,7 @@ namespace FinalProject.Controllers
         {
             try
             {
-                
+
                 if (ModelState.IsValid)
                 {
                     db.Postings.Add(posting);
@@ -164,6 +164,9 @@ namespace FinalProject.Controllers
             catch (DataException)
             {
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+            catch (Exception ) {
+                ModelState.AddModelError("", "Wrong data. ");
             }
 
             PopulateDropDownLists(posting);
