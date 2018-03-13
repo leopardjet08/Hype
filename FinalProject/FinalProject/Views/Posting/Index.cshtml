@@ -85,8 +85,10 @@
                                     @* Buttons in the table *@
                                     <td style="text-align:center; font-size:14px">
                                         @Html.ActionLink("View", "Details", new { id = item.ID }, new { @style = "border:0px;" })
-                                        &nbsp;@Html.ActionLink("Edit", "Edit", new { id = item.ID }, new {  @style = "border:0px;" })
-                                        &nbsp;@Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @style = "border:0px; " })
+                                        &nbsp;@Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @style = "border:0px;" })
+                                        &nbsp;@Html.ActionLink("Archive", "", new { id = item.ID }, new { @style = "border:0px; " })
+                                        &nbsp;@Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @style = "border:0px; display:none" })
+
                                     </td>
                                 </tr>
                             }
