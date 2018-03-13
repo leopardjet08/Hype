@@ -7,106 +7,109 @@
 
 }
 
-
-<div class="container well well-lg" style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
-    <br />
-    <div style="margin-bottom:60px; text-align:left">
-        <p style="text-align:center;  margin-bottom:15px; font-size:30px; color:#02388a;"> Niagara Catholic District School Board</p>
-        <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
-        <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
-        <br />
-
-        <h3 style="text-align:center; padding-bottom:10px">
-            ∙ &nbsp; Applications Archive&nbsp; ∙
-        </h3>
-        <div style="padding-bottom:50px; margin-left:165px">
-            <h3 style="padding-top:20px; padding-bottom:10px; border:none; font-size:20px;">
-                Search Applications:
-            </h3>
-
-            @Html.TextBox("searchName", null, new { @class = "form-control", @style = "margin:0 auto", @placeholder = "Search Job Title..." })
-            <input type="submit" name="actionButton" value="Search" style="border: none; font-weight:bold; color:white; background-color:#00a203;" class="btn-primary btn-sm" />
-        </div>
-
-        <br /><br />
-
-        <div class="container">
-            <table class="table table-bordered" style="width:75%; margin:0 auto">
-                <thead style="color:white; font-size:18px; background-color:#012e72">
-                    <tr>
-                        <th style="text-align:center;">
-                            <input style="color:white; font-size:18px; font-weight:bold" type="submit" name="actionButton" value="Applied Date" class="btn btn-link" />
-                        </th>
-                        <th style="text-align:center;">
-                            <input style="color:white; font-size:18px; font-weight:bold" type="submit" name="actionButton" value="Job Title" class="btn btn-link" />
-                        </th>
-                        <th style="text-align:center;">
-                            <input style="color:white; font-size:18px; font-weight:bold" type="submit" name="actionButton" value="Employer" class="btn btn-link" />
-                        </th>
-                        <th style="text-align:center;">
-                            <input style="color:white; font-size:18px; font-weight:bold" type="submit" name="actionButton" value="Applicant" class="btn btn-link" />
-                        </th>
-                        <th style="text-align:center;">
-                            <input style="color:white; font-size:18px; font-weight:bold" ; type="submit" name="actionButton" value="Status" class="btn btn-link" />
-                        </th>
-                        <th style="text-align:center;">
-                            <input style="color:white; text-decoration:none; font-size:18px; font-weight:bold" ; type="submit" value="Action" class="btn btn-link" />
-                        </th>
-                    </tr>
-                </thead>
-                <tbody id="tableColor" style="font-size:17px; text-align:left">
-                    @* Data in the table *@
-                    @foreach (var item in Model)
-                    {
-
-                        <tr>
-                            <td style="text-align:center;">
-                                Not in Database
-
-                            </td>
-                            <td style="text-align:center;">
-                                @Html.DisplayFor(modelItem => item.Posting.Job.JobTitle)
-                            </td>
-                            <td class="company" style="text-align:center;">
-                                @Html.DisplayFor(modelItem => item.Posting.School.SchoolName)
-                            </td>
-                            <td style="text-align:center;">
-                                @Html.DisplayFor(modelItem => item.Applicant.FullName)
-                            </td>
-                            <td style="text-align:center; color:red">
-                                @Html.DisplayFor(modelItem => item.ApplicationStatus.Status)
-                            </td>
-
-                            @* Buttons in the table *@
-                            <td style="text-align:center; font-size:14px">
-                                @Html.ActionLink("View", "Details", new { id = item.ID }, new { @style = "border:0px;" })
-                                &nbsp;@Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @style = "border:0px; " })
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-
-            @* Page counts  *@
-            <span id="filterMessage" class="text-danger">@((Model.Count() == 0) ? "Zero postings found.  No records match your criteria." : "")</span>
-            <input type="hidden" name="sortDirection" value="@ViewBag.sortDirection" />
-            <input type="hidden" name="sortField" value="@ViewBag.sortField" />
-            <br />
-            Page:  @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-
-
-            @Html.PagedListPager(Model, page => Url.Action("Index",
-new
+@using (Html.BeginForm())
 {
- page,
- sortDirection = ViewBag.sortDirection,
- sortField = ViewBag.sortField,
- searchName = ViewBag.searchName
-}))
+    <div class="container well well-lg" style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
+        <br />
+        <div style="margin-bottom:60px; text-align:left">
+            <p style="text-align:center;  margin-bottom:15px; font-size:30px; color:#02388a;"> Niagara Catholic District School Board</p>
+            <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
+            <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
+            <br />
+
+            <h3 style="text-align:center; padding-bottom:10px">
+                ∙ &nbsp; Applications Archive&nbsp; ∙
+            </h3>
+            <div class="container">
+
+
+                @* Search function  *@
+
+                <div style="padding-bottom:50px; text-align:center">
+
+                    @Html.TextBox("searchName", null, new { @class = "form-control", @style = "margin:0 auto", @placeholder = "Search Job Title..." })
+                    <br />
+                    <input type="submit" name="actionButton" value="Search" style="border: none; font-weight:bold; color:white; background-color:#00a203;" class="btn-primary btn-sm" />
+                </div>
+
+
+                <table class="table table-bordered" style="width:75%; margin:0 auto">
+
+                    <thead style="color:white; font-size:18px; background-color:#012e72">
+                        <tr>
+                            <th style="text-align:center;">
+                                <input style="color:white; font-size:18px; font-weight:bold" type="submit" name="actionButton" value="Applied Date" class="btn btn-link" />
+                            </th>
+                            <th style="text-align:center;">
+                                <input style="color:white; font-size:18px; font-weight:bold" type="submit" name="actionButton" value="Job Title" class="btn btn-link" />
+                            </th>
+                            <th style="text-align:center;">
+                                <input style="color:white; font-size:18px; font-weight:bold" type="submit" name="actionButton" value="Employer" class="btn btn-link" />
+                            </th>
+                            <th style="text-align:center;">
+                                <input style="color:white; font-size:18px; font-weight:bold" type="submit" name="actionButton" value="Applicant" class="btn btn-link" />
+                            </th>
+                            <th style="text-align:center;">
+                                <input style="color:white; font-size:18px; font-weight:bold" ; type="submit" name="actionButton" value="Status" class="btn btn-link" />
+                            </th>
+                            <th style="text-align:center;">
+                                <input style="color:white; text-decoration:none; font-size:18px; font-weight:bold" ; type="submit" value="Action" class="btn btn-link" />
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableColor" style="font-size:17px; text-align:left">
+                        @* Data in the table *@
+                        @foreach (var item in Model)
+                        {
+
+                            <tr>
+                                <td style="text-align:center;">
+                                    Not in Database
+
+                                </td>
+                                <td style="text-align:center;">
+                                    @Html.DisplayFor(modelItem => item.Posting.Job.JobTitle)
+                                </td>
+                                <td class="company" style="text-align:center;">
+                                    @Html.DisplayFor(modelItem => item.Posting.School.SchoolName)
+                                </td>
+                                <td style="text-align:center;">
+                                    @Html.DisplayFor(modelItem => item.Applicant.FullName)
+                                </td>
+                                <td style="text-align:center; color:red">
+                                    @Html.DisplayFor(modelItem => item.ApplicationStatus.Status)
+                                </td>
+
+                                @* Buttons in the table *@
+                                <td style="text-align:center; font-size:14px">
+                                    @Html.ActionLink("View", "Details", new { id = item.ID }, new { @style = "border:0px;" })
+                                    &nbsp;@Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @style = "border:0px; " })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                @* Page counts  *@
+                <span id="filterMessage" class="text-danger">@((Model.Count() == 0) ? "Zero postings found.  No records match your criteria." : "")</span>
+                <input type="hidden" name="sortDirection" value="@ViewBag.sortDirection" />
+                <input type="hidden" name="sortField" value="@ViewBag.sortField" />
+                <br />
+                Page:  @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+
+                @Html.PagedListPager(Model, page => Url.Action("Index",
+  new
+  {
+      page,
+      sortDirection = ViewBag.sortDirection,
+      sortField = ViewBag.sortField,
+      searchName = ViewBag.searchName
+  }))
+
+            </div>
 
         </div>
-
     </div>
-    <a href="javascript:void(0);" style="margin-bottom:60px; margin-top:40px;margin-left:165px" onclick="history.go(-1);">Back</a>
-</div>
 
+}

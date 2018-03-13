@@ -12,8 +12,7 @@ namespace FinalProject.Controllers
     public class ArchiveController : Controller
     {
         private JobPostingCFEntities db = new JobPostingCFEntities();
-        // GET: Archive
-        /////////////////Application details Old Index////////////////////////////////////////////////////////////
+        
 
         public ActionResult IndexApplications(string sortDirection, string sortField,
             string actionButton, string searchName, int? page)
@@ -49,7 +48,7 @@ namespace FinalProject.Controllers
                 }
             }
 
-            if (sortField == "Job Applied For")//Sorting by Job title
+            if (sortField == "Job Title")//Sorting by Job title
             {
                 if (String.IsNullOrEmpty(sortDirection))
                 {
