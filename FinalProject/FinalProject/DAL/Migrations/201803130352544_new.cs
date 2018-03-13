@@ -3,7 +3,7 @@ namespace FinalProject.DAL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class dasd : DbMigration
+    public partial class _new : DbMigration
     {
         public override void Up()
         {
@@ -39,7 +39,7 @@ namespace FinalProject.DAL.Migrations
                         ID = c.Int(nullable: false, identity: true),
                         PostingID = c.Int(nullable: false),
                         ApplicantID = c.Int(nullable: false),
-                        SubmissionDate = c.String(),
+                        SubmissionDate = c.DateTime(nullable: false),
                         ApplicationStatusID = c.Int(nullable: false),
                         School_ID = c.Int(),
                     })

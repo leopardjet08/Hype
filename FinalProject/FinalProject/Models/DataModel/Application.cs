@@ -22,11 +22,11 @@ namespace FinalProject.Models
 
         public Application()
         {
-            DateTime dt = DateTime.Now;
-            String SubmissionDate = dt.ToShortDateString();
+
+            SubmissionDate = DateTime.Now;
 
         }
-        public String SubmissionDate { get; private set; }
+        public DateTime SubmissionDate { get; private set; }
 
         // Value 1 default ID for Pending status
         public int ApplicationStatusID { get; set; } = 1;

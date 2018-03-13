@@ -48,7 +48,7 @@ namespace FinalProject.Controllers
                 }
             }
 
-            if (sortField == "Job Title")//Sorting by Job title
+            if (sortField == "Job Applied For")//Sorting by Job title
             {
                 if (String.IsNullOrEmpty(sortDirection))
                 {
@@ -58,23 +58,26 @@ namespace FinalProject.Controllers
                 else
                 {
                     application = application
-                         .OrderBy(p => p.Posting.Job.JobTitle);
+                         .OrderByDescending(p => p.Posting.Job.JobTitle);
                 }
             }
-            else if (sortField == "Applicant")//Sorting by Closing Date
-            {
-                if (String.IsNullOrEmpty(sortDirection))
+            else if (sortField == "Submission Date") {
+                if (sortField == "Submission Date")//Sorting by Submission DATE
                 {
-                    application = application
-                        .OrderBy(p => p.Applicant.FullName);
-                }
-                else
-                {
-                    application = application
-                        .OrderBy(p => p.Applicant.FullName);
+                    if (String.IsNullOrEmpty(sortDirection))
+                    {
+                        application = application
+                            .OrderBy(p => p.SubmissionDate);
+                    }
+                    else
+                    {
+                        application = application
+                             .OrderByDescending(p => p.SubmissionDate);
+                    }
                 }
             }
-            else if (sortField == "School")//Sorting by Start Date
+           
+            else if (sortField == "School")//Sorting by School
             {
                 if (String.IsNullOrEmpty(sortDirection))
                 {
@@ -85,10 +88,10 @@ namespace FinalProject.Controllers
 
                     application = application
                         .OrderByDescending(p => p.Posting.School.SchoolName);
-                
-                
+
+
             }
-           
+
             else //By default sort by Job title 
             {
                 if (String.IsNullOrEmpty(sortDirection))
@@ -99,7 +102,7 @@ namespace FinalProject.Controllers
                 else
                 {
                     application = application
-                         .OrderBy(p => p.Posting.Job.JobTitle);
+                         .OrderByDescending(p => p.Posting.Job.JobTitle);
                 }
             }
 

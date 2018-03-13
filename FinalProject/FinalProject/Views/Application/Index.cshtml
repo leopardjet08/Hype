@@ -47,7 +47,7 @@
                                     <input style="color:white; font-size:18px; font-weight:bold" type="submit" name="actionButton" value="School" class="btn btn-link" />
                                 </th>
                                 <th style="text-align:center;">
-                                    <input style="color:white; font-size:18px; font-weight:bold" type="submit" name="actionButton" value="Applicant Name" class="btn btn-link" />
+                                    <input style="color:white; font-size:18px; font-weight:bold" type="submit" name="actionButton" value="Applicant" class="btn btn-link" />
                                 </th>
                                 <th style="text-align:center;">
                                     <input style="color:white; text-decoration:none; font-size:18px; font-weight:bold" ; type="submit" value="Action" class="btn btn-link" />
@@ -62,7 +62,7 @@
 
                                 <tr>          
                                     <td class="company" style="text-align:center;">
-                                        @Html.DisplayFor(modelItem => item.SubmissionDate)
+                                        @Html.DisplayFor(modelItem => item.SubmissionDate).ToString().Substring(0, 9)
                                     </td>
                                     <td style="text-align:center;">
                                         @Html.DisplayFor(modelItem => item.Posting.Job.JobTitle)
@@ -77,7 +77,6 @@
                                     @* Buttons in the table *@
                                     <td style="text-align:center; font-size:14px">
                                         @Html.ActionLink("View", "Details", new { id = item.ID }, new { @style = "border:0px;" })
-                                        &nbsp;@Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @style = "border:0px;" })
                                         &nbsp;@Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @style = "border:0px; " })
                                     </td>
                                 </tr>
