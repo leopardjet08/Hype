@@ -12,190 +12,198 @@
     <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
     <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
     <br />
-    
-        <h3 style="text-align:center; padding-bottom:30px">
-            ∙ &nbsp; Application Details &nbsp; ∙
-        </h3>&nbsp;&nbsp;
 
-        <h4 style="text-align:center; margin-left:18px; color:#02388a; display:inline; padding-bottom:30px; padding-right: 10px">
-            <b>Application Status:</b>
-        </h4>
-        <h4 style="text-align:center; display:inline; margin-bottom:70px; color:#ffa500">
-            Pending
-        </h4>
+    <h3 style="text-align:center; padding-bottom:30px">
+        ∙ &nbsp; Application Details &nbsp; ∙
+    </h3>&nbsp;&nbsp;
 
+    <h4 style="text-align:center; margin-left:18px; color:#02388a; display:inline; padding-bottom:30px; padding-right: 10px">
+        <b>Application Status:</b>
+    </h4>
+    <h4 style="text-align:center; display:inline; margin-bottom:70px; color:red">
+        @Html.DisplayFor(model => model.ApplicationStatus.Status)
+
+    </h4>
+    Need to change color based on status!!!
     <br />
-          
-    
-
-        @* Divider *@
-        <div class="modal-body row">
-
-            @* Posting Details *@
-            <div class="col-md-6" style="margin-top:30px">
-                <div class="container well well-lg">
 
 
-                    @using (Html.BeginForm())
-            {
-                        @Html.AntiForgeryToken()
 
-                        <div class="form-horizontal">
-                            <p style="font-size:20px; color:#02388a; text-align:center; margin-top:20px; margin-bottom:50px"><u>Posting Details</u></p>
-                            
-                            <table style="width:100%; margin:0 auto; font-size:18px">
-                                <tr>
-                                    <td style="padding-bottom:10px; color:#02388a">
-                                        <h4 style="display:inline-block">Job Title:</h4>
-                                    </td>
-                                    <td style="padding-bottom:10px;">
-                                        @Html.Label("title", "Computer Programmer")
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="padding-bottom:10px; color:#02388a">
-                                        <h4 style="display:inline-block">Location:</h4>
-                                    </td>
-                                    <td style="padding-bottom:10px;">
-                                        @Html.Label("location", "St. Catharines")
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="padding-bottom:10px; color:#02388a">
-                                        <h4 style="display:inline-block">School:</h4>
-                                    </td>
-                                    <td style="padding-bottom:10px;">
-                                        @Html.Label("School", "Niagara College")
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="color:#02388a">
-                                        <h4 style="display:inline-block">Type:</h4>
-                                    </td>
-                                    <td>
-                                        @Html.Label("type", "Full-Time")
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="color:#02388a">
-                                        <h4 style="display:inline-block">Description:</h4>
-                                    </td>
-                                    <td>
-                                        <br />
-                                        @Html.Label("type", "You will be helping with designing websites and creating databases.")
-                                    </td>
+    @* Divider *@
+    <div class="modal-body row">
 
-                                </tr>
-                                <tr>
-                                    <td style="color:#02388a">
-                                        <h4 style="display:inline-block">Qualification:</h4>
-                                    </td>
-                                    <td>
-                                        <br />
-                                        @Html.Label("Quali", "C#, HTML, CSS, Java, JavaScript, SQL, JQuery, Azure, Pyton")
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style=" color:#02388a">
-                                        <h4 style="display:inline-block">Number of Openings:</h4>
-                                    </td>
-                                    <td>
-                                        @Html.Label("OPNum", "3")
-                                    </td>
-                                </tr>
-                            </table>
+        @* Posting Details *@
+        <div class="col-md-6" style="margin-top:30px">
+            <div class="container well well-lg">
 
-                        </div>
-                    }
+
+
+
+                <div class="form-horizontal">
+                    <p style="font-size:20px; color:#02388a; text-align:center; margin-top:20px; margin-bottom:50px"><u>Posting Details</u></p>
+
+                    <table style="width:100%; margin:0 auto; font-size:18px">
+                        <tr>
+                            <td style="padding-bottom:10px; color:#02388a">
+                                <h4 style="display:inline-block">Job Title:</h4>
+                            </td>
+                            <td style="padding-bottom:10px;">
+                                @Html.DisplayFor(model => model.Posting.Job.JobTitle)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-bottom:10px; color:#02388a">
+                                <h4 style="display:inline-block">Location:</h4>
+                            </td>
+                            <td style="padding-bottom:10px;">
+                                @Html.DisplayFor(model => model.Posting.School.City.CityName)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-bottom:10px; color:#02388a">
+                                <h4 style="display:inline-block">School:</h4>
+                            </td>
+                            <td style="padding-bottom:10px;">
+                                @Html.DisplayFor(model => model.Posting.School.SchoolName)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="color:#02388a">
+                                <h4 style="display:inline-block">Requirement:</h4>
+                            </td>
+                            <td>
+                                @{
+                                    foreach (var requirment in Model.Posting.Job.Requirements)
+                                    {
+                                        @:  @requirment.RequirementName <br />
+                                    }
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="color:#02388a">
+                                <h4 style="display:inline-block">Description:</h4>
+                            </td>
+                            <td>
+                                <br />
+                                @Html.DisplayFor(model => model.Posting.PostingDescription)
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td style="color:#02388a">
+                                <h4 style="display:inline-block">Qualification:</h4>
+                            </td>
+                            <td>
+                                <br />
+                                @{
+                                    foreach (var qualification in Model.Posting.Job.Qualifications)
+                                    {
+                                        @:  @qualification.QualificationSet <br />
+                                    }
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style=" color:#02388a">
+                                <h4 style="display:inline-block">Number of Openings:</h4>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.Posting.NumberOpen)
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+
+
+            </div>
+
+        </div>
+        <div class="col-md-6" style="margin-top:30px">
+            <div class="container well well-lg">
+                @* Applicant Details *@
+
+
+
+                <div class="form-horizontal">
+                    <p style="font-size:20px; color:#02388a; text-align:center; margin-top:20px; margin-bottom:50px"><u>Applicant Details</u></p>
+
+                    <table style="width:50%; margin:0 auto; font-size:18px">
+                        <tr>
+                            <td style="padding-bottom:24px; color:#02388a">
+                                Name:
+                            </td>
+                            <td style="padding-left:20px; padding-bottom:24px">
+                                @Html.DisplayFor(model => model.Applicant.FullName)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-bottom:22px; color:#02388a">
+                                Address:
+                            </td>
+                            <td style="padding-left:20px; padding-bottom:24px">
+                                @Html.DisplayFor(model => model.Applicant.Address)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-bottom:22px; color:#02388a">
+                                City:
+                            </td>
+                            <td style="padding-left:20px; padding-bottom:24px">
+                                @Html.DisplayFor(model => model.Applicant.City.CityName)
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding-bottom:22px; color:#02388a">
+                                Phone:
+                            </td>
+                            <td style="padding-left:20px; padding-bottom:24px">
+                                @Html.Label("pho", "Not in database")
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-bottom:22px; color:#02388a">
+                                Email:
+                            </td>
+                            <td style="padding-left:20px; padding-bottom:24px">
+                                @Html.DisplayFor(model => model.Applicant.eMail)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-bottom:20px; color:#02388a">
+                                Resume:
+                            </td>
+                            <td style="padding-left:20px;">
+                                <a href="https://omextemplates.content.office.net/support/templates/en-us/tf00002110.docx" download="Download Resume"><img src="http://pluspng.com/img-png/resume-png-resume-icon-png-1024.png" height="42" width="42" />Download Resume.</a>
+                                Not in Database
+                            </td>
+                        </tr>
+                    </table>
+
+                    <br />
 
                 </div>
 
             </div>
-            <div class="col-md-6" style="margin-top:30px">
-                <div class="container well well-lg">
-                    @* Applicant Details *@
+        </div>
+        <br />
 
-                    @using (Html.BeginForm())
-            {
-                        @Html.AntiForgeryToken()
+        <div style="margin-bottom:50px; margin-top:150px">
+            @Html.ActionLink("Accept", "IndexOld", "Application", null, new { @class = "btn btn-primary btn-large", @style = "background-color:#00a203; width:150px; margin-left: 12px; margin-right:20px" })
+            @Html.ActionLink("Decline", "IndexOld", "Application", null, new { @class = "btn btn-danger btn-large", @style = "width:150px;" })
+        </div>
 
-                        <div class="form-horizontal">
-                            <p style="font-size:20px; color:#02388a; text-align:center; margin-top:20px; margin-bottom:50px"><u>Applicant Details</u></p>
-                            
-                            <table style="width:50%; margin:0 auto; font-size:18px">
-                                <tr>
-                                    <td style="padding-bottom:24px; color:#02388a">
-                                        Name:
-                                    </td>
-                                    <td style="padding-left:20px; padding-bottom:24px">
-                                        @Html.Label("name", "John Saluna")
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="padding-bottom:22px; color:#02388a">
-                                        Address:
-                                    </td>
-                                    <td style="padding-left:20px; padding-bottom:24px">
-                                        @Html.Label("add", "311 North Street")
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="padding-bottom:22px; color:#02388a">
-                                        City:
-                                    </td>
-                                    <td style="padding-left:20px; padding-bottom:24px">
-                                        @Html.Label("city", "Niagara Falls")
-                                    </td>
-                                </tr>
 
-                                <tr>
-                                    <td style="padding-bottom:22px; color:#02388a">
-                                        Phone:
-                                    </td>
-                                    <td style="padding-left:20px; padding-bottom:24px">
-                                        @Html.Label("pho", "9053665795")
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="padding-bottom:22px; color:#02388a">
-                                        Email:
-                                    </td>
-                                    <td style="padding-left:20px; padding-bottom:24px">
-                                        @Html.Label("type", "johnSaluna01@hotmail.ca")
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="padding-bottom:20px; color:#02388a">
-                                        Resume:
-                                    </td>
-                                    <td style="padding-left:20px;">
-                                        <a href="https://omextemplates.content.office.net/support/templates/en-us/tf00002110.docx" download="Download Resume"><img src="http://pluspng.com/img-png/resume-png-resume-icon-png-1024.png" height="42" width="42" />Download Resume</a>
-                                    </td>
-                                </tr>
-                            </table>
-
-                            <br />
-
-                        </div>
-                    }
-                </div>
-            </div>
-            <br />
-
-            <div style="margin-bottom:50px; margin-top:150px">
-                @Html.ActionLink("Accept", "IndexOld", "Application", null, new { @class = "btn btn-primary btn-large", @style = "background-color:#00a203; width:150px; margin-left: 12px; margin-right:20px" })
-                @Html.ActionLink("Decline", "IndexOld", "Application", null, new { @class = "btn btn-danger btn-large", @style = "width:150px;" })
-            </div>
-           
-            
-               </div>
+    </div>
 
     <div style="font-size:16px; text-align:center; margin-bottom:50px; margin-top:20px">
         <a href="javascript:void(0);" style="margin-left:30px; padding-right:20px" onclick="history.go(-1);">Back</a>
         @Html.ActionLink("Delete Application", "Delete", "Application", null, new { @style = "border:0px; color:red; background-color:#f5f5f5" })
     </div>
 
-    </div>
+</div>
 
         <style>
             .q {

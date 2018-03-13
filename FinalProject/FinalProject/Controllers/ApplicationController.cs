@@ -3,7 +3,9 @@ using FinalProject.Models;
 using PagedList;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -15,7 +17,7 @@ namespace FinalProject.Controllers
 
         // GET: Application
         public ActionResult Index(string sortDirection, string sortField,
-            string actionButton, string searchName, string[] selectedSkills, int? page)
+            string actionButton, string searchName, int? page)
         {
             PopulateDropDownLists();
             ViewBag.Filtering = "";
@@ -118,24 +120,71 @@ namespace FinalProject.Controllers
             return View(application.ToPagedList(pageNumber, pageSize));
         }
 
+        
 
-        public ActionResult IndexOld()
+
+        public ActionResult Details(int? id, string message)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            //get all posting data
+            Application application = db.Applications
+                .Where(p => p.ID == id).SingleOrDefault();
+            if (application == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.Message = message;
+            return View(application);
+
         }
-        public ActionResult Details()
+        public ActionResult Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Application application = db.Applications.Find(id);
+            if (application == null)
+            {
+                return HttpNotFound();
+            }
+            return View(application);
         }
-        public ActionResult Delete()
+
+        //For protection against hacker!!! 
+        // POST: Application/Delete
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
         {
-            return View();
+            Application application = db.Applications.Find(id);
+            try
+            {
+                db.Applications.Remove(application);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (DataException dex)
+            {
+                if (dex.InnerException.InnerException.Message.Contains("FK_"))
+                {
+                    ModelState.AddModelError("", "You cannot delete a Application.");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+                }
+            }
+            return View(application);
+
         }
 
         private void PopulateDropDownLists(Application app = null)
         {
-            //ViewBag.JobID = new SelectList(db.Jobs.OrderBy(p => p.JobTitle), "ID", "JobTitle", app?.JobID);
-            //ViewBag.SchoolID = new SelectList(db.Schools.OrderBy(p => p.SchoolName), "ID", "SchoolName", app?.SchoolID);
+            
         }
     }
 }

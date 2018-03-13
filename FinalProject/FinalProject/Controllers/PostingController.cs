@@ -19,7 +19,7 @@ namespace FinalProject.Controllers
 
         // GET: Posting
         public ActionResult Index(string sortDirection, string sortField,
-            string actionButton, string searchName, string[] selectedSkills, int? page)
+            string actionButton, string searchName, int? page)
             
         {
             PopulateDropDownLists();
