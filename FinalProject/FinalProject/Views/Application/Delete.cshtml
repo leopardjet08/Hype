@@ -22,19 +22,19 @@
             <table style="width:35%; margin:0 auto; text-align:left">
                 <tr>
                     <td style="color:#02388a"><b>Application Number:</b></td>
-                    <td><b>299843454</b></td>
+                    <td><b>@Html.DisplayFor(model => model.ID)</b></td>
                 </tr>
                 <tr>
                     <td style="color:#02388a"><b>Applicant Name:</b></td>
-                    <td><b>Harold Morta</b></td>
+                    <td><b>@Html.DisplayFor(model => model.Applicant.FullName)</b></td>
                 </tr>
                 <tr>
                     <td style="color:#02388a"><b>Job ID:</b></td>
-                    <td><b>5493922332</b></td>
+                    <td><b>@Html.DisplayFor(model => model.Posting.Job.ID)</b></td>
                 </tr>
                 <tr>
                     <td style="color:#02388a"><b>Job Title:</b></td>
-                    <td><b>Math Teacher</b></td>
+                    <td><b>@Html.DisplayFor(model => model.Posting.Job.JobTitle)</b></td>
                 </tr>
             </table>               
     </div>
