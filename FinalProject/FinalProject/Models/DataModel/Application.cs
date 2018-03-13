@@ -20,6 +20,14 @@ namespace FinalProject.Models
         [Index("IX_Unique_Application", Order = 2, IsUnique = true)]
         public int ApplicantID { get; set; }
 
+        public Application()
+        {
+
+            SubmissionDate = DateTime.Now;
+
+        }
+        public DateTime SubmissionDate { get; private set; }
+
         // Value 1 default ID for Pending status
         public int ApplicationStatusID { get; set; } = 1;
 

@@ -16,6 +16,30 @@ namespace FinalProject.Models
             this.SavedPostings = new HashSet<SavedPosting>();
         }
 
+        // Get Full Name
+        [Display(Name = "Applicant")]
+        public string FullName
+        {
+            get
+            {
+                return FName
+                    + (string.IsNullOrEmpty(MName) ? " " :
+                        (" " + (char?)MName[0] + ". ").ToUpper())
+                    + LName;
+            }
+        }
+
+        // Get Formal Name
+        public string FormalName
+        {
+            get
+            {
+                return LName + ", " + FName
+                    + (string.IsNullOrEmpty(MName) ? "" :
+                        (" " + (char?)MName[0] + ".").ToUpper());
+            }
+        }
+
         public int ID { get; set; }
 
         [Display(Name = "First Name")]
