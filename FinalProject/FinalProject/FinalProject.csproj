@@ -251,6 +251,7 @@
     <Compile Include="Models\Review.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\AssignedRequirmentVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\About.png" />

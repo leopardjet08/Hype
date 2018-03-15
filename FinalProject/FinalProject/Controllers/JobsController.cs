@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FinalProject.DAL;
 using FinalProject.Models;
+using FinalProject.Models.DataModel;
+using FinalProject.ViewModels;
 
 namespace FinalProject.Controllers
 {
     public class JobsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private JobPostingCFEntities db = new JobPostingCFEntities();
 
         // GET: Jobs
         public ActionResult Index()
@@ -39,6 +42,11 @@ namespace FinalProject.Controllers
         // GET: Jobs/Create
         public ActionResult Create()
         {
+            PopulateDropDownLists();
+            //Add all (unchecked) Skills to ViewBag
+            var job = new Job();
+            job.Requirements = new List<Requirement>();
+            PopulateAssignedRequirementData(job);
             return View();
         }
 
@@ -47,16 +55,39 @@ namespace FinalProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,JobTitle,JobSummary")] Job job)
+        public ActionResult Create([Bind(Include = "ID,JobTitle,JobSummary,SkillQualification")] Job job, string[] selectedRequirments)
         {
-            if (ModelState.IsValid)
-            {
-                db.Jobs.Add(job);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            
+                try
+                {
+                    //Add the selected skills
+                    if (selectedRequirments != null)
+                    {
+                        job.Requirements = new List<Requirement>();
+                        foreach (var requirment in selectedRequirments)
+                        {
+                            var requirmentToAdd = db.Requirements.Find(int.Parse(requirment));
+                            job.Requirements.Add(requirmentToAdd);
+                        }
+                    }
+                    if (ModelState.IsValid)
+                    {
+                        db.Jobs.Add(job);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                }
+                catch (RetryLimitExceededException /* dex */)
+                {
+                    ModelState.AddModelError("", "Unable to save changes after multiple attempts. Try again, and if the problem persists, see your system administrator.");
+                }
+                catch (DataException)
+                {
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+                }
 
-            return View(job);
+                PopulateDropDownLists(job);
+                return View(job);
         }
 
         // GET: Jobs/Edit/5
@@ -114,6 +145,28 @@ namespace FinalProject.Controllers
             db.Jobs.Remove(job);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        private void PopulateAssignedRequirementData(Job job)
+        {
+            var allRequirments = db.Requirements;
+            var appRequirments = new HashSet<int>(job.Requirements.Select(b => b.ID));
+            var viewModel = new List<AssignedRequirmentVM>();
+            foreach (var sr in allRequirments)
+            {
+                viewModel.Add(new AssignedRequirmentVM
+                {
+                    RequirmentID = sr.ID,
+                    RequirementName = sr.RequirementName,
+                    Assigned = appRequirments.Contains(sr.ID)
+                });
+            }
+            ViewBag.Skills = viewModel;
+        }
+
+        private void PopulateDropDownLists(Job job = null)
+        {
+            
         }
 
         protected override void Dispose(bool disposing)
