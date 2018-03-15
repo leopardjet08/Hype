@@ -19,6 +19,7 @@ namespace FinalProject.DAL
         public DbSet<SchoolFamily> SchoolFamilies { get; set; }
         public DbSet<Qualification> Qualifications { get; set; }
         public DbSet<Requirement> Requirements { get; set; }
+        public DbSet<Skill> Skills { get; set; }
         public DbSet<School> Schools { get; set; }
         public DbSet<Applicant> Applicants { get; set; }
         public DbSet<Posting> Postings { get; set; }
