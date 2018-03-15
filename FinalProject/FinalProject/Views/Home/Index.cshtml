@@ -187,7 +187,7 @@
                     @Html.DisplayFor(modelItem => item.PostingDescription)
                     <br />
                     @Html.ActionLink("Apply", "Details", "Posting", new { id = item.ID }, new { @class = "btn btn-primary btn-large", @style = "background-color:#00a203" })
-                    @Html.ActionLink("Save","null", new { @class = "btn btn-primary btn-large", @style = "background-color:#00a203" })
+                    @Html.ActionLink("Save Posting", "Details", "", new { id = item.ID }, new { @class = "btn btn-primary btn-large", @style = "background-color:#95cedf" })
                 </div>
                     <br />
 
