@@ -92,13 +92,13 @@ namespace FinalProject.DAL.Migrations
             // Requirement and Qualification Seed Data is in the Job Seed data itself
             var jobs = new List<Job>
             {
-                new Job { Qualifications = new List<Qualification> { new Qualification { QualificationSet = "Qualification Set 1"}, new Qualification { QualificationSet = "Qualification Set 2"} },
+                new Job { SkillQualification=false, Qualifications = new List<Qualification> { new Qualification { QualificationSet = "Qualification Set 1"}, new Qualification { QualificationSet = "Qualification Set 2"} },
                     Requirements = new List<Requirement> { new Requirement { RequirementName = "Critical Thinking" }, new Requirement { RequirementName = "Adaptability" } },
                     JobTitle ="Math Teacher",JobSummary="Math teacher should be good as me. She/he knows how to add,subtract,multiplication and divide. He also know how to do statistic."},
-                new Job { Qualifications = new List<Qualification> { new Qualification { QualificationSet = "Qualification Set 3"}, new Qualification { QualificationSet = "Qualification Set 4"} },
+                new Job { SkillQualification=true, Qualifications = new List<Qualification> { new Qualification { QualificationSet = "Qualification Set 3"}, new Qualification { QualificationSet = "Qualification Set 4"} },
                     Requirements = new List<Requirement> {new Requirement { RequirementName = "Charismatic" }, new Requirement { RequirementName = "Integrity" } },
                     JobTitle ="Librarian",JobSummary="She knows how to read and write. Good reading skills and very knowlegable as me."},
-                new Job { Qualifications = new List<Qualification> { new Qualification { QualificationSet = "Qualification Set 5"} },
+                new Job { SkillQualification=true, Qualifications = new List<Qualification> { new Qualification { QualificationSet = "Qualification Set 5"} },
                     Requirements = new List<Requirement> {new Requirement { RequirementName = "Punctuality" } },
                     JobTitle ="Janitor",JobSummary="Very good at handling mops and brushes. He should always be around who can adpat very fast in the environment"}
 
@@ -243,13 +243,13 @@ namespace FinalProject.DAL.Migrations
             {
                 new Posting {  NumberOpen=2,ClosingDate=DateTime.Parse("2019-02-20"),StartDate=DateTime.Parse("2020-01-02"),
                 PostingDescription="First posting Description. made by yours trully jetson. spelling is wrong. i suck.", SchoolID=2,
-                JobID=2},
+                JobID=2, fte = 0.4},
                 new Posting {  NumberOpen=1,ClosingDate=DateTime.Parse("2019-05-10"),StartDate=DateTime.Parse("2020-04-02"),
                 PostingDescription="Second posting Description. dasdsadsadsa.", SchoolID=5,
-                JobID=1},
+                JobID=1, fte=0.7},
                 new Posting {  NumberOpen=3,ClosingDate=DateTime.Parse("2019-09-09"),StartDate=DateTime.Parse("2020-08-06"),
                 PostingDescription="Third posting Description. made by yours trully jetson. spelling is wrong. i suck.", SchoolID=9,
-                JobID=3}
+                JobID=3, fte=1.3}
 
             };
             postings.ForEach(a => context.Postings.AddOrUpdate(n => n.ClosingDate, a));

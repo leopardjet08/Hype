@@ -36,6 +36,11 @@ namespace FinalProject.Models
         [DataType(DataType.MultilineText)]
         public string PostingDescription { get; set; }
 
+        [Display(Name = "FTE Status")]
+        [Required(ErrorMessage = "You must specify employment status.")]
+        [Range(0, 1.5, ErrorMessage = "FTE number cannot exceed 1.5")]
+        public double fte  { get; set;}
+        
         [Required(ErrorMessage = "Please specify the school you applied for.")]
         public int SchoolID { get; set; }
 

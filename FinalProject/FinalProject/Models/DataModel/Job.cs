@@ -28,7 +28,11 @@ namespace FinalProject.Models
         [DataType(DataType.MultilineText)]
         public string JobSummary { get; set; }
 
+        // Skill == true, Qualification == false
+        public bool SkillQualification { get; set; }
+
         public ICollection<Posting> Postings { get; set; }
+        public virtual ICollection<Skill> Skills { get; set; }
         public virtual ICollection<Requirement> Requirements { get; set; }
         public virtual ICollection<Qualification> Qualifications { get; set; }
     }
