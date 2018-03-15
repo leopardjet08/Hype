@@ -93,14 +93,18 @@ namespace FinalProject.DAL.Migrations
             var jobs = new List<Job>
             {
                 new Job { SkillQualification=false, Qualifications = new List<Qualification> { new Qualification { QualificationSet = "Qualification Set 1"}, new Qualification { QualificationSet = "Qualification Set 2"} },
+                    Skills = new List<Skill> { new Skill { SkillName = "Skill 1"}, new Skill { SkillName = "Skill 2"} },
                     Requirements = new List<Requirement> { new Requirement { RequirementName = "Critical Thinking" }, new Requirement { RequirementName = "Adaptability" } },
                     JobTitle ="Math Teacher",JobSummary="Math teacher should be good as me. She/he knows how to add,subtract,multiplication and divide. He also know how to do statistic."},
-                    //Skills = new List<Skill> { new Skill { SkillName = "Skill 1"}, new Skill { SkillName = "Skill 2"} },
+                    
                     
                 new Job { SkillQualification=true, Qualifications = new List<Qualification> { new Qualification { QualificationSet = "Qualification Set 3"}, new Qualification { QualificationSet = "Qualification Set 4"} },
+                    Skills = new List<Skill> { new Skill { SkillName = "Skill 22"}, new Skill { SkillName = "Skill 5"}, new Skill { SkillName = "Skill 9"} },
                     Requirements = new List<Requirement> {new Requirement { RequirementName = "Charismatic" }, new Requirement { RequirementName = "Integrity" } },
                     JobTitle ="Librarian",JobSummary="She knows how to read and write. Good reading skills and very knowlegable as me."},
+
                 new Job { SkillQualification=true, Qualifications = new List<Qualification> { new Qualification { QualificationSet = "Qualification Set 5"} },
+                    Skills = new List<Skill> { new Skill { SkillName = "Skill 13"}, new Skill { SkillName = "Skill 24"} },
                     Requirements = new List<Requirement> {new Requirement { RequirementName = "Punctuality" } },
                     JobTitle ="Janitor",JobSummary="Very good at handling mops and brushes. He should always be around who can adpat very fast in the environment"}
 
