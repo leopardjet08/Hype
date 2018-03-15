@@ -248,13 +248,13 @@ namespace FinalProject.DAL.Migrations
             var postings = new List<Posting>
             {
                 new Posting {  NumberOpen=2,ClosingDate=DateTime.Parse("2019-02-20"),StartDate=DateTime.Parse("2020-01-02"),
-                PostingDescription="First posting Description. made by yours trully jetson. spelling is wrong. i suck.", SchoolID=2,
+                PostingDescription="Math teachers work with students of all ages in classrooms around the United States. Typically, they teach children and teens, but some math teachers may also teach adults, or continue their careers at community colleges or universities. Their goal is to help pupils develop critical-thinking abilities by gaining an understanding of mathematic concepts.", SchoolID=2,
                 JobID=2, fte = 0.4},
                 new Posting {  NumberOpen=1,ClosingDate=DateTime.Parse("2019-05-10"),StartDate=DateTime.Parse("2020-04-02"),
-                PostingDescription="Second posting Description. dasdsadsadsa.", SchoolID=5,
+                PostingDescription="Librarians evaluate books and other informational resources for consideration as additions to collections.They organize resources so that patrons can easily find the material that they desire. Librarians assess the research needs of individual visitors and identify the necessary resources.Librarians arrange speakers, entertainers and workshops to educate and entertain patrons.They publicize services to their constituency and endeavor to expand the use of library resources.", SchoolID=5,
                 JobID=1, fte=0.7},
                 new Posting {  NumberOpen=3,ClosingDate=DateTime.Parse("2019-09-09"),StartDate=DateTime.Parse("2020-08-06"),
-                PostingDescription="Third posting Description. made by yours trully jetson. spelling is wrong. i suck.", SchoolID=9,
+                PostingDescription="Keep buildings in clean and orderly condition. Perform heavy cleaning duties, such as cleaning floors, shampooing rugs, washing walls and glass, and removing rubbish. Duties may include tending furnace and boiler, performing routine maintenance activities, notifying management of need for repairs, and cleaning snow or debris from sidewalk.", SchoolID=9,
                 JobID=3, fte=1.3}
 
             };
