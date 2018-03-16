@@ -41,9 +41,10 @@
                                             </a>
                                             @Html.DropDownList("JobID", null, "Select a Job Title", htmlAttributes: new { @class = "form-control", @style = "width:200px", @runat = "server" })
                                            
-                                            @section Scripts {
-                                                @Scripts.Render("~/bundles/jqueryval")
-                                                <script type="text/javascript">
+    @section Scripts {
+       @Scripts.Render("~/bundles/jqueryval")
+        <script type="text/javascript">
+
             $('#ddlRefresh').click(function (event) {
                 event.preventDefault();
                 var JobsSelect = $('#JobID');
@@ -70,9 +71,43 @@
                     $('#JobID').fadeToggle(400);
                 });
 
+            });
+
+
+            $('#ddlAuto').click(function (event) {
+                event.preventDefault();
+                //select the schoolID dropdown
+                var SchoolsSelect = $('#SchoolID');
+                var textbox = $('#CityID');
+                //selected schoolID get the value of it
+                var selectedSchool = SchoolsSelect.val();
+
+                
+                $.getJSON('@Url.Action("GetSchoolCity")', { SchoolID: selectedSchool }, function (schools) {
+
+                    //if its not empty run this
+                    if (schools != null && !jQuery.isEmptyObject(schools)) {
+                        textbox.empty();
+
+                        $.each(schools, function (index, school) {
+                            textbox.append($('<option/>', {
+                                value: school.Value,
+                                text: school.Text
+                            }));
+                            
+                        });
+
+                        
+                    };
                 });
-                                                </script>
-                                            }
+                $('#CityID').fadeToggle(400, function () {
+                    $('#CityID').fadeToggle(400);
+                });
+
+            });
+
+           </script>
+             }
 
                                             @Html.ValidationMessageFor(model => model.JobID, "", new { @class = "text-danger" })
                                         </td>
@@ -82,8 +117,11 @@
                                             <h4 style="display:inline-block">@Html.LabelFor(model => model.School.SchoolName, "School: ")</h4>
                                         </td>
                                         <td>
-                                            @Html.DropDownList("SchoolID", null, "Select a School", htmlAttributes: new { id = "SchoolID", @class = "form-control", @style = "width:200px", @runat = "server" })
+
+                                            @Html.DropDownList("SchoolID", null, "Select a City", htmlAttributes: new { id = "SchoolID", @class = "form-control", @style = "width:200px", @runat = "server" })
                                             @Html.ValidationMessageFor(model => model.SchoolID, "", new { @class = "text-danger" })
+                                            Only Assumption, father Hennepin and Monsignor Clancy are working
+                                            <button class="btn btn-default" id="ddlAuto" type="button"><span class="glyphicon glyphicon-search"></span></button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -91,10 +129,9 @@
                                             <h4 style="display:inline-block">@Html.LabelFor(model => model.School.City, "City: ")</h4>
                                         </td>
                                         <td>
-  
 
-                                         Code here. it should be automatic the school city when u select school name
-
+                                            @Html.DropDownList("CityID", null, null, htmlAttributes: new { @class = "form-control", @style = "width:200px", @runat = "server" })
+                                            
                                         </td>
                                     </tr>
                                     <tr>
