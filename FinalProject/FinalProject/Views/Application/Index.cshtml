@@ -16,7 +16,7 @@
                 <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
                 <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
                 <br />
-
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <h3 style="padding-top:10px; text-align:center;">
                     ∙ &nbsp; All Listed Application &nbsp; ∙
                 </h3>&nbsp;&nbsp;
@@ -58,29 +58,29 @@
                         <tbody id="tableColor" style="font-size:17px; text-align:left">
                             @* Data in the table *@
                             @foreach (var item in Model)
-                            {
+                {
 
-                                <tr>          
-                                    <td class="company" style="text-align:center;">
-                                        @Html.DisplayFor(modelItem => item.SubmissionDate).ToString().Substring(0, 9)
-                                    </td>
-                                    <td style="text-align:center;">
-                                        @Html.DisplayFor(modelItem => item.Posting.Job.JobTitle)
-                                    </td>
-                                    <td style="text-align:center;">
-                                        @Html.DisplayFor(modelItem => item.Posting.School.SchoolName)
-                                    </td>
-                                    <td style="text-align:center;">
-                                        @Html.DisplayFor(modelItem => item.Applicant.FormalName)
-                                    </td>
+                    <tr>
+                        <td class="company" style="text-align:center;">
+                            @Html.DisplayFor(modelItem => item.SubmissionDate).ToString().Substring(0, 9)
+                        </td>
+                        <td style="text-align:center;">
+                            @Html.DisplayFor(modelItem => item.Posting.Job.JobTitle)
+                        </td>
+                        <td style="text-align:center;">
+                            @Html.DisplayFor(modelItem => item.Posting.School.SchoolName)
+                        </td>
+                        <td style="text-align:center;">
+                            @Html.DisplayFor(modelItem => item.Applicant.FormalName)
+                        </td>
 
-                                    @* Buttons in the table *@
-                                    <td style="text-align:center; font-size:14px">
-                                        @Html.ActionLink("View", "Details", new { id = item.ID }, new { @style = "border:0px;" })
-                                        &nbsp;@Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @style = "border:0px; " })
-                                    </td>
-                                </tr>
-                            }
+                        @* Buttons in the table *@
+                        <td style="text-align:center; font-size:14px">
+                            @Html.ActionLink("View", "Details", new { id = item.ID }, new { @style = "border:0px;" })
+                            &nbsp;@Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @style = "border:0px; " })
+                        </td>
+                    </tr>
+    }
                         </tbody>
                     </table>
                     @* Page counts  *@
@@ -94,10 +94,10 @@
                     @Html.PagedListPager(Model, page => Url.Action("Index",
 new
 {
-    page,
-    sortDirection = ViewBag.sortDirection,
-    sortField = ViewBag.sortField,
-    searchName = ViewBag.searchName
+page,
+sortDirection = ViewBag.sortDirection,
+sortField = ViewBag.sortField,
+searchName = ViewBag.searchName
 }))
 
                 </div>
