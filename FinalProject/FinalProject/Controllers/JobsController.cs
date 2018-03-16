@@ -43,10 +43,19 @@ namespace FinalProject.Controllers
         public ActionResult Create()
         {
             PopulateDropDownLists();
-            //Add all (unchecked) Skills to ViewBag
+            //Add all (unchecked) Requirement to ViewBag
             var job = new Job();
+
+
             job.Requirements = new List<Requirement>();
             PopulateAssignedRequirementData(job);
+
+            job.Skills = new List<Skill>();
+            PopulateAssignedSkillData(job);
+
+            job.Qualifications = new List<Qualification>();
+            PopulateAssignedQualificationData(job);
+
             return View();
         }
 
@@ -55,12 +64,12 @@ namespace FinalProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,JobTitle,JobSummary,SkillQualification")] Job job, string[] selectedRequirments)
+        public ActionResult Create([Bind(Include = "ID,JobTitle,JobSummary,SkillQualification")] Job job, string[] selectedRequirments, string[] selectedSkills, string[] selectedQualifications)
         {
-            
-                try
-                {
-                    //Add the selected skills
+            /////////////////Requirement create/////////////////////////
+            try
+            {
+                    
                     if (selectedRequirments != null)
                     {
                         job.Requirements = new List<Requirement>();
@@ -73,8 +82,8 @@ namespace FinalProject.Controllers
                     if (ModelState.IsValid)
                     {
                         db.Jobs.Add(job);
-                        db.SaveChanges();
-                        return RedirectToAction("Index");
+                        //db.SaveChanges();
+                        //return RedirectToAction("Index");
                     }
                 }
                 catch (RetryLimitExceededException /* dex */)
@@ -86,7 +95,70 @@ namespace FinalProject.Controllers
                     ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
                 }
 
-                PopulateDropDownLists(job);
+
+            /////////////////Qualification create/////////////////////////
+            try
+            {
+
+                if (selectedQualifications != null)
+                {
+                    job.Qualifications = new List<Qualification>();
+                    foreach (var qualification in selectedQualifications)
+                    {
+                        var qualificationtToAdd = db.Qualifications.Find(int.Parse(qualification));
+                        job.Qualifications.Add(qualificationtToAdd);
+                    }
+                }
+                if (ModelState.IsValid)
+                {
+                    db.Jobs.Add(job);
+                    //db.SaveChanges();
+                    //return RedirectToAction("Index");
+                }
+            }
+            catch (RetryLimitExceededException /* dex */)
+            {
+                ModelState.AddModelError("", "Unable to save changes after multiple attempts. Try again, and if the problem persists, see your system administrator.");
+            }
+            catch (DataException)
+            {
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+
+
+
+            ////////////////////Skill create/////////////////////////
+
+            try
+            {
+                //Add the selected skills
+                if (selectedSkills != null)
+                {
+                    job.Skills = new List<Skill>();
+                    foreach (var skill in selectedSkills)
+                    {
+                        var skillToAdd = db.Skills.Find(int.Parse(skill));
+                        job.Skills.Add(skillToAdd);
+                    }
+                }
+                if (ModelState.IsValid)
+                {
+                    db.Jobs.Add(job);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (RetryLimitExceededException /* dex */)
+            {
+                ModelState.AddModelError("", "Unable to save changes after multiple attempts. Try again, and if the problem persists, see your system administrator.");
+            }
+            catch (DataException)
+            {
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+
+            PopulateDropDownLists(job);
+
                 return View(job);
         }
 
@@ -136,15 +208,67 @@ namespace FinalProject.Controllers
             return View(job);
         }
 
-        // POST: Jobs/Delete/5
+        
+        //For protection against hacker!!! 
+        // POST: Postings/Delete
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             Job job = db.Jobs.Find(id);
-            db.Jobs.Remove(job);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                db.Jobs.Remove(job);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (DataException dex)
+            {
+                if (dex.InnerException.InnerException.Message.Contains("FK_"))
+                {
+                    ModelState.AddModelError("", "You cannot delete this job if you made a posting with this.");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+                }
+            }
+            return View(job);
+
+        }
+
+        private void PopulateAssignedQualificationData(Job job)
+        {
+            var allQualifications = db.Qualifications;
+            var appQualifications = new HashSet<int>(job.Qualifications.Select(b => b.ID));
+            var viewModel = new List<AssignedQualificationVM>();
+            foreach (var sq in allQualifications)
+            {
+                viewModel.Add(new AssignedQualificationVM
+                {
+                    QualificationID = sq.ID,
+                    QualificationSet = sq.QualificationSet,
+                    Assigned = appQualifications.Contains(sq.ID)
+                });
+            }
+            ViewBag.Qualifications = viewModel;
+        }
+
+        private void PopulateAssignedSkillData(Job job)
+        {
+            var allSkills = db.Skills;
+            var appSkills = new HashSet<int>(job.Skills.Select(b => b.ID));
+            var viewModel = new List<AssignedSkillVM>();
+            foreach (var sk in allSkills)
+            {
+                viewModel.Add(new AssignedSkillVM
+                {
+                    SkillID = sk.ID,
+                    SkillName = sk.SkillName,
+                    Assigned = appSkills.Contains(sk.ID)
+                });
+            }
+            ViewBag.Skills = viewModel;
         }
 
         private void PopulateAssignedRequirementData(Job job)
@@ -161,7 +285,7 @@ namespace FinalProject.Controllers
                     Assigned = appRequirments.Contains(sr.ID)
                 });
             }
-            ViewBag.Skills = viewModel;
+            ViewBag.Requirements = viewModel;
         }
 
         private void PopulateDropDownLists(Job job = null)

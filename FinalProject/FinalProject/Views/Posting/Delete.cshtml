@@ -12,10 +12,10 @@
     <br />
 
     <h3 style="padding-bottom:30px">
-        ∙ &nbsp; Delete Job Posting &nbsp; ∙
+        ∙ &nbsp; Archive Job Posting &nbsp; ∙
     </h3>&nbsp;&nbsp;
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <h3>Are you sure you want to delete this job posting?</h3>
+    <h3>Are you sure you want to put this job posting on the archive?</h3>
     <br /><br />
 
     <div style="font-size:16px; margin-top:10px; margin-bottom:30px">
@@ -56,7 +56,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <input type="submit" value="Delete" style="margin-right:30px" class="btn btn-danger btn-large" />
+    <input type="submit" value="Archive" style="margin-right:30px" class="btn btn-danger btn-large" />
     @Html.ActionLink("Cancel", "Index")
 }
 </div>

@@ -38,8 +38,8 @@
         </div>
     </div>
 
-    @*<div class="form-group">
-        <label class="control-label col-md-2">Required Skills</label>
+    <div class="form-group">
+        <label class="control-label col-md-2">Choose Requirements for Job: </label>
         <div class="col-md-offset-2 col-md-10">
             <table>
                 <tr>
@@ -54,7 +54,7 @@
                             }
                             @:<td>
                                 <input type="checkbox"
-                                       name="selectedSkills"
+                                       name="selectedRequirments"
                                        value="@requirement.RequirmentID"
                                        @(Html.Raw(requirement.Assigned ? "checked=\"checked\"" : "")) />
                                 @requirement.RequirementName @:&nbsp;&nbsp;
@@ -64,10 +64,65 @@
                     }
                 </table>
             </div>
-        </div>*@
+        </div>
+    @* //////////////////////////////////////////////////////////////////////////////////////////// *@
 
+    <div class="form-group">
+        <label class="control-label col-md-2">Choose Qualifications for Job:</label>
+            <div class="col-md-offset-2 col-md-10">
+                <table>
+                    <tr>
+                        @{
+                            int counts = 0;
+                            List<FinalProject.ViewModels.AssignedQualificationVM> qualifications = ViewBag.Qualifications;
+                            foreach (var qualification in qualifications)
+                            {
+                                if (counts++ % 3 == 0)
+                                {
+                                    @:</tr><tr>
+                                }
+                                @:<td>
+                                    <input type="checkbox"
+                                    name="selectedQualifications"
+                                    value="@qualification.QualificationID"
+                                    @(Html.Raw(qualification.Assigned ? "checked=\"checked\"" : "")) />
+                                @qualification.QualificationSet @:&nbsp;&nbsp;   
+                                @: </td>
+                            }
+                            @:</tr>
+                        }
+                    </table>
+                </div>
+            </div>
 
-
+    @* /////////////////////////////////////////////////////////////////////////////////////////// *@
+    <div class="form-group">
+        <label class="control-label col-md-2">Choose Skills for Job:</label>
+            <div class="col-md-offset-2 col-md-10">
+                <table>
+                    <tr>
+                        @{
+                            int count = 0;
+                            List<FinalProject.ViewModels.AssignedSkillVM> skills = ViewBag.Skills;
+                            foreach (var skill in skills)
+                            {
+                                if (count++ % 3 == 0)
+                                {
+                                    @:</tr><tr>
+                                }
+                                @:<td>
+                                    <input type="checkbox"
+                                    name="selectedSkills"
+                                    value="@skill.SkillID"
+                                    @(Html.Raw(skill.Assigned ? "checked=\"checked\"" : "")) />
+                                    @skill.SkillName @:&nbsp;&nbsp;
+                                @: </td>
+                            }
+                            @:</tr>
+                        }
+                    </table>
+                </div>
+            </div>
 
 
         <div class="form-group">
