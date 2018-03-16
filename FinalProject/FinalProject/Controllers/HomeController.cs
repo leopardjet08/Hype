@@ -33,6 +33,7 @@ namespace FinalProject.Controllers
                 ViewBag.Filtering = " in";
                 ViewBag.searchName = searchName;
             }
+            
 
             if (!String.IsNullOrEmpty(actionButton))
             {
@@ -46,6 +47,20 @@ namespace FinalProject.Controllers
                         sortDirection = String.IsNullOrEmpty(sortDirection) ? "desc" : "";
                     }
                     sortField = actionButton;//Sort by the button clicked
+                }
+            }
+
+            if (!String.IsNullOrEmpty(actionButton))
+            {
+                
+
+                if (actionButton == "Search")//Change of sort is requested
+                {
+                    if (searchName == "") //Reverse order on same field
+                    {
+                        ViewBag.ShowList = true;
+                    }
+                    
                 }
             }
 
