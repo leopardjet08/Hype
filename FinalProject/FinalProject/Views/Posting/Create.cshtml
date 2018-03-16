@@ -78,7 +78,7 @@
                 event.preventDefault();
                 //select the schoolID dropdown
                 var SchoolsSelect = $('#SchoolID');
-                var textbox = $('#textfield18');
+                var textbox = $('#CityID');
                 //selected schoolID get the value of it
                 var selectedSchool = SchoolsSelect.val();
 
@@ -87,11 +87,23 @@
 
                     //if its not empty run this
                     if (schools != null && !jQuery.isEmptyObject(schools)) {
-                        console.log("hi");
-                       
-                    };
+                        textbox.empty();
 
+                        $.each(schools, function (index, school) {
+                            textbox.append($('<option/>', {
+                                value: school.Value,
+                                text: school.Text
+                            }));
+                            
+                        });
+
+                        
+                    };
                 });
+                $('#CityID').fadeToggle(400, function () {
+                    $('#CityID').fadeToggle(400);
+                });
+
             });
 
            </script>
@@ -105,9 +117,10 @@
                                             <h4 style="display:inline-block">@Html.LabelFor(model => model.School.SchoolName, "School: ")</h4>
                                         </td>
                                         <td>
-                                            @Html.DropDownList("SchoolID", null, "Select a School", htmlAttributes: new { id = "SchoolID", @class = "form-control", @style = "width:200px", @runat = "server" })
-                                            @Html.ValidationMessageFor(model => model.SchoolID, "", new { @class = "text-danger" })
 
+                                            @Html.DropDownList("SchoolID", null, "Select a City", htmlAttributes: new { id = "SchoolID", @class = "form-control", @style = "width:200px", @runat = "server" })
+                                            @Html.ValidationMessageFor(model => model.SchoolID, "", new { @class = "text-danger" })
+                                            Only Assumption, father Hennepin and Monsignor Clancy are working
                                             <button class="btn btn-default" id="ddlAuto" type="button"><span class="glyphicon glyphicon-search"></span></button>
                                         </td>
                                     </tr>
@@ -117,8 +130,8 @@
                                         </td>
                                         <td>
 
-                                            <input type="text" name ="textfield18" id="textfield18" size="10" />
-
+                                            @Html.DropDownList("CityID", null, null, htmlAttributes: new { @class = "form-control", @style = "width:200px", @runat = "server" })
+                                            
                                         </td>
                                     </tr>
                                     <tr>
