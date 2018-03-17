@@ -17,7 +17,7 @@
                 <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
                 <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
                 <br />
-                
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <h3 style="padding-top:10px; text-align:center;">
                     ∙ &nbsp; All Listed Job Postings &nbsp; ∙
                 </h3>&nbsp;&nbsp;
@@ -26,15 +26,15 @@
                     @* Search function  *@
 
                     <div style="padding-bottom:50px; text-align:center">
-                        
-                        @Html.TextBox("searchName", null, new { @class = "form-control", @style="margin:0 auto", @placeholder="Search Job Title..." })
+
+                        @Html.TextBox("searchName", null, new { @class = "form-control", @style = "margin:0 auto", @placeholder = "Search Job Title..." })
                         <br />
-                        <input type="submit" name="actionButton" value="Search" style="border: none; font-weight:bold; color:white; background-color:#00a203;" class="btn-primary btn-sm"/>  
+                        <input type="submit" name="actionButton" value="Search" style="border: none; font-weight:bold; color:white; background-color:#00a203;" class="btn-primary btn-sm" />
                     </div>
-                              
+
                     @* Posting list in the table *@
-                    <table class="table table-bordered"  style=" table-layout:fixed; width:70%; margin:0 auto">
-                        
+                    <table class="table table-bordered" style=" table-layout:fixed; width:70%; margin:0 auto">
+
                         @* Title in the table *@
                         <thead style="background-color:#012e72;">
                             <tr>
@@ -51,47 +51,46 @@
                                     <input style="color:white; font-size:18px; font-weight:bold" type="submit" name="actionButton" value="Openings" class="btn btn-link" />
                                 </th>
                                 <th style="text-align:center;">
-                                    <input style="color:white; font-size:18px; font-weight:bold"; type="submit" name="actionButton" value="City" class="btn btn-link" />
+                                    <input style="color:white; font-size:18px; font-weight:bold" ; type="submit" name="actionButton" value="City" class="btn btn-link" />
                                 </th>
                                 <th style="text-align:center;">
-                                    <input style="color:white; text-decoration:none; font-size:18px; font-weight:bold";  type="submit" value="Action" class="btn btn-link" />
+                                    <input style="color:white; text-decoration:none; font-size:18px; font-weight:bold" ; type="submit" value="Action" class="btn btn-link" />
                                 </th>
                             </tr>
                         </thead>
-                       
+
                         <tbody id="tableColor" style="font-size:17px; text-align:left">
                             @* Data in the table *@
                             @foreach (var item in Model)
-                            {
+                {
 
-                                <tr>
-                                    <td style="text-align:center;">
-                                        @Html.ActionLink(item.Job.JobTitle, "Details", new { id = item.ID })
+                    <tr>
+                        <td style="text-align:center;">
+                            @Html.ActionLink(item.Job.JobTitle, "Details", new { id = item.ID })
 
-                                    </td>
-                                    <td style="text-align:center;">
-                                        @Html.DisplayFor(modelItem => item.ClosingDate)
-                                    </td>
-                                    <td class="company" style="text-align:center;">
-                                        @Html.DisplayFor(modelItem => item.StartDate)
-                                    </td> 
-                                    <td style="text-align:center;">
-                                        @Html.DisplayFor(modelItem => item.NumberOpen)
-                                    </td>
-                                    <td style="text-align:center;">
-                                        @Html.DisplayFor(modelItem => item.School.City.CityName)
-                                    </td>
-                                    
-                                    @* Buttons in the table *@
-                                    <td style="text-align:center; font-size:14px">
-                                        @Html.ActionLink("View", "Details", new { id = item.ID }, new { @style = "border:0px;" })
-                                        &nbsp;@Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @style = "border:0px;" })
-                                        &nbsp;@Html.ActionLink("Archive", "", new { id = item.ID }, new { @style = "border:0px; " })
-                                        &nbsp;@Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @style = "border:0px; display:none" })
+                        </td>
+                        <td style="text-align:center;">
+                            @Html.DisplayFor(modelItem => item.ClosingDate)
+                        </td>
+                        <td class="company" style="text-align:center;">
+                            @Html.DisplayFor(modelItem => item.StartDate)
+                        </td>
+                        <td style="text-align:center;">
+                            @Html.DisplayFor(modelItem => item.NumberOpen)
+                        </td>
+                        <td style="text-align:center;">
+                            @Html.DisplayFor(modelItem => item.School.City.CityName)
+                        </td>
 
-                                    </td>
-                                </tr>
-                            }
+                        @* Buttons in the table *@
+                        <td style="text-align:center; font-size:14px">
+                            @Html.ActionLink("View", "Details", new { id = item.ID }, new { @style = "border:0px;" })
+                            &nbsp;@Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @style = "border:0px;" })
+                            &nbsp;@Html.ActionLink("Archive", "Delete", new { id = item.ID }, new { @style = "border:0px;" })
+
+                        </td>
+                    </tr>
+    }
                         </tbody>
                     </table>
                     @* Page counts  *@
@@ -105,10 +104,10 @@
                     @Html.PagedListPager(Model, page => Url.Action("Index",
 new
 {
-    page,
-    sortDirection = ViewBag.sortDirection,
-    sortField = ViewBag.sortField,
-    searchName = ViewBag.searchName
+page,
+sortDirection = ViewBag.sortDirection,
+sortField = ViewBag.sortField,
+searchName = ViewBag.searchName
 }))
 
                 </div>

@@ -334,11 +334,52 @@ namespace FinalProject.Controllers
 
         }
 
+        private SelectList jobSelectList(int? selectedID)
+        {
+            var dQuery = from d in db.Jobs.AsNoTracking()
+                         orderby d.JobTitle
+                         select d;
+            return new SelectList(dQuery, "ID", "JobTitle", selectedID);
+        }
+
+        private SelectList SchoolSelectedList(int? selectedID)
+        {
+            var JetQuery = from d in db.Postings.Where(x => x.School.ID == selectedID)
+                         select d.School.City;
+            return new SelectList(JetQuery, "ID", "CityName", selectedID);
+        }
+
         private void PopulateDropDownLists(Posting posting = null)
         {
             ViewBag.JobID = new SelectList(db.Jobs.OrderBy(p => p.JobTitle), "ID", "JobTitle", posting?.JobID);
+            ViewBag.CityID = new SelectList( "", "");
             ViewBag.SchoolID = new SelectList(db.Schools.OrderBy(p => p.SchoolName), "ID", "SchoolName", posting?.SchoolID);
         }
-        
+
+        [HttpGet]
+        public ActionResult GetJobs(int? JobID)
+        {
+            SelectList jobs = jobSelectList(JobID);
+            return Json(jobs, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetSchoolCity(int? SchoolID)
+        {
+
+            SelectList schools = SchoolSelectedList(SchoolID);
+            return Json(schools, JsonRequestBehavior.AllowGet);
+        }
+       
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
     }
 }

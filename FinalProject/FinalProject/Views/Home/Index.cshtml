@@ -1,63 +1,32 @@
-﻿@{
+﻿
+@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<FinalProject.Models.Posting>
+
+@{
     ViewBag.Title = "Home Page";
 }
 
-<script>
-    function toggle_div_hide(id)
-    {
 
-          var divElement = document.getElementById(id);
-
-          if (divElement.style.display == 'none')
-              divElement.style.display = 'block';
-          else
-              divElement.style.display = 'none';
-    }
-
-    function AdvanceClick(id) {
-
-        var divElement = document.getElementById(id);
-
-        if (divElement.style.display == 'none')
-            divElement.style.display = 'block';
-        else
-            divElement.style.display = 'none';
-    }
-
-    function AdvanceClick(id) {
-
-        var divElement = document.getElementById(id);
-
-        if (divElement.style.display == 'none')
-            divElement.style.display = 'block';
-        else
-            divElement.style.display = 'none';
-    }
-
-    function Clear() {
-        document.getElementById("txtMyEmail").value = "";      
-    }
-
-</script>
 
 
 <div class="modal fade" data-backdrop="static" id="subModal" tabindex="-1">
-    <div class="modal-dialog" >
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header" style="color:white; background-color:#012e72">
                 <button class="close" style="color:white" onclick="Clear()" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Subscribe</h4>
             </div>
             <div class="modal-body">
-                <form  style="margin-top:10px; text-align:center">
+                <form style="margin-top:10px; text-align:center">
                     <p style="font-size:16px">Subscribe to receive updates and notifications for new job postings.</p>
                     <br />
                     <input type="checkbox" style="width : 0.9em;
 	height :0.9em;
 	padding: 2px;
-	margin: 0px;"name="chkSubscribe"  id="subscribe">
+	margin: 0px;" name="chkSubscribe" id="subscribe">
                     <label style="font-size:16px">&nbsp;  Yes, send me updates via email. </label>
-                 </form>
+                </form>
             </div>
             <div class="modal-footer" style="border:none; margin-top:0px">
                 <button ID="btnSubmitSub" class="btn btn-default" type="submit">Submit</button>
@@ -70,92 +39,111 @@
 
 
 
-<div class="container well well-lg"  style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
+<script>
+    function toggle_div_hide() {
+
+        console.log("click");
+    }
+
+</script>
+
+
+
+<div class="container well well-lg" style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
     <br />
-    <p style="text-align:center; font-size:30px; color:#02388a;">Niagara Catholic District School Board</p> 
+    <p style="text-align:center; font-size:30px; color:#02388a;">Niagara Catholic District School Board</p>
     <br />
     <br />
     <div class="container" style="background-image: url('Images/background1.jpg'); border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
-    
-    <div id="AdvanceToggle" style="display:block; text-align:center">
-        <h3 style="padding-top:20px; border:none; text-align:center; color:white">
-            <b>∙&nbsp; Search Job Postings &nbsp;∙</b>
-        </h3>&nbsp;&nbsp;
 
-        <div style="padding-bottom:20px">
-            @Html.TextBox("txtPostingSearch", null, new { @class = "form-control", @style = "margin:0 auto", @placeholder="Search by title, location, description... ", @runat = "server" })
+        <div id="AdvanceToggle" style="display:block; text-align:center">
+            <h3 style="padding-top:20px; border:none; text-align:center; color:white">
+                <b>∙&nbsp; Search Job Postings &nbsp;∙</b>
+            </h3>&nbsp;&nbsp;
+            @using (Html.BeginForm())
+            {
+                <div style="padding-bottom:20px">
+                    @Html.TextBox("searchName", null, new { @class = "form-control", @style = "margin:0 auto", @placeholder = "Search by title, location, description... ", @runat = "server" })
+                </div>
+
+
+                <div style="padding-top:10px; padding-bottom:40px; margin:0 auto; text-align:center;">
+                    <input name="actionButton" value="Search" ID="btnPostingSearch" onclick="newAJAXCommand('@(ViewBag.ShowList==true)');" style="border: 0px;background-color:#00a203" class="btn btn-primary btn-large" type="submit" />
+                </div>
+            }
+
+
         </div>
 
 
-        <div style="padding-top:10px; padding-bottom:40px; margin:0 auto; text-align:center;">
-            <button ID="btnPostingSearch" onclick="toggle_div_hide('postingResults')" style="border: 0px;background-color:#00a203" class="btn btn-primary btn-large" type="submit">Search</button>
-           
-        </div>
-    </div>
-        
+
+
+
+
         <!--Start of more search -->
         @*<div class="AdvanceSeachContainer" style="font-size:14px">
-           
-            <div class="row">
-                <div id="filter-panel" class="collapse filter-panel">
-                    
-                    <p style="color:white; font-size:22px">
-                        <b>Search By:</b>
-                    </p>
 
-                    <label class="controls" for="pref-search"style="font-size:20px; padding-top:20px; border:none; text-align:center; color:white">        
-                       <b>Job Title:</b>
-                    </label>   
-                    @Html.TextBox("txtPostingSearch", null, new { @class = "textbox", @style = "margin-bottom:5px",  @runat = "server" })
-                    <br />
-                    <label class="controls" for="pref-search" style="font-size:20px; color:white">Location:</label>
-                    @Html.TextBox("txtPostingSearch", null, new { @class = "textbox", @runat = "server" })
+                <div class="row">
+                    <div id="filter-panel" class="collapse filter-panel">
 
-            ---- <select> --
-                <option >Welland</option>
-                <option value="3">St.Catherine</option>
-                <option value="4">Hamilton</option>
-                <option value="5">Grimsby</option>
-                <option value="6">Niagara-on-the-lake</option>
+                        <p style="color:white; font-size:22px">
+                            <b>Search By:</b>
+                        </p>
 
-            ---- </select> --
-                    <div class="AdvanceSeachContainer" style="width:1000px; margin-left:120px; margin-top:-7px" >
-           
-                        <div class="row">
-                            <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4">
-                                <div class="fancy-collapse-panel">
-                                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                                        
+                        <label class="controls" for="pref-search"style="font-size:20px; padding-top:20px; border:none; text-align:center; color:white">
+                           <b>Job Title:</b>
+                        </label>
+                        @Html.TextBox("txtPostingSearch", null, new { @class = "textbox", @style = "margin-bottom:5px",  @runat = "server" })
+                        <br />
+                        <label class="controls" for="pref-search" style="font-size:20px; color:white">Location:</label>
+                        @Html.TextBox("txtPostingSearch", null, new { @class = "textbox", @runat = "server" })
 
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading" role="tab" id="headingThree">
-                                                <h4 class="panel-title">
-                                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                        Search By Qualification
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                                                <div class="panel-body">
+                ---- <select> --
+                    <option >Welland</option>
+                    <option value="3">St.Catherine</option>
+                    <option value="4">Hamilton</option>
+                    <option value="5">Grimsby</option>
+                    <option value="6">Niagara-on-the-lake</option>
 
-                                                    <input type="checkbox" id="checkbox8">Qualification / Skill
+                ---- </select> --
+                        <div class="AdvanceSeachContainer" style="width:1000px; margin-left:120px; margin-top:-7px" >
 
-                                                    <br />
-                                                    <input type="checkbox" id="checkbox8">Qualification / Skill
+                            <div class="row">
+                                <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4">
+                                    <div class="fancy-collapse-panel">
+                                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
-                                                    <br />
-                                                    <input type="checkbox" id="checkbox8">Qualification / Skill
 
-                                                    <br />
-                                                    <input type="checkbox" id="checkbox8">Qualification / Skill
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" role="tab" id="headingThree">
+                                                    <h4 class="panel-title">
+                                                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                            Search By Qualification
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                                    <div class="panel-body">
 
-                                                    <br />
-                                                    <input type="checkbox" id="checkbox8">Qualification / Skill
+                                                        <input type="checkbox" id="checkbox8">Qualification / Skill
 
-                                                    <br />
-                                                    <input type="checkbox" id="checkbox8">Qualification / Skill
+                                                        <br />
+                                                        <input type="checkbox" id="checkbox8">Qualification / Skill
 
-                                                    <br />
+                                                        <br />
+                                                        <input type="checkbox" id="checkbox8">Qualification / Skill
+
+                                                        <br />
+                                                        <input type="checkbox" id="checkbox8">Qualification / Skill
+
+                                                        <br />
+                                                        <input type="checkbox" id="checkbox8">Qualification / Skill
+
+                                                        <br />
+                                                        <input type="checkbox" id="checkbox8">Qualification / Skill
+
+                                                        <br />
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -163,180 +151,180 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
- 
-                    <div style="padding-top:10px; margin:0 auto; text-align:center;">
-                        <button ID="btnPostingSearch" onclick="toggle_div_hide('postingResults')" style="border: 2px solid black;" class="btn btn-info-outline" type="submit">Search</button>
-                    </div>
-                    <br /><br />
 
+                        <div style="padding-top:10px; margin:0 auto; text-align:center;">
+                            <button ID="btnPostingSearch" onclick="toggle_div_hide('postingResults')" style="border: 2px solid black;" class="btn btn-info-outline" type="submit">Search</button>
+                        </div>
+                        <br /><br />
+
+                    </div>
+
+                    <button type="button" class="btn btn-primary"  onclick="AdvanceClick('AdvanceToggle')" data-toggle="collapse" data-target="#filter-panel">
+                        <span class="glyphicon glyphicon-cog"></span> Advanced Search
+                    </button>
                 </div>
-
-                <button type="button" class="btn btn-primary"  onclick="AdvanceClick('AdvanceToggle')" data-toggle="collapse" data-target="#filter-panel">
-                    <span class="glyphicon glyphicon-cog"></span> Advanced Search
-                </button>
-            </div>
-        </div>*@
+            </div>*@
         <!--End of More Search -->
 
     </div>  <!--End of Blue Section -->
-   
-    <div id="postingResults" style="display:none; width:75%; margin:0 auto;" >
-        <br />
-        @Html.Label("lblResult", " Result found: 3", new { @style = "color:green; font-size:17px; margin-top:30px; margin-bottom:30px; margin-left:5px" })
-        <br />
+
+    @if (ViewBag.ShowList)
+    {
+        <div id="postingResults" width:75%; margin:0 auto;">
+            <br />
+            <br />
             <div class="borderVibe" style="border:2px solid gray; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
 
+                @foreach (var item in Model)
+                {
+
                 <div id="searchResult" style="background-color:#f5f5f5; margin-top:20px; margin-left:20px; margin-right:20px; border-bottom:none">
-                    @Html.ActionLink("Math Teacher Full-Time ", "Index")
+                    @Html.ActionLink(item.Job.JobTitle, "Details", new { id = item.ID })
                     <br />
-                    Holy Trinity Elementary School - Welland, ON
+                    @Html.DisplayFor(modelItem => item.School.SchoolName) - @Html.DisplayFor(modelItem => item.School.City.CityName), ON
                     <br />
-                    We are looking for a good teacher. College Graduate and have a degree. Good Communicatin skill
-                    Good teaching skill and can handle bunch of kids ha....
+                    @Html.DisplayFor(modelItem => item.PostingDescription)
                     <br />
-                    @Html.ActionLink("Apply", "Details", "Posting", null, new { @class = "btn btn-primary btn-large", @style = "background-color:#00a203" })
-
-                    @Html.ActionLink("Save Job", "", "", null, new { @class = "btn btn-primary btn-large", @style = "background-color:#95cedf" })
+                    @Html.ActionLink("Apply", "Details", "Posting", new { id = item.ID }, new { @class = "btn btn-primary btn-large", @style = "background-color:#00a203" })
+                    @Html.ActionLink("Save Posting", "Details", "", new { id = item.ID }, new { @class = "btn btn-primary btn-large", @style = "background-color:#95cedf" })
                 </div>
-                <br />
-                <div id="searchResult" style="background-color:#f5f5f5; margin-top:20px; margin-left:20px; margin-right:20px; border-bottom:none">
-                    @Html.ActionLink("Vice Principal Full-Time ", "Index")
                     <br />
-                    St.Agustine Elementary School - St.Catherine, ON
-                    <br />
-                    sdf sdfd fpsojgposd dsjpgj fdspogjpdof gfdjgopjfdopgjfdopgj ofdjgop jfdopgj fdopgj ofdpjg
-                    kfldskflds dsofkldspfk dskflpkdsplfk dslfpd....
-                    <br />
-                    @Html.ActionLink("Apply", "Details", "Posting", null, new { @class = "btn btn-primary btn-large", @style = "background-color:#00a203" })
 
-                    @Html.ActionLink("Save Job", "", "", null, new { @class = "btn btn-primary btn-large", @style = "background-color:#95cedf" })
-                </div>
-                <br />
-                <div id="searchResult" style="background-color:#f5f5f5; margin-top:20px; margin-left:20px; margin-right:20px; margin-bottom:20px;  border-bottom:none">
-                    @Html.ActionLink("IT Department Part-Time ", "Index")
-                    <br />
-                    Morlan High School - Niagara-on-the-lake, ON
-                    <br />
-                    jfsdklfjokp jdslkfjkdsjf lkdsjflkdsjfkljds klfjdsklfj kdsljfk ldsjfkldsj dsjflkjdskl
-                    jdskfj dksfj kldsfjkdlsfj kdslfjk ldsjfkjd sklfjdsk fkdsl....
-                    <br />
-                    @Html.ActionLink("Apply", "Details", "Posting", null, new { @class = "btn btn-primary btn-large", @style = "background-color:#00a203" })
-
-                    @Html.ActionLink("Save Job", "", "", null, new { @class = "btn btn-primary btn-large", @style = "background-color:#95cedf" })
-                </div>
-
+                }
             </div>
-    </div>
 
-    <div style=" margin-bottom:100px"></div>
-           
-    <div class="row" style="text-align:center; margin:0 auto";>
-    <div class="col-md-4">  
-        <p>
-            <a href="#" data-target="#subModal" data-toggle="modal"><img src="Images/Subscribe.png" style="height:60px"/></a>
+            @* Page counts  *@
+            <span id="filterMessage" class="text-danger">@((Model.Count() == 0) ? "Zero postings found.  No records match your criteria." : "")</span>
+            <input type="hidden" name="sortField" value="@ViewBag.sortField" />
+            <br />
+            Page:  @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+
+            @Html.PagedListPager(Model, page => Url.Action("Index",
+                               new
+                               {
+                                   page,
+                                   sortField = ViewBag.sortField,
+                                   searchName = ViewBag.searchName
+                               }))
+        </div>
+    }
+
+
+
+
+
+        <div style=" margin-bottom:100px"></div>
+
+        <div class="row" style="text-align:center; margin:0 auto" ;>
+            <div class="col-md-4">
+                <p>
+                    <a href="#" data-target="#subModal" data-toggle="modal"><img src="Images/Subscribe.png" style="height:60px" /></a>
+                </p>
+                <h4>Subscribe</h4>
+            </div>
+
+            <div class="col-md-4">
+                <p>
+                    <a href="#"><img src="Images/FAQ.png" style="height:60px" /></a>
+                </p>
+                <h4>Frequently Asked Questions</h4>
+            </div>
+
+            <div class="col-md-4">
+                <p>
+                    <a href="#"><img src="Images/About.png" style="height:60px" /></a>
+                </p>
+                <h4>About Us</h4>
+            </div>
+        </div>
+
+        <p style="padding-top:100px;">
+            Follow us on social media:
         </p>
-        <h4>Subscribe</h4>   
+
+        <div style="padding-top:20px;">
+            <p>
+                <a href="https://www.facebook.com/NiagaraCatholicDSB/"><img src="Images/facebook.png" style="height:30px;" /></a>&nbsp;&nbsp;
+                <a href="https://twitter.com/niagaracatholic"><img src="Images/twitter.png" style="height:30px;" /></a>&nbsp;&nbsp;
+                <a href="https://www.youtube.com/user/NiagaraCatholicDSB"><img src="Images/youtube.png" style="height:30px;" /></a><br />
+            </p>
+        </div>
     </div>
 
-    <div class="col-md-4">    
-        <p>
-            <a href="#"><img src="Images/FAQ.png" style="height:60px"/></a>
-        </p>
-        <h4>Frequently Asked Questions</h4>     
-    </div>
-
-    <div class="col-md-4">     
-        <p>
-            <a href="#"><img src="Images/About.png" style="height:60px"/></a>
-        </p>
-        <h4>About Us</h4>
-    </div>
-</div>
-
-    <p style="padding-top:100px;">
-        Follow us on social media:
-    </p>
-
-    <div style="padding-top:20px;">
-        <p>
-            <a href="https://www.facebook.com/NiagaraCatholicDSB/"><img src="Images/facebook.png" style="height:30px;" /></a>&nbsp;&nbsp;
-            <a href="https://twitter.com/niagaracatholic"><img src="Images/twitter.png" style="height:30px;" /></a>&nbsp;&nbsp;
-            <a href="https://www.youtube.com/user/NiagaraCatholicDSB"><img src="Images/youtube.png" style="height:30px;" /></a><br />
-        </p>
-    </div>
-</div>          
 
 
-<style>
+    <style>
 
-    .AdvanceSeachContainer {
-        margin-top: 30px;
-        text-align: center;
-        padding-top: 20px;
-        padding-bottom: 30px;
-    }
-
-    .filter-col {
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-    .controls {
-    font-size:25px;
-    color:blue;
-    }
-    .textbox {
-        width: 100%;
-        height: 34px;
-        padding: 6px 12px;
-        font-size: 14px;
-        line-height: 1.428571429;
-        color: #555555;
-        background-color: #ffffff;
-        border: 1px solid #cccccc;
-        border-radius: 4px;
-        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-        -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-        transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-    }
-
-    .fancy-collapse-panel .panel-default > .panel-heading {
-        padding: 0;
-    }
-
-    .fancy-collapse-panel .panel-heading a {
-        padding: 12px 35px 12px 15px;
-        display: inline-block;
-        width: 100%;
-        background-color: white;
-        color: blue;
-        position: relative;
-        text-decoration: none;
-    }
-
-        .fancy-collapse-panel .panel-heading a:after {
-            font-family: "FontAwesome";
-            content: "\f147";
-            position: absolute;
-            right: 20px;
-            font-size: 20px;
-            font-weight: 400;
-            top: 50%;
-            line-height: 1;
-            margin-top: -10px;
+        .AdvanceSeachContainer {
+            margin-top: 30px;
+            text-align: center;
+            padding-top: 20px;
+            padding-bottom: 30px;
         }
 
-        .fancy-collapse-panel .panel-heading a.collapsed:after {
-            content: "\f196";
+        .filter-col {
+            padding-left: 10px;
+            padding-right: 10px;
         }
 
-    .checkbox-teal [type="checkbox"]:checked + label:before {
-        border-color: transparent #009688 #009688 transparent;
-    }
-    #searchResult {
-        border-bottom: 4px solid blue;
-        background-color: lightgrey;
-    }
-    
-</style>
+        .controls {
+            font-size: 25px;
+            color: blue;
+        }
+
+        .textbox {
+            width: 100%;
+            height: 34px;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.428571429;
+            color: #555555;
+            background-color: #ffffff;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+            transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+        }
+
+        .fancy-collapse-panel .panel-default > .panel-heading {
+            padding: 0;
+        }
+
+        .fancy-collapse-panel .panel-heading a {
+            padding: 12px 35px 12px 15px;
+            display: inline-block;
+            width: 100%;
+            background-color: white;
+            color: blue;
+            position: relative;
+            text-decoration: none;
+        }
+
+            .fancy-collapse-panel .panel-heading a:after {
+                font-family: "FontAwesome";
+                content: "\f147";
+                position: absolute;
+                right: 20px;
+                font-size: 20px;
+                font-weight: 400;
+                top: 50%;
+                line-height: 1;
+                margin-top: -10px;
+            }
+
+            .fancy-collapse-panel .panel-heading a.collapsed:after {
+                content: "\f196";
+            }
+
+        .checkbox-teal [type="checkbox"]:checked + label:before {
+            border-color: transparent #009688 #009688 transparent;
+        }
+
+        #searchResult {
+            border-bottom: 4px solid blue;
+            background-color: lightgrey;
+        }
+    </style>
