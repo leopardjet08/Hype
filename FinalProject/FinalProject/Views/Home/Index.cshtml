@@ -71,100 +71,7 @@
                     <input name="actionButton" value="Search" ID="btnPostingSearch" onclick="newAJAXCommand('@(ViewBag.ShowList==true)');" style="border: 0px;background-color:#00a203" class="btn btn-primary btn-large" type="submit" />
                 </div>
             }
-
-
         </div>
-
-
-
-
-
-
-        <!--Start of more search -->
-        @*<div class="AdvanceSeachContainer" style="font-size:14px">
-
-                <div class="row">
-                    <div id="filter-panel" class="collapse filter-panel">
-
-                        <p style="color:white; font-size:22px">
-                            <b>Search By:</b>
-                        </p>
-
-                        <label class="controls" for="pref-search"style="font-size:20px; padding-top:20px; border:none; text-align:center; color:white">
-                           <b>Job Title:</b>
-                        </label>
-                        @Html.TextBox("txtPostingSearch", null, new { @class = "textbox", @style = "margin-bottom:5px",  @runat = "server" })
-                        <br />
-                        <label class="controls" for="pref-search" style="font-size:20px; color:white">Location:</label>
-                        @Html.TextBox("txtPostingSearch", null, new { @class = "textbox", @runat = "server" })
-
-                ---- <select> --
-                    <option >Welland</option>
-                    <option value="3">St.Catherine</option>
-                    <option value="4">Hamilton</option>
-                    <option value="5">Grimsby</option>
-                    <option value="6">Niagara-on-the-lake</option>
-
-                ---- </select> --
-                        <div class="AdvanceSeachContainer" style="width:1000px; margin-left:120px; margin-top:-7px" >
-
-                            <div class="row">
-                                <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4">
-                                    <div class="fancy-collapse-panel">
-                                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-
-
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading" role="tab" id="headingThree">
-                                                    <h4 class="panel-title">
-                                                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                            Search By Qualification
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                                                    <div class="panel-body">
-
-                                                        <input type="checkbox" id="checkbox8">Qualification / Skill
-
-                                                        <br />
-                                                        <input type="checkbox" id="checkbox8">Qualification / Skill
-
-                                                        <br />
-                                                        <input type="checkbox" id="checkbox8">Qualification / Skill
-
-                                                        <br />
-                                                        <input type="checkbox" id="checkbox8">Qualification / Skill
-
-                                                        <br />
-                                                        <input type="checkbox" id="checkbox8">Qualification / Skill
-
-                                                        <br />
-                                                        <input type="checkbox" id="checkbox8">Qualification / Skill
-
-                                                        <br />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div style="padding-top:10px; margin:0 auto; text-align:center;">
-                            <button ID="btnPostingSearch" onclick="toggle_div_hide('postingResults')" style="border: 2px solid black;" class="btn btn-info-outline" type="submit">Search</button>
-                        </div>
-                        <br /><br />
-
-                    </div>
-
-                    <button type="button" class="btn btn-primary"  onclick="AdvanceClick('AdvanceToggle')" data-toggle="collapse" data-target="#filter-panel">
-                        <span class="glyphicon glyphicon-cog"></span> Advanced Search
-                    </button>
-                </div>
-            </div>*@
-        <!--End of More Search -->
 
     </div>  <!--End of Blue Section -->
 
@@ -173,21 +80,22 @@
         <div id="postingResults" width:75%; margin:0 auto;">
             <br />
             <br />
-            <div class="borderVibe" style="border:2px solid gray; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
+            <div class="borderVibe" style="border:1px solid #d5d2d2; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
 
                 @foreach (var item in Model)
                 {
 
-                <div id="searchResult" style="background-color:#f5f5f5; margin-top:20px; margin-left:20px; margin-right:20px; border-bottom:none">
+                <div id="searchResult" style="background-color:#f5f5f5; margin-top:30px; margin-left:30px; margin-right:30px; border-bottom:none">
                     @Html.ActionLink(item.Job.JobTitle, "Details", new { id = item.ID })
                     <br />
                     @Html.DisplayFor(modelItem => item.School.SchoolName) - @Html.DisplayFor(modelItem => item.School.City.CityName), ON
                     <br />
                     @Html.DisplayFor(modelItem => item.PostingDescription)
                     <br />
-                    @Html.ActionLink("Apply", "Details", "Posting", new { id = item.ID }, new { @class = "btn btn-primary btn-large", @style = "background-color:#00a203" })
-                    @Html.ActionLink("Save Posting", "Details", "", new { id = item.ID }, new { @class = "btn btn-primary btn-large", @style = "background-color:#95cedf" })
+                    @Html.ActionLink("Apply", "Details", "Posting", new { id = item.ID }, new { @class = "btn btn-primary btn-sm", @style = "border:none; font-weight:bold; background-color:#00a203" })
+                    @Html.ActionLink("Save", "Details", "", new { id = item.ID }, new { @class = "btn btn-primary btn-sm", @style = "border:none; font-weight:bold; background-color:#95cedf" })
                 </div>
+                    <br />
                     <br />
 
                 }

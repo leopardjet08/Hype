@@ -59,7 +59,7 @@ html {
 }
 
 
-ul li a:before {
+#myNav2 ul li a:before {
     content: '';
     width: 0px;
     height: 3px;
@@ -71,7 +71,7 @@ ul li a:before {
 }
 
 
-ul li a:after {
+#myNav #myNav2 ul li a:after {
     content: '';
     width: 0px;
     height: 3px;
@@ -82,17 +82,16 @@ ul li a:after {
     transition: ease-in-out .3s;
 }
 
-ul li:hover a:before
-{
-    width:45%;
-    transform:translateX(100%);
+/*#myNav #myNav2 ul li:hover a:before {
+    width: 45%;
+    transform: translateX(100%);
 }
 
-ul li:hover a:after 
-{
+#myNav #myNav2 ul li:hover a:after {
     width: 45%;
     transform: translateX(-100%);
-}
+}*/
+
 
 
 .nav > li > a {
