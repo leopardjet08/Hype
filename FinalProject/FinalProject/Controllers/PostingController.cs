@@ -344,8 +344,8 @@ namespace FinalProject.Controllers
 
         private SelectList SchoolSelectedList(int? selectedID)
         {
-            var JetQuery = from d in db.Postings.Where(x => x.School.ID == selectedID)
-                         select d.School.City;
+            var JetQuery = from d in db.Schools.Where(x => x.ID == selectedID)
+                         select d.City;
             return new SelectList(JetQuery, "ID", "CityName", selectedID);
         }
 
