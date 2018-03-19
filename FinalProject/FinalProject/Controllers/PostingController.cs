@@ -351,11 +351,23 @@ namespace FinalProject.Controllers
 
         private SelectList ReqSelectedList(int? selectedID)
         {
-
-
             var JetQuery = from e in db.Jobs from t in e.Requirements where e.ID == selectedID select t;
 
             return new SelectList(JetQuery, "ID", "RequirementName", selectedID);
+        }
+
+        private SelectList QualSelectedList(int? selectedID)
+        {
+            var JetQuery = from e in db.Jobs from t in e.Qualifications where e.ID == selectedID select t;
+
+            return new SelectList(JetQuery, "ID", "QualificationSet", selectedID);
+        }
+
+        private SelectList SkillSelectedList(int? selectedID)
+        {
+            var JetQuery = from e in db.Jobs from t in e.Skills where e.ID == selectedID select t;
+
+            return new SelectList(JetQuery, "ID", "SkillName", selectedID);
         }
 
         private void PopulateDropDownLists(Posting posting = null)
@@ -363,6 +375,8 @@ namespace FinalProject.Controllers
             ViewBag.JobID = new SelectList(db.Jobs.OrderBy(p => p.JobTitle), "ID", "JobTitle", posting?.JobID);
             ViewBag.CityID = new SelectList( "", "");
             ViewBag.Req = new SelectList("", "");
+            ViewBag.Qual = new SelectList("", "");
+            ViewBag.Skill = new SelectList("", "");
             ViewBag.SchoolID = new SelectList(db.Schools.OrderBy(p => p.SchoolName), "ID", "SchoolName", posting?.SchoolID);
         }
 
@@ -384,6 +398,19 @@ namespace FinalProject.Controllers
         {
 
             SelectList req = ReqSelectedList(JobID);
+            return Json(req, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Getqual(int? JobID)
+        {
+
+            SelectList req = QualSelectedList(JobID);
+            return Json(req, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult Getskill(int? JobID)
+        {
+
+            SelectList req = SkillSelectedList(JobID);
             return Json(req, JsonRequestBehavior.AllowGet);
         }
 
