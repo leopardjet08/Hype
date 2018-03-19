@@ -1,7 +1,7 @@
 ﻿@model FinalProject.Models.Job
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create Job";
 }
 
 <div class="container well well-lg" style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
@@ -117,14 +117,13 @@
     <div class="form-group" style="text-align:center; margin-left:270px;">
         @Html.LabelFor(model => model.SkillQualification, htmlAttributes: new { @style = "text-align:center; display:inline; font-size:16px; color:#012e72; font-weight:bold" })
             @Html.EditorFor(model => model.SkillQualification, new { htmlAttributes = new { @class = "form-control", @style="display:inline"} })
-            @Html.ValidationMessageFor(model => model.SkillQualification, "", new { @class = "text-danger" })
-      
+            @Html.ValidationMessageFor(model => model.SkillQualification, "", new { @class = "text-danger" })   
     </div>
 
 <div class="form-group" style="margin-bottom:90px">
     <p style="text-align:center; font-size:16px; color:#012e72; font-weight:bold">Choose Skills for Job: </p>
             <br />
-    <div>
+            <div>
                 <table style="font-size:16px; margin:0 auto">
                     <tr>
                         @{
@@ -148,16 +147,12 @@
                         }
                     </table>
                 </div>
- <br />
+        <br />
         <div style="text-align:center">
             @Html.ActionLink("Add Skill", "")
         </div>
-            </div>
-
-            
+            </div>       
             <br /><br />
-
-
                   <div style="text-align:center">
                       <div class="form-group">
                           <div>

@@ -82,10 +82,7 @@
                 </div>
 
 
-
                 <div class="col-md-6" style="margin-top:30px;">
-
-
                     <div class="form-horizontal">
                         <table style="margin:0 auto; width:70%;">
                             <tr>
@@ -105,37 +102,47 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                            </tr>
+                            <tr>
 
                                 <td>
                                     <h4>Qualifications:</h4>
                                 </td>
                                 <td>
                                     @{
-                                        foreach (var qaulification in Model.Job.Qualifications)
-                                        {
+                foreach (var qaulification in Model.Job.Qualifications)
+                {
 
-                                            @:  @qaulification.QualificationSet <br />
-
-                                        }
+                        @:  @qaulification.QualificationSet
+                        @Html.CheckBox("isChecked", true)
+                        <br />
+}
                                     }
                                 </td>
                             </tr>
                             <tr>
-
                                 <td>
                                     <h4>Requirements:</h4>
                                 </td>
                                 <td>
                                     @{
-                                        foreach (var requirments in Model.Job.Requirements)
-                                        {
+                foreach (var requirments in Model.Job.Requirements)
+                {
 
-                                            @:  @requirments.RequirementName <br />
-
-                                        }
+                        @:  @requirments.RequirementName
+                        @Html.CheckBox("isChecked", true)
+                        <br />
+}
                                     }
                                 </td>
                             </tr>
+
                             <tr>
                                 <td>
                                     <h4>Number of Openings:</h4>
