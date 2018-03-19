@@ -25,7 +25,7 @@ namespace FinalProject.Controllers
             PopulateDropDownLists();
             ViewBag.Filtering = ""; 
 
-            var postings = from s in db.Postings select s;
+            var postings = from s in db.Postings where ((DateTime)s.ClosingDate >= DateTime.Today) select s;
 
             
 
@@ -349,10 +349,25 @@ namespace FinalProject.Controllers
             return new SelectList(JetQuery, "ID", "CityName", selectedID);
         }
 
+        private SelectList ReqSelectedList(int? selectedID)
+        {
+            IList<String> list = new List<String>();
+            //var employees = model.Employees.Where(e => e.Tags.Any(t => tagsIDList.Contains(t.TagID)));
+            //var JetQuery = from d in db.Schools.Where(x => x.ID == selectedID)
+            //               select d.City;
+
+            //var employees = (from e in model.Employees from t in e.Tags where tagsIDList.Contains(t.TagID) select e);
+
+            var JetQuery = from e in db.Jobs from t in e.Requirements where e.ID == selectedID select e;
+
+            return new SelectList(JetQuery, "ID","RequirementName");
+        }
+
         private void PopulateDropDownLists(Posting posting = null)
         {
             ViewBag.JobID = new SelectList(db.Jobs.OrderBy(p => p.JobTitle), "ID", "JobTitle", posting?.JobID);
             ViewBag.CityID = new SelectList( "", "");
+            ViewBag.Req = new SelectList("", "");
             ViewBag.SchoolID = new SelectList(db.Schools.OrderBy(p => p.SchoolName), "ID", "SchoolName", posting?.SchoolID);
         }
 
@@ -370,7 +385,13 @@ namespace FinalProject.Controllers
             SelectList schools = SchoolSelectedList(SchoolID);
             return Json(schools, JsonRequestBehavior.AllowGet);
         }
-       
+        public ActionResult Getreq(int? ID)
+        {
+
+            SelectList req = ReqSelectedList(ID);
+            return Json(req, JsonRequestBehavior.AllowGet);
+        }
+
 
         protected override void Dispose(bool disposing)
         {
