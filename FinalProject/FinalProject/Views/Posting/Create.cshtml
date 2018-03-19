@@ -293,7 +293,9 @@
                                 <h4>@Html.LabelFor(model => model.Job.Requirements, "Requirements: ")</h4>
                             </td>
                             <td style="padding-bottom:70px; vertical-align:central">
-                                @Html.DropDownList("req", null, null, htmlAttributes: new { @class = "form-control", @style = "vertical-algin:top; width:200px", @runat = "server" })
+                               
+                                @*@Html.DropDownList("req", null, null, htmlAttributes: new { @class = "form-control", @style = "vertical-algin:top; width:200px", @runat = "server" })*@
+                                @Html.Label(" " , new { id ="req"})
                             </td>
                         </tr>
                         <tr>
@@ -301,8 +303,8 @@
                                 <h4>@Html.LabelFor(model => model.Job.Qualifications, "Qualifications: ")</h4>
                             </td>
                             <td style="padding-bottom:70px; vertical-align:central">
-                                @Html.DropDownList("qual", null, null, htmlAttributes: new { @class = "form-control", @style = "vertical-algin:top; width:200px", @runat = "server" })
-                               
+                                @*@Html.DropDownList("qual", null, null, htmlAttributes: new { @class = "form-control", @style = "vertical-algin:top; width:200px", @runat = "server" })*@
+                                @Html.Label(" ", new { id = "qual" })
                             </td>
                         </tr>
                         <tr>
@@ -310,7 +312,8 @@
                                 <h4>@Html.LabelFor(model => model.Job.Skills, "Skills: ")</h4>
                             </td>
                             <td>
-                                @Html.DropDownList("skill", null, null, htmlAttributes: new { @class = "form-control", @style = "vertical-algin:top; width:200px", @runat = "server" })
+                                @*@Html.DropDownList("skill", null, null, htmlAttributes: new { @class = "form-control", @style = "vertical-algin:top; width:200px", @runat = "server" })*@
+                                @Html.Label(" ", new { id = "skill" })
                             </td>
                         </tr>
 
