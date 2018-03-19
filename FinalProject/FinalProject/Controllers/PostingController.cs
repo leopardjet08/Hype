@@ -369,6 +369,13 @@ namespace FinalProject.Controllers
 
             return new SelectList(JetQuery, "ID", "SkillName", selectedID);
         }
+        private SelectList descSelectedList(int? selectedID)
+        {
+            var JetQuery = from e in db.Jobs  where e.ID == selectedID select e;
+
+            return new SelectList(JetQuery, "ID", "JobSummary", selectedID);
+        }
+
 
         private void PopulateDropDownLists(Posting posting = null)
         {
@@ -411,6 +418,12 @@ namespace FinalProject.Controllers
         {
 
             SelectList req = SkillSelectedList(JobID);
+            return Json(req, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetDesc(int? JobID)
+        {
+
+            SelectList req = descSelectedList(JobID);
             return Json(req, JsonRequestBehavior.AllowGet);
         }
 
