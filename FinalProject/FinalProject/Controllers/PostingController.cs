@@ -351,16 +351,11 @@ namespace FinalProject.Controllers
 
         private SelectList ReqSelectedList(int? selectedID)
         {
-            IList<String> list = new List<String>();
-            //var employees = model.Employees.Where(e => e.Tags.Any(t => tagsIDList.Contains(t.TagID)));
-            //var JetQuery = from d in db.Schools.Where(x => x.ID == selectedID)
-            //               select d.City;
 
-            //var employees = (from e in model.Employees from t in e.Tags where tagsIDList.Contains(t.TagID) select e);
 
-            var JetQuery = from e in db.Jobs from t in e.Requirements where e.ID == selectedID select e;
+            var JetQuery = from e in db.Jobs from t in e.Requirements where e.ID == selectedID select t;
 
-            return new SelectList(JetQuery, "ID","RequirementName");
+            return new SelectList(JetQuery, "ID", "RequirementName", selectedID);
         }
 
         private void PopulateDropDownLists(Posting posting = null)
@@ -385,10 +380,10 @@ namespace FinalProject.Controllers
             SelectList schools = SchoolSelectedList(SchoolID);
             return Json(schools, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult Getreq(int? ID)
+        public ActionResult Getreq(int? JobID)
         {
 
-            SelectList req = ReqSelectedList(ID);
+            SelectList req = ReqSelectedList(JobID);
             return Json(req, JsonRequestBehavior.AllowGet);
         }
 
