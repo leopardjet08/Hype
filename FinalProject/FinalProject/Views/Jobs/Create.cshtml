@@ -4,51 +4,53 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<div class="container well well-lg" style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
 
+    <p style="text-align:center; margin-top:20px; margin-bottom:15px; font-size:30px; color:#02388a;"> Niagara Catholic District School Board</p>
+    <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
+    <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
+    <br />
+   
+    
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
-<div class="form-horizontal">
-    <h4>Job</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.JobTitle, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.JobTitle, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.JobTitle, "", new { @class = "text-danger" })
-        </div>
+
+    <div style="text-align:center; margin-bottom:60px">
+        <h3> ∙ &nbsp; Create a Job Template&nbsp; ∙</h3>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.JobSummary, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.JobSummary, new { htmlAttributes = new { @class = "form-control" } })
+    <div style="text-align:center; font-size:16px; color:#012e72">
+        <div style="margin-bottom:70px">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.LabelFor(model => model.JobTitle)
+            <br /><br />
+            @Html.EditorFor(model => model.JobTitle, new { htmlAttributes = new { @class = "form-control", @style = "margin:0 auto" } })
+            @Html.ValidationMessageFor(model => model.JobTitle, "", new { @class = "text-danger" })
+        </div>  
+    
+        <div style="margin-bottom:70px">
+            @Html.LabelFor(model => model.JobSummary)
+            <br /><br />
+            @Html.EditorFor(model => model.JobSummary, new { htmlAttributes = new { @class = "form-control", @rows = "2", @cols = "100", @style = "margin:0 auto; max-width:73%; height:200px;", @placeholder = "Enter Description here..." } })
             @Html.ValidationMessageFor(model => model.JobSummary, "", new { @class = "text-danger" })
         </div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.SkillQualification, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.SkillQualification, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.SkillQualification, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="control-label col-md-2">Choose Requirements for Job: </label>
-        <div class="col-md-offset-2 col-md-10">
-            <table>
+    
+    <div class="form-group" style="text-align:center; margin-bottom:90px">
+        <p style="text-align:center; font-size:16px; color:#012e72; font-weight:bold">Choose Requirements for Job: </p>
+        <br />
+        <div>
+            <table style="font-size:16px; margin:0 auto">
                 <tr>
                     @{
                         int cnt = 0;
                         List<FinalProject.ViewModels.AssignedRequirmentVM> requirements = ViewBag.Requirements;
                         foreach (var requirement in requirements)
                         {
-                            if (cnt++ % 3 == 0)
+                            if (cnt++ % 5 == 0)
                             {
                                 @:</tr> <tr>
                             }
@@ -57,27 +59,36 @@
                                        name="selectedRequirments"
                                        value="@requirement.RequirmentID"
                                        @(Html.Raw(requirement.Assigned ? "checked=\"checked\"" : "")) />
-                                @requirement.RequirementName @:&nbsp;&nbsp;
+                                @requirement.RequirementName @:&nbsp;&nbsp;&nbsp;&nbsp;
                                 @:</td>
                         }
                         @:</tr>
                     }
                 </table>
             </div>
+                <br />
+            <div style="text-align:center">
+                @Html.ActionLink("Add Requirement", "")
+            </div>
         </div>
+
+       
+
     @* //////////////////////////////////////////////////////////////////////////////////////////// *@
 
-    <div class="form-group">
-        <label class="control-label col-md-2">Choose Qualifications for Job:</label>
-            <div class="col-md-offset-2 col-md-10">
-                <table>
+    <div class="form-group" style="margin-bottom:90px; text-align:center">
+        
+        <p style="text-align:center; font-size:16px; color:#012e72; font-weight:bold">Choose Qualifications for Job: </p>
+            <br />
+            <div>
+                <table style="font-size:16px; margin:0 auto">
                     <tr>
                         @{
                             int counts = 0;
                             List<FinalProject.ViewModels.AssignedQualificationVM> qualifications = ViewBag.Qualifications;
                             foreach (var qualification in qualifications)
                             {
-                                if (counts++ % 3 == 0)
+                                if (counts++ % 4 == 0)
                                 {
                                     @:</tr><tr>
                                 }
@@ -86,27 +97,42 @@
                                     name="selectedQualifications"
                                     value="@qualification.QualificationID"
                                     @(Html.Raw(qualification.Assigned ? "checked=\"checked\"" : "")) />
-                                @qualification.QualificationSet @:&nbsp;&nbsp;   
+                                @qualification.QualificationSet @:&nbsp;&nbsp;&nbsp;&nbsp;  
                                 @: </td>
                             }
                             @:</tr>
                         }
                     </table>
                 </div>
+                    <br />
+                <div style="text-align:center">
+                    @Html.ActionLink("Add Qualification", "")
+                </div>
             </div>
 
+           
+           
+            
     @* /////////////////////////////////////////////////////////////////////////////////////////// *@
-    <div class="form-group">
-        <label class="control-label col-md-2">Choose Skills for Job:</label>
-            <div class="col-md-offset-2 col-md-10">
-                <table>
+    <div class="form-group" style="text-align:center; margin-left:270px;">
+        @Html.LabelFor(model => model.SkillQualification, htmlAttributes: new { @style = "text-align:center; display:inline; font-size:16px; color:#012e72; font-weight:bold" })
+            @Html.EditorFor(model => model.SkillQualification, new { htmlAttributes = new { @class = "form-control", @style="display:inline"} })
+            @Html.ValidationMessageFor(model => model.SkillQualification, "", new { @class = "text-danger" })
+      
+    </div>
+
+<div class="form-group" style="margin-bottom:90px">
+    <p style="text-align:center; font-size:16px; color:#012e72; font-weight:bold">Choose Skills for Job: </p>
+            <br />
+    <div>
+                <table style="font-size:16px; margin:0 auto">
                     <tr>
                         @{
                             int count = 0;
                             List<FinalProject.ViewModels.AssignedSkillVM> skills = ViewBag.Skills;
                             foreach (var skill in skills)
                             {
-                                if (count++ % 3 == 0)
+                                if (count++ % 7 == 0)
                                 {
                                     @:</tr><tr>
                                 }
@@ -115,28 +141,44 @@
                                     name="selectedSkills"
                                     value="@skill.SkillID"
                                     @(Html.Raw(skill.Assigned ? "checked=\"checked\"" : "")) />
-                                    @skill.SkillName @:&nbsp;&nbsp;
+                                    @skill.SkillName @:&nbsp;&nbsp;&nbsp;&nbsp;
                                 @: </td>
                             }
                             @:</tr>
                         }
                     </table>
                 </div>
-            </div>
-
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+ <br />
+        <div style="text-align:center">
+            @Html.ActionLink("Add Skill", "")
         </div>
-    </div>
+            </div>
+
+            
+            <br /><br />
+
+
+                  <div style="text-align:center">
+                      <div class="form-group">
+                          <div>
+                              <input type="submit" value="Add Job" style=" margin-right:30px; border: 0px;background-color:#00a203" class="btn btn-primary btn-large" />
+                              <a href="javascript:void(0);" style="margin-left:30px; padding-right:20px" onclick="history.go(-1);">Back</a>
+                          </div>
+                  </div>
+            </div>
+        
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+                
+    </div> @*  End of container   *@
+
+
+
+
+
