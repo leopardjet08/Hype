@@ -217,9 +217,9 @@
     <Compile Include="Controllers\SchoolsController.cs" />
     <Compile Include="DAL\ApplicationDBContext.cs" />
     <Compile Include="DAL\JobPostingCFEntities.cs" />
-    <Compile Include="DAL\Migrations\201803152003072_initial.cs" />
-    <Compile Include="DAL\Migrations\201803152003072_initial.Designer.cs">
-      <DependentUpon>201803152003072_initial.cs</DependentUpon>
+    <Compile Include="DAL\Migrations\201803180702096_aaaaaa.cs" />
+    <Compile Include="DAL\Migrations\201803180702096_aaaaaa.Designer.cs">
+      <DependentUpon>201803180702096_aaaaaa.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\Migrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
@@ -270,6 +270,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\Subscribe.png" />
     <Content Include="DAL\MigratingCopyPasta.txt" />
+    <Content Include="Scripts\appStatusColor.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -280,6 +281,7 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -368,8 +370,8 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DAL\Migrations\201803152003072_initial.resx">
-      <DependentUpon>201803152003072_initial.cs</DependentUpon>
+    <EmbeddedResource Include="DAL\Migrations\201803180702096_aaaaaa.resx">
+      <DependentUpon>201803180702096_aaaaaa.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
