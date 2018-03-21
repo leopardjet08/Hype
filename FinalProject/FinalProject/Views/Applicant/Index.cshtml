@@ -1,138 +1,162 @@
-﻿@model FinalProject.Models.Applicant
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<FinalProject.Models.Applicant>
 
 @{
-    ViewBag.Title = "Applicant";
+    ViewBag.Title = "Applicant Index";
 
 }
 
+<div>
+    @using (Html.BeginForm())
+    {
+        <div class="container well well-lg" style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
+            <br />
+            <div style="margin-bottom:100px; text-align:left">
+                <p style="text-align:center;  margin-bottom:15px; font-size:30px; color:#02388a;"> Niagara Catholic District School Board</p>
+                <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
+                <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
+                <br />
 
-<div class="container well well-lg" style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
-    <br />
-    <div style="margin-bottom:100px; text-align:left">
-        <p style="text-align:center;  margin-bottom:15px; font-size:30px; color:#02388a;"> Niagara Catholic District School Board</p>
-        <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
-        <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
-        <br /> 
+                <h3 style="text-align:center; padding-bottom:10px">
+                    ∙ &nbsp; All Applicants &nbsp; ∙
+                </h3>
 
-        <h3 style="text-align:center; padding-bottom:10px">
-        ∙ &nbsp; All Applicants &nbsp; ∙
-       </h3>
+                <div style="padding-bottom:50px; margin-left:165px">
+                    <h3 style="padding-top:20px; padding-bottom:10px; border:none; font-size:20px;">
+                        Search Applicants:
+                    </h3>
+                    @Html.TextBox("txtApplicantSearch", null, new { @class = "form-control", @style = "display:inline-block", @runat = "server" })
+                    <button ID="btnApplicantSearch" style="border: 2px solid black;" class="btn btn-sm" type="submit">Search</button>
+                </div>
 
-        <div style="padding-bottom:50px; margin-left:165px">
-            <h3 style="padding-top:20px; padding-bottom:10px; border:none; font-size:20px;">
-                Search Applicants:
-            </h3>
-            @Html.TextBox("txtApplicantSearch", null, new { @class = "form-control", @style = "display:inline-block", @runat = "server" })
-            <button ID="btnApplicantSearch" style="border: 2px solid black;" class="btn btn-sm" type="submit">Search</button>
-        </div>
+                @Html.Label("lblResult", " Results found: 7", new { @style = "color:green; margin-left:165px" })
+                <br /><br />
+                <div class="container">
+                    <table class="table table-bordered" style="width:75%; margin:0 auto">
+                        <thead style="color:white; font-size:18px; background-color:#012e72">
+                            <tr>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Status</th>
+                                <th>City</th>
+                                <th>Last Logged In</th>
+                                <th>View</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableColor" style="font-size:17px; text-align:left">
+                            <tr>
+                                <td>Jose Pabalinas</td>
 
-            @Html.Label("lblResult", " Results found: 7", new { @style = "color:green; margin-left:165px" })
-            <br /><br />
-            <div class="container">
-                <table class="table table-bordered" style="width:75%; margin:0 auto">
-                    <thead style="color:white; font-size:18px; background-color:#012e72">
-                        <tr>
-                            <th>Name</th>
-                            <th>Phone</th>
-                            <th>Status</th>
-                            <th>City</th>
-                            <th>Last Logged In</th>
-                            <th>View</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tableColor" style="font-size:17px; text-align:left">
-                        <tr>
-                            <td>Jose Pabalinas</td>
+                                <td>9054563678</td>
+                                <td>Hired</td>
+                                <td>Welland</td>
+                                <td>February 5,2018</td>
+                                <th>
+                                    @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-default", @style = "border:0px; background-color:#f5f5f5;" })
+                                </th>
 
-                            <td>9054563678</td>
-                            <td>Hired</td>
-                            <td>Welland</td>
-                            <td>February 5,2018</td>
-                            <th>
-                                @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-default", @style = "border:0px; background-color:#f5f5f5;" })
-                            </th>
+                            </tr>
+                            <tr>
+                                <td>Mark Aceno</td>
 
-                        </tr>
-                        <tr>
-                            <td>Mark Aceno</td>
-
-                            <td>2895676569</td>
-                            <td>Hired</td>
-                            <td>St. Catharines</td>
-                            <td>February 2, 2018</td>
-                            <th>
-                                @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-default", @style = "border:0px;" })
-                            </th>
+                                <td>2895676569</td>
+                                <td>Hired</td>
+                                <td>St. Catharines</td>
+                                <td>February 2, 2018</td>
+                                <th>
+                                    @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-default", @style = "border:0px;" })
+                                </th>
 
 
-                        <tr>
-                            <td>John Balili</td>
+                            <tr>
+                                <td>John Balili</td>
 
-                            <td>9054511216</td>
-                            <td>Vacation</td>
-                            <td>Welland</td>
-                            <td>January 21, 2018</td>
-                            <th>
-                                @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-default", @style = "border:0px; background-color:#f5f5f5;" })
-                            </th>
-                        </tr>
-                        <tr>
-                            <td>Joharie Mallo</td>
+                                <td>9054511216</td>
+                                <td>Vacation</td>
+                                <td>Welland</td>
+                                <td>January 21, 2018</td>
+                                <th>
+                                    @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-default", @style = "border:0px; background-color:#f5f5f5;" })
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>Joharie Mallo</td>
 
-                            <td>9054565553</td>
-                            <td>Waiting</td>
-                            <td>Hamilton</td>
-                            <td>February 7, 2018</td>
-                            <th>
-                                @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-default", @style = "border:0px;" })
-                            </th>
-                        </tr>
-                        <tr>
-                            <td>Jake Rocero</td>
+                                <td>9054565553</td>
+                                <td>Waiting</td>
+                                <td>Hamilton</td>
+                                <td>February 7, 2018</td>
+                                <th>
+                                    @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-default", @style = "border:0px;" })
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>Jake Rocero</td>
 
-                            <td>9054563678</td>
-                            <td>Waiting</td>
-                            <td>St. Catharines</td>
-                            <td>February 2, 2018</td>
-                            <th>
-                                @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-default", @style = "border:0px; background-color:#f5f5f5;" })
-                            </th>
+                                <td>9054563678</td>
+                                <td>Waiting</td>
+                                <td>St. Catharines</td>
+                                <td>February 2, 2018</td>
+                                <th>
+                                    @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-default", @style = "border:0px; background-color:#f5f5f5;" })
+                                </th>
 
-                        </tr>
-                        <tr>
-                            <td>Torlan Mogas</td>
+                            </tr>
+                            <tr>
+                                <td>Torlan Mogas</td>
 
-                            <td>9045563678</td>
-                            <td>Hired</td>
-                            <td>Grimsby</td>
-                            <td>February 2, 2018</td>
-                            <th>
-                                @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-default", @style = "border:0px;" })
-                            </th>
-                        </tr>
-                        <tr>
-                            <td>Rulan Qogas</td>
+                                <td>9045563678</td>
+                                <td>Hired</td>
+                                <td>Grimsby</td>
+                                <td>February 2, 2018</td>
+                                <th>
+                                    @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-default", @style = "border:0px;" })
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>Rulan Qogas</td>
 
-                            <td>9045555678</td>
-                            <td>Vacation</td>
-                            <td>Welland</td>
-                            <td>February 7, 2018</td>
-                            <th>
-                                @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-default", @style = "border:0px; background-color:#f5f5f5;" })
-                            </th>
-                        </tr>
-                    </tbody>
-                </table>
+                                <td>9045555678</td>
+                                <td>Vacation</td>
+                                <td>Welland</td>
+                                <td>February 7, 2018</td>
+                                <th>
+                                    @Html.ActionLink("View", "Details", "Applicant", null, new { @class = "btn btn-default", @style = "border:0px; background-color:#f5f5f5;" })
+                                </th>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    @* Page counts  *@
+                    <span id="filterMessage" class="text-danger">@((Model.Count() == 0) ? "Zero postings found.  No records match your criteria." : "")</span>
+                    <input type="hidden" name="sortDirection" value="@ViewBag.sortDirection" />
+                    <input type="hidden" name="sortField" value="@ViewBag.sortField" />
+                    <br />
+                    Page:  @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+
+                    @Html.PagedListPager(Model, page => Url.Action("Index",
+new
+{
+page,
+sortDirection = ViewBag.sortDirection,
+sortField = ViewBag.sortField,
+searchName = ViewBag.searchName
+}))
+
+                </div>
             </div>
+            @*<a href="javascript:void(0);" style="margin-bottom:60px; margin-top:40px;margin-left:165px" onclick="history.go(-1);">Back</a>*@
         </div>
-    <a href="javascript:void(0);" style="margin-bottom:60px; margin-top:40px;margin-left:165px" onclick="history.go(-1);">Back</a>
- </div>
-
-           
-            
 
 
-           
+    }
+</div>
+
+
+
+
 
 
 
