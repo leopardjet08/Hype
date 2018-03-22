@@ -83,8 +83,8 @@
 
                                 @* Buttons in the table *@
                                 <td style="text-align:center; font-size:14px">
-                                    @Html.ActionLink("View", "Details", new { id = item.ID }, new { @style = "border:0px;" })
-                                    &nbsp;@Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @style = "border:0px; " })
+                                    @Html.ActionLink("View", "Details", "Application", new { id = item.ID }, new { @style = "border:0px;" })
+                                    &nbsp;@Html.ActionLink("Delete", "Delete", "Application", new { id = item.ID }, new { @style = "border:0px; " })
                                 </td>
                             </tr>
                         }
