@@ -1,46 +1,63 @@
 ﻿@model FinalProject.Models.Applicant
 
+@{
+    ViewBag.Title = "Applicant Details";
+}
+
+<div>
+    <div class="container well well-lg" style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
+
+        <p style="text-align:center; margin-top:20px; margin-bottom:15px; font-size:30px; color:#02388a;"> Niagara Catholic District School Board</p>
+        <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
+        <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
+        <br />
+
+        <div style="margin:0 auto">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <h3 style="text-align:center; padding-bottom:30px">
+                ∙ &nbsp; My Profile &nbsp; ∙
+            </h3>&nbsp;&nbsp;
+
+            <div  style="margin:0 auto; text-align:center; ">
+                <img src="https://www.w3schools.com/w3images/team2.jpg" alt="Image is not in database" style="width:50%; ">
+                
+            </div>
+            
+            <br />
+
+            <div style="text-align:center">
+
+                <strong> First name: </strong> @Html.DisplayFor(model => model.FName) <br>
+                <br>
+                <strong>Last name: </strong> @Html.DisplayFor(model => model.LName)<br>
+                <br>
+                <strong> Address: </strong> @Html.DisplayFor(model => model.Address)<br>
+                <br>
+                <strong> Email: </strong>@Html.DisplayFor(model => model.eMail)<br>
+                <br>
+                <strong> Phone Number: </strong>@*@Html.DisplayFor(model => model.Phone)*@Not In Database<br>
+                <br>
+
+                &nbsp;@Html.ActionLink("Edit Profile", "Edit", new { id = Model.ID }, new { @class = "btn btn-primary btn-large", @style = "border:none; padding-right:50px; padding-left:50px; margin-right:50px;" })
+
+                <br /><hr />
+
+                <h1>
+                    Resume
+                </h1>
+
+                <p><strong>Upload Resume:</strong> </p>
+                <br>
+                <input type="file" id="myFile" style="display:inline">
+                <br>
+                <input type="button" value="View" class="btn btn-default" />
+                <input type="button" value="Download" class="btn btn-default" />
+                <input type="button" value="Remove" class="btn btn-default" />
+                <input type="button" value="Add" class="btn btn-default" />
+
+            </div>
 
 
-<div class="card">
-
-    <h2>My Profile</h2>
-    <hr />
-
-    <img src="https://www.w3schools.com/w3images/team2.jpg" alt="John" style="width:100%">
-    <strong> First name:</strong> <input type="text" name="fname" value="Joe peter"><br>
-    <br>
-    <strong>Last name: </strong><input type="text" name="lname" value="Mortalon"><br>
-    <br>
-    <strong> Address:</strong> <input type="text" name="lname" value="454 Welland street, Ontario"><br>
-    <br>
-    <strong> Email: </strong><input type="text" name="lname" value="johndoe5656@hotmail.ca"><br>
-    <br>
-    <strong> Phone Number: </strong><input type="text" name="lname" value=" 905356457486"><br>
-    <br>
-    <input type="button" value="Edit Profile" class="btn btn-default" />
-    <input type="button" value="Change Picture" class="btn btn-default" />
+    </div>
+ </div>
 </div>
-<br>
-<h1>
-    Resume
-</h1>
-<div class="card">
-    <p><strong>Upload Resume:</strong> </p>
-    <input type="file" id="myFile">
-    <br>
-    <input type="button" value="View" class="btn btn-default" />
-    <input type="button" value="Download" class="btn btn-default" />
-    <input type="button" value="Remove" class="btn btn-default" />
-    <input type="button" value="Add" class="btn btn-default" />
-</div>
-
-
-<style>
-    .card {
-        box-shadow: 0 9px 8px 0 rgba(0, 0, 0, 0.2);
-        max-width: 500px;
-        margin: auto;
-        font-family: arial;
-    }
-</style>

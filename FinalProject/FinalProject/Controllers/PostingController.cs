@@ -334,7 +334,7 @@ namespace FinalProject.Controllers
 
         }
 
-        private SelectList jobSelectList(int? selectedID)
+        private SelectList JobSelectList(int? selectedID)
         {
             var dQuery = from d in db.Jobs.AsNoTracking()
                          orderby d.JobTitle
@@ -369,7 +369,7 @@ namespace FinalProject.Controllers
 
             return new SelectList(JetQuery, "ID", "SkillName", selectedID);
         }
-        private SelectList descSelectedList(int? selectedID)
+        private SelectList DescSelectedList(int? selectedID)
         {
             var JetQuery = from e in db.Jobs  where e.ID == selectedID select e;
 
@@ -390,7 +390,7 @@ namespace FinalProject.Controllers
         [HttpGet]
         public ActionResult GetJobs(int? JobID)
         {
-            SelectList jobs = jobSelectList(JobID);
+            SelectList jobs = JobSelectList(JobID);
             return Json(jobs, JsonRequestBehavior.AllowGet);
         }
 
@@ -423,7 +423,7 @@ namespace FinalProject.Controllers
         public ActionResult GetDesc(int? JobID)
         {
 
-            SelectList req = descSelectedList(JobID);
+            SelectList req = DescSelectedList(JobID);
             return Json(req, JsonRequestBehavior.AllowGet);
         }
 
