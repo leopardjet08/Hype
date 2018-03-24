@@ -119,7 +119,35 @@
                 $('#CityID').fadeToggle(400, function () {
                     $('#CityID').fadeToggle(400);
                 });
-            });
+                                        });
+
+
+                                        $(function () {
+
+                                            $("#maxs").slider({
+
+                                                range: "max",
+
+                                                min: 0.0,
+
+                                                max: 1.5,
+
+                                                step=0.1,
+
+                                                value: 0.0,
+
+                                                slide: function (event, ui) {
+
+                                                    $("#amount").val(ui.value);
+
+                                                }
+
+                                            });
+
+                                            $("#amount").val($("#maxs").slider("value"));
+
+                                        });
+
                                     </script>
                                 }
 
@@ -158,8 +186,13 @@
                                 <h4>@Html.LabelFor(model => model.fte, "FTE: ")</h4>
                             </td>
                             <td style="padding-bottom:15px;">
-                                <input type="range" id="range" onInput="sliderChange(this.value)" min="0.0" max="1.5" step="0.1" value="0.0">
-                                <br /><span id="sliderStatus">0.0</span>
+                                @Html.EditorFor(model => model.NumberOpen, new { htmlAttributes = new { @class = "amount" } })
+                                
+                                <input type="range" id="amount" onInput="sliderChange(this.value)" min="0.0" max="1.5" step="0.1" value="0.0">
+
+                                <div id="maxs" class="maxs"></div>
+                                
+
                             </td>
                         </tr>
                         <tr>

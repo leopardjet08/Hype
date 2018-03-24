@@ -20,7 +20,7 @@ namespace FinalProject.Controllers
             
             ViewBag.Filtering = "";
 
-            var postings = from s in db.Postings select s;
+            var postings = from s in db.Postings where ((DateTime)s.ClosingDate >= DateTime.Today) select s;
 
             ViewBag.ShowList = false;
 
