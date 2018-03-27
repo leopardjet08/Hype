@@ -18,21 +18,20 @@
                 <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
                 <br />
 
-                <h3 style="text-align:center; padding-bottom:10px">
-                    ∙ &nbsp; All Applicants &nbsp; ∙
-                </h3>
-
-                <div style="padding-bottom:50px; margin-left:165px">
-                    <h3 style="padding-top:20px; padding-bottom:10px; border:none; font-size:20px;">
-                        Search Applicants:
-                    </h3>
-                    @Html.TextBox("txtApplicantSearch", null, new { @class = "form-control", @style = "display:inline-block", @runat = "server" })
-                    <button ID="btnApplicantSearch" style="border: 2px solid black;" class="btn btn-sm" type="submit">Search</button>
-                </div>
-
-                @Html.Label("lblResult", " Results found: 7", new { @style = "color:green; margin-left:165px" })
-                <br /><br />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <h3 style="padding-top:10px; text-align:center;">
+                    ∙ &nbsp; All Applicants List &nbsp; ∙
+                </h3>&nbsp;&nbsp;
                 <div class="container">
+
+                    @* Search function  *@
+
+                    <div style="padding-bottom:50px; text-align:center">
+
+                        @Html.TextBox("searchName", null, new { @class = "form-control", @style = "margin:0 auto", @placeholder = "Search Job Title..." })
+                        <br />
+                        <input type="submit" name="actionButton" value="Search" style="border: none; font-weight:bold; color:white; background-color:#00a203;" class="btn-primary btn-sm" />
+                    </div>
                     <table class="table table-bordered" style="width:75%; margin:0 auto">
                         <thead style="color:white; font-size:18px; background-color:#012e72">
                             <tr>
@@ -57,56 +56,56 @@
                         <tbody id="tableColor" style="font-size:17px; text-align:left">
                             @* Data in the table *@
                             @foreach (var item in Model)
-                            {
+                {
 
-                                <tr>
-                                    <td style="text-align:center;">
-                                        @Html.ActionLink(item.FullName, "Details", new { id = item.ID })
+                    <tr>
+                        <td style="text-align:center;">
+                            @Html.ActionLink(item.FullName, "Details", new { id = item.ID })
 
-                                    </td>
-                                    <td style="text-align:center;">
-                                        @*@Html.DisplayFor(modelItem => item.Phone)*@
-                                        Not in Database
-                                    </td>
-                                    <td class="company" style="text-align:center;">
-                                        @Html.DisplayFor(modelItem => item.City.CityName)
-                                    </td>
-                                    <td style="text-align:center;">
-                                        @Html.DisplayFor(modelItem => item.CreatedOn)
+                        </td>
+                        <td style="text-align:center;">
+                            @*@Html.DisplayFor(modelItem => item.Phone)*@
+                            Not in Database
+                        </td>
+                        <td class="company" style="text-align:center;">
+                            @Html.DisplayFor(modelItem => item.City.CityName)
+                        </td>
+                        <td style="text-align:center;">
+                            @Html.DisplayFor(modelItem => item.CreatedOn)
 
-                                    </td>
+                        </td>
 
-                                    @* Buttons in the table *@
-                                    <td style="text-align:center; font-size:14px">
-                                        @Html.ActionLink("View", "Details", new { id = item.ID }, new { @style = "border:0px;" })
-                                        &nbsp;@Html.ActionLink("Archive", "Archive", new { id = item.ID }, new { @style = "border:0px;" })
+                        @* Buttons in the table *@
+                        <td style="text-align:center; font-size:14px">
+                            @Html.ActionLink("View", "Details", new { id = item.ID }, new { @style = "border:0px;" })
+                            &nbsp;@Html.ActionLink("Archive", "Archive", new { id = item.ID }, new { @style = "border:0px;" })
 
-                                    </td>
-                                </tr>
+                        </td>
+                    </tr>
 
-                            }
-                            </tbody>
-                        </table>
+    }
+                        </tbody>
+                    </table>
 
-                        @* Page counts  *@
-                        <span id="filterMessage" class="text-danger">@((Model.Count() == 0) ? "Zero postings found.  No records match your criteria." : "")</span>
-                        <input type="hidden" name="sortDirection" value="@ViewBag.sortDirection" />
-                        <input type="hidden" name="sortField" value="@ViewBag.sortField" />
-                        <br />
-                        Page:  @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                    @* Page counts  *@
+                    <span id="filterMessage" class="text-danger">@((Model.Count() == 0) ? "Zero postings found.  No records match your criteria." : "")</span>
+                    <input type="hidden" name="sortDirection" value="@ViewBag.sortDirection" />
+                    <input type="hidden" name="sortField" value="@ViewBag.sortField" />
+                    <br />
+                    Page:  @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
 
-                        @Html.PagedListPager(Model, page => Url.Action("Index",
-         new
-         {
-             page,
-             sortDirection = ViewBag.sortDirection,
-             sortField = ViewBag.sortField,
-             searchName = ViewBag.searchName
-         }))
+                    @Html.PagedListPager(Model, page => Url.Action("Index",
+new
+{
+  page,
+  sortDirection = ViewBag.sortDirection,
+  sortField = ViewBag.sortField,
+  searchName = ViewBag.searchName
+}))
 
-                    </div>
                 </div>
+            </div>
                 @*<a href="javascript:void(0);" style="margin-bottom:60px; margin-top:40px;margin-left:165px" onclick="history.go(-1);">Back</a>*@
             </div>
         
