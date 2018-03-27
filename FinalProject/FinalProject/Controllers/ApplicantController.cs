@@ -28,7 +28,7 @@ namespace FinalProject.Controllers
 
             if (!String.IsNullOrEmpty(searchName))
             {
-                applicants = applicants.Where(p => p.FullName.ToUpper().Contains(searchName.ToUpper()));
+                applicants = applicants.Where(p => p.FName.ToUpper().Contains(searchName.ToUpper()) || p.LName.ToUpper().Contains(searchName.ToUpper()) );
                 ViewBag.Filtering = " in";
                 ViewBag.searchName = searchName;
             }
@@ -53,12 +53,12 @@ namespace FinalProject.Controllers
                 if (String.IsNullOrEmpty(sortDirection))
                 {
                     applicants = applicants
-                        .OrderBy(p => p.FullName);
+                        .OrderBy(p => p.LName);
                 }
                 else
                 {
                     applicants = applicants
-                        .OrderByDescending(p => p.FullName);
+                        .OrderByDescending(p => p.LName);
                 }
             }
             
@@ -67,12 +67,12 @@ namespace FinalProject.Controllers
                 if (String.IsNullOrEmpty(sortDirection))
                 {
                     applicants = applicants
-                        .OrderBy(p => p.FullName);
+                        .OrderBy(p => p.FName);
                 }
                 else
                 {
                     applicants = applicants
-                        .OrderByDescending(p => p.FullName);
+                        .OrderByDescending(p => p.FName);
                 }
             }
 
@@ -87,6 +87,11 @@ namespace FinalProject.Controllers
             return View(applicants.ToPagedList(pageNumber, pageSize));
         }
         public ActionResult Details()
+        {
+            return View();
+        }
+
+        public ActionResult Archive()
         {
             return View();
         }
