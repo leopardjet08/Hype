@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -17,6 +18,12 @@ namespace FinalProject.Models
         }
 
         public int ID { get; set; }
+
+        [Index("IX_Unique_JobCode", IsUnique = true)]
+        [Display(Name = "Code")]
+        [Required(ErrorMessage = "Job Code Required.")]
+        [StringLength(20, ErrorMessage = "Cannot be longer than 20 characters.")]
+        public string JobCode { get; set; }
 
         [Display(Name = "Title")]
         [Required(ErrorMessage = "Job title Required.")]
