@@ -77,88 +77,91 @@
 
     @if (ViewBag.ShowList)
     {
-        <div id="postingResults" width:75%; margin:0 auto;">
-            <br />
-            <br />
-            <div class="borderVibe" style="border:1px solid #d5d2d2; background-color:white; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
+    <div id="postingResults" width:75%; margin:0 auto;">
+        <br />
+        <br />
+        <div class="borderVibe" style="border:1px solid #d5d2d2; background-color:white; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
 
-                @foreach (var item in Model)
-                {
+            @foreach (var item in Model)
+        {
 
-                <div id="searchResult" style="font-size:16px; background-color:white; margin-top:30px; margin-left:30px; margin-right:30px; border-bottom:none">
-                    @Html.ActionLink(item.Job.JobTitle, "Details", new { id = item.ID }, new { @style = "font-weight:bold; font-size:16px; color:#012e72" })
-                    <br />
-                    <div style="color:#012e72;">
-                        @Html.DisplayFor(modelItem => item.School.SchoolName) - @Html.DisplayFor(modelItem => item.School.City.CityName), ON
-                        <br />
-                    </div>
-                   
-                    @Html.DisplayFor(modelItem => item.PostingDescription)
-                    <br />
-                    <br />
-                    @Html.ActionLink("Apply", "Details", "Posting", new { id = item.ID }, new { @class = "btn btn-primary btn-sm", @style = "border:none; font-weight:bold; background-color:#00a203" })
-                    @*@Html.ActionLink("Save", "Details", "", new { id = item.ID }, new { @class = "btn btn-primary btn-sm", @style = "border:none; font-weight:bold; background-color:#012e72" })*@
-                    &nbsp; &nbsp; @Html.ActionLink("Save", "", "", new { @style = "color:#012e72; font-size:14px" })
-                </div>
-                    <br />
-                    <br />
-
-                }
-            </div>
-
-            <div style="text-align:center" >
-                @* Page counts  *@
-                <span id="filterMessage" class="text-danger">@((Model.Count() == 0) ? "Zero postings found.  No records match your criteria." : "")</span>
-                <input type="hidden" name="sortField" value="@ViewBag.sortField" />
+            <div id="searchResult" style="font-size:16px; background-color:white; margin-top:30px; margin-left:30px; margin-right:30px; border-bottom:none">
+                @Html.ActionLink(item.Job.JobTitle, "Details", new { id = item.ID }, new { @style = "font-weight:bold; font-size:16px; color:#012e72" })
                 <br />
-                Page:  @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                <div style="color:#012e72;">
+                    @Html.DisplayFor(modelItem => item.School.SchoolName) - @Html.DisplayFor(modelItem => item.School.City.CityName), ON
+                    <br />
+                </div>
 
-                @Html.PagedListPager(Model, page => Url.Action("Index",
-                            new { page, sortField = ViewBag.sortField, searchName = ViewBag.searchName }
-                            ))
-
+                @Html.DisplayFor(modelItem => item.PostingDescription)
+                <br />
+                <br />
+                @Html.ActionLink("Apply", "Details", "Posting", new { id = item.ID }, new { @class = "btn btn-primary btn-sm", @style = "border:none; font-weight:bold; background-color:#00a203" })
+                @*@Html.ActionLink("Save", "Details", "", new { id = item.ID }, new { @class = "btn btn-primary btn-sm", @style = "border:none; font-weight:bold; background-color:#012e72" })*@
+                &nbsp; &nbsp; @Html.ActionLink("Save", "", "", new { @style = "color:#012e72; font-size:14px" })
             </div>
-        </div>
+            <br />
+            <br />
+
     }
+        </div>
+        <div style="text-align:center">
+            @* Page counts  *@
+            <span id="filterMessage" class="text-danger">@((Model.Count() == 0) ? "Zero postings found.  No records match your criteria." : "")</span>
+            <input type="hidden" name="sortField" value="@ViewBag.sortField" />
+            <br />
+            Page:  @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
+            @Html.PagedListPager(Model, page => Url.Action("Index",
+                              new { page, sortField = ViewBag.sortField, searchName = ViewBag.searchName }
+                              ))
 
-        <div style=" margin-bottom:100px"></div>
-
-        <div class="row" style="text-align:center; margin:0 auto" ;>
-            <div class="col-md-4">
-                <p>
-                    <a href="#" data-target="#subModal" data-toggle="modal"><img src="Images/Subscribe.png" style="height:60px" /></a>
-                </p>
-                <h4>Subscribe</h4>
-            </div>
-
-            <div class="col-md-4">
-                <p>
-                    <a href="#"><img src="Images/FAQ.png" style="height:60px" /></a>
-                </p>
-                <h4>Frequently Asked Questions</h4>
-            </div>
-
-            <div class="col-md-4">
-                <p>
-                    <a href="#"><img src="Images/About.png" style="height:60px" /></a>
-                </p>
-                <h4>About Us</h4>
-            </div>
         </div>
 
-        <p style="padding-top:100px;">
-            Follow us on social media:
-        </p>
+    </div>
+    }
+    
 
-        <div style="padding-top:20px;">
+    <div style="text-align:center; color:red"> total posting: @ViewBag.total </div> 
+
+
+    <div style=" margin-bottom:100px"></div>
+
+    <div class="row" style="text-align:center; margin:0 auto" ;>
+        <div class="col-md-4">
             <p>
-                <a href="https://www.facebook.com/NiagaraCatholicDSB/"><img src="Images/facebook.png" style="height:30px;" /></a>&nbsp;&nbsp;
-                <a href="https://twitter.com/niagaracatholic"><img src="Images/twitter.png" style="height:30px;" /></a>&nbsp;&nbsp;
-                <a href="https://www.youtube.com/user/NiagaraCatholicDSB"><img src="Images/youtube.png" style="height:30px;" /></a><br />
+                <a href="#" data-target="#subModal" data-toggle="modal"><img src="Images/Subscribe.png" style="height:60px" /></a>
             </p>
+            <h4>Subscribe</h4>
+        </div>
+
+        <div class="col-md-4">
+            <p>
+                <a href="#"><img src="Images/FAQ.png" style="height:60px" /></a>
+            </p>
+            <h4>Frequently Asked Questions</h4>
+        </div>
+
+        <div class="col-md-4">
+            <p>
+                <a href="#"><img src="Images/About.png" style="height:60px" /></a>
+            </p>
+            <h4>About Us</h4>
         </div>
     </div>
+
+    <p style="padding-top:100px;">
+        Follow us on social media:
+    </p>
+
+    <div style="padding-top:20px;">
+        <p>
+            <a href="https://www.facebook.com/NiagaraCatholicDSB/"><img src="Images/facebook.png" style="height:30px;" /></a>&nbsp;&nbsp;
+            <a href="https://twitter.com/niagaracatholic"><img src="Images/twitter.png" style="height:30px;" /></a>&nbsp;&nbsp;
+            <a href="https://www.youtube.com/user/NiagaraCatholicDSB"><img src="Images/youtube.png" style="height:30px;" /></a><br />
+        </p>
+    </div>
+</div>
 
 
 
