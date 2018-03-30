@@ -230,6 +230,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Archive.cs" />
+    <Compile Include="Models\DataModel\aFile.cs" />
     <Compile Include="Models\DataModel\Applicant.cs" />
     <Compile Include="Models\DataModel\Application.cs" />
     <Compile Include="Models\DataModel\ApplicationStatus.cs" />
