@@ -26,7 +26,6 @@ namespace FinalProject.DAL
         public DbSet<Application> Applications { get; set; }
         public DbSet<BestCandidate> BestCandidates { get; set; }
         public DbSet<SavedPosting> SavedPostings { get; set; }
-        public DbSet<UserPhoto> UserPhotos { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

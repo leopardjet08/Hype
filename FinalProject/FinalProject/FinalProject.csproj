@@ -232,6 +232,7 @@
     <Compile Include="Models\Archive.cs" />
     <Compile Include="Models\DataModel\aFile.cs" />
     <Compile Include="Models\DataModel\Applicant.cs" />
+    <Compile Include="Models\DataModel\ApplicantImage.cs" />
     <Compile Include="Models\DataModel\Application.cs" />
     <Compile Include="Models\DataModel\ApplicationStatus.cs" />
     <Compile Include="Models\DataModel\Auditable.cs" />
