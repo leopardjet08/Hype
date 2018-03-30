@@ -42,94 +42,98 @@
                 ∙ &nbsp; Apply for Job &nbsp; ∙
             </h3>&nbsp;&nbsp;
 
-            <table style="width:70%; margin:0 auto; font-size:18px">
-                <tr>
-                    <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.Posting.Job.JobTitle)  :  </b></h4></td>
-                    <td>Job title - dummy text</td>
-                    <td style="width:10px"></td>
-                    <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.Posting.ClosingDate)  :  </b></h4></td>
-                    <td>Closing date - dummy text</td>
-                </tr>
+            <div class="borderVibe" style="width:90%; border:1px solid #d5d2d2; background-color:white; margin:0 auto; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
+                <div style="text-align:center; margin-top:60px; margin-bottom:60px ">
+                    <h4>[ Insert Job Title Here ]</h4>
+                </div>
 
-                <tr style="height:60px">
-                    <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.Posting.School.SchoolName) :  </b></h4></td>
-                    <td>School name - dummy text</td>
-                    <td style="width:10px"></td>
-                    <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.Posting.StartDate)  :  </b></h4></td>
-                    <td>Start date - dummy text</td>
-                </tr>
-                <tr>
-                    <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.Posting.School.SchoolFamily)  :  </b></h4></td>
-                    <td>School family - dummy text</td>
-                    <td style="width:10px"></td>
-                    <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.Posting.Job.Qualifications)  :  </b></h4></td>
-                    <td>
-                        Qualifications - dummy text
+                <div style="margin-left:286px;">
 
-                        @*@{
-                        foreach (var qualification in Model.Job.Qualifications)
-                            {
-                                @:  @qualification.QualificationSet <br />
-                            }
-                        }*@
-                    </td>
-                </tr>
-                <tr style="height:60px">
-                    <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.Posting.School.City.CityName)  :  </b></h4></td>
-                    <td>City - dummy text</td>
-                    <td style="width:10px"></td>
-                    <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.Posting.Job.Requirements)  :  </b></h4></td>
-                    <td>
-                        Requirements - dummy text
-                        @*@{
-                        foreach (var requirments in model.Job.Requirements)
-                        {
-                            @:  @requirments.RequirementName <br />
-                        }
-                        }*@
-                    </td>
-                </tr>
+                    <div style="margin-bottom:50px">
+                        <p style="font-weight:bold">Upload Resume:</p>
+                        <input type="file" id="myFile">
+                        <br>
+                        @Html.ActionLink("Remove", "")
+                    </div>
+                    <div class="form-horizontal">
+                        <table style="font-size:18px; width:70%;">
+                            <tr>
+                                <td><h4 style="color:#02388a"><b>@Html.DisplayNameFor(model => model.Posting.fte)  :  </b></h4></td>
+                                <td>FTE - dummy text</td>
+                            </tr>
+                            <tr>
+                                <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.Posting.School.SchoolName) :  </b></h4></td>
+                                <td>School name - dummy text</td>
+                            </tr>
+                            <tr>
+                                <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.Posting.School.SchoolFamily)  :  </b></h4></td>
+                                <td>School family - dummy text</td>
+                            </tr>
+                            <tr>
+                                <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.Posting.School.City.CityName)  :  </b></h4></td>
+                                <td>City - dummy text</td>
+                            </tr>
+                            <tr style="height:50px">
+                                <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.Posting.NumberOpen)  :  </b></h4></td>
+                                <td>Number Open - dummy text</td>
+                            </tr>
+                            <tr>
+                                <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.Posting.ClosingDate)  :  </b></h4></td>
+                                <td>Closing date - dummy text</td>
+                            </tr>
+                            <tr>
+                                <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.Posting.StartDate)  :  </b></h4></td>
+                                <td>Start date - dummy text</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <br />
 
+                    <div style="margin-bottom:50px">
 
-                <tr style="height:50px">
-                    <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.Posting.NumberOpen)  :  </b></h4></td>
-                    <td>Number Open - dummy text</td>
-                    <td style="color:#f5f5f5; width:10px"></td>
-                    <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.Posting.Job.Skills)  :</b></h4></td>
-                    <td>
-                        Skills - dummy text
-                        @*@{
-                        foreach (var skills in Model.Job.Skills)
-                        {
-                            @:  @skills.SkillName <br />
-                        }
-                        }*@
-                    </td>
-                </tr>
-            </table><br />
-                    <div style="margin-left:186px">
-
-                        <div>
-                            <p>Upload Resume:</p>
-                            <input type="file" id="myFile">
-                            <br>
-                            <input type="button" value="Remove" class="btn btn-default"/>                
-                        </div>
-
-                        <p><h4 style="color:#02388a"><b>@Html.DisplayNameFor(model => model.Posting.fte)  :  </b></h4></p>
-                        <p>FTE - dummy text</p>
                         <br />
                         <h4 style="color:#02388a"><b>@Html.DisplayNameFor(model => model.Posting.PostingDescription)  :  </b></h4>
-                        <p style="width:900px;  font-size:18px">
+                        <p style="width:900px; font-size:18px">
                             Job Description - dummy text
                         </p>
-                    </div>
+                        <br />
 
-            <div style="margin-top:30px; margin-left:550px">
-                @*&nbsp;@Html.ActionLink("Submit", "", new { id = Model.ID }, new {data_toggle="modal", data_target="#applyModal", @class="btn btn-default"})*@
-                <button ID="btnConfirmApply" data-target="#applyModal" data-toggle="modal" class="btn btn-default" type="submit">Submit Application</button>
-                <a href="javascript:void(0);" onclick="history.go(-1);">Back</a>
+                        <div style="margin-bottom:50px">
+                            <h4 style="color:#02388a"><b>@Html.DisplayNameFor(model => model.Posting.Job.Requirements)  : </b></h4>
+                            <p style="font-size:18px">Requirements - dummy text</p>
+                            @*@{foreach (var requirments in model.Job.Requirements)
+                            {@:  @requirments.RequirementName <br />  } }*@
+                        </div>
+
+                        <div style="margin-bottom:50px">
+                            <h4 style="color:#02388a"><b>@Html.DisplayNameFor(model => model.Posting.Job.Qualifications)  :  </b></h4>
+                            <p style="font-size:18px;">
+                                Qualifications - dummy text
+                                @*@{foreach (var qualification in Model.Job.Qualifications)
+                                {@:  @qualification.QualificationSet <br /> } }*@
+                            </p>
+                        </div>
+
+                        <div style="margin-top:20px; margin-bottom:20px">
+                            <h4 style="color:#02388a"><b>@Html.DisplayNameFor(model => model.Posting.Job.Skills)  :</b></h4>
+                            <p style="font-size:18px;">Skills - dummy text </p>
+                            @*@{foreach (var skills in Model.Job.Skills)
+                            { @:  @skills.SkillName <br /> }  }*@
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin:0 auto; text-align:center">
+                    <div style="margin-top:30px; margin-bottom:50px;">
+                        @*&nbsp;@Html.ActionLink("Submit", "", new { id = Model.ID }, new {data_toggle="modal", data_target="#applyModal", @class="btn btn-default"})*@
+                        <button ID="btnConfirmApply" data-target="#applyModal" data-toggle="modal" style="background-color:#00a203; margin:0 auto; border:none" class="btn btn-primary btn-large" type="submit">Submit Application</button>
+                        <br />
+                        <br />
+                        <a href="javascript:void(0);" onclick="history.go(-1);">Back</a>
+                    </div>
+                </div>
+
             </div>
-        </div>
-    </div>
+      </div>
+   </div>
 </div>
