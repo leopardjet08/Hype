@@ -24,5 +24,6 @@ namespace FinalProject.Models
         public string QualificationSet { get; set; }
         
         public virtual ICollection<Job> Jobs { get; set; }
+        public virtual ICollection<Posting> Postings { get; set; }
     }
 }

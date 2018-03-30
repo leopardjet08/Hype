@@ -23,5 +23,6 @@ namespace FinalProject.Models.DataModel
         public string SkillName { get; set; }
 
         public virtual ICollection<Job> Jobs { get; set; }
+        public virtual ICollection<Posting> Postings { get; set; }
     }
 }
