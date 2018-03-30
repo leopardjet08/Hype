@@ -20,7 +20,6 @@ namespace FinalProject.Models
         [Display(Name = "Qualifications")]
         [Required(ErrorMessage = "You cannot leave the name of the qualification blank.")]
         [StringLength(255, ErrorMessage = "Qualifications cannot exceed 255 characters.")]
-        [Index("IX_Unique_Qualification", IsUnique = true)]
         public string QualificationSet { get; set; }
         
         public virtual ICollection<Job> Jobs { get; set; }

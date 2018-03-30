@@ -66,7 +66,7 @@
                                     <h4 style="display:inline-block">@Html.LabelFor(model => model.School, "School: ")</h4>
                                 </td>
                                 <td style="padding-bottom:15px;">
-                                    @Html.DropDownList("SchoolID", null, "Select a School", htmlAttributes: new { id = "SchoolID", @class = "form-control", @style = "vertical-algin:top; width:200px", @runat = "server" })
+                                    @Html.DropDownList("SchoolID", null, "Select a School", htmlAttributes: new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.SchoolID, "", new { @class = "text-danger" })
 
                                     <button class="btn btn-default" id="ddlAuto" type="button"><span class="glyphicon glyphicon-search"></span></button>
@@ -123,35 +123,94 @@
                     <div class="form-horizontal">
 
                         <table style="text-align: left; width:60%; margin:0 auto;">
-                            <tr>
-                                <td style="padding-bottom:70px;">
+
+                            @* Requirements checkboxex *@
+                       <tr>
+
+                                   <td style="padding-bottom:70px;">
                                     <h4>@Html.LabelFor(model => model.Job.Requirements, "Requirements: ")</h4>
                                 </td>
-                                <td style="padding-bottom:70px; vertical-align:central">
+                                <td style="padding-bottom:70px; vertical-align:central"> </td>
+                                <tr>
+                                                                    @{
+                            int cnt = 0;
+                            List<FinalProject.ViewModels.AssignedRequirmentVM> requirements = ViewBag.Requirements;
+                            foreach (var requirement in requirements)
+                            {
+                                if (cnt++ % 3 == 0)
+                                {
+                                    @:</tr><tr>
+                                    }
+                                    @:<td>
+                                        <input type="checkbox"
+                                               name="selectedRequirements"
+                                               value="@requirement.RequirmentID"
+                                               @(Html.Raw(requirement.Assigned ? "checked=\"checked\"" : "")) />
+                                        @requirement.RequirementName @:&nbsp;&nbsp;
+                                        @:</td>
+                                    }
+                                    @:</tr>
+                            }
 
-                                    @*@Html.DropDownList("req", null, null, htmlAttributes: new { @class = "form-control", @style = "vertical-algin:top; width:200px", @runat = "server" })*@
-                                    @Html.Label(" ", new { id = "req" })
-                                </td>
-                            </tr>
+                             </tr>
+                           
+                                    
+                               
+                            @* Qulification checkboxex *@
+
                             <tr>
                                 <td style="padding-bottom:70px;">
                                     <h4>@Html.LabelFor(model => model.Job.Qualifications, "Qualifications: ")</h4>
                                 </td>
                                 <td style="padding-bottom:70px; vertical-align:central">
-                                    @*@Html.DropDownList("qual", null, null, htmlAttributes: new { @class = "form-control", @style = "vertical-algin:top; width:200px", @runat = "server" })*@
-                                    @Html.Label(" ", new { id = "qual" })
-                                </td>
-                            </tr>
+                                    <tr>
+                                                                    @{
+                            int cnts = 0;
+                            List<FinalProject.ViewModels.AssignedQualificationVM> qualifications = ViewBag.Qualifications;
+                            foreach (var qualification in qualifications)
+                            {
+                                if (cnts++ % 3 == 0)
+                                {
+                                    @:</tr><tr>
+                                    }
+                                    @:<td>
+                                        <input type="checkbox"
+                                               name="selectedQualifications"
+                                               value="@qualification.QualificationID"
+                                               @(Html.Raw(qualification.Assigned ? "checked=\"checked\"" : "")) />
+                                        @qualification.QualificationSet @:&nbsp;&nbsp;
+                                        @:</td>
+                                    }
+                                    @:</tr>
+                            }
+                              
+
+                            
                             <tr>
                                 <td>
                                     <h4>@Html.LabelFor(model => model.Job.Skills, "Skills: ")</h4>
                                 </td>
                                 <td>
-                                    @*@Html.DropDownList("skill", null, null, htmlAttributes: new { @class = "form-control", @style = "vertical-algin:top; width:200px", @runat = "server" })*@
-                                    @Html.Label(" ", new { id = "skill" })
-                                </td>
-                            </tr>
-
+                                                                    @{
+                            int cnts2 = 0;
+                            List<FinalProject.ViewModels.AssignedSkillVM> skills = ViewBag.Skills;
+                            foreach (var skill in skills)
+                            {
+                                if (cnts2++ % 3 == 0)
+                                {
+                                    @:</tr><tr>
+                                    }
+                                    @:<td>
+                                        <input type="checkbox"
+                                               name="selectedSkills"
+                                               value="@skill.SkillID"
+                                               @(Html.Raw(skill.Assigned ? "checked=\"checked\"" : "")) />
+                                        @skill.SkillName @:&nbsp;&nbsp;
+                                        @:</td>
+                                    }
+                                    @:</tr>
+                            }
+                             
                         </table>
                     </div>
                 </div>
@@ -188,7 +247,7 @@
     <script type="text/javascript">
         $('#SchoolID').change(function () {
             $('#City').val('');
-            var selectedSchool = $("#JobID").val();
+            var selectedSchool = $("#SchoolID").val();
             var URL = "/Posting/GetCity/" + selectedSchool;
             $.getJSON(URL, function (data) {
                 if (data != null && !jQuery.isEmptyObject(data)) {

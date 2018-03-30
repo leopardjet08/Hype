@@ -7,13 +7,13 @@ namespace FinalProject.DAL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Jetson : IMigrationMetadata
+    public sealed partial class InitialCreate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Jetson));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
         
         string IMigrationMetadata.Id
         {
-            get { return "201803301811446_Jetson"; }
+            get { return "201803301935422_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

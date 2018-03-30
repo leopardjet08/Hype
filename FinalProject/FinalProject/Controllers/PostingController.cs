@@ -158,9 +158,15 @@ namespace FinalProject.Controllers
                 StartDate = DateTime.Today.AddDays(14),
                 PostingDescription = job.JobSummary,
                 JobCode = job.JobCode,
-                Skills = job.Skills
+                Skills = job.Skills,
+                Requirements = job.Requirements,
+                Qualifications = job.Qualifications
             };
+
             PopulateAssignedSkillData(posting);
+            PopulateAssignedQualificationData(posting);
+            PopulateAssignedRequirmentData(posting);
+
             PopulateDropDownLists();
             return View("Create", posting);
         }
@@ -169,11 +175,42 @@ namespace FinalProject.Controllers
         //For protection against hacker!!! 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,NumberOpen,ClosingDate,StartDate,PostingDescription,SchoolID,JobID")] Posting posting)
+        public ActionResult Create([Bind(Include = "ID,NumberOpen,ClosingDate,StartDate,PostingDescription,SchoolID,JobID")] Posting posting, string[] selectedSkills, string[] selectedRequirements, string[] selectedQualifications)
         {
             try
             {
+                //Add the selected requirement
+                if (selectedRequirements != null)
+                {
+                    posting.Requirements = new List<Requirement>();
+                    foreach (var requirement in selectedRequirements)
+                    {
+                        var requirementToAdd = db.Requirements.Find(int.Parse(requirement));
+                        posting.Requirements.Add(requirementToAdd);
+                    }
+                }
 
+                //Add the selected skill
+                if (selectedSkills != null)
+                {
+                    posting.Skills = new List<Skill>();
+                    foreach (var skill in selectedSkills)
+                    {
+                        var skillToAdd = db.Skills.Find(int.Parse(skill));
+                        posting.Skills.Add(skillToAdd);
+                    }
+                }
+
+                //Add the selected qualification
+                if (selectedQualifications != null)
+                {
+                    posting.Qualifications = new List<Qualification>();
+                    foreach (var qualification in selectedQualifications)
+                    {
+                        var qualificationToAdd = db.Qualifications.Find(int.Parse(qualification));
+                        posting.Qualifications.Add(qualificationToAdd);
+                    }
+                }
                 if (ModelState.IsValid)
                 {
                     db.Postings.Add(posting);
@@ -194,6 +231,11 @@ namespace FinalProject.Controllers
             }
 
             PopulateDropDownLists(posting);
+
+            PopulateAssignedRequirmentData(posting);
+            PopulateAssignedSkillData(posting);
+            PopulateAssignedQualificationData(posting);
+
             return View(posting);
         }
 
@@ -518,6 +560,40 @@ namespace FinalProject.Controllers
                 });
             }
             ViewBag.Skills = viewModel;
+        }
+
+        private void PopulateAssignedRequirmentData(Posting posting)
+        {
+            var allRequirment = db.Requirements;
+            var appRequirments = new HashSet<int>(posting.Requirements.Select(b => b.ID));
+            var viewModel = new List<AssignedRequirmentVM>();
+            foreach (var sk in allRequirment)
+            {
+                viewModel.Add(new AssignedRequirmentVM
+                {
+                    RequirmentID = sk.ID,
+                    RequirementName = sk.RequirementName,
+                    Assigned = appRequirments.Contains(sk.ID)
+                });
+            }
+            ViewBag.Requirements = viewModel;
+        }
+
+        private void PopulateAssignedQualificationData(Posting posting)
+        {
+            var allQualifications = db.Qualifications;
+            var appQualifications = new HashSet<int>(posting.Qualifications.Select(b => b.ID));
+            var viewModel = new List<AssignedQualificationVM>();
+            foreach (var sk in allQualifications)
+            {
+                viewModel.Add(new AssignedQualificationVM
+                {
+                    QualificationID = sk.ID,
+                    QualificationSet = sk.QualificationSet,
+                    Assigned = appQualifications.Contains(sk.ID)
+                });
+            }
+            ViewBag.Qualifications = viewModel;
         }
 
 

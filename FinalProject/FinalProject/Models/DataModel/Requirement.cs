@@ -19,7 +19,6 @@ namespace FinalProject.Models.DataModel
         [Display(Name = "Requirement")]
         [Required(ErrorMessage = "Provide Requirement Description.")]
         [StringLength(50, ErrorMessage = "Name too long.")]
-        [Index("IX_Unique_Requirement", IsUnique = true)]
         public string RequirementName { get; set; }
         
         

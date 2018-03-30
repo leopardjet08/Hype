@@ -19,7 +19,6 @@ namespace FinalProject.Models.DataModel
         [Display(Name = "Skills")]
         [Required(ErrorMessage = "You cannot leave the name of the qualification blank.")]
         [StringLength(255, ErrorMessage = "Skills cannot exceed 255 characters.")]
-        [Index("IX_Unique_Skill", IsUnique = true)]
         public string SkillName { get; set; }
 
         public virtual ICollection<Job> Jobs { get; set; }

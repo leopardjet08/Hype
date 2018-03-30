@@ -3,7 +3,7 @@ namespace FinalProject.DAL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Jetson : DbMigration
+    public partial class InitialCreate : DbMigration
     {
         public override void Up()
         {
@@ -121,8 +121,7 @@ namespace FinalProject.DAL.Migrations
                         ID = c.Int(nullable: false, identity: true),
                         QualificationSet = c.String(nullable: false, maxLength: 255),
                     })
-                .PrimaryKey(t => t.ID)
-                .Index(t => t.QualificationSet, unique: true, name: "IX_Unique_Qualification");
+                .PrimaryKey(t => t.ID);
             
             CreateTable(
                 "Job.Requirement",
@@ -131,8 +130,7 @@ namespace FinalProject.DAL.Migrations
                         ID = c.Int(nullable: false, identity: true),
                         RequirementName = c.String(nullable: false, maxLength: 50),
                     })
-                .PrimaryKey(t => t.ID)
-                .Index(t => t.RequirementName, unique: true, name: "IX_Unique_Requirement");
+                .PrimaryKey(t => t.ID);
             
             CreateTable(
                 "Job.Skill",
@@ -141,8 +139,7 @@ namespace FinalProject.DAL.Migrations
                         ID = c.Int(nullable: false, identity: true),
                         SkillName = c.String(nullable: false, maxLength: 255),
                     })
-                .PrimaryKey(t => t.ID)
-                .Index(t => t.SkillName, unique: true, name: "IX_Unique_Skill");
+                .PrimaryKey(t => t.ID);
             
             CreateTable(
                 "Job.SavedPosting",
@@ -387,9 +384,6 @@ namespace FinalProject.DAL.Migrations
             DropIndex("Job.School", new[] { "SchoolLevelID" });
             DropIndex("Job.SavedPosting", new[] { "PostingID" });
             DropIndex("Job.SavedPosting", new[] { "ApplicantID" });
-            DropIndex("Job.Skill", "IX_Unique_Skill");
-            DropIndex("Job.Requirement", "IX_Unique_Requirement");
-            DropIndex("Job.Qualification", "IX_Unique_Qualification");
             DropIndex("Job.Job", "IX_Unique_JobCode");
             DropIndex("Job.Posting", new[] { "JobID" });
             DropIndex("Job.Posting", new[] { "SchoolID" });
