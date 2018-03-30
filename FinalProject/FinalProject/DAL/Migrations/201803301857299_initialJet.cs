@@ -3,7 +3,7 @@ namespace FinalProject.DAL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class g : DbMigration
+    public partial class initialJet : DbMigration
     {
         public override void Up()
         {
