@@ -1,0 +1,135 @@
+﻿@model IEnumerable<FinalProject.Models.Application>
+
+@{
+    ViewBag.Title = "Apply";
+}
+
+
+<div class="container well well-lg" style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
+    <br />
+    <div style="margin-bottom:100px; text-align:left">
+        <p style="text-align:center;  margin-bottom:15px; font-size:30px; color:#02388a;"> Niagara Catholic District School Board</p>
+        <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
+        <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
+        <br />
+
+        <div class="modal fade" data-backdrop="static" id="applyModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="color:white; background-color:#012e72">
+                        <button class="close" style="color:white" onclick="Clear()" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" style="text-align:center">∙ &nbsp; Confirm &nbsp; ∙</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form style="margin-top:10px; text-align:center">
+                            <label style="font-size:16px">&nbsp;  Submit application for job posting. </label>
+                        </form>
+                    </div>
+                    <div class="modal-footer" style="border:none; margin-top:0px">
+                        <button ID="btnSubmitSub" class="btn btn-default" type="submit">Confirm</button>
+                        <button ID="btnCancelSub" onclick="Clear()" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
+        <div style="margin:0 auto" ;>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <h3 style="text-align:center; padding-bottom:30px">
+                ∙ &nbsp; Apply for Job &nbsp; ∙
+            </h3>&nbsp;&nbsp;
+
+            <table style="width:70%; margin:0 auto; font-size:18px">
+                <tr>
+                    <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.Posting.Job.JobTitle)  :  </b></h4></td>
+                    <td>Job title - dummy text</td>
+                    <td style="width:10px"></td>
+                    <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.Posting.ClosingDate)  :  </b></h4></td>
+                    <td>Closing date - dummy text</td>
+                </tr>
+
+                <tr style="height:60px">
+                    <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.Posting.School.SchoolName) :  </b></h4></td>
+                    <td>School name - dummy text</td>
+                    <td style="width:10px"></td>
+                    <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.Posting.StartDate)  :  </b></h4></td>
+                    <td>Start date - dummy text</td>
+                </tr>
+                <tr>
+                    <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.Posting.School.SchoolFamily)  :  </b></h4></td>
+                    <td>School family - dummy text</td>
+                    <td style="width:10px"></td>
+                    <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.Posting.Job.Qualifications)  :  </b></h4></td>
+                    <td>
+                        Qualifications - dummy text
+
+                        @*@{
+                        foreach (var qualification in Model.Job.Qualifications)
+                            {
+                                @:  @qualification.QualificationSet <br />
+                            }
+                        }*@
+                    </td>
+                </tr>
+                <tr style="height:60px">
+                    <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.Posting.School.City.CityName)  :  </b></h4></td>
+                    <td>City - dummy text</td>
+                    <td style="width:10px"></td>
+                    <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.Posting.Job.Requirements)  :  </b></h4></td>
+                    <td>
+                        Requirements - dummy text
+                        @*@{
+                        foreach (var requirments in model.Job.Requirements)
+                        {
+                            @:  @requirments.RequirementName <br />
+                        }
+                        }*@
+                    </td>
+                </tr>
+
+
+                <tr style="height:50px">
+                    <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.Posting.NumberOpen)  :  </b></h4></td>
+                    <td>Number Open - dummy text</td>
+                    <td style="color:#f5f5f5; width:10px"></td>
+                    <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.Posting.Job.Skills)  :</b></h4></td>
+                    <td>
+                        Skills - dummy text
+                        @*@{
+                        foreach (var skills in Model.Job.Skills)
+                        {
+                            @:  @skills.SkillName <br />
+                        }
+                        }*@
+                    </td>
+                </tr>
+            </table><br />
+                    <div style="margin-left:186px">
+
+                        <div>
+                            <p>Upload Resume:</p>
+                            <input type="file" id="myFile">
+                            <br>
+                            <input type="button" value="Remove" class="btn btn-default"/>                
+                        </div>
+
+                        <p><h4 style="color:#02388a"><b>@Html.DisplayNameFor(model => model.Posting.fte)  :  </b></h4></p>
+                        <p>FTE - dummy text</p>
+                        <br />
+                        <h4 style="color:#02388a"><b>@Html.DisplayNameFor(model => model.Posting.PostingDescription)  :  </b></h4>
+                        <p style="width:900px;  font-size:18px">
+                            Job Description - dummy text
+                        </p>
+                    </div>
+
+            <div style="margin-top:30px; margin-left:550px">
+                @*&nbsp;@Html.ActionLink("Submit", "", new { id = Model.ID }, new {data_toggle="modal", data_target="#applyModal", @class="btn btn-default"})*@
+                <button ID="btnConfirmApply" data-target="#applyModal" data-toggle="modal" class="btn btn-default" type="submit">Submit Application</button>
+                <a href="javascript:void(0);" onclick="history.go(-1);">Back</a>
+            </div>
+        </div>
+    </div>
+</div>

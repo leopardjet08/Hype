@@ -15,7 +15,7 @@
         <div class="modal-content">
             <div class="modal-header" style="color:white; background-color:#012e72">
                 <button class="close" style="color:white" onclick="Clear()" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Subscribe</h4>
+                <h4 class="modal-title" style="text-align:center">∙&nbsp; Subscribe &nbsp;∙</h4>
             </div>
             <div class="modal-body">
                 <form style="margin-top:10px; text-align:center">
@@ -96,7 +96,7 @@
                     @Html.DisplayFor(modelItem => item.PostingDescription)
                     <br />
                     <br />
-                    @Html.ActionLink("Apply", "Details", "Posting", new { id = item.ID }, new { @class = "btn btn-primary btn-sm", @style = "border:none; font-weight:bold; background-color:#00a203" })
+                    @Html.ActionLink("Apply", "Index", "Apply", new { id = item.ID }, new { @class = "btn btn-primary btn-sm", @style = "border:none; font-weight:bold; background-color:#00a203" })
                     @*@Html.ActionLink("Save", "Details", "", new { id = item.ID }, new { @class = "btn btn-primary btn-sm", @style = "border:none; font-weight:bold; background-color:#012e72" })*@
                     &nbsp; &nbsp; @Html.ActionLink("Save", "", "", new { @style = "color:#012e72; font-size:14px" })
                 </div>

@@ -19,7 +19,7 @@
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
-    <table class="table">
+    <table class="table" style="font-size:16px">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.JobTitle)
@@ -33,15 +33,15 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
+                <td  style="color:#012e72">
                     @Html.DisplayFor(modelItem => item.JobTitle)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.JobSummary)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+                    @Html.ActionLink("Details", "Details", new { id = item.ID })
                     @Html.ActionLink("Delete", "Delete", new { id = item.ID })
                 </td>
             </tr>

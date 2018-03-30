@@ -208,6 +208,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApplicantController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
+    <Compile Include="Controllers\ApplyController.cs" />
     <Compile Include="Controllers\ArchiveController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobsController.cs" />
@@ -229,7 +230,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Archive.cs" />
+    <Compile Include="Models\DataModel\Archive.cs" />
     <Compile Include="Models\DataModel\Applicant.cs" />
     <Compile Include="Models\DataModel\Application.cs" />
     <Compile Include="Models\DataModel\ApplicationStatus.cs" />
@@ -367,6 +368,8 @@
     <Content Include="Views\Skills\Index.cshtml" />
     <Content Include="Views\Applicant\Archive.cshtml" />
     <Content Include="Views\Applicant\Edit.cshtml" />
+    <Content Include="Views\Apply\Create.cshtml" />
+    <Content Include="Views\Apply\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
