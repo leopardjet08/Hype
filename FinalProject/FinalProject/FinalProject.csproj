@@ -220,9 +220,9 @@
     <Compile Include="Controllers\SkillsController.cs" />
     <Compile Include="DAL\ApplicationDBContext.cs" />
     <Compile Include="DAL\JobPostingCFEntities.cs" />
-    <Compile Include="DAL\Migrations\201803301725267_g.cs" />
-    <Compile Include="DAL\Migrations\201803301725267_g.Designer.cs">
-      <DependentUpon>201803301725267_g.cs</DependentUpon>
+    <Compile Include="DAL\Migrations\201803301811446_Jetson.cs" />
+    <Compile Include="DAL\Migrations\201803301811446_Jetson.Designer.cs">
+      <DependentUpon>201803301811446_Jetson.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\Migrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
@@ -296,6 +296,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Images\twitter.png" />
+    <Content Include="Views\Posting\ourCreateCode.txt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -370,6 +371,7 @@
     <Content Include="Views\Skills\Index.cshtml" />
     <Content Include="Views\Applicant\Archive.cshtml" />
     <Content Include="Views\Applicant\Edit.cshtml" />
+    <Content Include="Views\Posting\CreateStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -393,8 +395,8 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DAL\Migrations\201803301725267_g.resx">
-      <DependentUpon>201803301725267_g.cs</DependentUpon>
+    <EmbeddedResource Include="DAL\Migrations\201803301811446_Jetson.resx">
+      <DependentUpon>201803301811446_Jetson.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,6 +1,7 @@
 ﻿using FinalProject.DAL;
 using FinalProject.Models;
 using FinalProject.Models.DataModel;
+using FinalProject.ViewModels;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -130,15 +131,38 @@ namespace FinalProject.Controllers
             return View(postings.ToPagedList(pageNumber, pageSize));
         }
 
-        //create controller
-        public ActionResult Create()
+        public ActionResult CreateStart()
         {
             PopulateDropDownLists();
-            ViewBag.Message = "School by jet";
-
-            var posting = new Posting();
-
-            return View();
+            return View("CreateStart");
+        }
+        //create controller
+        public ActionResult Create(int? JobID)
+        {
+            Job job = db.Jobs
+                .Where(p => p.ID == JobID)
+                .SingleOrDefault();
+            if (job == null)
+            {
+                ModelState.AddModelError("", "No Job to use as a Template");
+                PopulateDropDownLists();
+                return View("CreateStart");
+            }
+            //We have the positon to use as a template
+            var posting = new Posting()
+            {
+                JobID = job.ID,
+                Job = job,
+                NumberOpen = 1,
+                ClosingDate = DateTime.Today.AddDays(7),
+                StartDate = DateTime.Today.AddDays(14),
+                PostingDescription = job.JobSummary,
+                JobCode = job.JobCode,
+                Skills = job.Skills
+            };
+            PopulateAssignedSkillData(posting);
+            PopulateDropDownLists();
+            return View("Create", posting);
         }
 
         // POST: Postings/Create
@@ -425,6 +449,75 @@ namespace FinalProject.Controllers
 
             SelectList req = DescSelectedList(JobID);
             return Json(req, JsonRequestBehavior.AllowGet);
+        }
+        
+        [HttpGet]
+        public ActionResult GetAJob(int? ID)
+        {
+            try
+            {
+                Job job = db.Jobs
+                    .Where(d => d.ID == ID)
+                    .SingleOrDefault();
+                //Build a string of html for the skills collection
+                string Skills = "";
+                foreach (var s in job.Skills)
+                {
+                    Skills += s.SkillName + "<br />";
+                }
+                //Using an annomous object as a DTO to avoid serialization errors
+                var pos = new
+                {
+                    job.JobTitle,
+                    job.JobSummary,
+                    JobCode = job.JobCode,
+                    Skills
+                };
+                return Json(pos, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                return HttpNotFound();
+            }
+        }
+
+        [HttpGet]
+        public ActionResult GetCity(int? ID)
+        {
+            try
+            {
+                School school = db.Schools
+                    .Where(d => d.ID == ID)
+                    .SingleOrDefault();
+
+                var pos = new
+                {
+                    school.City.CityName,
+
+                };
+                return Json(pos, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                return HttpNotFound();
+            }
+        }
+
+        private void PopulateAssignedSkillData(Posting posting)
+        {
+            var allSkills = db.Skills;
+            var appSkills = new HashSet<int>(posting.Skills.Select(b => b.ID));
+            var viewModel = new List<AssignedSkillVM>();
+            foreach (var sk in allSkills)
+            {
+                viewModel.Add(new AssignedSkillVM
+                {
+                    SkillID = sk.ID,
+                    SkillName = sk.SkillName,
+                    Assigned = appSkills.Contains(sk.ID)
+                });
+            }
+            ViewBag.Skills = viewModel;
         }
 
 

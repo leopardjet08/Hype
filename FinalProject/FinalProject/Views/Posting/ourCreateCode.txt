@@ -1,0 +1,367 @@
+﻿@model FinalProject.Models.Posting
+
+@{
+    ViewBag.Title = "Posting";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    
+    <script type="text/javascript">
+        function sliderChange(val) {
+            document.getElementById('sliderStatus').innerHTML = val;
+
+        }
+
+    </script>
+
+
+
+<div class="container well well-lg" style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
+
+    <p style="text-align:center; margin-top:20px; margin-bottom:15px; font-size:30px; color:#02388a;"> Niagara Catholic District School Board</p>
+    <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
+    <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
+    <br />
+
+    <div class="form-horizontal">
+        <div style="text-align:center; margin-bottom:60px">
+            <h3> ∙ &nbsp; Create New Posting&nbsp; ∙</h3>
+        </div>
+
+        <div>
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <button class="btn btn-default" id="ddlRefresh" type="button"><span class="glyphicon glyphicon-refresh"></span></button>
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    @* Divider *@
+    <div class="modal-body row">
+
+        @* Column 1 *@
+        <div class="col-md-6">
+            <div>
+                <div class="form-horizontal">
+                    <table style="text-align: left; width:60%; margin:0 auto;">
+                        <tr>
+                            <td style="padding-bottom:10px; width:50%">
+                                <h4>@Html.LabelFor(model => model.Job.JobTitle, "Job Title: ")</h4>
+                            </td>
+                            <td style="padding-bottom:10px;">
+                                @Html.DropDownList("JobID", null, "Select a Job Title", htmlAttributes: new { @class = "form-control", @style = "width:200px", @runat = "server" })
+                                @*@Html.ActionLink("Create a Job", "Create", "Jobs")*@
+                                <a href="@Url.Action("Create", "Jobs", new { addJob = "AddJob" })" , target="_blank" type="submit" id="addJob">
+                                    Create a Job
+                                </a>
+
+                                @section Scripts {
+                                    @Scripts.Render("~/bundles/jqueryval")
+                                    <script type="text/javascript">
+
+            $('#ddlRefresh').click(function (event) {
+                event.preventDefault();
+                var JobsSelect = $('#JobID');
+                var selectedJob = JobsSelect.val();
+
+                $.getJSON('@Url.Action("GetJobs")', { JobID: selectedJob }, function (jobs) {
+                    if (jobs != null && !jQuery.isEmptyObject(jobs))
+                    {
+                        JobsSelect.empty();
+                        JobsSelect.append($('<option/>', {
+                            value: null,
+                            text: "Select a Job"
+                        }));
+                        $.each(jobs, function (index, job) {
+                            JobsSelect.append($('<option/>', {
+                                value: job.Value,
+                                text: job.Text,
+                                selected: job.Selected
+                            }));
+                        });
+                    };
+                });
+                $('#JobID').fadeToggle(400, function () {
+                    $('#JobID').fadeToggle(400);
+                });
+            });
+
+            $('#ddlAuto').click(function (event) {
+                event.preventDefault();
+                //select the schoolID dropdown
+                var SchoolsSelect = $('#SchoolID');
+                var textbox = $('#CityID');
+                //selected schoolID get the value of it
+                var selectedSchool = SchoolsSelect.val();
+
+                $.getJSON('@Url.Action("GetSchoolCity")', { SchoolID: selectedSchool }, function (schools) {
+
+                    //if its not empty run this
+                    if (schools != null && !jQuery.isEmptyObject(schools)) {
+                        textbox.empty();
+
+                        $.each(schools, function (index, school) {
+                            textbox.append($('<option/>', {
+                                value: school.Value,
+                                text: school.Text
+                            }));
+                        });
+                    };
+                });
+                $('#CityID').fadeToggle(400, function () {
+                    $('#CityID').fadeToggle(400);
+                });
+                                        });
+
+
+   ///////////////////////////////////////////////////////////////////
+              $('#ddlAuto').click(function (event) {
+                event.preventDefault();
+                //select the schoolID dropdown
+                var JobsSelect = $('#JobID');
+                var textbox = $('#req');
+                //selected schoolID get the value of it
+                  var selectedJob = JobsSelect.val();
+
+                $.getJSON('@Url.Action("GetReq")', { JobID: selectedJob }, function (jobs) {
+
+                    //if its not empty run this
+                    if (jobs != null && !jQuery.isEmptyObject(jobs)) {
+                        textbox.empty();
+
+                        $.each(jobs, function (index, job) {
+                            textbox.append($('<option/>', {
+                                value: job.Value,
+                                text: job.Text
+                            }));
+                        });
+                    };
+                });
+                $('#req').fadeToggle(400, function () {
+                    $('#req').fadeToggle(400);
+                });
+            });
+
+/////////////////////////////////////////////////////////////////////////////
+
+
+                                                      $('#ddlAuto').click(function (event) {
+                event.preventDefault();
+                //select the schoolID dropdown
+                var JobsSelect = $('#JobID');
+                var textbox = $('#qual');
+                //selected schoolID get the value of it
+                  var selectedJob = JobsSelect.val();
+
+                $.getJSON('@Url.Action("GetQual")', { JobID: selectedJob }, function (jobs) {
+
+                    //if its not empty run this
+                    if (jobs != null && !jQuery.isEmptyObject(jobs)) {
+                        textbox.empty();
+
+                        $.each(jobs, function (index, job) {
+                            textbox.append($('<option/>', {
+                                value: job.Value,
+                                text: job.Text
+                            }));
+                        });
+                    };
+                });
+                $('#qual').fadeToggle(400, function () {
+                    $('#qual').fadeToggle(400);
+                });
+                                        });
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+               
+                 $('#ddlAuto').click(function (event) {
+                event.preventDefault();
+                //select the schoolID dropdown
+                var JobsSelect = $('#JobID');
+                var textbox = $('#skill');
+                //selected schoolID get the value of it
+                  var selectedJob = JobsSelect.val();
+
+                $.getJSON('@Url.Action("GetSkill")', { JobID: selectedJob }, function (jobs) {
+
+                    //if its not empty run this
+                    if (jobs != null && !jQuery.isEmptyObject(jobs)) {
+                        textbox.empty();
+
+                        $.each(jobs, function (index, job) {
+                            textbox.append($('<option/>', {
+                                value: job.Value,
+                                text: job.Text
+                            }));
+                        });
+                    };
+                });
+                $('#skill').fadeToggle(400, function () {
+                    $('#skill').fadeToggle(400);
+                });
+                                        });
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+            $('#ddlAuto').click(function (event) {
+                event.preventDefault();
+                //select the schoolID dropdown
+                var JobsSelect = $('#JobID');
+                var textbox = $('#desc');
+                //selected schoolID get the value of it
+                  var selectedJob = JobsSelect.val();
+
+                $.getJSON('@Url.Action("GetDesc")', { JobID: selectedJob }, function (jobs) {
+
+                    //if its not empty run this
+                    if (jobs != null && !jQuery.isEmptyObject(jobs)) {
+                        textbox.empty();
+
+                        $.each(jobs, function (index, job) {
+                            textbox.append(job.Text);
+                        });
+                    };
+                });
+                $('#desc').fadeToggle(400, function () {
+                    $('#desc').fadeToggle(400);
+                });
+                                        });
+
+
+                                    </script>
+                                }
+
+                                @Html.ValidationMessageFor(model => model.JobID, "", new { @class = "text-danger" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-bottom:15px;">
+                                <h4 style="display:inline-block">@Html.LabelFor(model => model.School, "School: ")</h4>
+                            </td>
+                            <td style="padding-bottom:15px;">
+                                @Html.DropDownList("SchoolID", null, "Select a School", htmlAttributes: new { id = "SchoolID", @class = "form-control", @style = "vertical-algin:top; width:200px", @runat = "server" })
+                                @Html.ValidationMessageFor(model => model.SchoolID, "", new { @class = "text-danger" })
+
+                                <button class="btn btn-default" id="ddlAuto" type="button"><span class="glyphicon glyphicon-search"></span></button>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-bottom:15px;">
+                                <h4 style="display:inline-block">@Html.LabelFor(model => model.School.City, "City: ")</h4>
+                            </td>
+                            <td style="padding-bottom:15px;">
+                                @Html.ValidationMessageFor(model => model.SchoolID, "", new { @class = "text-danger" })
+                                @Html.DropDownList("CityID", null, null, htmlAttributes: new {  @class = "form-control", @style = "vertical-algin:top; width:200px", @runat = "server" })
+                                @Html.Label("")
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-bottom:15px;">
+                                <h4>@Html.LabelFor(model => model.NumberOpen, "Openings: ")</h4>
+                            </td>
+                            <td style="padding-bottom:15px;">
+                                @Html.EditorFor(model => model.NumberOpen, new { htmlAttributes = new { @class = "form-control", @style = "width:75px" } })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-bottom:15px;">
+                                <h4>@Html.LabelFor(model => model.Fte, "FTE: ")</h4>
+                            </td>
+                            <td style="padding-bottom:15px;">
+                                <input type="range" id="range" onInput="sliderChange(this.value)" min="0.0" max="1.5" step="0.1" value="0.0">
+                                <br /><span id="sliderStatus">0.0</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-bottom:15px;">
+                                <h4>@Html.LabelFor(model => model.ClosingDate, "Deadline: ")</h4>
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.ClosingDate, new { htmlAttributes = new { @class = "form-control", @style = "width:200px", @placeholder = "yyyy-mm-dd" } })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-bottom:15px;">
+                                <h4>@Html.LabelFor(model => model.StartDate, "Start Date: ")</h4>
+                            </td>
+                            <td style="padding-bottom:15px;">
+                                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control", @style = "width:200px", @placeholder = "yyyy-mm-dd" } })
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        @* Column 2 *@
+        <div class="col-md-6">
+            <div>
+                <div class="form-horizontal">
+
+                    <table style="text-align: left; width:60%; margin:0 auto;">
+                        <tr>
+                            <td style="padding-bottom:70px;">
+                                <h4>@Html.LabelFor(model => model.Job.Requirements, "Requirements: ")</h4>
+                            </td>
+                            <td style="padding-bottom:70px; vertical-align:central">
+                               
+                                @*@Html.DropDownList("req", null, null, htmlAttributes: new { @class = "form-control", @style = "vertical-algin:top; width:200px", @runat = "server" })*@
+                                @Html.Label(" " , new { id ="req"})
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-bottom:70px;">
+                                <h4>@Html.LabelFor(model => model.Job.Qualifications, "Qualifications: ")</h4>
+                            </td>
+                            <td style="padding-bottom:70px; vertical-align:central">
+                                @*@Html.DropDownList("qual", null, null, htmlAttributes: new { @class = "form-control", @style = "vertical-algin:top; width:200px", @runat = "server" })*@
+                                @Html.Label(" ", new { id = "qual" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td >
+                                <h4>@Html.LabelFor(model => model.Job.Skills, "Skills: ")</h4>
+                            </td>
+                            <td>
+                                @*@Html.DropDownList("skill", null, null, htmlAttributes: new { @class = "form-control", @style = "vertical-algin:top; width:200px", @runat = "server" })*@
+                                @Html.Label(" ", new { id = "skill" })
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-left:135px; width:100%">
+        <h4 >@Html.LabelFor(model => model.PostingDescription, "Job Description: ")</h4>
+        <br />
+        @Html.EditorFor(model => model.PostingDescription, new { htmlAttributes = new { id ="desc", @class = "form-control", @rows = "2", @cols = "100", @style = "max-width:73%; height:200px;", @placeholder = "Enter Description here..." } })
+        
+    </div>
+        <br />
+        <br />
+
+    <div style="text-align:center">
+        <input type="submit" value="Publish" style="background-color:#00a203; border:none; margin-right:30px" class="btn btn-primary btn-large" />
+        <a href="javascript:void(0);" style="margin-left:30px; padding-right:20px" onclick="history.go(-1);">Back</a>
+    </div>
+    <br />
+</div>
+
+    
+}

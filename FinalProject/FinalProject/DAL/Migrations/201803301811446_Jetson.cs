@@ -3,7 +3,7 @@ namespace FinalProject.DAL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class g : DbMigration
+    public partial class Jetson : DbMigration
     {
         public override void Up()
         {
@@ -88,6 +88,7 @@ namespace FinalProject.DAL.Migrations
                         Fte = c.Double(nullable: false),
                         SchoolID = c.Int(nullable: false),
                         JobID = c.Int(nullable: false),
+                        JobCode = c.String(nullable: false, maxLength: 20),
                         CreatedBy = c.String(maxLength: 256),
                         CreatedOn = c.DateTime(),
                         UpdatedBy = c.String(maxLength: 256),
