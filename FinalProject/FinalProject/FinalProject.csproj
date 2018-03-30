@@ -241,9 +241,7 @@
     <Compile Include="Models\DataModel\IAuditable.cs" />
     <Compile Include="Models\DataModel\Requirement.cs" />
     <Compile Include="Models\DataModel\Skill.cs" />
-    <Compile Include="Models\DataModel\UserPhoto.cs" />
     <Compile Include="Models\DataModel\SavedPosting.cs" />
-    <Compile Include="Models\DataModel\UserUploads.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\DataModel\Job.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
