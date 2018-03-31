@@ -10,17 +10,12 @@ namespace FinalProject.Models
 {
     public class Qualification
     {
-        public Qualification()
-        {
-            this.Jobs = new HashSet<Job>();
-        }
 
         public int ID { get; set; }
-
+        [Index("IX_Unique_qual", IsUnique = true)]
         [Display(Name = "Qualifications")]
         [Required(ErrorMessage = "You cannot leave the name of the qualification blank.")]
         [StringLength(255, ErrorMessage = "Qualifications cannot exceed 255 characters.")]
-        [Index("IX_Unique_Qualification", IsUnique = true)]
         public string QualificationSet { get; set; }
         
         public virtual ICollection<Job> Jobs { get; set; }

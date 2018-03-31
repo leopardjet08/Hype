@@ -1,0 +1,152 @@
+﻿@model FinalProject.Models.Job
+
+@{
+    ViewBag.Title = "Create Posting";
+}
+
+<h2>Create Posting From Job</h2>
+<h3>Step 1 - Select Job as Template</h3>
+
+@using (Html.BeginForm("Create", "Posting", FormMethod.Get, null))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="row">
+        <div class="col-md-6 col-lg-6">
+            <div class="form-group">
+                <label class="control-label col-md-4">Job Based On: </label>
+                <div class="col-md-7">
+                    @Html.DropDownList("JobID", null, "Select a Job", htmlAttributes: new { @class = "form-control" })
+                    <a href="@Url.Action("Create", "Jobs", new { addJob = "AddJob" })" , target="_blank" type="submit" id="addJob">
+                        Create a new Job
+                    </a>
+                    <button class="btn btn-default" id="ddlRefresh" type="button"><span class="glyphicon-search"></span></button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.JobTitle, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-7">
+                    <input type="text" class="form-control" id="Title" readonly="readonly" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.JobCode, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-7">
+                    <input type="text" class="form-control" id="JobCode" readonly="readonly" />
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-lg-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.JobSummary, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-8">
+                    <div class="well" id="Summary"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Requirement Required</label>
+                <div class="col-md-8">
+                    <div class="well" id="RequirementsList"></div>
+                </div>
+            </div>
+
+
+            <div class="form-group" >
+                <label class="control-label col-md-2">Skills Required</label>
+                <div class="col-md-8">
+                    <div class="well" id="SkillsList"></div>
+                </div>
+            </div>
+
+
+
+            <div class="form-group" >
+                <label class="control-label col-md-2">Qualification Required</label>
+                <div class="col-md-8">
+                    <div class="well" id="QualificationsList"></div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Next Step" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@section Scripts {
+<script type="text/javascript">
+        $('#JobID').change(function () {
+            $('#Title').val('');
+            $('#Summary').empty();
+            $('#JobCode').val('');
+            $('#SkillsList').empty();
+            $('#RequirementsList').empty();
+            $('#QualificationsList').empty();
+            var selectedJob = $("#JobID").val();
+            var URL = "/Posting/GetAJob/" + selectedJob;
+            $.getJSON(URL, function (data) {
+                if (data != null && !jQuery.isEmptyObject(data)) {
+                    $('#Title').val(data.JobTitle);
+                    $('#Summary').html(data.JobSummary);
+                    $('#JobCode').val(data.JobCode);
+                    $('#SkillsList').html(data.Skills);
+                    $('#RequirementsList').html(data.Requirements);
+                    $('#QualificationsList').html(data.Qualifications);
+                    $('#w').val(data.SkillQualification);
+                };
+            });
+
+
+    });
+
+    $('#ddlRefresh').click(function (event) {
+                event.preventDefault();
+                var JobsSelect = $('#JobID');
+                var selectedJob = JobsSelect.val();
+
+                $.getJSON('@Url.Action("GetJobs")', { JobID: selectedJob }, function (jobs) {
+                    if (jobs != null && !jQuery.isEmptyObject(jobs))
+                    {
+                        JobsSelect.empty();
+                        JobsSelect.append($('<option/>', {
+                            value: null,
+                            text: "Select a Job"
+                        }));
+                        $.each(jobs, function (index, job) {
+                            JobsSelect.append($('<option/>', {
+                                value: job.Value,
+                                text: job.Text,
+                                selected: job.Selected
+                            }));
+                        });
+                    };
+                });
+                $('#JobID').fadeToggle(400, function () {
+                    $('#JobID').fadeToggle(400);
+                });
+            });
+
+
+</script>
+
+}

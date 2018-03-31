@@ -30,6 +30,10 @@
             <div>
 
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <button class="btn btn-default" id="ddlRefresh" type="button"><span class="glyphicon glyphicon-refresh"></span></button>
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -60,7 +64,6 @@
                                 <td style="padding-bottom:10px;">
                                     @Html.EditorFor(model => model.JobCode, new { htmlAttributes = new { @class = "form-control", @style = "width:75px" } })
                                     @Html.ValidationMessageFor(model => model.JobID, "", new { @class = "text-danger" })
-                                   
                                 </td>
                             </tr>
                             <tr>
@@ -68,10 +71,10 @@
                                     <h4 style="display:inline-block">@Html.LabelFor(model => model.School, "School: ")</h4>
                                 </td>
                                 <td style="padding-bottom:15px;">
-                                    @* Dropdown should be textbox auto complete *@
                                     @Html.DropDownList("SchoolID", null, "Select a School", htmlAttributes: new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.SchoolID, "", new { @class = "text-danger" })
 
+                                    <button class="btn btn-default" id="ddlAuto" type="button"><span class="glyphicon glyphicon-search"></span></button>
 
                                 </td>
                             </tr>
@@ -129,7 +132,6 @@
 
 
 
-
             @* Column 2 *@
             <div class="col-md-6">
                 <div>
@@ -139,11 +141,12 @@
 
                             @* Requirements checkboxex *@
                        <tr>
-                                <td>
-                                    <br />
+
+                                   <td style="padding-bottom:70px;">
                                     <h4>@Html.LabelFor(model => model.Job.Requirements, "Requirements: ")</h4>
                                 </td>
-                                    <tr>
+                                <td style="padding-bottom:70px; vertical-align:central"> </td>
+                                <tr>
                                                                     @{
                             int cnt = 0;
                             List<FinalProject.ViewModels.AssignedRequirmentVM> requirements = ViewBag.Requirements;
@@ -164,17 +167,17 @@
                                     @:</tr>
                             }
 
-                          
+                             </tr>
                            
                                     
                                
                             @* Qulification checkboxex *@
 
                             <tr>
-                                <td>
-                                    <br />
+                                <td style="padding-bottom:70px;">
                                     <h4>@Html.LabelFor(model => model.Job.Qualifications, "Qualifications: ")</h4>
                                 </td>
+                                <td style="padding-bottom:70px; vertical-align:central">
                                     <tr>
                                                                     @{
                             int cnts = 0;
@@ -198,11 +201,8 @@
                               
 
                             
-
                             <tr>
-                            
                                 <td>
-                                    <br />
                                     <h4>@Html.LabelFor(model => model.Job.Skills, "Skills: ")</h4>
                                 </td>
                                 <td>
@@ -228,7 +228,6 @@
                              
                         </table>
                     </div>
-
                 </div>
             </div>
         </div>

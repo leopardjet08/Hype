@@ -46,7 +46,6 @@
 
                     <div class="form-horizontal">
                         <table style="margin:0 auto; width:60%;">
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             @Html.HiddenFor(model => model.ID)
                             @Html.HiddenFor(model => model.RowVersion)
 
@@ -126,46 +125,77 @@
                                     <h4>Skills:</h4>
                                 </td>
                                 <td>
-                                    @{
-                                        foreach (var skill in Model.Job.Skills)
-                                        {
-                                            @:  @skill.SkillName
-                                            @Html.CheckBox("isChecked", true)
-                                            <br />
-                                        }
-                                     }
-                                </td>
-                            </tr>
+                                    <tr>
+                                                                    @{
+                            int cnts2 = 0;
+                            List<FinalProject.ViewModels.AssignedSkillVM> skills = ViewBag.Skills;
+                            foreach (var skill in skills)
+                            {
+                                if (cnts2++ % 3 == 0)
+                                {
+                                    @:</tr><tr>
+                                    }
+                                    @:<td>
+                                        <input type="checkbox"
+                                               name="selectedSkills"
+                                               value="@skill.SkillID"
+                                               @(Html.Raw(skill.Assigned ? "checked=\"checked\"" : "")) />
+                                        @skill.SkillName @:&nbsp;&nbsp;
+                                        @:</td>
+                                    }
+                                    @:</tr>
+                            }
+                                
+                           
                             <tr>
                                 <td>
                                     <h4>Qualifications:</h4>
                                 </td>
                                 <td>
-                                    @{
-                                        foreach (var qaulification in Model.Job.Qualifications)
-                                        {
-                                                @:  @qaulification.QualificationSet
-                                                @Html.CheckBox("isChecked", true)
-                                                <br />
-                                        }
+                                                                    @{
+                            int cnts = 0;
+                            List<FinalProject.ViewModels.AssignedQualificationVM> qualifications = ViewBag.Qualifications;
+                            foreach (var qualification in qualifications)
+                            {
+                                if (cnts++ % 3 == 0)
+                                {
+                                    @:</tr><tr>
                                     }
-                                </td>
-                            </tr>
+                                    @:<td>
+                                        <input type="checkbox"
+                                               name="selectedQuals"
+                                               value="@qualification.QualificationID"
+                                               @(Html.Raw(qualification.Assigned ? "checked=\"checked\"" : "")) />
+                                        @qualification.QualificationSet @:&nbsp;&nbsp;
+                                        @:</td>
+                                    }
+                                    @:</tr>
+                            }
+
                             <tr>
                                 <td>
                                     <h4>Requirements:</h4>
                                 </td>
                                 <td>
-                                    @{
-                                        foreach (var requirments in Model.Job.Requirements)
-                                        {
-                                                @:  @requirments.RequirementName
-                                                @Html.CheckBox("isChecked", true)
-                                                <br />
-                                        }
+                                                                    @{
+                            int cnt = 0;
+                            List<FinalProject.ViewModels.AssignedRequirmentVM> requirements = ViewBag.Requirements;
+                            foreach (var requirement in requirements)
+                            {
+                                if (cnt++ % 3 == 0)
+                                {
+                                    @:</tr><tr>
                                     }
-                                </td>
-                            </tr>
+                                    @:<td>
+                                        <input type="checkbox"
+                                               name="selectedReqs"
+                                               value="@requirement.RequirmentID"
+                                               @(Html.Raw(requirement.Assigned ? "checked=\"checked\"" : "")) />
+                                        @requirement.RequirementName @:&nbsp;&nbsp;
+                                        @:</td>
+                                    }
+                                    @:</tr>
+                            }
 
                              
                             
@@ -174,7 +204,6 @@
 
                 </div>
 
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <br />
             </div>
 
