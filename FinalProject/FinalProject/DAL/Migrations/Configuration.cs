@@ -54,7 +54,7 @@ namespace FinalProject.DAL.Migrations
 
         protected override void Seed(FinalProject.DAL.JobPostingCFEntities context)
         {
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //var qualification = new List<Qualification>()
             //{
             //    new Qualification{ QualificationSet="Qualification1"},
@@ -87,23 +87,23 @@ namespace FinalProject.DAL.Migrations
             //var job2 = new Job { Qualifications = new List<Qualification>(), Requirements = new List<Requirement>(), JobTitle = "Librarian", JobSummary = "She knows how to read and write. Good reading skills and very knowlegable as me." };
             //var job3 = new Job { Qualifications = new List<Qualification>(), Requirements = new List<Requirement>(), JobTitle = "Janitor", JobSummary = "Very good at handling mops and brushes. He should always be around who can adpat very fast in the environment" };
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             // Requirement and Qualification Seed Data is in the Job Seed data itself
             var jobs = new List<Job>
             {
-                new Job { SkillQualification=false, Qualifications = new List<Qualification> { new Qualification { QualificationSet = "Qualification Set 1"}, new Qualification { QualificationSet = "Qualification Set 2"} },
+                new Job { JobCode="MATR", SkillQualification=false, Qualifications = new List<Qualification> { new Qualification { QualificationSet = "Qualification Set 1"}, new Qualification { QualificationSet = "Qualification Set 2"} },
                     Skills = new List<Skill> { new Skill { SkillName = "Skill 1"}, new Skill { SkillName = "Skill 2"} },
                     Requirements = new List<Requirement> { new Requirement { RequirementName = "Critical Thinking" }, new Requirement { RequirementName = "Adaptability" } },
                     JobTitle ="Math Teacher",JobSummary="Math teacher should be good as me. She/he knows how to add,subtract,multiplication and divide. He also know how to do statistic."},
-                    
-                    
-                new Job { SkillQualification=true, Qualifications = new List<Qualification> { new Qualification { QualificationSet = "Qualification Set 3"}, new Qualification { QualificationSet = "Qualification Set 4"} },
+
+
+                new Job { JobCode="LIR",SkillQualification=true, Qualifications = new List<Qualification> { new Qualification { QualificationSet = "Qualification Set 3"}, new Qualification { QualificationSet = "Qualification Set 4"} },
                     Skills = new List<Skill> { new Skill { SkillName = "Skill 22"}, new Skill { SkillName = "Skill 5"}, new Skill { SkillName = "Skill 9"} },
                     Requirements = new List<Requirement> {new Requirement { RequirementName = "Charismatic" }, new Requirement { RequirementName = "Integrity" } },
                     JobTitle ="Librarian",JobSummary="She knows how to read and write. Good reading skills and very knowlegable as me."},
 
-                new Job { SkillQualification=true, Qualifications = new List<Qualification> { new Qualification { QualificationSet = "Qualification Set 5"} },
+                new Job { JobCode="JAT",SkillQualification=true, Qualifications = new List<Qualification> { new Qualification { QualificationSet = "Qualification Set 5"} },
                     Skills = new List<Skill> { new Skill { SkillName = "Skill 13"}, new Skill { SkillName = "Skill 24"} },
                     Requirements = new List<Requirement> {new Requirement { RequirementName = "Punctuality" } },
                     JobTitle ="Janitor",JobSummary="Very good at handling mops and brushes. He should always be around who can adpat very fast in the environment"}
@@ -129,17 +129,17 @@ namespace FinalProject.DAL.Migrations
 
             var city = new List<City>
             {
-                new City { CityName="Welland"},
-                new City { CityName="St. Catharines"},
-                new City { CityName="Niagara Falls"},
-                new City { CityName="Thorold"},
-                new City { CityName="Grimsby"},
-                new City { CityName="Fort Erie"},
-                new City { CityName="Pelham"},
-                new City { CityName="Lincoln & W. Lincoln"},
-                new City { CityName="Wainfleet"},
-                new City { CityName="Port Colborne"},
-                new City { CityName="Niagara-on-the-Lake"}
+                new City { ID=1, CityName="Welland"},
+                new City { ID=2,CityName="St. Catharines"},
+                new City { ID=3,CityName="Niagara Falls"},
+                new City { ID=4,CityName="Thorold"},
+                new City { ID=5,CityName="Grimsby"},
+                new City { ID=6,CityName="Fort Erie"},
+                new City { ID=7,CityName="Pelham"},
+                new City { ID=8,CityName="Lincoln & W. Lincoln"},
+                new City { ID=9,CityName="Wainfleet"},
+                new City { ID=10,CityName="Port Colborne"},
+                new City { ID=11,CityName="Niagara-on-the-Lake"}
             };
             city.ForEach(a => context.Cities.AddOrUpdate(n => n.CityName, a));
             SaveChanges(context);
@@ -178,7 +178,7 @@ namespace FinalProject.DAL.Migrations
             schoolFamilies.ForEach(a => context.SchoolFamilies.AddOrUpdate(n => n.FamilyName, a));
             SaveChanges(context);
 
-            
+
             var school = new List<School>
             {
                 new School { SchoolName="Alexander Kuska",SchoolLevelID=1,CityID=1,SchoolFamilyID=1},
@@ -234,28 +234,28 @@ namespace FinalProject.DAL.Migrations
             };
             school.ForEach(a => context.Schools.AddOrUpdate(n => n.SchoolName, a));
             SaveChanges(context);
-            
+
             var applicants = new List<Applicant>
             {
-                new Applicant { FName = "Alex", MName = "Ark",  LName = "Axibeg", eMail="aaxibeg@outlook.com", Address="45 road street", ProvinceID=1,CityID=2},
-                new Applicant { FName = "Boris", MName = "Boyle",  LName = "Burnsworth", eMail="bburnsworth@outlook.com", Address="55 street", ProvinceID=3,CityID=1},
-                new Applicant { FName = "Cathy", LName = "Carlisle", eMail="ccarlisle@outlook.com" , Address="11 street", ProvinceID=2,CityID=4},
-                new Applicant { FName = "Derrick", MName = "Dee",  LName = "DaVinci", eMail="ddavincis@outlook.com", Address="88 street", ProvinceID=4,CityID=2}
+                new Applicant { FName = "Alex", MName = "Ark",  LName = "Axibeg", PhoneNumber=9053707878, EMail="aaxibeg@outlook.com", Address="45 road street", ProvinceID=1,CityID=2},
+                new Applicant { FName = "Boris", MName = "Boyle",  LName = "Burnsworth", PhoneNumber=9055669878, EMail="bburnsworth@outlook.com", Address="55 street", ProvinceID=3,CityID=1},
+                new Applicant { FName = "Cathy", LName = "Carlisle",PhoneNumber=9053557878,  EMail="ccarlisle@outlook.com" , Address="11 street", ProvinceID=2,CityID=4},
+                new Applicant { FName = "Derrick", MName = "Dee",  LName = "DaVinci", PhoneNumber=9053741184, EMail="ddavincis@outlook.com", Address="88 street", ProvinceID=4,CityID=2}
             };
-            applicants.ForEach(a => context.Applicants.AddOrUpdate(n => n.eMail, a));
+            applicants.ForEach(a => context.Applicants.AddOrUpdate(n => n.EMail, a));
             SaveChanges(context);
 
             var postings = new List<Posting>
             {
-                new Posting {  NumberOpen=2,ClosingDate=DateTime.Parse("2019-02-20"),StartDate=DateTime.Parse("2020-01-02"),
+                new Posting {  NumberOpen=2,ClosingDate=DateTime.Parse("2019-02-20"),StartDate=DateTime.Parse("2020-01-02"),JobEndDate=DateTime.Parse("2021-01-02"),
                 PostingDescription="Math teachers work with students of all ages in classrooms around the United States. Typically, they teach children and teens, but some math teachers may also teach adults, or continue their careers at community colleges or universities. Their goal is to help pupils develop critical-thinking abilities by gaining an understanding of mathematic concepts.", SchoolID=2,
-                JobID=2, fte = 0.4},
-                new Posting {  NumberOpen=1,ClosingDate=DateTime.Parse("2019-05-10"),StartDate=DateTime.Parse("2020-04-02"),
+                JobID=2, Fte = 0.4},
+                new Posting {  NumberOpen=1,ClosingDate=DateTime.Parse("2019-05-10"),StartDate=DateTime.Parse("2020-04-02"),JobEndDate=DateTime.Parse("2022-05-02"),
                 PostingDescription="Librarians evaluate books and other informational resources for consideration as additions to collections.They organize resources so that patrons can easily find the material that they desire. Librarians assess the research needs of individual visitors and identify the necessary resources.Librarians arrange speakers, entertainers and workshops to educate and entertain patrons.They publicize services to their constituency and endeavor to expand the use of library resources.", SchoolID=5,
-                JobID=1, fte=0.7},
-                new Posting {  NumberOpen=3,ClosingDate=DateTime.Parse("2019-09-09"),StartDate=DateTime.Parse("2020-08-06"),
+                JobID=1, Fte=0.7},
+                new Posting {  NumberOpen=3,ClosingDate=DateTime.Parse("2019-09-09"),StartDate=DateTime.Parse("2020-08-06"),JobEndDate=DateTime.Parse("2023-01-02"),
                 PostingDescription="Keep buildings in clean and orderly condition. Perform heavy cleaning duties, such as cleaning floors, shampooing rugs, washing walls and glass, and removing rubbish. Duties may include tending furnace and boiler, performing routine maintenance activities, notifying management of need for repairs, and cleaning snow or debris from sidewalk.", SchoolID=9,
-                JobID=3, fte=1.3}
+                JobID=3, Fte=1.3}
 
             };
             postings.ForEach(a => context.Postings.AddOrUpdate(n => n.ClosingDate, a));
@@ -265,11 +265,11 @@ namespace FinalProject.DAL.Migrations
 
             var applications = new List<Application>
             {
-                new Application {  ApplicantID=(context.Applicants.Where(p=>p.eMail=="aaxibeg@outlook.com").SingleOrDefault().ID),
+                new Application {  ApplicantID=(context.Applicants.Where(p=>p.EMail=="aaxibeg@outlook.com").SingleOrDefault().ID),
                     PostingID =(context.Postings.Where(p=>p.NumberOpen==2).SingleOrDefault().ID), ApplicationStatusID=1 },
-                new Application {  ApplicantID=(context.Applicants.Where(p=>p.eMail=="bburnsworth@outlook.com").SingleOrDefault().ID),
+                new Application {  ApplicantID=(context.Applicants.Where(p=>p.EMail=="bburnsworth@outlook.com").SingleOrDefault().ID),
                     PostingID =(context.Postings.Where(p=>p.NumberOpen==3).SingleOrDefault().ID), ApplicationStatusID=2 },
-                new Application {  ApplicantID=(context.Applicants.Where(p=>p.eMail=="ccarlisle@outlook.com").SingleOrDefault().ID),
+                new Application {  ApplicantID=(context.Applicants.Where(p=>p.EMail=="ccarlisle@outlook.com").SingleOrDefault().ID),
                     PostingID =(context.Postings.Where(p=>p.NumberOpen==1).SingleOrDefault().ID), ApplicationStatusID=3 }
             };
             applications.ForEach(a => context.Applications.AddOrUpdate(n => n.ApplicantID, a));
