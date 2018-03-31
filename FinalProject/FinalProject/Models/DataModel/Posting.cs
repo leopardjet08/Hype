@@ -59,6 +59,9 @@ namespace FinalProject.Models
         [StringLength(20, ErrorMessage = "Cannot be longer than 20 characters.")]
         public string JobCode { get; set; }
 
+        [Required(ErrorMessage = "Choose Type.")]
+        public bool SkillQualification { get; set; }
+
         public virtual School School { get; set; }
         public virtual Job Job { get; set; }
         public ICollection<Application> Applications { get; set; }

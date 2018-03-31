@@ -220,9 +220,9 @@
     <Compile Include="Controllers\SkillsController.cs" />
     <Compile Include="DAL\ApplicationDBContext.cs" />
     <Compile Include="DAL\JobPostingCFEntities.cs" />
-    <Compile Include="DAL\Migrations\201803311520040_p.cs" />
-    <Compile Include="DAL\Migrations\201803311520040_p.Designer.cs">
-      <DependentUpon>201803311520040_p.cs</DependentUpon>
+    <Compile Include="DAL\Migrations\201803311718095_JetInitial.cs" />
+    <Compile Include="DAL\Migrations\201803311718095_JetInitial.Designer.cs">
+      <DependentUpon>201803311718095_JetInitial.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\Migrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
@@ -396,8 +396,8 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DAL\Migrations\201803311520040_p.resx">
-      <DependentUpon>201803311520040_p.cs</DependentUpon>
+    <EmbeddedResource Include="DAL\Migrations\201803311718095_JetInitial.resx">
+      <DependentUpon>201803311718095_JetInitial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

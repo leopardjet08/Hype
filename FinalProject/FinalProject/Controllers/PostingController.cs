@@ -139,10 +139,11 @@ namespace FinalProject.Controllers
         //create controller
         public ActionResult Create(int? JobID)
         {
-            Job job = db.Jobs
-                
+            Job job = db.Jobs 
                 .Where(p => p.ID == JobID)
                 .SingleOrDefault();
+
+
             if (job == null)
             {
                 ModelState.AddModelError("", "No Job to use as a Template");
@@ -164,7 +165,8 @@ namespace FinalProject.Controllers
                 JobCode = job.JobCode,
                 Skills = job.Skills,
                 Requirements = job.Requirements,
-                Qualifications = job.Qualifications
+                Qualifications = job.Qualifications,
+                SkillQualification = job.SkillQualification
             };
 
             PopulateAssignedSkillData(posting);
@@ -305,13 +307,14 @@ namespace FinalProject.Controllers
                 .Where(p => p.ID == id).SingleOrDefault();
 
             if (TryUpdateModel(postingToUpdate, "",
-               new string[] { "NumberOpen,ClosingDate,StartDate,JobEndDate,PostingDescription,Fte,SchoolID,JobID,JobCode" }))
+               new string[] { "NumberOpen","ClosingDate","StartDate","JobEndDate","PostingDescription","Fte","SchoolID","JobID","JobCode" }))
             {
                 try
                 {
-                    //UpdatePostingSkills(selectedSkills, postingToUpdate);
-                    //UpdatePostingQualifications(selectedQuals, postingToUpdate);
-                    //UpdatePostingRequirements(selectedReqs, postingToUpdate);
+                   
+                    UpdatePostingQualifications(selectedQuals, postingToUpdate);
+                    UpdatePostingRequirements(selectedReqs, postingToUpdate);
+                    UpdatePostingSkills(selectedSkills, postingToUpdate);
 
                     db.Entry(postingToUpdate).OriginalValues["RowVersion"] = rowVersion;
                     db.SaveChanges();
@@ -463,7 +466,7 @@ namespace FinalProject.Controllers
 
             var selectedRequirementHS = new HashSet<string>(selectedReqs);
             var postingRequirements = new HashSet<int>
-                (postingToUpdate.Skills.Select(c => c.ID));//IDs of the currently selected Reqs
+                (postingToUpdate.Requirements.Select(c => c.ID));//IDs of the currently selected Reqs
             foreach (var reqs in db.Requirements)
             {
                 if (selectedRequirementHS.Contains(reqs.ID.ToString()))
@@ -483,17 +486,17 @@ namespace FinalProject.Controllers
             }
         }
 
-        private void UpdatePostingQualifications(string[] selectedQual, Posting postingToUpdate)
+        private void UpdatePostingQualifications(string[] selectedQuals, Posting postingToUpdate)
         {
-            if (selectedQual == null)
+            if (selectedQuals == null)
             {
                 postingToUpdate.Qualifications = new List<Qualification>();
                 return;
             }
 
-            var selectedQualificationHS = new HashSet<string>(selectedQual);
+            var selectedQualificationHS = new HashSet<string>(selectedQuals);
             var postingQualification = new HashSet<int>
-                (postingToUpdate.Qualifications.Select(c => c.ID));//IDs of the currently selected skills
+                (postingToUpdate.Qualifications.Select(c => c.ID));//IDs of the currently selected Qualification
             foreach (var Qual in db.Qualifications)
             {
                 if (selectedQualificationHS.Contains(Qual.ID.ToString()))
@@ -619,19 +622,39 @@ namespace FinalProject.Controllers
                 Job job = db.Jobs
                     .Where(d => d.ID == ID)
                     .SingleOrDefault();
+
                 //Build a string of html for the skills collection
+                string Qualifications = "";
+                foreach (var q in job.Qualifications)
+                {
+                    Qualifications += q.QualificationSet + "<br />";
+                }
+//////////////////////////////////////////////////////////////////////////////////
                 string Skills = "";
                 foreach (var s in job.Skills)
                 {
                     Skills += s.SkillName + "<br />";
                 }
+/////////////////////////////////////////////////////////////////////////////////
+                string Requirements = "";
+                foreach (var r in job.Requirements)
+                {
+                    Requirements += r.RequirementName + "<br />";
+                }
+
+
+
                 //Using an annomous object as a DTO to avoid serialization errors
                 var pos = new
                 {
                     job.JobTitle,
                     job.JobSummary,
                     JobCode = job.JobCode,
-                    Skills
+                    Skills,
+                    Qualifications,
+                    Requirements,
+                    job.SkillQualification
+
                 };
                 return Json(pos, JsonRequestBehavior.AllowGet);
             }

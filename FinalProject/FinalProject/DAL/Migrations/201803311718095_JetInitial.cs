@@ -3,7 +3,7 @@ namespace FinalProject.DAL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class p : DbMigration
+    public partial class JetInitial : DbMigration
     {
         public override void Up()
         {
@@ -89,6 +89,7 @@ namespace FinalProject.DAL.Migrations
                         SchoolID = c.Int(nullable: false),
                         JobID = c.Int(nullable: false),
                         JobCode = c.String(nullable: false, maxLength: 20),
+                        SkillQualification = c.Boolean(nullable: false),
                         CreatedBy = c.String(maxLength: 256),
                         CreatedOn = c.DateTime(),
                         UpdatedBy = c.String(maxLength: 256),

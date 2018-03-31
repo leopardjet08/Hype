@@ -36,6 +36,7 @@ namespace FinalProject.Models
         public string JobSummary { get; set; }
 
         // Skill == true, Qualification == false
+        [Required(ErrorMessage = "Choose Type.")]
         public bool SkillQualification { get; set; }
 
         public ICollection<Posting> Postings { get; set; }
