@@ -446,10 +446,10 @@ namespace FinalProject.Controllers
         private void PopulateDropDownLists(Posting posting = null)
         {
             ViewBag.JobID = new SelectList(db.Jobs.OrderBy(p => p.JobTitle), "ID", "JobTitle", posting?.JobID);
-            ViewBag.CityID = new SelectList( "", "");
-            ViewBag.Req = new SelectList("", "");
-            ViewBag.Qual = new SelectList("", "");
-            ViewBag.Skill = new SelectList("", "");
+            //ViewBag.CityID = new SelectList( "", "");
+            //ViewBag.Req = new SelectList("", "");
+            //ViewBag.Qual = new SelectList("", "");
+            //ViewBag.Skill = new SelectList("", "");
             ViewBag.SchoolID = new SelectList(db.Schools.OrderBy(p => p.SchoolName), "ID", "SchoolName", posting?.SchoolID);
         }
 
