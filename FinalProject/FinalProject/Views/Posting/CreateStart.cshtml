@@ -21,6 +21,9 @@
                 <label class="control-label col-md-4">Job Based On: </label>
                 <div class="col-md-7">
                     @Html.DropDownList("JobID", null, "Select a Job", htmlAttributes: new { @class = "form-control" })
+                    <a href="@Url.Action("Create", "Jobs", new { addJob = "AddJob" })" , target="_blank" type="submit" id="addJob">
+                        Create a new Job
+                    </a>
                 </div>
             </div>
 
