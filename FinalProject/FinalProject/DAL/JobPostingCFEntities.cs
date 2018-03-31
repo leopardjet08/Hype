@@ -1,4 +1,4 @@
-﻿using FinalProject.Models;
+using FinalProject.Models;
 using FinalProject.Models.DataModel;
 using System;
 using System.Collections.Generic;
@@ -86,7 +86,6 @@ namespace FinalProject.DAL
 
         }
 
+        }
+        
     }
-
-
-}

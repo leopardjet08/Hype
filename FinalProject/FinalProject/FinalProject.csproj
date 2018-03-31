@@ -208,6 +208,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApplicantController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
+    <Compile Include="Controllers\ApplyController.cs" />
     <Compile Include="Controllers\ArchiveController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobsController.cs" />
@@ -220,16 +221,17 @@
     <Compile Include="Controllers\SkillsController.cs" />
     <Compile Include="DAL\ApplicationDBContext.cs" />
     <Compile Include="DAL\JobPostingCFEntities.cs" />
+
     <Compile Include="DAL\Migrations\201803311718095_JetInitial.cs" />
     <Compile Include="DAL\Migrations\201803311718095_JetInitial.Designer.cs">
       <DependentUpon>201803311718095_JetInitial.cs</DependentUpon>
+
     </Compile>
     <Compile Include="DAL\Migrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Archive.cs" />
     <Compile Include="Models\DataModel\aFile.cs" />
     <Compile Include="Models\DataModel\Applicant.cs" />
     <Compile Include="Models\DataModel\ApplicantImage.cs" />
@@ -373,6 +375,9 @@
     <Content Include="Views\Applicant\Archive.cshtml" />
     <Content Include="Views\Applicant\Edit.cshtml" />
     <Content Include="Views\Posting\CreateStart.cshtml" />
+    <Content Include="Views\Apply\Create.cshtml" />
+    <Content Include="Views\Apply\Index.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -398,6 +403,7 @@
   <ItemGroup>
     <EmbeddedResource Include="DAL\Migrations\201803311718095_JetInitial.resx">
       <DependentUpon>201803311718095_JetInitial.cs</DependentUpon>
+
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
