@@ -521,13 +521,13 @@ namespace FinalProject.Controllers
 
 
 
-        //private SelectList JobSelectList(int? selectedID)
-        //{
-        //    var dQuery = from d in db.Jobs.AsNoTracking()
-        //                 orderby d.JobTitle
-        //                 select d;
-        //    return new SelectList(dQuery, "ID", "JobTitle", selectedID);
-        //}
+        private SelectList JobSelectList(int? selectedID)
+        {
+            var dQuery = from d in db.Jobs.AsNoTracking()
+                         orderby d.JobTitle
+                         select d;
+            return new SelectList(dQuery, "ID", "JobTitle", selectedID);
+        }
 
         //private SelectList SchoolSelectedList(int? selectedID)
         //{
@@ -574,12 +574,12 @@ namespace FinalProject.Controllers
             ViewBag.SchoolID = new SelectList(db.Schools.OrderBy(p => p.SchoolName), "ID", "SchoolName", posting?.SchoolID);
         }
 
-        //[HttpGet]
-        //public ActionResult GetJobs(int? JobID)
-        //{
-        //    SelectList jobs = JobSelectList(JobID);
-        //    return Json(jobs, JsonRequestBehavior.AllowGet);
-        //}
+        [HttpGet]
+        public ActionResult GetJobs(int? JobID)
+        {
+            SelectList jobs = JobSelectList(JobID);
+            return Json(jobs, JsonRequestBehavior.AllowGet);
+        }
 
         //[HttpGet]
         //public ActionResult GetSchoolCity(int? SchoolID)
@@ -613,7 +613,7 @@ namespace FinalProject.Controllers
         //    SelectList req = DescSelectedList(JobID);
         //    return Json(req, JsonRequestBehavior.AllowGet);
         //}
-        
+
         [HttpGet]
         public ActionResult GetAJob(int? ID)
         {

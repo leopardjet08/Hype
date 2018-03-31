@@ -24,7 +24,7 @@
                     <a href="@Url.Action("Create", "Jobs", new { addJob = "AddJob" })" , target="_blank" type="submit" id="addJob">
                         Create a new Job
                     </a>
-                    <button class="btn btn-default" id="ddlAuto" type="button"><span class="glyphicon-refresh"></span></button>
+                    <button class="btn btn-default" id="ddlRefresh" type="button"><span class="glyphicon-search"></span></button>
                 </div>
             </div>
 
@@ -118,6 +118,33 @@
 
 
     });
+
+    $('#ddlRefresh').click(function (event) {
+                event.preventDefault();
+                var JobsSelect = $('#JobID');
+                var selectedJob = JobsSelect.val();
+
+                $.getJSON('@Url.Action("GetJobs")', { JobID: selectedJob }, function (jobs) {
+                    if (jobs != null && !jQuery.isEmptyObject(jobs))
+                    {
+                        JobsSelect.empty();
+                        JobsSelect.append($('<option/>', {
+                            value: null,
+                            text: "Select a Job"
+                        }));
+                        $.each(jobs, function (index, job) {
+                            JobsSelect.append($('<option/>', {
+                                value: job.Value,
+                                text: job.Text,
+                                selected: job.Selected
+                            }));
+                        });
+                    };
+                });
+                $('#JobID').fadeToggle(400, function () {
+                    $('#JobID').fadeToggle(400);
+                });
+            });
 
 
 </script>
