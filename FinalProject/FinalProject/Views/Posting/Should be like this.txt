@@ -71,7 +71,6 @@
                                     <h4 style="display:inline-block">@Html.LabelFor(model => model.School, "School: ")</h4>
                                 </td>
                                 <td style="padding-bottom:15px;">
-                                    @* Dropdown should be textbox auto complete *@
                                     @Html.DropDownList("SchoolID", null, "Select a School", htmlAttributes: new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.SchoolID, "", new { @class = "text-danger" })
 
@@ -168,7 +167,7 @@
                                     @:</tr>
                             }
 
-                          
+                             </tr>
                            
                                     
                                

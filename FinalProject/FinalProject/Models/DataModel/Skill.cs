@@ -9,13 +9,9 @@ namespace FinalProject.Models.DataModel
 {
     public class Skill
     {
-        public Skill()
-        {
-            this.Jobs = new HashSet<Job>();
-        }
 
         public int ID { get; set; }
-
+        [Index("IX_Unique_skill", IsUnique = true)]
         [Display(Name = "Skills")]
         [Required(ErrorMessage = "You cannot leave the name of the qualification blank.")]
         [StringLength(255, ErrorMessage = "Skills cannot exceed 255 characters.")]

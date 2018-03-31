@@ -9,13 +9,9 @@ namespace FinalProject.Models.DataModel
 {
     public class Requirement
     {
-        public Requirement()
-        {
-            this.Jobs = new HashSet<Job>();
-        }
 
         public int ID  { get; set; }
-
+        [Index("IX_Unique_Req", IsUnique = true)]
         [Display(Name = "Requirement")]
         [Required(ErrorMessage = "Provide Requirement Description.")]
         [StringLength(50, ErrorMessage = "Name too long.")]

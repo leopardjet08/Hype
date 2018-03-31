@@ -220,9 +220,9 @@
     <Compile Include="Controllers\SkillsController.cs" />
     <Compile Include="DAL\ApplicationDBContext.cs" />
     <Compile Include="DAL\JobPostingCFEntities.cs" />
-    <Compile Include="DAL\Migrations\201803301935422_InitialCreate.cs" />
-    <Compile Include="DAL\Migrations\201803301935422_InitialCreate.Designer.cs">
-      <DependentUpon>201803301935422_InitialCreate.cs</DependentUpon>
+    <Compile Include="DAL\Migrations\201803311520040_p.cs" />
+    <Compile Include="DAL\Migrations\201803311520040_p.Designer.cs">
+      <DependentUpon>201803311520040_p.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\Migrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
@@ -297,6 +297,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Images\twitter.png" />
     <Content Include="Views\Posting\ourCreateCode.txt" />
+    <Content Include="Views\Posting\Should be like this.txt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -395,8 +396,8 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DAL\Migrations\201803301935422_InitialCreate.resx">
-      <DependentUpon>201803301935422_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="DAL\Migrations\201803311520040_p.resx">
+      <DependentUpon>201803311520040_p.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
