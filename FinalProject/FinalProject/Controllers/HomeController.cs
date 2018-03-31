@@ -22,6 +22,18 @@ namespace FinalProject.Controllers
 
             var postings = from s in db.Postings where ((DateTime)s.ClosingDate >= DateTime.Today) select s;
 
+            ////////////////// total posting
+            var a = db.Postings.Where(f => f.ClosingDate >= DateTime.Today).Select(g => g.ID).ToList();
+
+            List<Posting> postingList = new List<Posting>();
+            int numP = 0;
+
+            for (int i = 0; i < postings.ToList().Count; i++)
+            {
+                numP += 1;
+            }
+
+            /////////////////////
 
             ViewBag.ShowList = false;
 
@@ -33,8 +45,16 @@ namespace FinalProject.Controllers
                 postings = postings.Where(p => p.Job.JobTitle.ToUpper().Contains(searchName.ToUpper()));
                 ViewBag.Filtering = " in";
                 ViewBag.searchName = searchName;
+
+                numP = 0;
+                for (int i = 0; i < postings.ToList().Count; i++)
+                {
+                    numP += 1;
+                }
+
+
             }
-            
+
 
             if (!String.IsNullOrEmpty(actionButton))
             {
@@ -76,6 +96,8 @@ namespace FinalProject.Controllers
             int pageSize = 9;
             int pageNumber = (page ?? 1);
 
+
+            ViewBag.total = numP;
             return View(postings.ToPagedList(pageNumber, pageSize));
         }
 
