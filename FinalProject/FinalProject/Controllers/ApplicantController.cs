@@ -130,7 +130,7 @@ namespace FinalProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,FName,MName,LName,eMail,Address,ProvinceID,CityID,CreatedBy,CreatedOn,UpdatedBy,UpdatedOn,RowVersion")] Applicant applicant)
+        public ActionResult Edit([Bind(Include = "ID,FName,MName,LName,EMail,Address,ProvinceID,CityID,CreatedBy,CreatedOn,UpdatedBy,UpdatedOn,RowVersion")] Applicant applicant)
         {
             if (ModelState.IsValid)
             {
