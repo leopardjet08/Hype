@@ -16,34 +16,52 @@ namespace FinalProject.Controllers
         private JobPostingCFEntities db = new JobPostingCFEntities();
 
         // GET: Apply
-        public ActionResult Index()
-        {
-            var applications = db.Applications.Include(a => a.Applicant).Include(a => a.ApplicationStatus).Include(a => a.Posting);
-            return View(applications.ToList());
-        }
-
-        // GET: Apply/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Index(int? id, string message)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Application application = db.Applications.Find(id);
-            if (application == null)
+            //get all posting data
+            Posting posting = db.Postings
+                .Where(p => p.ID == id).SingleOrDefault();
+            if (posting == null)
             {
                 return HttpNotFound();
             }
-            return View(application);
+            ViewBag.Message = message;
+            return View(posting);
         }
 
+       
+
+
+
         // GET: Apply/Create
-        public ActionResult Create()
+        public ActionResult Create(int? PostingID)
         {
-            ViewBag.ApplicantID = new SelectList(db.Applicants, "ID", "FName");
-            ViewBag.ApplicationStatusID = new SelectList(db.ApplicationStatus, "ID", "Status");
-            ViewBag.PostingID = new SelectList(db.Postings, "ID", "PostingDescription");
-            return View();
+
+            Posting posting = db.Postings
+               .Where(p => p.ID == PostingID)
+               .SingleOrDefault();
+
+            //Applicant applicant
+
+            if (posting == null)
+            {
+                ModelState.AddModelError("", "No Job to use as a Template");
+                PopulateDropDownLists();
+                return View("Index");
+            }
+
+            var application = new Application()
+            {
+                PostingID = posting.ID,
+
+
+            };
+
+            return View("Create", posting);
         }
 
         // POST: Apply/Create
@@ -66,67 +84,9 @@ namespace FinalProject.Controllers
             return View(application);
         }
 
-        // GET: Apply/Edit/5
-        public ActionResult Edit(int? id)
+        private void PopulateDropDownLists(Posting posting = null)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Application application = db.Applications.Find(id);
-            if (application == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.ApplicantID = new SelectList(db.Applicants, "ID", "FName", application.ApplicantID);
-            ViewBag.ApplicationStatusID = new SelectList(db.ApplicationStatus, "ID", "Status", application.ApplicationStatusID);
-            ViewBag.PostingID = new SelectList(db.Postings, "ID", "PostingDescription", application.PostingID);
-            return View(application);
-        }
-
-        // POST: Apply/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,PostingID,ApplicantID,SubmissionDate,ApplicationStatusID")] Application application)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(application).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.ApplicantID = new SelectList(db.Applicants, "ID", "FName", application.ApplicantID);
-            ViewBag.ApplicationStatusID = new SelectList(db.ApplicationStatus, "ID", "Status", application.ApplicationStatusID);
-            ViewBag.PostingID = new SelectList(db.Postings, "ID", "PostingDescription", application.PostingID);
-            return View(application);
-        }
-
-        // GET: Apply/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Application application = db.Applications.Find(id);
-            if (application == null)
-            {
-                return HttpNotFound();
-            }
-            return View(application);
-        }
-
-        // POST: Apply/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Application application = db.Applications.Find(id);
-            db.Applications.Remove(application);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+           
         }
 
         protected override void Dispose(bool disposing)
