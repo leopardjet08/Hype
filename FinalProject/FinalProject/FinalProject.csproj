@@ -221,9 +221,9 @@
     <Compile Include="Controllers\SkillsController.cs" />
     <Compile Include="DAL\ApplicationDBContext.cs" />
     <Compile Include="DAL\JobPostingCFEntities.cs" />
-    <Compile Include="DAL\Migrations\201804011347081_d.cs" />
-    <Compile Include="DAL\Migrations\201804011347081_d.Designer.cs">
-      <DependentUpon>201804011347081_d.cs</DependentUpon>
+    <Compile Include="DAL\Migrations\201804012156316_JetInitial.cs" />
+    <Compile Include="DAL\Migrations\201804012156316_JetInitial.Designer.cs">
+      <DependentUpon>201804012156316_JetInitial.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\Migrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
@@ -242,6 +242,7 @@
     <Compile Include="Models\DataModel\City.cs" />
     <Compile Include="Models\DataModel\FileContent.cs" />
     <Compile Include="Models\DataModel\IAuditable.cs" />
+    <Compile Include="Models\DataModel\PostingStatus.cs" />
     <Compile Include="Models\DataModel\Requirement.cs" />
     <Compile Include="Models\DataModel\Skill.cs" />
     <Compile Include="Models\DataModel\SavedPosting.cs" />
@@ -342,7 +343,7 @@
     <Content Include="Views\Application\Delete.cshtml" />
     <Content Include="Views\Posting\Details.cshtml" />
     <Content Include="Views\Posting\Edit.cshtml" />
-    <Content Include="Views\Posting\Delete.cshtml" />
+    <Content Include="Views\Posting\Archive.cshtml" />
     <Content Include="Views\Archive\IndexApplications.cshtml" />
     <Content Include="Views\Archive\IndexPostings.cshtml" />
     <Content Include="Views\Jobs\Create.cshtml" />
@@ -375,6 +376,7 @@
     <Content Include="Views\Posting\CreateStart.cshtml" />
     <Content Include="Views\Apply\Create.cshtml" />
     <Content Include="Views\Apply\Index.cshtml" />
+    <Content Include="Views\Posting\IndexExpired.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -398,8 +400,8 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DAL\Migrations\201804011347081_d.resx">
-      <DependentUpon>201804011347081_d.cs</DependentUpon>
+    <EmbeddedResource Include="DAL\Migrations\201804012156316_JetInitial.resx">
+      <DependentUpon>201804012156316_JetInitial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

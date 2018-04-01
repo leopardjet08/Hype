@@ -19,7 +19,7 @@
                 <br />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <h3 style="padding-top:10px; text-align:center;">
-                    ∙ &nbsp; All Listed Job Postings &nbsp; ∙
+                    ∙ &nbsp; Expired Job Posting &nbsp; ∙
                 </h3>&nbsp;&nbsp;
                 <div class="container">
 
@@ -62,74 +62,74 @@
                         <tbody id="tableColor" style="font-size:17px; text-align:left">
                             @* Data in the table *@
                             @foreach (var item in Model)
-                {
+                            {
 
-                    <tr>
-                        <td style="text-align:center;">
-                            @Html.ActionLink(item.Job.JobTitle, "Details", new { id = item.ID })
+                                <tr>
+                                    <td style="text-align:center;">
+                                        @Html.ActionLink(item.Job.JobTitle, "Details", new { id = item.ID })
 
-                        </td>
-                        <td style="text-align:center;">
-                            @Html.DisplayFor(modelItem => item.ClosingDate)
-                        </td>
-                        <td class="company" style="text-align:center;">
-                            @Html.DisplayFor(modelItem => item.StartDate)
-                        </td>
-                        <td style="text-align:center;">
-                            @Html.DisplayFor(modelItem => item.NumberOpen)
-                        </td>
-                        <td style="text-align:center;">
-                            @Html.DisplayFor(modelItem => item.School.City.CityName)
-                        </td>
+                                    </td>
+                                    <td style="text-align:center;">
+                                        @Html.DisplayFor(modelItem => item.ClosingDate)
+                                    </td>
+                                    <td class="company" style="text-align:center;">
+                                        @Html.DisplayFor(modelItem => item.StartDate)
+                                    </td>
+                                    <td style="text-align:center;">
+                                        @Html.DisplayFor(modelItem => item.NumberOpen)
+                                    </td>
+                                    <td style="text-align:center;">
+                                        @Html.DisplayFor(modelItem => item.School.City.CityName)
+                                    </td>
 
-                        @* Buttons in the table *@
-                        <td style="text-align:center; font-size:14px">
-                            @Html.ActionLink("View", "Details", new { id = item.ID }, new { @style = "border:0px;" })
-                            &nbsp;@Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @style = "border:0px;" })
-                            &nbsp;@Html.ActionLink("Archive", "Archive", new { id = item.ID }, new { @style = "border:0px;" })
+                                    @* Buttons in the table *@
+                                    <td style="text-align:center; font-size:14px">
+                                        @Html.ActionLink("View", "Details", new { id = item.ID }, new { @style = "border:0px;" })
+                                        &nbsp;@Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @style = "border:0px;" })
+                                        &nbsp;@Html.ActionLink("Archive", "Delete", new { id = item.ID }, new { @style = "border:0px;" })
 
-                        </td>
-                    </tr>
-    }
+                                    </td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                     <div style="text-align:center">
-                                            @* Page counts  *@
-                    <span id="filterMessage" class="text-danger">@((Model.Count() == 0) ? "Zero postings found.  No records match your criteria." : "")</span>
-                    <input type="hidden" name="sortDirection" value="@ViewBag.sortDirection" />
-                    <input type="hidden" name="sortField" value="@ViewBag.sortField" />
-                    <br />
-                    Page:  @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                        @* Page counts  *@
+                        <span id="filterMessage" class="text-danger">@((Model.Count() == 0) ? "Zero postings found.  No records match your criteria." : "")</span>
+                        <input type="hidden" name="sortDirection" value="@ViewBag.sortDirection" />
+                        <input type="hidden" name="sortField" value="@ViewBag.sortField" />
+                        <br />
+                        Page:  @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
 
-                    @Html.PagedListPager(Model, page => Url.Action("Index",
-new
-{
-page,
-sortDirection = ViewBag.sortDirection,
-sortField = ViewBag.sortField,
-searchName = ViewBag.searchName
-}))
+                        @Html.PagedListPager(Model, page => Url.Action("Index",
+         new
+         {
+             page,
+             sortDirection = ViewBag.sortDirection,
+             sortField = ViewBag.sortField,
+             searchName = ViewBag.searchName
+         }))
 
                     </div>
 
 
                 </div>
             </div>
-          </div>
+        </div>
     }
-       </div>
+</div>
 
 
-        <style>
-            a.classname {
-                background: url(../Images/image.gif) no-repeat top left;
-                display: block;
-                width: 150px;
-                height: 150px;
-                text-indent: -9999px;
-            }
-       </style>
+<style>
+    a.classname {
+        background: url(../Images/image.gif) no-repeat top left;
+        display: block;
+        width: 150px;
+        height: 150px;
+        text-indent: -9999px;
+    }
+</style>
 
 
 

@@ -28,7 +28,7 @@ namespace FinalProject.Models
         }
         public DateTime SubmissionDate { get; private set; }
 
-        // Value 1 default ID for Pending status
+        // Value 0 default ID for Pending status
         public int ApplicationStatusID { get; set; } = 1;
 
         public virtual Applicant Applicant { get; set; }

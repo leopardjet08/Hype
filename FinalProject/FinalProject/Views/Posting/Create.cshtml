@@ -237,6 +237,7 @@
             <h4>@Html.LabelFor(model => model.PostingDescription, "Job Description: ")</h4>
             <br />
             @Html.EditorFor(model => model.PostingDescription, new { htmlAttributes = new { id = "desc", @class = "form-control", @rows = "2", @cols = "100", @style = "max-width:73%; height:200px;", @placeholder = "Enter Description here..." } })
+            @Html.EditorFor(model => model.PostingStatusID, new { htmlAttributes = new { @class = "form-control", @style = "visibility: hidden;" } })
 
         </div>
         <br />
