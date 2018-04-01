@@ -8,7 +8,6 @@
 {
     @Html.AntiForgeryToken()
 
-
     
     <script type="text/javascript">
         function sliderChange(val) {
@@ -17,7 +16,6 @@
         }
 
     </script>
-
 
 
 <div class="container well well-lg" style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
@@ -31,33 +29,37 @@
         <div style="text-align:center; margin-bottom:60px">
             <h3> ∙ &nbsp; Create New Posting&nbsp; ∙</h3>
         </div>
-
-        <div>
-
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-            <button class="btn btn-default" id="ddlRefresh" type="button"><span class="glyphicon glyphicon-refresh"></span></button>
-
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        </div>
     </div>
+    <br />
+        <div style="text-align: center; margin:0 auto;">
+           <h4 style="color:#012e72">@Html.LabelFor(model => model.NumberOpen, "Number of Openings: ")</h4>          
+           @Html.EditorFor(model => model.NumberOpen, new { htmlAttributes = new { @class = "form-control", @style = "margin:0 auto; width:75px" } })
+        </div>
+    <br />
 
+ <div style="margin-top:20px">
 
-    @* Divider *@
-    <div class="modal-body row">
+   @* Divider *@
+   <div class="modal-body row">
 
-        @* Column 1 *@
-        <div class="col-md-6">
-            <div>
-                <div class="form-horizontal">
-                    <table style="text-align: left; width:60%; margin:0 auto;">
+        @* Column1 *@
+        <div class="col-md-6" style="width:50%">
+            <div class="container well well-lg">
+            <table style="width:100%;">
                         <tr>
-                            <td style="padding-bottom:10px; width:50%">
-                                <h4>@Html.LabelFor(model => model.Job.JobTitle, "Job Title: ")</h4>
+                            <td style="padding-bottom:30px; width:25%">
+                                <h4 style="color:#012e72">@Html.LabelFor(model => model.Job.JobTitle, "Job Title: ")</h4>
                             </td>
-                            <td style="padding-bottom:10px;">
-                                @Html.DropDownList("JobID", null, "Select a Job Title", htmlAttributes: new { @class = "form-control", @style = "width:200px", @runat = "server" })
-                                @*@Html.ActionLink("Create a Job", "Create", "Jobs")*@
+                            <td style="padding-bottom:30px;">
+                                @Html.DropDownList("JobID", null, "Select a Job Title", htmlAttributes: new { @class = "form-control", @style = "width:200px; display:inline", @runat = "server" })
+                                
+                                <div style="display:inline">
+                                   @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                   <button class="btn btn-default" id="ddlRefresh" type="button"><span class="glyphicon glyphicon-refresh"></span></button>
+                                   <button class="btn btn-default" style="display:inline" id="ddlAuto" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                </div>
+                        <br />
                                 <a href="@Url.Action("Create", "Jobs", new { addJob = "AddJob" })" , target="_blank" type="submit" id="addJob">
                                     Create a Job
                                 </a>
@@ -233,58 +235,67 @@
                 $('#desc').fadeToggle(400, function () {
                     $('#desc').fadeToggle(400);
                 });
-                                        });
-
-
-                                    </script>
-                                }
-
+            });
+                </script>   }
                                 @Html.ValidationMessageFor(model => model.JobID, "", new { @class = "text-danger" })
                             </td>
                         </tr>
                         <tr>
-                            <td style="padding-bottom:15px;">
-                                <h4 style="display:inline-block">@Html.LabelFor(model => model.School, "School: ")</h4>
+                            <td style="vertical-align:top; ">
+                                <h4 style="color:#012e72; display:inline-block">@Html.LabelFor(model => model.School, "School: ")</h4>
                             </td>
-                            <td style="padding-bottom:15px;">
-                                @Html.DropDownList("SchoolID", null, "Select a School", htmlAttributes: new { id = "SchoolID", @class = "form-control", @style = "vertical-algin:top; width:200px", @runat = "server" })
-                                @Html.ValidationMessageFor(model => model.SchoolID, "", new { @class = "text-danger" })
+                            <td style="padding-bottom:20px; vertical-align:central">
+                                @Html.DropDownList("SchoolID", null, "Select a School", htmlAttributes: new { id = "SchoolID", @class = "form-control", @style = "vertical-algin:top; display:inline-block; width:200px", @runat = "server" })
+                                <input class="form-control" style="display:inline; width:50px; padding:5px" type="number" min="0" max="20" step="1" value="0">
+                                @Html.ValidationMessageFor(model => model.SchoolID, "", new { @class = "text-danger" }) 
+                                <br/>
+                                @Html.ActionLink("Add a Location", null, new { @id = "hideSchools",  @style = "border:0px;" })           
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-bottom:20px; vertical-align:top">
+                               <h4 style="color:#012e72; font-weight:bold; margin-bottom:5px" id="school2Hide">School 2:</h4>
+                            </td>
+                            <td style="padding-bottom:20px; vertical-align:central">
+                                <div id="school2Hide" style="margin-bottom:20px">
+                                    @Html.DropDownList("SchoolID", null, "Select a School", htmlAttributes: new { id = "SchoolID", @class = "form-control", @style = "display:inline; vertical-algin:top; width:200px", @runat = "server" })
+                                    <input class="form-control" style="display:inline; width:50px; padding:5px" type="number" min="0" max="20" step="1" value="0">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align:top">
+                                <h4 style="color:#012e72; font-weight:bold; margin-bottom:20px" id="school2Hide">School 3:</h4>
+                            </td>
+                            <td>
+                                 <div id="school2Hide" style="margin-bottom:20px">
+                                    @Html.DropDownList("SchoolID", null, "Select a School", htmlAttributes: new { id = "SchoolID", @class = "form-control", @style = "display:inline; vertical-algin:top; width:200px", @runat = "server" })
+                                    <input class="form-control" style="display:inline; width:50px; padding:5px" type="number" min="0" max="20" step="1" value="0">
+                                 </div>
+                            </td>
+                        </tr>
+                </table>
 
-                                <button class="btn btn-default" id="ddlAuto" type="button"><span class="glyphicon glyphicon-search"></span></button>
+            </div>
+        </div>
 
-                            </td>
-                        </tr>
+       @* Column2 *@
+       <div class="col-md-6">
+            <div class="container well well-lg">
+            
+                <table style=" width:100%; margin:0 auto;">
                         <tr>
                             <td style="padding-bottom:15px;">
-                                <h4 style="display:inline-block">@Html.LabelFor(model => model.School.City, "City: ")</h4>
-                            </td>
-                            <td style="padding-bottom:15px;">
-                                @Html.ValidationMessageFor(model => model.SchoolID, "", new { @class = "text-danger" })
-                                @Html.DropDownList("CityID", null, null, htmlAttributes: new {  @class = "form-control", @style = "vertical-algin:top; width:200px", @runat = "server" })
-                                @Html.Label("")
-                                
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="padding-bottom:15px;">
-                                <h4>@Html.LabelFor(model => model.NumberOpen, "Openings: ")</h4>
-                            </td>
-                            <td style="padding-bottom:15px;">
-                                @Html.EditorFor(model => model.NumberOpen, new { htmlAttributes = new { @class = "form-control", @style = "width:75px" } })
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="padding-bottom:15px;">
-                                <h4>@Html.LabelFor(model => model.fte, "FTE: ")</h4>
+                                <h4 style="color:#012e72">@Html.LabelFor(model => model.fte, "FTE: ")</h4>
                             </td>
                             <td style="padding-bottom:15px;">
                                 <input type="range" id="range" onInput="sliderChange(this.value)" min="0.0" max="1.5" step="0.1" value="0.0">
                                 <br /><span id="sliderStatus">0.0</span>
                             </td>
                         </tr>
-                        <tr>
-                            <td style="padding-bottom:15px;">
-                                <h4>@Html.LabelFor(model => model.ClosingDate, "Deadline: ")</h4>
+                        <tr style="vertical-align:top">
+                            <td style="padding-bottom:15px; vertical-align:bottom">
+                                <h4 style="color:#012e72">@Html.LabelFor(model => model.ClosingDate, "Deadline: ")</h4>
                             </td>
                             <td>
                                 @Html.EditorFor(model => model.ClosingDate, new { htmlAttributes = new { @class = "form-control", @style = "width:200px", @placeholder = "yyyy-mm-dd" } })
@@ -292,76 +303,80 @@
                         </tr>
                         <tr>
                             <td style="padding-bottom:15px;">
-                                <h4>@Html.LabelFor(model => model.StartDate, "Start Date: ")</h4>
+                                <h4 style="color:#012e72">@Html.LabelFor(model => model.StartDate, "Start Date: ")</h4>
                             </td>
                             <td style="padding-bottom:15px;">
                                 @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control", @style = "width:200px", @placeholder = "yyyy-mm-dd" } })
                             </td>
                         </tr>
-                    </table>
-                </div>
+                        <tr>
+                            <td style="padding-bottom:15px;">
+                                <h4 style="color:#012e72; font-weight:bold">End Date:</h4>
+                            </td>
+                            <td style="padding-bottom:15px;">
+                                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control", @style = "width:200px", @placeholder = "yyyy-mm-dd" } })
+                            </td>
+                        </tr>
+                 </table>  
+        <br />
+        <br />
+   
+
             </div>
         </div>
+   </div>
 
+          @*///////// ///////////////////*@                  
 
+         <div class="row" style="text-align:center; margin:0 auto" ;>
 
-
-        @* Column 2 *@
-        <div class="col-md-6">
-            <div>
-                <div class="form-horizontal">
-
-                    <table style="text-align: left; width:60%; margin:0 auto;">
-                        <tr>
-                            <td style="padding-bottom:70px;">
-                                <h4>@Html.LabelFor(model => model.Job.Requirements, "Requirements: ")</h4>
-                            </td>
-                            <td style="padding-bottom:70px; font-size: 16px; vertical-align:central">
-                               
-                                @*@Html.DropDownList("req", null, null, htmlAttributes: new { @class = "form-control", @style = "vertical-algin:top; width:200px", @runat = "server" })*@
-                                @Html.Label(" " , new { id ="req", @style = "font-weight:normal" })
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="padding-bottom:70px;">
-                                <h4>@Html.LabelFor(model => model.Job.Qualifications, "Qualifications: ")</h4>
-                            </td>
-                            <td style="padding-bottom:70px; font-size: 16px; vertical-align:central">
-                                @*@Html.DropDownList("qual", null, null, htmlAttributes: new { @class = "form-control", @style = "vertical-algin:top; width:200px", @runat = "server" })*@
-                                @Html.Label(" ", new { id = "qual", @style = "font-weight:normal" })
-                            </td>
-                        </tr>
-                        <tr>
-                            <td >
-                                <h4>@Html.LabelFor(model => model.Job.Skills, "Skills: ")</h4>
-                            </td>
-                            <td style="font-size: 16px; ">
-                                @*@Html.DropDownList("skill", null, null, htmlAttributes: new { @class = "form-control", @style = "vertical-algin:top; width:200px", @runat = "server" })*@
-                                @Html.Label(" ", new { id = "skill", @style="font-weight:normal"})
-                            </td>
-                        </tr>
-
-                    </table>
+            <div class="col-md-4">
+                <div style="padding-bottom:10px; padding-left:60px; text-align:center">
+                    <h4 style="color:#012e72">@Html.LabelFor(model => model.Job.Requirements, "Requirements")</h4>
+                </div>
+                <div style="padding-bottom:10px; padding-left:60px; font-size: 16px; vertical-align:central">               
+                    @*@Html.DropDownList("req", null, null, htmlAttributes: new { @class = "form-control", @style = "vertical-algin:top; width:200px", @runat = "server" })*@
+                    @Html.Label(" " , new { id ="req", @style = "font-weight:normal" })
                 </div>
             </div>
-        </div>
-    </div>
 
-    <div style="margin-left:135px; width:100%">
-        <h4 >@Html.LabelFor(model => model.PostingDescription, "Job Description: ")</h4>
-        <br />
-        @Html.EditorFor(model => model.PostingDescription, new { htmlAttributes = new { id ="desc", @class = "form-control", @rows = "2", @cols = "100", @style = "max-width:73%; height:200px;", @placeholder = "Enter Description here..." } })
-        
-    </div>
-        <br />
-        <br />
+            <div class="col-md-4">
+                 <div style="padding-bottom:10px;">
+                    <h4 style="color:#012e72">@Html.LabelFor(model => model.Job.Qualifications, "Qualifications")</h4>
+                 </div>
+                 <div style="padding-bottom:10px; font-size: 16px; vertical-align:central">
+                    @*@Html.DropDownList("qual", null, null, htmlAttributes: new { @class = "form-control", @style = "vertical-algin:top; width:200px", @runat = "server" })*@
+                    @Html.Label(" ", new { id = "qual", @style = "font-weight:normal" })
+                 </div>
+            </div>
 
-    <div style="text-align:center">
-        <input type="submit" value="Publish" style="background-color:#00a203; border:none; margin-right:30px" class="btn btn-primary btn-large" />
-        <a href="javascript:void(0);" style="margin-left:30px; padding-right:20px" onclick="history.go(-1);">Back</a>
+            <div class="col-md-4">
+                <div style="padding-bottom:10px">
+                    <h4 style="color:#012e72">@Html.LabelFor(model => model.Job.Skills, "Skills")</h4>
+                </div>              
+                <div style="font-size: 16px; ">
+                   @*@Html.DropDownList("skill", null, null, htmlAttributes: new { @class = "form-control", @style = "vertical-algin:top; width:200px", @runat = "server" })*@
+                   @Html.Label(" ", new { id = "skill", @style="font-weight:normal"})
+                </div>
+
+            </div>
+         </div>
+ 
+   </div>
+                   
+    <div style=" margin-top:50px;">
+        @Html.EditorFor(model => model.PostingDescription, new { htmlAttributes = new { id ="desc", @class = "form-control", @rows = "2", @cols = "100", @style = "max-width:73%; margin:0 auto; font-size:16px; height:200px;", @placeholder = "Enter Description here..." } })
+        <br />
+        <h4 style="color:#012e72; text-align:center">@Html.LabelFor(model => model.PostingDescription, "Job Description")</h4>
+    </div>
+       
+    <div style="text-align:center; margin-top:80px">
+        <input type="submit" value="Publish" style="background-color:#00a203; border:none;" class="btn btn-primary btn-large" />
+       <br /><br />
+        <a href="javascript:void(0);" onclick="history.go(-1);">Back</a>
     </div>
     <br />
-</div>
 
+</div>
     
 }
