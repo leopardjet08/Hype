@@ -64,18 +64,18 @@ namespace FinalProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,JobTitle,JobSummary,SkillQualification")] Job job, string[] selectedRequirments, string[] selectedSkills, string[] selectedQualifications)
+        public ActionResult Create([Bind(Include = "ID,JobTitle,JobSummary,SkillQualification")] Job job, string[] selectedRequirements, string[] selectedSkills, string[] selectedQualifications)
         {
             /////////////////Requirement create/////////////////////////
             try
             {
                     
-                    if (selectedRequirments != null)
+                    if (selectedRequirements != null)
                     {
                         job.Requirements = new List<Requirement>();
-                        foreach (var requirment in selectedRequirments)
+                        foreach (var requirement in selectedRequirements)
                         {
-                            var requirmentToAdd = db.Requirements.Find(int.Parse(requirment));
+                            var requirmentToAdd = db.Requirements.Find(int.Parse(requirement));
                             job.Requirements.Add(requirmentToAdd);
                         }
                     }
@@ -157,9 +157,14 @@ namespace FinalProject.Controllers
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
 
+
             PopulateDropDownLists(job);
 
-                return View(job);
+            PopulateAssignedRequirementData(job);
+            PopulateAssignedQualificationData(job);
+            PopulateAssignedSkillData(job);
+
+            return View(job);
         }
 
         // GET: Jobs/Edit/5
