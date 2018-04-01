@@ -1,18 +1,13 @@
-﻿using FinalProject.Models.DataModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
 
-namespace FinalProject.Models
+namespace FinalProject.Models.DataModel
 {
-    public class Posting : Auditable, IValidatableObject
+    public class Archiveposting
     {
-        public Posting()
-        {
-            this.Applications = new HashSet<Application>();
-            this.SavedPostings = new HashSet<SavedPosting>();
-        }
-
         public int ID { get; set; }
 
         [Display(Name = "Number of Openings")]
@@ -46,7 +41,7 @@ namespace FinalProject.Models
         [Display(Name = "FTE Status")]
         [Required(ErrorMessage = "You must specify employment status.")]
         [Range(0, 1.5, ErrorMessage = "FTE number cannot exceed 1.5")]
-        public double Fte { get; set; }
+        public double fte { get; set; }
 
         [Required(ErrorMessage = "Please specify the school you applied for.")]
         public int SchoolID { get; set; }
@@ -64,24 +59,6 @@ namespace FinalProject.Models
         public virtual ICollection<Requirement> Requirements { get; set; }
         public virtual ICollection<Qualification> Qualifications { get; set; }
 
-        // Validation for date
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            if (ClosingDate < DateTime.Today)
-            {
-                yield return new ValidationResult("The closing date cannot be in the past.", new[] { "ClosingDate" });
-            }
-            if (StartDate.GetValueOrDefault() < ClosingDate)
-            {
-                yield return new ValidationResult("The start date for the posting cannot be before the closing date.", new[] { "StartDate" });
-            }
-
-            if (JobEndDate < StartDate)
-            {
-                yield return new ValidationResult("The Job End date cannot be before the job Start date.", new[] { "JobEndDate" });
-            }
-
-        }
-
+        public DateTime ArchiveDate { get; set; }
     }
 }

@@ -24,5 +24,6 @@ namespace FinalProject.Models.DataModel
         
         
         public virtual ICollection<Job> Jobs { get; set; }
+        public virtual ICollection<Posting> Postings { get; set; }
     }
 }

@@ -7,13 +7,13 @@ namespace FinalProject.DAL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class aaaaaa : IMigrationMetadata
+    public sealed partial class initialJet : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(aaaaaa));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(initialJet));
         
         string IMigrationMetadata.Id
         {
-            get { return "201803180702096_aaaaaa"; }
+            get { return "201803301857299_initialJet"; }
         }
         
         string IMigrationMetadata.Source

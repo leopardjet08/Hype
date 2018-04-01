@@ -14,6 +14,8 @@ namespace FinalProject.Models
         {
             this.Applications = new HashSet<Application>();
             this.SavedPostings = new HashSet<SavedPosting>();
+            this.Files = new HashSet<aFile>();
+
         }
 
         // Get Full Name
@@ -60,7 +62,13 @@ namespace FinalProject.Models
         [StringLength(255)]
         [DataType(DataType.EmailAddress)]
         [Index("IX_Unique_Applicant_email", IsUnique = true)]
-        public string eMail { get; set; }
+        public string EMail { get; set; }
+
+        [Required(ErrorMessage = "Phone number is required.")]
+        [RegularExpression("^\\d{10}$", ErrorMessage = "Please enter a valid 10-digit phone number (no spaces).")]
+        [DataType(DataType.PhoneNumber)]
+        [DisplayFormat(DataFormatString = "{0:(###) ###-####}", ApplyFormatInEditMode = false)]
+        public Int64 PhoneNumber { get; set; }
 
         [Display(Name = "Address")]
         [Required(ErrorMessage = "Required.")]
@@ -77,5 +85,13 @@ namespace FinalProject.Models
         public virtual City City { get; set; }
         public ICollection<Application> Applications { get; set; }
         public ICollection<SavedPosting> SavedPostings { get; set; }
+
+        //Added to hold picture of applicant
+        public virtual ApplicantImage ApplicantImage { get; set; }
+
+        //Added to hold related files
+        public ICollection<aFile> Files { get; set; }
+
+
     }
 }
