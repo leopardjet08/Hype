@@ -11,9 +11,15 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.JobCode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.JobCode)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.JobTitle)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.JobTitle)
         </dd>
@@ -24,6 +30,50 @@
 
         <dd>
             @Html.DisplayFor(model => model.JobSummary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Qualifications)
+        </dt>
+        <dd>
+
+
+            @{
+            foreach (var qualification in Model.Qualifications)
+            {
+                @:  @qualification.QualificationSet <br />
+        }
+            }
+
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Requirements)
+        </dt>
+        <dd>
+
+
+            @{
+            foreach (var requirement in Model.Requirements)
+            {
+                @:  @requirement.RequirementName <br />
+        }
+            }
+
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Skills)
+        </dt>
+        <dd>
+           
+
+            @{
+            foreach (var skill in Model.Skills)
+            {
+                @:  @skill.SkillName <br />
+        }
+            }
+
         </dd>
 
     </dl>

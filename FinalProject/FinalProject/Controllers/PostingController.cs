@@ -311,7 +311,8 @@ namespace FinalProject.Controllers
             {
                 try
                 {
-                   
+                    //ID,JobTitle,JobSummary
+
                     UpdatePostingQualifications(selectedQuals, postingToUpdate);
                     UpdatePostingRequirements(selectedReqs, postingToUpdate);
                     UpdatePostingSkills(selectedSkills, postingToUpdate);

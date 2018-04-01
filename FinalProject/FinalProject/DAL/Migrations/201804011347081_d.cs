@@ -3,7 +3,7 @@ namespace FinalProject.DAL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class h : DbMigration
+    public partial class d : DbMigration
     {
         public override void Up()
         {
@@ -88,6 +88,8 @@ namespace FinalProject.DAL.Migrations
                         Fte = c.Double(nullable: false),
                         SchoolID = c.Int(nullable: false),
                         JobID = c.Int(nullable: false),
+                        JobCode = c.String(nullable: false, maxLength: 20),
+                        SkillQualification = c.Boolean(nullable: false),
                         CreatedBy = c.String(maxLength: 256),
                         CreatedOn = c.DateTime(),
                         UpdatedBy = c.String(maxLength: 256),
@@ -121,7 +123,7 @@ namespace FinalProject.DAL.Migrations
                         QualificationSet = c.String(nullable: false, maxLength: 255),
                     })
                 .PrimaryKey(t => t.ID)
-                .Index(t => t.QualificationSet, unique: true, name: "IX_Unique_Qualification");
+                .Index(t => t.QualificationSet, unique: true, name: "IX_Unique_qual");
             
             CreateTable(
                 "Job.Requirement",
@@ -131,7 +133,7 @@ namespace FinalProject.DAL.Migrations
                         RequirementName = c.String(nullable: false, maxLength: 50),
                     })
                 .PrimaryKey(t => t.ID)
-                .Index(t => t.RequirementName, unique: true, name: "IX_Unique_Requirement");
+                .Index(t => t.RequirementName, unique: true, name: "IX_Unique_Req");
             
             CreateTable(
                 "Job.Skill",
@@ -141,7 +143,7 @@ namespace FinalProject.DAL.Migrations
                         SkillName = c.String(nullable: false, maxLength: 255),
                     })
                 .PrimaryKey(t => t.ID)
-                .Index(t => t.SkillName, unique: true, name: "IX_Unique_Skill");
+                .Index(t => t.SkillName, unique: true, name: "IX_Unique_skill");
             
             CreateTable(
                 "Job.SavedPosting",
@@ -386,9 +388,9 @@ namespace FinalProject.DAL.Migrations
             DropIndex("Job.School", new[] { "SchoolLevelID" });
             DropIndex("Job.SavedPosting", new[] { "PostingID" });
             DropIndex("Job.SavedPosting", new[] { "ApplicantID" });
-            DropIndex("Job.Skill", "IX_Unique_Skill");
-            DropIndex("Job.Requirement", "IX_Unique_Requirement");
-            DropIndex("Job.Qualification", "IX_Unique_Qualification");
+            DropIndex("Job.Skill", "IX_Unique_skill");
+            DropIndex("Job.Requirement", "IX_Unique_Req");
+            DropIndex("Job.Qualification", "IX_Unique_qual");
             DropIndex("Job.Job", "IX_Unique_JobCode");
             DropIndex("Job.Posting", new[] { "JobID" });
             DropIndex("Job.Posting", new[] { "SchoolID" });

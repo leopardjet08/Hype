@@ -11,34 +11,135 @@
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-horizontal">
-        <h4>Job</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ID)
+<div class="form-horizontal">
+    <h4>Job</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ID)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.JobTitle, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.JobTitle, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.JobTitle, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.JobSummary, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.JobSummary, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.JobSummary, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.JobCode, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.JobCode, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.JobCode, "", new { @class = "text-danger" })
         </div>
     </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.JobTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.JobTitle, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.JobTitle, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.JobSummary, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.JobSummary, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.JobSummary, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    <div class="col-md-6" style="margin-top:30px;">
+                    <div class="form-horizontal">
+                        <table style="text-align: left; width:60%; margin:0 auto";>
+                            
+                            <tr>
+                                <td>
+                                    <h4>Skills:</h4>
+                                </td>
+                                <td>
+                                    <tr>
+                                                                    @{
+                            int cnts2 = 0;
+                            List<FinalProject.ViewModels.AssignedSkillVM> skills = ViewBag.Skills;
+                            foreach (var skill in skills)
+                            {
+                                if (cnts2++ % 3 == 0)
+                                {
+                                    @:</tr><tr>
+                                    }
+                                    @:<td>
+                                        <input type="checkbox"
+                                               name="selectedSkills"
+                                               value="@skill.SkillID"
+                                               @(Html.Raw(skill.Assigned ? "checked=\"checked\"" : "")) />
+                                        @skill.SkillName @:&nbsp;&nbsp;
+                                        @:</td>
+                                    }
+                                    @:</tr>
+                            }
+                                
+                           
+                            <tr>
+                                <td>
+                                    <h4>Qualifications:</h4>
+                                </td>
+                                <td>
+                                                                    @{
+                            int cnts = 0;
+                            List<FinalProject.ViewModels.AssignedQualificationVM> qualifications = ViewBag.Qualifications;
+                            foreach (var qualification in qualifications)
+                            {
+                                if (cnts++ % 3 == 0)
+                                {
+                                    @:</tr><tr>
+                                    }
+                                    @:<td>
+                                        <input type="checkbox"
+                                               name="selectedQuals"
+                                               value="@qualification.QualificationID"
+                                               @(Html.Raw(qualification.Assigned ? "checked=\"checked\"" : "")) />
+                                        @qualification.QualificationSet @:&nbsp;&nbsp;
+                                        @:</td>
+                                    }
+                                    @:</tr>
+                            }
+
+                            <tr>
+                                <td>
+                                    <h4>Requirements:</h4>
+                                </td>
+                                <td>
+                                                                    @{
+                            int cnt = 0;
+                            List<FinalProject.ViewModels.AssignedRequirmentVM> requirements = ViewBag.Requirements;
+                            foreach (var requirement in requirements)
+                            {
+                                if (cnt++ % 3 == 0)
+                                {
+                                    @:</tr><tr>
+                                    }
+                                    @:<td>
+                                        <input type="checkbox"
+                                               name="selectedReqs"
+                                               value="@requirement.RequirmentID"
+                                               @(Html.Raw(requirement.Assigned ? "checked=\"checked\"" : "")) />
+                                        @requirement.RequirementName @:&nbsp;&nbsp;
+                                        @:</td>
+                                    }
+                                    @:</tr>
+                            }
+
+                             
+                            
+                        </table>
+                    </div>
+
+                </div>
+
+
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
 }
 
 <div>

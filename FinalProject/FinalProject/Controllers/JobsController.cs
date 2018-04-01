@@ -48,7 +48,7 @@ namespace FinalProject.Controllers
 
 
             job.Requirements = new List<Requirement>();
-            PopulateAssignedRequirementData(job);
+            PopulateAssignedRequirmentData(job);
 
             job.Skills = new List<Skill>();
             PopulateAssignedSkillData(job);
@@ -64,74 +64,22 @@ namespace FinalProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,JobTitle,JobSummary,SkillQualification")] Job job, string[] selectedRequirements, string[] selectedSkills, string[] selectedQualifications)
+        public ActionResult Create([Bind(Include = "ID,JobTitle,JobCode,JobSummary,SkillQualification")] Job job, string[] selectedRequirements, string[] selectedSkills, string[] selectedQualifications)
         {
-            /////////////////Requirement create/////////////////////////
             try
             {
-                    
-                    if (selectedRequirements != null)
+                //Add the selected requirement
+                if (selectedRequirements != null)
+                {
+                    job.Requirements = new List<Requirement>();
+                    foreach (var requirement in selectedRequirements)
                     {
-                        job.Requirements = new List<Requirement>();
-                        foreach (var requirement in selectedRequirements)
-                        {
-                            var requirmentToAdd = db.Requirements.Find(int.Parse(requirement));
-                            job.Requirements.Add(requirmentToAdd);
-                        }
-                    }
-                    if (ModelState.IsValid)
-                    {
-                        db.Jobs.Add(job);
-                        //db.SaveChanges();
-                        //return RedirectToAction("Index");
+                        var requirementToAdd = db.Requirements.Find(int.Parse(requirement));
+                        job.Requirements.Add(requirementToAdd);
                     }
                 }
-                catch (RetryLimitExceededException /* dex */)
-                {
-                    ModelState.AddModelError("", "Unable to save changes after multiple attempts. Try again, and if the problem persists, see your system administrator.");
-                }
-                catch (DataException)
-                {
-                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
-                }
 
-
-            /////////////////Qualification create/////////////////////////
-            try
-            {
-
-                if (selectedQualifications != null)
-                {
-                    job.Qualifications = new List<Qualification>();
-                    foreach (var qualification in selectedQualifications)
-                    {
-                        var qualificationtToAdd = db.Qualifications.Find(int.Parse(qualification));
-                        job.Qualifications.Add(qualificationtToAdd);
-                    }
-                }
-                if (ModelState.IsValid)
-                {
-                    db.Jobs.Add(job);
-                    //db.SaveChanges();
-                    //return RedirectToAction("Index");
-                }
-            }
-            catch (RetryLimitExceededException /* dex */)
-            {
-                ModelState.AddModelError("", "Unable to save changes after multiple attempts. Try again, and if the problem persists, see your system administrator.");
-            }
-            catch (DataException)
-            {
-                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
-            }
-
-
-
-            ////////////////////Skill create/////////////////////////
-
-            try
-            {
-                //Add the selected skills
+                //Add the selected skill
                 if (selectedSkills != null)
                 {
                     job.Skills = new List<Skill>();
@@ -139,6 +87,17 @@ namespace FinalProject.Controllers
                     {
                         var skillToAdd = db.Skills.Find(int.Parse(skill));
                         job.Skills.Add(skillToAdd);
+                    }
+                }
+
+                //Add the selected qualification
+                if (selectedQualifications != null)
+                {
+                    job.Qualifications = new List<Qualification>();
+                    foreach (var qualification in selectedQualifications)
+                    {
+                        var qualificationToAdd = db.Qualifications.Find(int.Parse(qualification));
+                        job.Qualifications.Add(qualificationToAdd);
                     }
                 }
                 if (ModelState.IsValid)
@@ -156,13 +115,16 @@ namespace FinalProject.Controllers
             {
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
-
+            catch (NullReferenceException)
+            {
+                ModelState.AddModelError("", "Its a null daw yawa ");
+            }
 
             PopulateDropDownLists(job);
 
-            PopulateAssignedRequirementData(job);
-            PopulateAssignedQualificationData(job);
+            PopulateAssignedRequirmentData(job);
             PopulateAssignedSkillData(job);
+            PopulateAssignedQualificationData(job);
 
             return View(job);
         }
@@ -179,23 +141,59 @@ namespace FinalProject.Controllers
             {
                 return HttpNotFound();
             }
+
+            PopulateDropDownLists(job);
+
+            PopulateAssignedSkillData(job);
+            PopulateAssignedQualificationData(job);
+            PopulateAssignedRequirmentData(job);
+
             return View(job);
         }
 
-        // POST: Jobs/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        // POST: Postings/Edit/5
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,JobTitle,JobSummary")] Job job)
+        public ActionResult EditPost(int? id, string[] selectedSkills, string[] selectedQuals, string[] selectedReqs)
         {
-            if (ModelState.IsValid)
+            if (id == null)
             {
-                db.Entry(job).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return View(job);
+            var jobToUpdate = db.Jobs
+                .Where(p => p.ID == id).SingleOrDefault();
+
+            if (TryUpdateModel(jobToUpdate, "",
+               new string[] { "JobTitle", "JobSummary" }))
+            {
+                try
+                {
+
+                    UpdateJobQualifications(selectedQuals, jobToUpdate);
+                    UpdateJobRequirements(selectedReqs, jobToUpdate);
+                    UpdateJobSkills(selectedSkills, jobToUpdate);
+
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (RetryLimitExceededException /* dex */)
+                {
+                    ModelState.AddModelError("", "Unable to save changes after multiple attempts. Try again, and if the problem persists, see your system administrator.");
+                }
+                
+                catch (DataException)
+                {
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+                }
+            }
+
+            PopulateDropDownLists(jobToUpdate);
+
+            PopulateAssignedSkillData(jobToUpdate);
+            PopulateAssignedQualificationData(jobToUpdate);
+            PopulateAssignedRequirmentData(jobToUpdate);
+
+            return View(jobToUpdate);
         }
 
         // GET: Jobs/Delete/5
@@ -242,6 +240,99 @@ namespace FinalProject.Controllers
 
         }
 
+        /////// for update
+        private void UpdateJobSkills(string[] selectedSkills, Job jobToUpdate)
+        {
+            if (selectedSkills == null)
+            {
+                jobToUpdate.Skills = new List<Skill>();
+                return;
+            }
+
+            var selectedSkillsHS = new HashSet<string>(selectedSkills);
+            var jobSkills = new HashSet<int>
+                (jobToUpdate.Skills.Select(c => c.ID));//IDs of the currently selected skills
+            foreach (var skill in db.Skills)
+            {
+                if (selectedSkillsHS.Contains(skill.ID.ToString()))
+                {
+                    if (!jobSkills.Contains(skill.ID))
+                    {
+                        jobToUpdate.Skills.Add(skill);
+                    }
+                }
+                else
+                {
+                    if (jobSkills.Contains(skill.ID))
+                    {
+                        jobToUpdate.Skills.Remove(skill);
+                    }
+                }
+            }
+        }
+
+        private void UpdateJobRequirements(string[] selectedReqs, Job jobToUpdate)
+        {
+            if (selectedReqs == null)
+            {
+                jobToUpdate.Requirements = new List<Requirement>();
+                return;
+            }
+
+            var selectedRequirementHS = new HashSet<string>(selectedReqs);
+            var jobRequirements = new HashSet<int>
+                (jobToUpdate.Requirements.Select(c => c.ID));//IDs of the currently selected Reqs
+            foreach (var reqs in db.Requirements)
+            {
+                if (selectedRequirementHS.Contains(reqs.ID.ToString()))
+                {
+                    if (!jobRequirements.Contains(reqs.ID))
+                    {
+                        jobToUpdate.Requirements.Add(reqs);
+                    }
+                }
+                else
+                {
+                    if (jobRequirements.Contains(reqs.ID))
+                    {
+                        jobToUpdate.Requirements.Remove(reqs);
+                    }
+                }
+            }
+        }
+
+        private void UpdateJobQualifications(string[] selectedQuals, Job jobToUpdate)
+        {
+            if (selectedQuals == null)
+            {
+                jobToUpdate.Qualifications = new List<Qualification>();
+                return;
+            }
+
+            var selectedQualificationHS = new HashSet<string>(selectedQuals);
+            var jobQualification = new HashSet<int>
+                (jobToUpdate.Qualifications.Select(c => c.ID));//IDs of the currently selected Qualification
+            foreach (var Qual in db.Qualifications)
+            {
+                if (selectedQualificationHS.Contains(Qual.ID.ToString()))
+                {
+                    if (!jobQualification.Contains(Qual.ID))
+                    {
+                        jobToUpdate.Qualifications.Add(Qual);
+                    }
+                }
+                else
+                {
+                    if (jobQualification.Contains(Qual.ID))
+                    {
+                        jobToUpdate.Qualifications.Remove(Qual);
+                    }
+                }
+            }
+        }
+
+        ////// Populate
+
         private void PopulateAssignedQualificationData(Job job)
         {
             var allQualifications = db.Qualifications;
@@ -275,8 +366,8 @@ namespace FinalProject.Controllers
             }
             ViewBag.Skills = viewModel;
         }
-
-        private void PopulateAssignedRequirementData(Job job)
+                     
+        private void PopulateAssignedRequirmentData(Job job)
         {
             var allRequirments = db.Requirements;
             var appRequirments = new HashSet<int>(job.Requirements.Select(b => b.ID));
