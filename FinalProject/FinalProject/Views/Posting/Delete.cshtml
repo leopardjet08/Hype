@@ -1,0 +1,62 @@
+﻿@model FinalProject.Models.Posting
+
+@{
+    ViewBag.Title = "Delete Posting";
+}
+
+<div class="container well well-lg" style=" text-align:center; width:1288px; padding-bottom:75px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
+
+    <p style="text-align:center; margin-top:20px; margin-bottom:15px; font-size:30px; color:#02388a;"> Niagara Catholic District School Board</p>
+    <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
+    <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
+    <br />
+
+    <h3 style="padding-bottom:30px">
+        ∙ &nbsp; Archive Job Posting &nbsp; ∙
+    </h3>&nbsp;&nbsp;
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <h3>Are you sure you want to put this job posting on the archive?</h3>
+    <br /><br />
+
+    <div style="font-size:16px; margin-top:10px; margin-bottom:30px">
+
+        <table style="width:50%; margin:0 auto; text-align:left">
+            <tr>
+                <td style="color:#02388a"><b>Posting ID: </b></td>
+                <td><b>@Html.DisplayFor(model => model.ID)</b></td>
+            </tr>
+            <tr>
+                <td style="color:#02388a"><b>Job Title: </b></td>
+                <td><b>@Html.DisplayFor(model => model.Job.JobTitle)</b></td>
+            </tr>
+            <tr>
+                <td style="color:#02388a"><b>Openings: </b></td>
+                <td><b>@Html.DisplayFor(model => model.NumberOpen)</b></td>
+            </tr>
+            <tr>
+                <td style="color:#02388a"><b>Start Date:</b></td>
+                <td><b>@Html.DisplayFor(model => model.StartDate)</b></td>
+            </tr>
+            <tr>
+                <td style="color:#02388a"><b>Closing Date:</b></td>
+                <td><b>@Html.DisplayFor(model => model.ClosingDate)</b></td>
+            </tr>
+            <tr>
+                <td style="color:#02388a"><b>School: </b></td>
+                <td><b>@Html.DisplayFor(model => model.School.SchoolName)</b></td>
+            </tr>
+            <tr>
+                <td style="color:#02388a"><b>Job Summary: </b></td>
+                <td><b>@Html.DisplayFor(model => model.Job.JobSummary)</b></td>
+            </tr>
+        </table>
+    </div>
+    <br />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <input type="submit" value="Archive" style="margin-right:30px" class="btn btn-danger btn-large" />
+    @Html.ActionLink("Cancel", "Index")
+}
+</div>

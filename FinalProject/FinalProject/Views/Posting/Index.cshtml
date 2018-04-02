@@ -86,15 +86,14 @@
                         <td style="text-align:center; font-size:14px">
                             @Html.ActionLink("View", "Details", new { id = item.ID }, new { @style = "border:0px;" })
                             &nbsp;@Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @style = "border:0px;" })
-                            &nbsp;@Html.ActionLink("Archive", "Archive", new { id = item.ID }, new { @style = "border:0px;" })
+                            &nbsp;@Html.ActionLink("Archive", "Delete", new { id = item.ID }, new { @style = "border:0px;" })
 
                         </td>
                     </tr>
     }
                         </tbody>
                     </table>
-                    <div style="text-align:center">
-                                            @* Page counts  *@
+                    @* Page counts  *@
                     <span id="filterMessage" class="text-danger">@((Model.Count() == 0) ? "Zero postings found.  No records match your criteria." : "")</span>
                     <input type="hidden" name="sortDirection" value="@ViewBag.sortDirection" />
                     <input type="hidden" name="sortField" value="@ViewBag.sortField" />
@@ -110,9 +109,6 @@ sortDirection = ViewBag.sortDirection,
 sortField = ViewBag.sortField,
 searchName = ViewBag.searchName
 }))
-
-                    </div>
-
 
                 </div>
             </div>

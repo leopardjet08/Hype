@@ -26,7 +26,7 @@ namespace FinalProject.Controllers
             PopulateDropDownLists();
             ViewBag.Filtering = ""; 
 
-            var postings = from s in db.Postings where ((DateTime)s.ClosingDate >= DateTime.Today) && (s.PostingStatusID == 1) select s;
+            var postings = from s in db.Postings where ((DateTime)s.ClosingDate >= DateTime.Today) select s;
 
             
 
@@ -131,126 +131,6 @@ namespace FinalProject.Controllers
             return View(postings.ToPagedList(pageNumber, pageSize));
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////
-        ///Expired index page
-
-        // GET: Posting
-        public ActionResult IndexExpired(string sortDirection, string sortField,
-            string actionButton, string searchName, int? page)
-
-        {
-            PopulateDropDownLists();
-            ViewBag.Filtering = "";
-
-            var postings = from s in db.Postings where ((DateTime)s.ClosingDate < DateTime.Today) || (s.PostingStatusID==2) select s;
-
-
-
-            //Search bar code
-
-            if (!String.IsNullOrEmpty(searchName))
-            {
-                postings = postings.Where(p => p.Job.JobTitle.ToUpper().Contains(searchName.ToUpper()));
-                ViewBag.Filtering = " in";
-                ViewBag.searchName = searchName;
-            }
-
-            if (!String.IsNullOrEmpty(actionButton))
-            {
-                //Reset paging if ANY button was pushed
-                page = 1;
-
-                if (actionButton != "Search")//Change of sort is requested
-                {
-                    if (actionButton == sortField) //Reverse order on same field
-                    {
-                        sortDirection = String.IsNullOrEmpty(sortDirection) ? "desc" : "";
-                    }
-                    sortField = actionButton;//Sort by the button clicked
-                }
-            }
-
-            if (sortField == "Number of Openings")//Sorting by Number of opening
-            {
-                if (String.IsNullOrEmpty(sortDirection))
-                {
-                    postings = postings
-                        .OrderBy(p => p.NumberOpen);
-                }
-                else
-                {
-                    postings = postings
-                        .OrderByDescending(p => p.NumberOpen);
-                }
-            }
-            else if (sortField == "Closing Date")//Sorting by Closing Date
-            {
-                if (String.IsNullOrEmpty(sortDirection))
-                {
-                    postings = postings
-                        .OrderBy(p => p.ClosingDate);
-                }
-                else
-                {
-                    postings = postings
-                        .OrderByDescending(p => p.ClosingDate);
-                }
-            }
-            else if (sortField == "Start Date")//Sorting by Start Date
-            {
-                if (String.IsNullOrEmpty(sortDirection))
-                {
-                    postings = postings
-                        .OrderBy(p => p.StartDate);
-                }
-                else
-                {
-                    postings = postings
-                        .OrderByDescending(p => p.StartDate);
-                }
-            }
-            else if (sortField == "Posting Description") //Sorting by Applicant Name
-            {
-                if (String.IsNullOrEmpty(sortDirection))
-                {
-                    postings = postings
-                        .OrderBy(p => p.PostingDescription);
-                }
-                else   //Sorting by Posting description
-                {
-                    postings = postings
-                        .OrderByDescending(p => p.PostingDescription);
-                }
-            }
-            else //By default sort by Job title 
-            {
-                if (String.IsNullOrEmpty(sortDirection))
-                {
-                    postings = postings
-                        .OrderBy(p => p.Job.JobTitle);
-                }
-                else
-                {
-                    postings = postings
-                        .OrderByDescending(p => p.Job.JobTitle);
-                }
-            }
-
-            //Set sort for next time
-            ViewBag.sortField = sortField;
-            ViewBag.sortDirection = sortDirection;
-
-            //number of data in the table
-            int pageSize = 9;
-            int pageNumber = (page ?? 1);
-
-            return View(postings.ToPagedList(pageNumber, pageSize));
-        }
-
-    /// ////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
         public ActionResult CreateStart()
         {
             PopulateDropDownLists();
@@ -286,8 +166,7 @@ namespace FinalProject.Controllers
                 Skills = job.Skills,
                 Requirements = job.Requirements,
                 Qualifications = job.Qualifications,
-                SkillQualification = job.SkillQualification,
-                PostingStatusID = 1
+                SkillQualification = job.SkillQualification
             };
 
             PopulateAssignedSkillData(posting);
@@ -302,7 +181,7 @@ namespace FinalProject.Controllers
         //For protection against hacker!!! 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,NumberOpen,ClosingDate,StartDate,JobEndDate,PostingDescription,Fte,SchoolID,JobID,JobCode,PostingStatusID")] Posting posting, string[] selectedSkills, string[] selectedRequirements, string[] selectedQualifications)
+        public ActionResult Create([Bind(Include = "ID,NumberOpen,ClosingDate,StartDate,JobEndDate,PostingDescription,Fte,SchoolID,JobID,JobCode")] Posting posting, string[] selectedSkills, string[] selectedRequirements, string[] selectedQualifications)
         {
             try
             {
@@ -507,112 +386,45 @@ namespace FinalProject.Controllers
         }
 
 
-        public ActionResult Archive(int? id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            Posting posting = db.Postings
-               .Where(p => p.ID == id).SingleOrDefault();
-
+            Posting posting = db.Postings.Find(id);
             if (posting == null)
             {
                 return HttpNotFound();
             }
-
             return View(posting);
         }
         
         //For protection against hacker!!! 
         // POST: Postings/Delete
-        [HttpPost, ActionName("Archive")]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult ArchiveConfirmed(int? id, Byte[] rowVersion)
+        public ActionResult DeleteConfirmed(int id)
         {
-            ViewBag.PostingStatus = 2;
-
-            if (id == null)
+            Posting posting = db.Postings.Find(id);
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                db.Postings.Remove(posting);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            var postingToUpdate = db.Postings
-                .Where(p => p.ID == id).SingleOrDefault();
-
-            if (TryUpdateModel(postingToUpdate, "",
-               new string[] { "NumberOpen", "ClosingDate", "StartDate", "JobEndDate", "PostingDescription", "Fte", "SchoolID", "JobID", "JobCode","PositionID","PostingStatusID" }))
+            catch (DataException dex)
             {
-                try
+                if (dex.InnerException.InnerException.Message.Contains("FK_"))
                 {
-
-                    db.Entry(postingToUpdate).OriginalValues["RowVersion"] = rowVersion;
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    ModelState.AddModelError("", "You cannot delete a Posting that has applications in the system.");
                 }
-                catch (RetryLimitExceededException /* dex */)
-                {
-                    ModelState.AddModelError("", "Unable to save changes after multiple attempts. Try again, and if the problem persists, see your system administrator.");
-                }
-                catch (DbUpdateConcurrencyException ex)// Added for concurrency
-                {
-                    var entry = ex.Entries.Single();
-                    var clientValues = (Posting)entry.Entity;
-                    var databaseEntry = entry.GetDatabaseValues();
-                    if (databaseEntry == null)
-                    {
-                        ModelState.AddModelError("",
-                            "Unable to save changes. The Posting was deleted by another user.");
-                    }
-                    else
-                    {
-                        var databaseValues = (Posting)databaseEntry.ToObject();
-                        if (databaseValues.ClosingDate != clientValues.ClosingDate)
-                            ModelState.AddModelError("ClosingDate", "Current value: "
-                                + String.Format("{0:d}", databaseValues.ClosingDate));
-                        if (databaseValues.StartDate != clientValues.StartDate)
-                            ModelState.AddModelError("StartDate", "Current Date: "
-                                + String.Format("{0:d}", databaseValues.StartDate));
-                        if (databaseValues.NumberOpen != clientValues.NumberOpen)
-                            ModelState.AddModelError("NumberOpen", "Current Date: "
-                                + databaseValues.NumberOpen);
-                        if (databaseValues.JobEndDate != clientValues.JobEndDate)
-                            ModelState.AddModelError("JobEndDate", "Current Date: "
-                                + databaseValues.NumberOpen);
-                        if (databaseValues.School.SchoolName != clientValues.School.SchoolName)
-                            ModelState.AddModelError("SchooName", "Current name: "
-                                + databaseValues.School.SchoolName);
-                        if (databaseValues.Job.JobTitle != clientValues.Job.JobTitle)
-                            ModelState.AddModelError("Job Title", "Current Job title: "
-                                + databaseValues.Job.JobTitle);
-                        if (databaseValues.PostingDescription != clientValues.PostingDescription)
-                            ModelState.AddModelError("Posting Description", "Current Description: "
-                                + databaseValues.PostingDescription);
-                        if (databaseValues.Fte != clientValues.Fte)
-                            ModelState.AddModelError("Fte", "Current Fte: "
-                                + databaseValues.PostingDescription);
-                        if (databaseValues.PostingStatusID != clientValues.PostingStatusID)
-                            ModelState.AddModelError("PostingStatusID", "Current Status: "
-                                + databaseValues.PostingStatusID);
-                        ModelState.AddModelError(string.Empty, "The record you attempted to edit "
-                                + "was modified by another user after you received your values. The "
-                                + "edit operation was canceled and the current values in the database "
-                                + "have been displayed. If you still want to save your version of this record, click "
-                                + "the Save button again. Otherwise click the 'Back to List' hyperlink.");
-                        postingToUpdate.RowVersion = databaseValues.RowVersion;
-                    }
-                }
-                catch (DataException)
+                else
                 {
                     ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
                 }
             }
-
-            PopulateDropDownLists(postingToUpdate);
-
-
-
-            return View(postingToUpdate);
+            return View(posting);
 
         }
         private void UpdatePostingSkills(string[] selectedSkills, Posting postingToUpdate)

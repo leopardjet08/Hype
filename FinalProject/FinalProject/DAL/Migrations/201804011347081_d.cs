@@ -3,7 +3,7 @@ namespace FinalProject.DAL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class JetInitial : DbMigration
+    public partial class d : DbMigration
     {
         public override void Up()
         {
@@ -90,7 +90,6 @@ namespace FinalProject.DAL.Migrations
                         JobID = c.Int(nullable: false),
                         JobCode = c.String(nullable: false, maxLength: 20),
                         SkillQualification = c.Boolean(nullable: false),
-                        PostingStatusID = c.Int(nullable: false),
                         CreatedBy = c.String(maxLength: 256),
                         CreatedOn = c.DateTime(),
                         UpdatedBy = c.String(maxLength: 256),
@@ -99,11 +98,9 @@ namespace FinalProject.DAL.Migrations
                     })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("Job.Job", t => t.JobID)
-                .ForeignKey("Job.PostingStatus", t => t.PostingStatusID)
                 .ForeignKey("Job.School", t => t.SchoolID)
                 .Index(t => t.SchoolID)
-                .Index(t => t.JobID)
-                .Index(t => t.PostingStatusID);
+                .Index(t => t.JobID);
             
             CreateTable(
                 "Job.Job",
@@ -147,15 +144,6 @@ namespace FinalProject.DAL.Migrations
                     })
                 .PrimaryKey(t => t.ID)
                 .Index(t => t.SkillName, unique: true, name: "IX_Unique_skill");
-            
-            CreateTable(
-                "Job.PostingStatus",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        Status = c.String(),
-                    })
-                .PrimaryKey(t => t.ID);
             
             CreateTable(
                 "Job.SavedPosting",
@@ -360,7 +348,6 @@ namespace FinalProject.DAL.Migrations
             DropForeignKey("Job.Applicant", "CityID", "Job.City");
             DropForeignKey("Job.Application", "School_ID", "Job.School");
             DropForeignKey("Job.SavedPosting", "PostingID", "Job.Posting");
-            DropForeignKey("Job.Posting", "PostingStatusID", "Job.PostingStatus");
             DropForeignKey("Job.SkillPosting", "Posting_ID", "Job.Posting");
             DropForeignKey("Job.SkillPosting", "Skill_ID", "Job.Skill");
             DropForeignKey("Job.SkillJob", "Job_ID", "Job.Job");
@@ -405,7 +392,6 @@ namespace FinalProject.DAL.Migrations
             DropIndex("Job.Requirement", "IX_Unique_Req");
             DropIndex("Job.Qualification", "IX_Unique_qual");
             DropIndex("Job.Job", "IX_Unique_JobCode");
-            DropIndex("Job.Posting", new[] { "PostingStatusID" });
             DropIndex("Job.Posting", new[] { "JobID" });
             DropIndex("Job.Posting", new[] { "SchoolID" });
             DropIndex("Job.Application", new[] { "School_ID" });
@@ -431,7 +417,6 @@ namespace FinalProject.DAL.Migrations
             DropTable("Job.City");
             DropTable("Job.School");
             DropTable("Job.SavedPosting");
-            DropTable("Job.PostingStatus");
             DropTable("Job.Skill");
             DropTable("Job.Requirement");
             DropTable("Job.Qualification");
