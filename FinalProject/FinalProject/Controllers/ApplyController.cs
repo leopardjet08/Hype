@@ -32,15 +32,66 @@ namespace FinalProject.Controllers
             {
                 return HttpNotFound();
             }
-            return View(posting);
+            return View("Index",posting);
         }
 
-        //details controller
 
 
+        //// GET: Apply/Create
+        //public ActionResult Create(int? PostingID)
+        //{
 
-        // GET: Apply/Create
-        public ActionResult Create(int? PostingID)
+        //    Posting posting = db.Postings
+        //       .Where(p => p.ID == PostingID)
+        //       .SingleOrDefault();
+
+        //    //Applicant applicant
+
+        //    if (posting == null)
+        //    {
+        //        ModelState.AddModelError("", "No Job to use as a Template");
+        //        PopulateDropDownLists();
+        //        return View("Index");
+        //    }
+
+        //    var application = new Application()
+        //    {
+        //        PostingID = posting.ID,
+        //        ApplicantID = 1,
+        //        ApplicationStatusID =100
+                
+        //    };
+
+        //    PopulateAssignedSkillData(posting);
+        //    PopulateAssignedQualificationData(posting);
+        //    PopulateAssignedRequirmentData(posting);
+
+        //    return View("Create", posting);
+        //}
+
+        //// POST: Apply/Create
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "ID,PostingID,ApplicantID,ApplicationStatusID")] Application application)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Applications.Add(application);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    ViewBag.ApplicantID = new SelectList(db.Applicants, "ID", "FName", application.ApplicantID);
+        //    ViewBag.ApplicationStatusID = new SelectList(db.ApplicationStatus, "ID", "Status", application.ApplicationStatusID);
+        //    ViewBag.PostingID = new SelectList(db.Postings, "ID", "PostingDescription", application.PostingID);
+        //    return View(application);
+        //}
+
+
+        // GET: Jobs/Create
+        public ActionResult Createe(int? PostingID)
         {
 
             Posting posting = db.Postings
@@ -51,7 +102,7 @@ namespace FinalProject.Controllers
 
             if (posting == null)
             {
-                ModelState.AddModelError("", "No Job to use as a Template");
+                ModelState.AddModelError("", "No Posting to use as a Template");
                 PopulateDropDownLists();
                 return View("Index");
             }
@@ -60,48 +111,19 @@ namespace FinalProject.Controllers
             {
                 PostingID = posting.ID,
                 ApplicantID = 1,
-                ApplicationStatusID =100
-                
+                ApplicationStatusID = 1
+
             };
 
             PopulateAssignedSkillData(posting);
             PopulateAssignedQualificationData(posting);
             PopulateAssignedRequirmentData(posting);
 
-            return View("Create", posting);
-        }
-
-        // POST: Apply/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,PostingID,ApplicantID,ApplicationStatusID")] Application application)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Applications.Add(application);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
             ViewBag.ApplicantID = new SelectList(db.Applicants, "ID", "FName", application.ApplicantID);
             ViewBag.ApplicationStatusID = new SelectList(db.ApplicationStatus, "ID", "Status", application.ApplicationStatusID);
             ViewBag.PostingID = new SelectList(db.Postings, "ID", "PostingDescription", application.PostingID);
-            return View(application);
-        }
 
-
-        // GET: Jobs/Create
-        public ActionResult Createe(int? id)
-        {
-            PopulateDropDownLists();
-            //Add all (unchecked) Requirement to ViewBag
-            var application = db.Applications.Where(p => p.Posting.ID == id)
-                .SingleOrDefault();
-
-
-            return View("Index");
+            return View("Create", posting);
         }
 
         // POST: Jobs/Create
@@ -129,13 +151,10 @@ namespace FinalProject.Controllers
             {
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
-            catch (NullReferenceException)
-            {
-                ModelState.AddModelError("", "Its a null daw yawa ");
-            }
 
-            PopulateDropDownLists(application);
-
+            ViewBag.ApplicantID = new SelectList(db.Applicants, "ID", "FName", application.ApplicantID);
+            ViewBag.ApplicationStatusID = new SelectList(db.ApplicationStatus, "ID", "Status", application.ApplicationStatusID);
+            ViewBag.PostingID = new SelectList(db.Postings, "ID", "PostingDescription", application.PostingID);
 
             return View(application);
         }
@@ -145,7 +164,9 @@ namespace FinalProject.Controllers
 
         private void PopulateDropDownLists(Application application = null)
         {
-           
+            ViewBag.PostingID = new SelectList(db.Jobs.OrderBy(p => p.Postings), "ID", "JobTitle", application?.PostingID);
+            ViewBag.ApplicantID = new SelectList(db.Schools.OrderBy(p => p.SchoolName), "ID", "SchoolName", application?.PostingID);
+
         }
 
         private void PopulateAssignedSkillData(Posting posting)
