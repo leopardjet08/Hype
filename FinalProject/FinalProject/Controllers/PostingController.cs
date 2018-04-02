@@ -530,7 +530,7 @@ namespace FinalProject.Controllers
         // POST: Postings/Delete
         [HttpPost, ActionName("Archive")]
         [ValidateAntiForgeryToken]
-        public ActionResult ArchiveConfirmed(int? id, Byte[] rowVersion)
+        public ActionResult ArchiveConfirmed(int? id)
         {
  
 
@@ -542,12 +542,11 @@ namespace FinalProject.Controllers
                 .Where(p => p.ID == id).SingleOrDefault();
 
             if (TryUpdateModel(postingToUpdate, "",
-               new string[] { "NumberOpen", "ClosingDate", "StartDate", "JobEndDate", "PostingDescription", "Fte", "SchoolID", "JobID", "JobCode", "PositionID", "PostingStatusID" }))
+               new string[] { "NumberOpen", "ClosingDate", "StartDate", "JobEndDate", "PostingDescription", "Fte", "SchoolID", "JobID", "JobCode", "PostingStatusID" }))
             {
                 try
                 {
 
-                    db.Entry(postingToUpdate).OriginalValues["RowVersion"] = rowVersion;
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -555,54 +554,7 @@ namespace FinalProject.Controllers
                 {
                     ModelState.AddModelError("", "Unable to save changes after multiple attempts. Try again, and if the problem persists, see your system administrator.");
                 }
-                catch (DbUpdateConcurrencyException ex)// Added for concurrency
-                {
-                    var entry = ex.Entries.Single();
-                    var clientValues = (Posting)entry.Entity;
-                    var databaseEntry = entry.GetDatabaseValues();
-                    if (databaseEntry == null)
-                    {
-                        ModelState.AddModelError("",
-                            "Unable to save changes. The Posting was deleted by another user.");
-                    }
-                    else
-                    {
-                        var databaseValues = (Posting)databaseEntry.ToObject();
-                        if (databaseValues.ClosingDate != clientValues.ClosingDate)
-                            ModelState.AddModelError("ClosingDate", "Current value: "
-                                + String.Format("{0:d}", databaseValues.ClosingDate));
-                        if (databaseValues.StartDate != clientValues.StartDate)
-                            ModelState.AddModelError("StartDate", "Current Date: "
-                                + String.Format("{0:d}", databaseValues.StartDate));
-                        if (databaseValues.NumberOpen != clientValues.NumberOpen)
-                            ModelState.AddModelError("NumberOpen", "Current Date: "
-                                + databaseValues.NumberOpen);
-                        if (databaseValues.JobEndDate != clientValues.JobEndDate)
-                            ModelState.AddModelError("JobEndDate", "Current Date: "
-                                + databaseValues.NumberOpen);
-                        if (databaseValues.School.SchoolName != clientValues.School.SchoolName)
-                            ModelState.AddModelError("SchooName", "Current name: "
-                                + databaseValues.School.SchoolName);
-                        if (databaseValues.Job.JobTitle != clientValues.Job.JobTitle)
-                            ModelState.AddModelError("Job Title", "Current Job title: "
-                                + databaseValues.Job.JobTitle);
-                        if (databaseValues.PostingDescription != clientValues.PostingDescription)
-                            ModelState.AddModelError("Posting Description", "Current Description: "
-                                + databaseValues.PostingDescription);
-                        if (databaseValues.Fte != clientValues.Fte)
-                            ModelState.AddModelError("Fte", "Current Fte: "
-                                + databaseValues.PostingDescription);
-                        if (databaseValues.PostingStatusID != clientValues.PostingStatusID)
-                            ModelState.AddModelError("PostingStatusID", "Current Status: "
-                                + databaseValues.PostingStatusID);
-                        ModelState.AddModelError(string.Empty, "The record you attempted to edit "
-                                + "was modified by another user after you received your values. The "
-                                + "edit operation was canceled and the current values in the database "
-                                + "have been displayed. If you still want to save your version of this record, click "
-                                + "the Save button again. Otherwise click the 'Back to List' hyperlink.");
-                        postingToUpdate.RowVersion = databaseValues.RowVersion;
-                    }
-                }
+               
                 catch (DataException)
                 {
                     ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
