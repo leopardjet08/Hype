@@ -29,11 +29,10 @@ namespace FinalProject.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Message = message;
             return View(posting);
         }
 
-       
+        //details controller
 
 
 
@@ -57,8 +56,9 @@ namespace FinalProject.Controllers
             var application = new Application()
             {
                 PostingID = posting.ID,
-
-
+                ApplicantID = 1,
+                ApplicationStatusID =1
+                
             };
 
             return View("Create", posting);
@@ -69,7 +69,7 @@ namespace FinalProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,PostingID,ApplicantID,SubmissionDate,ApplicationStatusID")] Application application)
+        public ActionResult Create([Bind(Include = "ID,PostingID,ApplicantID,ApplicationStatusID")] Application application)
         {
             if (ModelState.IsValid)
             {
