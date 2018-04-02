@@ -17,8 +17,6 @@
 
         <div class="form-horizontal">
             <div style="text-align:center; margin-bottom:60px">
-
-                
                 <br />
                 <h3> ∙ &nbsp; Create New Posting&nbsp; ∙</h3>
             </div>
@@ -37,10 +35,10 @@
             <div class="col-md-6">
                 <div>
                     <div class="form-horizontal">
-                        <table style="text-align: left; width:60%; margin:0 auto;">
+                        <table style="text-align: left; width:70%; margin:0 auto;">
 
                             <tr>
-                                <td style="padding-bottom:15px;">
+                                <td style="padding-bottom:15px; color:#02388a">
                                     <h4>@Html.LabelFor(model => model.NumberOpen, "Openings: ")</h4>
                                 </td>
                                 <td style="padding-bottom:15px;">
@@ -48,32 +46,40 @@
                                     @Html.ValidationMessageFor(model => model.NumberOpen, "", new { @class = "text-danger" })
                                 </td>
                             </tr>
-
                             <tr>
-                                <td style="padding-bottom:10px; width:50%">
-                                    <h4>@Html.LabelFor(model => model.JobCode, "Job Title: ")</h4>
+                                <td style="padding-bottom:15px; color:#02388a; width:50%">
+                                    <h4>@Html.LabelFor(model => model.Job.JobTitle, "Job Title: ")</h4>
                                 </td>
-                                <td style="padding-bottom:10px;">
+                                <td style="padding-bottom:20px">
+                                    @Html.EditorFor(model => model.Job.JobTitle, new { htmlAttributes = new { @class = "form-control", @style = "" } })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-bottom:15px; color:#02388a; width:50%">
+                                    <h4>@Html.LabelFor(model => model.JobCode, "Job Code: ")</h4>
+                                </td>
+                                <td >
                                     @Html.EditorFor(model => model.JobCode, new { htmlAttributes = new { @class = "form-control", @style = "width:75px" } })
                                     @Html.ValidationMessageFor(model => model.JobID, "", new { @class = "text-danger" })
                                     @Html.EditorFor(model => model.PostingStatusID, new { htmlAttributes = new { @class = "form-control", @style = "visibility: hidden;" } })
-
                                 </td>
                             </tr>
                             <tr>
-                                <td style="padding-bottom:15px;">
+                                <td style="padding-bottom:15px; color:#02388a; ">
                                     <h4 style="display:inline-block">@Html.LabelFor(model => model.School, "School: ")</h4>
                                 </td>
                                 <td style="padding-bottom:15px;">
-                                    @* Dropdown should be textbox auto complete *@
-                                    @Html.DropDownList("SchoolID", null, "Select a School", htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.SchoolID, "", new { @class = "text-danger" })
-
-
-                                </td>
+                                    <div style="display:inline">
+                                        @* Dropdown should be textbox auto complete *@
+                                        @Html.DropDownList("SchoolID", null, "Select a School", htmlAttributes: new { @class = "form-control", style="display:inline" })
+                                        <input class="form-control" style="display:inline; width:50px; padding:5px" type="number" min="0" max="20" step="1" value="0">
+                                        @Html.ValidationMessageFor(model => model.SchoolID, "", new { @class = "text-danger" })
+                                    </div>
+                               </td>
                             </tr>
-                            <tr>
-                                <td style="padding-bottom:15px;">
+
+                            @*<tr>
+                                <td style="padding-bottom:15px; color:#02388a; ">
                                     <h4 style="display:inline-block">@Html.LabelFor(model => model.School.City, "City: ")</h4>
                                 </td>
                                 <td style="padding-bottom:15px;">
@@ -81,10 +87,9 @@
                                     <input type="text" class="form-control" id="City" readonly="readonly" />
 
                                 </td>
-                            </tr>
-
+                            </tr>*@
                             <tr>
-                                <td style="padding-bottom:15px;">
+                                <td style="padding-bottom:15px; color:#02388a; ">
                                     <h4>@Html.LabelFor(model => model.Fte, "FTE: ")</h4>
                                 </td>
                                 <td style="padding-bottom:15px;">
@@ -95,7 +100,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="padding-bottom:15px;">
+                                <td style="padding-bottom:15px; color:#02388a; ">
                                     <h4>@Html.LabelFor(model => model.ClosingDate, "Deadline: ")</h4>
                                 </td>
                                 <td>
@@ -103,7 +108,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="padding-bottom:15px;">
+                                <td style="padding-bottom:15px; color:#02388a; ">
                                     <h4>@Html.LabelFor(model => model.StartDate, "Job Start Date: ")</h4>
                                 </td>
                                 <td style="padding-bottom:15px;">
@@ -111,7 +116,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="padding-bottom:15px;">
+                                <td style="padding-bottom:15px; color:#02388a; ">
                                     <h4>@Html.LabelFor(model => model.JobEndDate, "Job End Date: ")</h4>
                                 </td>
                                 <td style="padding-bottom:15px;">
@@ -127,13 +132,11 @@
             <div class="col-md-6">
                 <div>
                     <div class="form-horizontal">
-
-                        <table style="text-align: left; width:60%; margin:0 auto;">
+                        <table style="text-align: left; width:70%; margin:0 auto;">
 
                             @* Requirements checkboxex *@
                        <tr>
-                                <td>
-                                    <br />
+                                <td style="color:#02388a;">
                                     <h4>@Html.LabelFor(model => model.Job.Requirements, "Requirements: ")</h4>
                                 </td>
                                     <tr>
@@ -156,15 +159,13 @@
                                     }
                                     @:</tr>
                             }
-
-                          
-                           
-                                    
-                               
+     
                             @* Qulification checkboxex *@
 
                             <tr>
-                                <td>
+                                <td style="color:#02388a;">
+                                    <br />
+                                    <br />
                                     <br />
                                     <h4>@Html.LabelFor(model => model.Job.Qualifications, "Qualifications: ")</h4>
                                 </td>
@@ -188,13 +189,10 @@
                                     }
                                     @:</tr>
                             }
-                              
 
-                            
-
-                            <tr>
-                            
-                                <td>
+                            <tr> 
+                                <td style="color:#02388a; ">
+                                    <br />
                                     <br />
                                     <h4>@Html.LabelFor(model => model.Job.Skills, "Skills: ")</h4>
                                 </td>
@@ -226,10 +224,9 @@
             </div>
         </div>
 
-        <div style="margin-left:135px; width:100%">
-            <h4>@Html.LabelFor(model => model.PostingDescription, "Job Description: ")</h4>
-            <br />
-            @Html.EditorFor(model => model.PostingDescription, new { htmlAttributes = new { id = "desc", @class = "form-control", @rows = "2", @cols = "100", @style = "max-width:73%; height:200px;", @placeholder = "Enter Description here..." } })
+        <div style="margin-left:135px; color:#02388a; width:100%">
+            <h4>@Html.LabelFor(model => model.PostingDescription, "Job Description: ")</h4><br />
+            @Html.EditorFor(model => model.PostingDescription, new { htmlAttributes = new { id = "desc", @class = "form-control", @rows = "2", @cols = "100", @style = "max-width:73%; height:120px;", @placeholder = "Enter Description here..." } })
 
         </div>
         <br />

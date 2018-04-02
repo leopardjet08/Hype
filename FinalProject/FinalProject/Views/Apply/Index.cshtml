@@ -26,7 +26,7 @@
                         </form>
                     </div>
                     <div class="modal-footer" style="border:none; margin-top:0px">
-                        <button ID="btnSubmitSub" class="btn btn-default" type="submit">Confirm</button>
+                        <button ID="btnSubmitSub" style="background-color:#00a203; border:none" class="btn btn-primary btn-large" type="submit">Confirm</button>
                         <button ID="btnCancelSub" onclick="Clear()" class="btn btn-default" data-dismiss="modal">Cancel</button>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
 
             <div class="borderVibe" style="width:90%; border:1px solid #d5d2d2; background-color:white; margin:0 auto; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
                 <div style="text-align:center; margin-top:60px; margin-bottom:60px ">
-                    <h4 style="font-size:xx-large; color:red">@Html.DisplayFor(model => model.Job.JobTitle)</h4>
+                    <h4 style="font-size:xx-large; color:#02388a">@Html.DisplayFor(model => model.Job.JobTitle)</h4>
                 </div>
 
                 <div style="margin-left:286px;">
@@ -67,19 +67,19 @@
                                 <td>@Html.DisplayFor(model => model.School.SchoolName)</td>
                             </tr>
                             <tr>
-                                <td style="color:#02388a"><h4><b>School Family  :  </b></h4></td>
+                                <td style="color:#02388a"><h4><b>School Family :  </b></h4></td>
                                 <td>@Html.DisplayFor(model => model.School.SchoolFamily.FamilyName)</td>
                             </tr>
                             <tr>
-                                <td style="color:#02388a"><h4><b>City  :  </b></h4></td>
+                                <td style="color:#02388a"><h4><b>City :  </b></h4></td>
                                 <td>@Html.DisplayFor(model => model.School.City.CityName)</td>
                             </tr>
                             <tr style="height:50px">
-                                <td style="color:#02388a"><h4><b>Number of Opening  :  </b></h4></td>
+                                <td style="color:#02388a"><h4><b>Number of Openings :  </b></h4></td>
                                 <td>@Html.DisplayFor(model => model.NumberOpen)</td>
                             </tr>
                             <tr>
-                                <td style="color:#02388a"><h4><b>Closing Date  :  </b></h4></td>
+                                <td style="color:#02388a"><h4><b>Closing Date :  </b></h4></td>
                                 <td>@Html.DisplayFor(model => model.ClosingDate)</td>
                             </tr>
                             <tr>
@@ -93,6 +93,7 @@
                         </table>
                     </div>
                     <br />
+
 
                   <div style="margin-bottom:50px">
 

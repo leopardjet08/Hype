@@ -3,7 +3,7 @@ namespace FinalProject.DAL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class p : DbMigration
+    public partial class TestSwayze : DbMigration
     {
         public override void Up()
         {

@@ -6,68 +6,67 @@
 
 
 
-<div class="navbar navbar-light navbar-fixed-top" style="border-bottom:10px solid white; background-color: #f5f5f5;">
-    <div class="container">
-
-        <!-- Logo -->
-        <div class="navbar-header">       
-            <img src="Images/CompanyLogo.png" alt="Logo" style="height:50%; width:50%; padding-top:10px; padding-bottom:10px;" />
-        </div>
-
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>     
-        </div>
-
-        <ul class="nav navbar-nav" >
-            <li style="color:#337ab7; padding-left:255px; text-align:center; margin:0 auto; float:none; display:inline-block"><h2> Niagara Catholic District School Board </h2></li>
-        </ul>          
-</div>
-</div>
-
-
-    <div class="container well well-lg" style=" margin-top:50px; margin-bottom:50px;">
-        <div style="margin: 0 auto; text-align: center">
+<div class="container well well-lg" style=" width:1000px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
+            <br />
+            <div style="margin-bottom:100px; ">
+                <p style="text-align:center;  margin-bottom:15px; font-size:30px; color:#02388a;"> Niagara Catholic District School Board</p>
+                <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
+                <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
+                <br />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <h3 style="padding-top:10px; text-align:center;">
+                    ∙ &nbsp; Log In &nbsp; ∙
+                </h3>
+    <br /><br />
             <div>
                 <section id="loginForm">
 
                     @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                     {
                         @Html.AntiForgeryToken()
-                        <h4>Please enter credentials to log in.</h4>
-                        <hr />
+                        
+                    <br />
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-                        <div style="margin:0 auto">
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                                <div class="col-md-10">
-                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        <table style="font-size:16px; width:50%; margin:0 auto">
+                            <tr>
+                                <td>
+                                    @Html.LabelFor(m => m.Email, new { @style = "" }):
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @style = "margin:0 auto; display:inline" })
                                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
 
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                            <div class="col-md-10">
-                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <div class="checkbox">
+                                </td>
+                            </tr>
+                     
+                                <tr>
+                                    <td>
+                                        <br />
+                                        @Html.LabelFor(m => m.Password, new { @style = "display:inline" }):
+                                    </td>
+                                    <td>
+                                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @style="margin:0 auto; display:inline" })
+                                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                    </td>
+                                </tr>
+                                <tr>
+
+                                </tr>
+                                <tr>
+
+                                </tr>
+                        </table>
+                        
+                        <br />
+                        <div class="form-group" style="">
+                                <div class="checkbox" style="text-align: center; margin:0 auto">
                                     @Html.CheckBoxFor(m => m.RememberMe)
                                     @Html.LabelFor(m => m.RememberMe)
                                 </div>
-                            </div>
+                           
                         </div>
                         <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
+                            <div>
                                 <input type="submit" value="Log in" class="btn btn-default" />
                             </div>
                         </div>

@@ -222,9 +222,9 @@
     <Compile Include="Controllers\SkillsController.cs" />
     <Compile Include="DAL\ApplicationDBContext.cs" />
     <Compile Include="DAL\JobPostingCFEntities.cs" />
-    <Compile Include="DAL\Migrations\201804020350042_y.cs" />
-    <Compile Include="DAL\Migrations\201804020350042_y.Designer.cs">
-      <DependentUpon>201804020350042_y.cs</DependentUpon>
+    <Compile Include="DAL\Migrations\201804020400508_TestSwayze.cs" />
+    <Compile Include="DAL\Migrations\201804020400508_TestSwayze.Designer.cs">
+      <DependentUpon>201804020400508_TestSwayze.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\Migrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
@@ -407,8 +407,9 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DAL\Migrations\201804020350042_y.resx">
-      <DependentUpon>201804020350042_y.cs</DependentUpon>
+    <EmbeddedResource Include="DAL\Migrations\201804020400508_TestSwayze.resx">
+      <DependentUpon>201804020400508_TestSwayze.cs</DependentUpon>
+
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
