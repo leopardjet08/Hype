@@ -377,6 +377,7 @@
     <Content Include="Views\Apply\Create.cshtml" />
     <Content Include="Views\Apply\Index.cshtml" />
     <Content Include="Views\Posting\IndexExpired.cshtml" />
+    <Content Include="Views\Apply\createe.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FinalProject.DAL;
 using FinalProject.Models;
+using FinalProject.Models.DataModel;
+using FinalProject.ViewModels;
 
 namespace FinalProject.Controllers
 {
@@ -57,9 +60,13 @@ namespace FinalProject.Controllers
             {
                 PostingID = posting.ID,
                 ApplicantID = 1,
-                ApplicationStatusID =1
+                ApplicationStatusID =100
                 
             };
+
+            PopulateAssignedSkillData(posting);
+            PopulateAssignedQualificationData(posting);
+            PopulateAssignedRequirmentData(posting);
 
             return View("Create", posting);
         }
@@ -84,9 +91,112 @@ namespace FinalProject.Controllers
             return View(application);
         }
 
-        private void PopulateDropDownLists(Posting posting = null)
+
+        // GET: Jobs/Create
+        public ActionResult Createe(int? id)
+        {
+            PopulateDropDownLists();
+            //Add all (unchecked) Requirement to ViewBag
+            var application = db.Applications.Where(p => p.Posting.ID == id)
+                .SingleOrDefault();
+
+
+            return View("Index");
+        }
+
+        // POST: Jobs/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Createe([Bind(Include = "ID,PostingID,ApplicantID,ApplicationStatusID")] Application application)
+        {
+            try
+            {
+                
+                if (ModelState.IsValid)
+                {
+                    db.Applications.Add(application);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (RetryLimitExceededException /* dex */)
+            {
+                ModelState.AddModelError("", "Unable to save changes after multiple attempts. Try again, and if the problem persists, see your system administrator.");
+            }
+            catch (DataException)
+            {
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+            catch (NullReferenceException)
+            {
+                ModelState.AddModelError("", "Its a null daw yawa ");
+            }
+
+            PopulateDropDownLists(application);
+
+
+            return View(application);
+        }
+
+
+
+
+        private void PopulateDropDownLists(Application application = null)
         {
            
+        }
+
+        private void PopulateAssignedSkillData(Posting posting)
+        {
+            var allSkills = db.Skills;
+            var appSkills = new HashSet<int>(posting.Skills.Select(b => b.ID));
+            var viewModel = new List<AssignedSkillVM>();
+            foreach (var sk in allSkills)
+            {
+                viewModel.Add(new AssignedSkillVM
+                {
+                    SkillID = sk.ID,
+                    SkillName = sk.SkillName,
+                    Assigned = appSkills.Contains(sk.ID)
+                });
+            }
+            ViewBag.Skills = viewModel;
+        }
+
+        private void PopulateAssignedRequirmentData(Posting posting)
+        {
+            var allRequirment = db.Requirements;
+            var appRequirments = new HashSet<int>(posting.Requirements.Select(b => b.ID));
+            var viewModel = new List<AssignedRequirmentVM>();
+            foreach (var sk in allRequirment)
+            {
+                viewModel.Add(new AssignedRequirmentVM
+                {
+                    RequirmentID = sk.ID,
+                    RequirementName = sk.RequirementName,
+                    Assigned = appRequirments.Contains(sk.ID)
+                });
+            }
+            ViewBag.Requirements = viewModel;
+        }
+
+        private void PopulateAssignedQualificationData(Posting posting)
+        {
+            var allQualifications = db.Qualifications;
+            var appQualifications = new HashSet<int>(posting.Qualifications.Select(b => b.ID));
+            var viewModel = new List<AssignedQualificationVM>();
+            foreach (var sk in allQualifications)
+            {
+                viewModel.Add(new AssignedQualificationVM
+                {
+                    QualificationID = sk.ID,
+                    QualificationSet = sk.QualificationSet,
+                    Assigned = appQualifications.Contains(sk.ID)
+                });
+            }
+            ViewBag.Qualifications = viewModel;
         }
 
         protected override void Dispose(bool disposing)
