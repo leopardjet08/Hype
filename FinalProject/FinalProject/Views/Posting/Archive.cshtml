@@ -1,0 +1,84 @@
+﻿@model FinalProject.Models.Posting
+
+@{
+    ViewBag.Title = "Archive Posting";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CreatePosting</title>
+    <script type="text/javascript">
+        function sliderChange(val) {
+            document.getElementById('sliderStatus').innerHTML = val;
+
+        }
+
+    </script>
+
+
+</head>
+<body>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <div class="container well well-lg" style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
+
+        <p style="text-align:center; margin-top:20px; margin-bottom:15px; font-size:30px; color:#02388a;"> Niagara Catholic District School Board</p>
+        <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
+        <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
+        <br />
+
+        <h3 style="padding-bottom:30px">
+            ∙ &nbsp; Archive Posting &nbsp; ∙
+        </h3>&nbsp;&nbsp;
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <h3>Are you sure you want to Archive the following Posting?</h3>
+            <br />
+
+            <div style="font-size:18px; margin-top:10px; margin-bottom:30px">
+
+                <table style="width:35%; margin:0 auto; text-align:left">
+                    <tr>
+                        <td style="color:#02388a"><b>Job Title:</b></td>
+                        <td><b> @Html.EditorFor(model => model.Job.JobTitle, new { htmlAttributes = new { @class = "form-control", @style = "width:200px" } })</b></td>
+                        @Html.ValidationMessageFor(model => model.Job.JobTitle, "", new { @class = "text-danger" })
+                    </tr>
+                    <tr>
+                        <td style="color:#02388a"><b>Expired Date:</b></td>
+                        <td><b>@Html.DisplayFor(model => model.ClosingDate)</b></td>
+                    </tr>
+                    <tr>
+                        <td style="color:#02388a"><b>School:</b></td>
+                        <td><b>  @Html.EditorFor(model => model.School.SchoolName, new { htmlAttributes = new { @class = "form-control", @style = "width:200px" } })</b></td>
+                    </tr>
+                    <tr>
+                        <td style="color:#02388a"><b>Job Code:</b></td>
+                        <td><b>@Html.DisplayFor(model => model.Job.JobCode)</b></td>
+                    </tr>
+                </table>
+            </div>
+            <div style="visibility:hidden">
+                @Html.TextBoxFor(model => model.PostingStatusID, new { @Value = "2" })
+            </div>
+            <br />
+
+            <div class="col-md-offset-2 col-md-10" style="margin-top:30px; margin-bottom:30px">
+                <input type="submit" value="Archive" style="background-color:#00a203; border:none; margin-left: 330px; margin-right:30px" class="btn btn-primary btn-large" />
+                @Html.ActionLink("Back", "Index")
+            </div>
+
+        }
+
+
+
+    </div>
+</body>
+</html>
