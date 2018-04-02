@@ -27,6 +27,7 @@ namespace FinalProject.DAL
         public DbSet<BestCandidate> BestCandidates { get; set; }
         public DbSet<SavedPosting> SavedPostings { get; set; }
         public DbSet<aFile> Files { get; set; }
+        public DbSet<PostingStatus> PostingStatus { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
