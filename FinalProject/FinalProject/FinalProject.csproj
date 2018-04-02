@@ -207,6 +207,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApplicantController.cs" />
+    <Compile Include="Controllers\ApplicantsController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\ApplyController.cs" />
     <Compile Include="Controllers\ArchiveController.cs" />
@@ -377,6 +378,12 @@
     <Content Include="Views\Apply\Create.cshtml" />
     <Content Include="Views\Apply\Index.cshtml" />
     <Content Include="Views\Posting\IndexExpired.cshtml" />
+    <Content Include="Views\Apply\createe.cshtml" />
+    <Content Include="Views\Applicants\Create.cshtml" />
+    <Content Include="Views\Applicants\Delete.cshtml" />
+    <Content Include="Views\Applicants\Details.cshtml" />
+    <Content Include="Views\Applicants\Edit.cshtml" />
+    <Content Include="Views\Applicants\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -402,6 +409,7 @@
   <ItemGroup>
     <EmbeddedResource Include="DAL\Migrations\201804020400508_TestSwayze.resx">
       <DependentUpon>201804020400508_TestSwayze.cs</DependentUpon>
+
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

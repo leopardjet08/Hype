@@ -4,7 +4,7 @@
     ViewBag.Title = "Applicant Details";
 }
 
-<div>
+
     <div class="container well well-lg" style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
 
         <p style="text-align:center; margin-top:20px; margin-bottom:15px; font-size:30px; color:#02388a;"> Niagara Catholic District School Board</p>
@@ -18,9 +18,19 @@
                 ∙ &nbsp; My Profile &nbsp; ∙
             </h3>&nbsp;&nbsp;
 
-            <div  style="margin:0 auto; text-align:center; ">
-                <img src="https://www.w3schools.com/w3images/team2.jpg" alt="Image is not in database" style="width:50%; ">
+            <div style="margin:0 auto; text-align:center; ">
                 
+                    <div>
+            @{
+                if (Model.ApplicantImage != null)
+                {
+                    string imageBase64 = Convert.ToBase64String(Model.ApplicantImage.ImageContent);
+                    string imageSrc = string.Format("data:" + Model.ApplicantImage.ImageMimeType + ";base64,{0}", imageBase64);
+                    <img src="@imageSrc" style="max-height: 500px; max-width: 600px" class="img-responsive img-rounded" /><br />
+                }
+            }
+                
+
             </div>
             
             <br />
@@ -47,13 +57,19 @@
                 </h1>
 
                 <p><strong>Upload Resume:</strong> </p>
-                <br>
-                <input type="file" id="myFile" style="display:inline">
-                <br>
-                <input type="button" value="View" class="btn btn-default" />
-                <input type="button" value="Download" class="btn btn-default" />
-                <input type="button" value="Remove" class="btn btn-default" />
-                <input type="button" value="Add" class="btn btn-default" />
+                <br> 
+                @{
+            foreach (var f in Model.Files)
+            {
+                @:  @Html.ActionLink(f.fileName, "Download", new { id = f.ID }) <br />
+        }
+            }
+  
+            <br>
+            <input type="button" value="View" class="btn btn-default" />
+            <input type="button" value="Download" class="btn btn-default" />
+            <input type="button" value="Remove" class="btn btn-default" />
+            <input type="button" value="Add" class="btn btn-default" />
 
             </div>
 
