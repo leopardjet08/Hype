@@ -226,6 +226,11 @@
       <DependentUpon>201804020143037_p.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\Migrations\Configuration.cs" />
+    <Compile Include="DAL\SecurityMigration\201804020313176_k.cs" />
+    <Compile Include="DAL\SecurityMigration\201804020313176_k.Designer.cs">
+      <DependentUpon>201804020313176_k.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\SecurityMigration\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -402,6 +407,9 @@
   <ItemGroup>
     <EmbeddedResource Include="DAL\Migrations\201804020143037_p.resx">
       <DependentUpon>201804020143037_p.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DAL\SecurityMigration\201804020313176_k.resx">
+      <DependentUpon>201804020313176_k.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

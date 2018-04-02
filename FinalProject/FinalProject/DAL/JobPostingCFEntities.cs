@@ -3,6 +3,7 @@ using FinalProject.Models.DataModel;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Web;
@@ -65,28 +66,50 @@ namespace FinalProject.DAL
                 .WithRequired(p => p.aFile)
                 .WillCascadeOnDelete(true);
 
-            //modelBuilder.Entity<City>()
-            //    .HasMany(w => w.Schools)
-            //    .WithRequired(p => p.City)
-            //    .WillCascadeOnDelete(false);
+            modelBuilder.Entity<City>()
+                .HasRequired(c => c.Schools)
+                .WithMany()
+                .WillCascadeOnDelete(false);
 
-            //modelBuilder.Entity<City>()
-            // .HasMany(w => w.Applicants)
-            // .WithRequired(p => p.City)
-            // .WillCascadeOnDelete(false);
+            modelBuilder.Entity<School>()
+                .HasRequired(s => s.City)
+                .WithMany()
+                .WillCascadeOnDelete(false);
 
-            //modelBuilder.Entity<School>()
-            //.HasMany(w => w.Postings)
-            //.WithRequired(p => p.School)
-            //.WillCascadeOnDelete(true);
-
-            //modelBuilder.Entity<School>()
-            //.HasMany(w => w.Postings)
-            //.WithRequired(p => p.School)
-            //.WillCascadeOnDelete(true);
 
         }
 
+        public override int SaveChanges()
+        {
+            //Get Audit Values if not supplied
+            string auditUser = "Anonymous";
+            try //Need to try becuase HttpContext might not exist
+            {
+                if (HttpContext.Current.User.Identity.IsAuthenticated)
+                    auditUser = HttpContext.Current.User.Identity.Name;
+            }
+            catch (Exception)
+            { }
+
+            DateTime auditDate = DateTime.UtcNow;
+            foreach (DbEntityEntry<IAuditable> entry in ChangeTracker.Entries<IAuditable>())
+            {
+                if (entry.State == EntityState.Added)
+                {
+                    entry.Entity.CreatedOn = auditDate;
+                    entry.Entity.CreatedBy = auditUser;
+                    entry.Entity.UpdatedOn = auditDate;
+                    entry.Entity.UpdatedBy = auditUser;
+                }
+                else if (entry.State == EntityState.Modified)
+                {
+                    entry.Entity.UpdatedOn = auditDate;
+                    entry.Entity.UpdatedBy = auditUser;
+                }
+            }
+            return base.SaveChanges();
         }
+
+    }
         
     }
