@@ -87,6 +87,7 @@ namespace FinalProject.DAL
 
         }
 
-        }
+        public System.Data.Entity.DbSet<FinalProject.Models.DataModel.ApplicantImage> ApplicantImages { get; set; }
+    }
         
     }
