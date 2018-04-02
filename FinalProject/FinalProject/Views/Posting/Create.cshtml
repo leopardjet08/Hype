@@ -71,8 +71,8 @@
                                 <td style="padding-bottom:15px;">
                                     <div style="display:inline">
                                         @* Dropdown should be textbox auto complete *@
-                                        @Html.DropDownList("SchoolID", null, "Select a School", htmlAttributes: new { @class = "form-control", style="display:inline" })
-                                        <input class="form-control" style="display:inline; width:50px; padding:5px" type="number" min="0" max="20" step="1" value="0">
+                                        @Html.DropDownList("SchoolID", null, "Select a School", htmlAttributes: new { @class = "form-control" })
+                                        
                                         @Html.ValidationMessageFor(model => model.SchoolID, "", new { @class = "text-danger" })
                                     </div>
                                </td>
@@ -224,7 +224,7 @@
             </div>
         </div>
 
-        <div style="margin-left:135px; color:#02388a; width:100%">
+        <div style="margin-left:110px; color:#02388a; width:100%">
             <h4>@Html.LabelFor(model => model.PostingDescription, "Job Description: ")</h4><br />
             @Html.EditorFor(model => model.PostingDescription, new { htmlAttributes = new { id = "desc", @class = "form-control", @rows = "2", @cols = "100", @style = "max-width:73%; height:120px;", @placeholder = "Enter Description here..." } })
 
