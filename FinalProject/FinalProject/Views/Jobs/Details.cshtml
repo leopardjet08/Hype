@@ -4,81 +4,92 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-@Html.ValidationSummary(true, "", new { @class = "text-danger" })
-<div>
-    <h4>Job</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.JobCode)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.JobCode)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.JobTitle)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.JobTitle)
-        </dd>
+<div class="container well well-lg" style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.JobSummary)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.JobSummary)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Qualifications)
-        </dt>
-        <dd>
+    <p style="text-align:center; margin-top:20px; margin-bottom:15px; font-size:30px; color:#02388a;"> Niagara Catholic District School Board</p>
+    <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
+    <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
+    <br />
 
 
-            @{
-            foreach (var qualification in Model.Qualifications)
-            {
-                @:  @qualification.QualificationSet <br />
-        }
-            }
 
-        </dd>
+    <h2>Details</h2>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div>
+        <h4>Job</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.JobCode)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.JobCode)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Requirements)
-        </dt>
-        <dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.JobTitle)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.JobTitle)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.JobSummary)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.JobSummary)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Qualifications)
+            </dt>
+            <dd>
 
 
-            @{
-            foreach (var requirement in Model.Requirements)
-            {
-                @:  @requirement.RequirementName <br />
-        }
-            }
+                @{
+                    foreach (var qualification in Model.Qualifications)
+                    {
+                        @:  @qualification.QualificationSet <br />
+                    }
+                }
 
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Skills)
-        </dt>
-        <dd>
-           
+            </dd>
 
-            @{
-            foreach (var skill in Model.Skills)
-            {
-                @:  @skill.SkillName <br />
-        }
-            }
+            <dt>
+                @Html.DisplayNameFor(model => model.Requirements)
+            </dt>
+            <dd>
 
-        </dd>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+                @{
+                    foreach (var requirement in Model.Requirements)
+                    {
+                        @:  @requirement.RequirementName <br />
+                    }
+                }
+
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Skills)
+            </dt>
+            <dd>
+
+
+                @{
+                    foreach (var skill in Model.Skills)
+                    {
+                        @:  @skill.SkillName <br />
+                    }
+                }
+
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+    </div>
