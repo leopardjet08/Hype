@@ -33,8 +33,9 @@
             </div>
         </div>
 
-
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @using (Html.BeginForm("createe", "Apply", FormMethod.Get, null))
+    {
+        @Html.AntiForgeryToken()
 
         <div style="margin:0 auto" ;>
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -92,8 +93,8 @@
                         </table>
                     </div>
                     <br />
-                    
-                    <div style="margin-bottom:50px">
+
+                  <div style="margin-bottom:50px">
 
                         <br />
                         <h4 style="color:#02388a"><b>Posting Description  :  </b></h4>
@@ -103,37 +104,37 @@
                         <div style="margin-bottom:50px">
                             <h4 style="color:#02388a"><b>Requirements  : </b></h4>
                             <p style="font-size:18px">
-                            @{
-                    foreach (var requirments in Model.Requirements)
-                    {
-                        @:  @requirments.RequirementName <br />
-        }
+                                @{
+                                foreach (var requirments in Model.Requirements)
+                                {
+                                    @:  @requirments.RequirementName <br />
                             }
+                                }
                             </p>
                         </div>
 
                         <div style="margin-bottom:50px">
                             <h4 style="color:#02388a"><b>Qualifications  :  </b></h4>
                             <p style="font-size:18px;">
-                                
-                            @{
-                    foreach (var qualification in Model.Qualifications)
-                    {
-                        @:  @qualification.QualificationSet <br />
-        }
+
+                                @{
+                                foreach (var qualification in Model.Qualifications)
+                                {
+                                    @:  @qualification.QualificationSet <br />
                             }
+                                }
                             </p>
                         </div>
 
                         <div style="margin-top:20px; margin-bottom:20px">
                             <h4 style="color:#02388a"><b>Skills  :</b></h4>
                             <p style="font-size:18px;">
-                           @{
-                    foreach (var skills in Model.Skills)
-                    {
-                        @:  @skills.SkillName <br />
-        }
+                                @{
+                                foreach (var skills in Model.Skills)
+                                {
+                                    @:  @skills.SkillName <br />
                             }
+                                }
 
                             </p>
 
@@ -144,7 +145,7 @@
                 <div style="margin:0 auto; text-align:center">
                     <div style="margin-top:30px; margin-bottom:50px;">
                         @*&nbsp;@Html.ActionLink("Submit", "", new { id = Model.ID }, new {data_toggle="modal", data_target="#applyModal", @class="btn btn-default"})*@
-                        @*&nbsp;@Html.ActionLink("Submit Application", "Create", new { id = Model.ID }, new { @class = "btn btn-primary btn-large", @style = "background-color:#00a203; margin:0 auto; border:none" })*@
+                        @*&nbsp; <input type="submit" style="text-align:center; background-color:#00a203; border:none" value="Next Step" class="btn btn-primary btn-large" />*@
                         <button ID="btnConfirmApply" data-target="#applyModal" data-toggle="modal" style="background-color:#00a203; margin:0 auto; border:none" class="btn btn-primary btn-large" type="submit">Submit Application</button>
                         <br />
                         <br />
@@ -153,6 +154,8 @@
                 </div>
 
             </div>
+
         </div>
+}
     </div>
 </div>
