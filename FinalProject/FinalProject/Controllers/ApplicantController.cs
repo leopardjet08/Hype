@@ -99,6 +99,8 @@ namespace FinalProject.Controllers
             }
             //get all posting data
             Applicant applicant = db.Applicants
+                .Include(s =>s.Files)
+                .Include(a => a.ApplicantImage)
                 .Where(p => p.ID == id).SingleOrDefault();
             if (applicant == null)
             {
@@ -106,6 +108,11 @@ namespace FinalProject.Controllers
             }
             return View(applicant);
 
+        }
+        public FileContentResult Download(int id)
+        {
+            var theFile = db.Files.Include(f => f.FileContent).Where(f => f.ID == id).SingleOrDefault();
+            return File(theFile.FileContent.Content, theFile.FileContent.MimeType, theFile.fileName);
         }
 
         public ActionResult Edit(int? id)
