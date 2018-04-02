@@ -4,97 +4,116 @@
     ViewBag.Title = "Create Posting";
 }
 
-<h2>Create Posting From Job</h2>
-<h3>Step 1 - Select Job as Template</h3>
 
-@using (Html.BeginForm("Create", "Posting", FormMethod.Get, null))
-{
-    @Html.AntiForgeryToken()
+<div class="container well well-lg" style=" width:1088px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
+    <br />
+    <div style="margin-bottom:100px; ">
+        <p style="text-align:center;  margin-bottom:15px; font-size:30px; color:#02388a;"> Niagara Catholic District School Board</p>
+        <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
+        <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
+        <br />
 
-<div class="form-horizontal">
+        <h3 style="padding-top:10px; margin-bottom:50px; text-align:center;">
+            Step 1: Select a Job
+        </h3>&nbsp;&nbsp;
+       
 
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="row">
-        <div class="col-md-6 col-lg-6">
-            <div class="form-group">
-                <label class="control-label col-md-4">Job Based On: </label>
-                <div class="col-md-7">
-                    @Html.DropDownList("JobID", null, "Select a Job", htmlAttributes: new { @class = "form-control" })
-                    <a href="@Url.Action("Create", "Jobs", new { addJob = "AddJob" })" , target="_blank" type="submit" id="addJob">
-                        Create a new Job
-                    </a>
-                    <button class="btn btn-default" id="ddlRefresh" type="button"><span class="glyphicon-search"></span></button>
+        @using (Html.BeginForm("Create", "Posting", FormMethod.Get, null))
+        {
+            @Html.AntiForgeryToken()
+
+       
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <h4 style="text-align:center; color:#02388a">Job Based On: </h4>
+               <br />   
+                <table style="margin:0 auto">
+                    <tr><td></td><td>
+                        @Html.DropDownList("JobID", null, "Select a Job", htmlAttributes: new { @class = "form-control", @style = "display:inline; margin-bottom:10px; width:200px" })
+                        <button class="btn btn-default" style="display:inline; margin-bottom:10px" id="ddlRefresh" type="button"><span class="glyphicon glyphicon-refresh"></span></button>
+                        <br />
+                         <a href="@Url.Action("Create", "Jobs", new { addJob = "AddJob" })" , target="_blank" type="submit" id="addJob">
+                            Create New Job
+                         </a>
+                    </td>
+                    </tr>
+                </table>
+                <br />
+            <br />
+            <div>
+                <h4 style="text-align:center; color:#02388a">  @Html.LabelFor(model => model.JobTitle, htmlAttributes: new { @style = "font-weight:normal" }):</h4>
+                <div>
+                    <input type="text" style="width:240px; margin:0 auto" class="form-control" id="Title" readonly="readonly" />
                 </div>
             </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.JobTitle, htmlAttributes: new { @class = "control-label col-md-4" })
-                <div class="col-md-7">
-                    <input type="text" class="form-control" id="Title" readonly="readonly" />
+                <br /> <br />     
+            <div style="margin-bottom:20px">
+                 <h4 style="text-align: center; color:#02388a">  Job @Html.LabelFor(model => model.JobCode, htmlAttributes: new { @style = "font-weight:normal;" }):</h4>
+                <div >
+                   <input type="text" style=" margin:0 auto; width: 240px" class="form-control" id="JobCode" readonly="readonly" />
                 </div>
             </div>
+  
+     <div style="margin-top:50px;">
+                <h4 style="text-align: center;  color:#02388a">
+                    @Html.LabelFor(model => model.JobSummary, htmlAttributes: new { @style = "margin-bottom:20px; font-weight:normal" }):
+                </h4>
+                <div style="width:700px; text-align:center; font-size:16px; margin:0 auto" id="Summary"></div>    
+         <br />
+         <br />
+         <br />
+
+         <div class="row" style="text-align:center; margin:0 auto" ;>
+                <div class="col-md-4">
+                    <div >
+                         <h4 style="text-align: center; color:#02388a"> Requirements:</h4>
+                         <div class="well" style="font-size:16px" id="RequirementsList"></div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div >
+                         <h4 style="text-align: center; color:#02388a"> Qualifications:</h4>
+                         <div>
+                             <div class="well" style="font-size:16px" id="QualificationsList"></div>
+                         </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div>
+                         <h4 style="text-align: center; color:#02388a">
+                             Skills:
+                         </h4>
+                         <div>
+                            <div class="well" style="font-size:16px" id="SkillsList"></div>
+                         </div>
+                    </div>
+                </div>
+         </div>
+     </div>
+
+          <br />
+          <br /> 
+          <br />
+      <div style="margin: 0 auto; text-align: center">
+          <input type="submit" style="text-align:center; background-color:#00a203; border:none" value="Next Step" class="btn btn-primary btn-large" />
+        <br />
+        <br />
+        <div>
+            <a href="javascript:void(0);" style="text-align:center; "onclick="history.go(-1);">Back</a>
         </div>
-        <div class="col-md-6 col-lg-6">
-            <div class="form-group">
-                @Html.LabelFor(model => model.JobCode, htmlAttributes: new { @class = "control-label col-md-4" })
-                <div class="col-md-7">
-                    <input type="text" class="form-control" id="JobCode" readonly="readonly" />
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12 col-lg-12">
-            <div class="form-group">
-                @Html.LabelFor(model => model.JobSummary, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-8">
-                    <div class="well" id="Summary"></div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label col-md-2">Requirement Required</label>
-                <div class="col-md-8">
-                    <div class="well" id="RequirementsList"></div>
-                </div>
-            </div>
+      
+      </div>
+   
+        }
+        
 
 
-            <div class="form-group" >
-                <label class="control-label col-md-2">Skills Required</label>
-                <div class="col-md-8">
-                    <div class="well" id="SkillsList"></div>
-                </div>
-            </div>
-
-
-
-            <div class="form-group" >
-                <label class="control-label col-md-2">Qualification Required</label>
-                <div class="col-md-8">
-                    <div class="well" id="QualificationsList"></div>
-                </div>
-            </div>
-
-
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Next Step" class="btn btn-default" />
-        </div>
     </div>
 </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
+
 @section Scripts {
-<script type="text/javascript">
+    <script type="text/javascript">
         $('#JobID').change(function () {
             $('#Title').val('');
             $('#Summary').empty();
@@ -147,6 +166,10 @@
             });
 
 
-</script>
+    </script>
+
+
+
+
 
 }

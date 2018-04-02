@@ -3,7 +3,7 @@
 @model IPagedList<FinalProject.Models.Application>
 <link href="~/Content/PagedList.css" rel="stylesheet" />
 @{
-    ViewBag.Title = "Posting List";
+    ViewBag.Title = "Applications List";
 }
 
 <div>
@@ -18,7 +18,7 @@
                 <br />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <h3 style="padding-top:10px; text-align:center;">
-                    ∙ &nbsp; All Listed Application &nbsp; ∙
+                    ∙ &nbsp; All Listed Applications &nbsp; ∙
                 </h3>&nbsp;&nbsp;
                 <div class="container">
 
@@ -77,7 +77,7 @@
                         @* Buttons in the table *@
                         <td style="text-align:center; font-size:14px">
                             @Html.ActionLink("View", "Details", new { id = item.ID }, new { @style = "border:0px;" })
-                            &nbsp;@Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @style = "border:0px; " })
+                            &nbsp;@Html.ActionLink("Archive", "Delete", new { id = item.ID }, new { @style = "border:0px; " })
                         </td>
                     </tr>
     }
