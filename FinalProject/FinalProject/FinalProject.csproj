@@ -222,11 +222,16 @@
     <Compile Include="Controllers\SkillsController.cs" />
     <Compile Include="DAL\ApplicationDBContext.cs" />
     <Compile Include="DAL\JobPostingCFEntities.cs" />
-    <Compile Include="DAL\Migrations\201804020400508_TestSwayze.cs" />
-    <Compile Include="DAL\Migrations\201804020400508_TestSwayze.Designer.cs">
-      <DependentUpon>201804020400508_TestSwayze.cs</DependentUpon>
+    <Compile Include="DAL\Migrations\201804031741102_initial.cs" />
+    <Compile Include="DAL\Migrations\201804031741102_initial.Designer.cs">
+      <DependentUpon>201804031741102_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\Migrations\Configuration.cs" />
+    <Compile Include="DAL\SecurityMigration\201804031744235_security.cs" />
+    <Compile Include="DAL\SecurityMigration\201804031744235_security.Designer.cs">
+      <DependentUpon>201804031744235_security.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\SecurityMigration\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -236,11 +241,13 @@
     <Compile Include="Models\DataModel\ApplicantImage.cs" />
     <Compile Include="Models\DataModel\Application.cs" />
     <Compile Include="Models\DataModel\ApplicationStatus.cs" />
+    <Compile Include="Models\DataModel\Appliedposting.cs" />
     <Compile Include="Models\DataModel\ArchiveApplication.cs" />
     <Compile Include="Models\DataModel\Archiveposting.cs" />
     <Compile Include="Models\DataModel\Auditable.cs" />
     <Compile Include="Models\DataModel\BestCandidate.cs" />
     <Compile Include="Models\DataModel\City.cs" />
+    <Compile Include="Models\DataModel\ExpiredPosting.cs" />
     <Compile Include="Models\DataModel\FileContent.cs" />
     <Compile Include="Models\DataModel\IAuditable.cs" />
     <Compile Include="Models\DataModel\PostingStatus.cs" />
@@ -265,6 +272,9 @@
     <Compile Include="ViewModels\AssignedSkillVM.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DAL\Migrations\BackUpMigration need to change the partial class.txt" />
+    <Content Include="DAL\Migrations\SampleSeed.txt" />
+    <Content Include="DAL\SecurityMigration\BackUpMigrationForSecurity.txt" />
     <Content Include="Images\About.png" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -407,9 +417,11 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DAL\Migrations\201804020400508_TestSwayze.resx">
-      <DependentUpon>201804020400508_TestSwayze.cs</DependentUpon>
-
+    <EmbeddedResource Include="DAL\Migrations\201804031741102_initial.resx">
+      <DependentUpon>201804031741102_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DAL\SecurityMigration\201804031744235_security.resx">
+      <DependentUpon>201804031744235_security.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -307,7 +307,41 @@ namespace FinalProject.DAL.Migrations
             savePosting.ForEach(a => context.SavedPostings.AddOrUpdate(n => n.ApplicantID, a));
             SaveChanges(context);
 
+            var archiveposting = new List<Archiveposting>
+            {
+                new Archiveposting {
 
+                    NumberOpen =2,ClosingDate=DateTime.Parse("2017-01-20"),StartDate=DateTime.Parse("2018-01-02"),JobEndDate=DateTime.Parse("2019-01-02"),
+                PostingDescription="Math teachers work with students of all ages in classrooms around the United States. Typically, they teach children and teens, but some math teachers may also teach adults, or continue their careers at community colleges or universities. Their goal is to help pupils develop critical-thinking abilities by gaining an understanding of mathematic concepts.", SchoolID=5,
+                JobID=2, fte = 0.4, JobCode="MATR",SkillQualification=false,ArchiveDate=DateTime.Parse("2017-02-20")},
+
+                new Archiveposting {
+
+                    NumberOpen =1,ClosingDate=DateTime.Parse("2014-05-10"),StartDate=DateTime.Parse("2014-07-02"),JobEndDate=DateTime.Parse("2015-05-02"),
+                PostingDescription="Librarians evaluate books and other informational resources for consideration as additions to collections.They organize resources so that patrons can easily find the material that they desire. Librarians assess the research needs of individual visitors and identify the necessary resources.Librarians arrange speakers, entertainers and workshops to educate and entertain patrons.They publicize services to their constituency and endeavor to expand the use of library resources.", SchoolID=5,
+                JobID=1, fte=0.7, JobCode="LIR",SkillQualification=true,ArchiveDate=DateTime.Parse("2014-02-20")},
+
+                new Archiveposting {
+
+                    NumberOpen =3,ClosingDate=DateTime.Parse("2011-01-09"),StartDate=DateTime.Parse("2011-03-06"),JobEndDate=DateTime.Parse("2012-01-02"),
+                PostingDescription="Keep buildings in clean and orderly condition. Perform heavy cleaning duties, such as cleaning floors, shampooing rugs, washing walls and glass, and removing rubbish. Duties may include tending furnace and boiler, performing routine maintenance activities, notifying management of need for repairs, and cleaning snow or debris from sidewalk.", SchoolID=9,
+                JobID=3, fte=1.3, JobCode="JAT",SkillQualification=true,ArchiveDate=DateTime.Parse("2011-02-20")}
+
+            };
+            archiveposting.ForEach(a => context.Archivepostings.AddOrUpdate(n => n.ClosingDate, a));
+            SaveChanges(context);
+
+            var Archiveapplication = new List<ArchiveApplication>
+            {
+                new ArchiveApplication {  ApplicantID=(context.Applicants.Where(p=>p.EMail=="aaxibeg@outlook.com").SingleOrDefault().ID),
+                    PostingID =(context.Postings.Where(p=>p.NumberOpen==1).SingleOrDefault().ID),SubmissionDate=DateTime.Parse("2014-01-20"),ArchiveDate=DateTime.Parse("2014-02-20") },
+                new ArchiveApplication {  ApplicantID=(context.Applicants.Where(p=>p.EMail=="bburnsworth@outlook.com").SingleOrDefault().ID),
+                    PostingID =(context.Postings.Where(p=>p.NumberOpen==2).SingleOrDefault().ID),SubmissionDate=DateTime.Parse("2015-01-20"),ArchiveDate=DateTime.Parse("2015-02-20") },
+                new ArchiveApplication {  ApplicantID=(context.Applicants.Where(p=>p.EMail=="ccarlisle@outlook.com").SingleOrDefault().ID),
+                    PostingID =(context.Postings.Where(p=>p.NumberOpen==3).SingleOrDefault().ID),SubmissionDate=DateTime.Parse("2016-01-20"),ArchiveDate=DateTime.Parse("2016-02-20")}
+            };
+            Archiveapplication.ForEach(a => context.ArchiveApplications.AddOrUpdate(n => n.ApplicantID, a));
+            SaveChanges(context);
 
         }
 

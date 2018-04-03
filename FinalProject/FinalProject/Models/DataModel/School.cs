@@ -25,7 +25,7 @@ namespace FinalProject.Models
         [Required(ErrorMessage = "Please specify the school level.")]
         public int SchoolLevelID { get; set; }
 
-        [Required(ErrorMessage = "Please indicate the school city.")]
+        [Required(ErrorMessage = "Please select City.")]
         public int CityID { get; set; }
 
         // For elementary level schools

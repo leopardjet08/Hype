@@ -9,21 +9,22 @@ namespace FinalProject.Models.DataModel
 {
     public class City
     {
-        public City()
-        {
-            this.Applicants = new HashSet<Applicant>();
-            this.Schools = new HashSet<School>();
-        }
+        //public City()
+        //{
+        //    this.Applicants = new HashSet<Applicant>();
+        //    this.Schools = new HashSet<School>();
+        //}
 
         public int ID { get; set; }
 
         [Display(Name = "City")]
         [Required(ErrorMessage = "City name required.")]
         [StringLength(50, ErrorMessage = "Character Length Exceeded.")]
-        [Index("IX_Unique_City", IsUnique = true)]
+        //[Index("IX_Unique_City", IsUnique = true)]
         public string CityName { get; set; }
 
         public ICollection<Applicant> Applicants { get; set; }
         public ICollection<School> Schools { get; set; }
+
     }
 }

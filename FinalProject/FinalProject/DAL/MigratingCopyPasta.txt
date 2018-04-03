@@ -1,3 +1,16 @@
 ﻿Enable-migrations -ContextTypeName JobPostingCFEntities -MigrationsDirectory DAL\Migrations
 add-migration -ConfigurationTypeName FinalProject.DAL.Migrations.Configuration
 update-database -ConfigurationTypeName FinalProject.DAL.Migrations.Configuration
+
+Enable-migrations -ContextTypeName ApplicationDBContext -MigrationsDirectory DAL\SecurityMigration
+add-migration -ConfigurationTypeName FinalProject.DAL.SecurityMigration.Configuration
+update-database -ConfigurationTypeName FinalProject.DAL.SecurityMigration.Configuration
+
+
+                                             ONLY DO THIS!!!
+
+                            Delete the Database in DataConnection AND AppData
+
+							 Package Manager Console Enter Copy AND Enter THIS:
+				 update-database -ConfigurationTypeName FinalProject.DAL.Migrations.Configuration
+				 update-database -ConfigurationTypeName FinalProject.DAL.SecurityMigration.Configuration
