@@ -49,6 +49,14 @@ namespace FinalProject.Models.DataModel
         [Required(ErrorMessage = "Please provide the Job for this posting")]
         public int JobID { get; set; }
 
+        [Display(Name = "Code")]
+        [Required(ErrorMessage = "Job Code Required.")]
+        [StringLength(20, ErrorMessage = "Cannot be longer than 20 characters.")]
+        public string JobCode { get; set; }
+
+        [Required(ErrorMessage = "Choose Type.")]
+        public bool SkillQualification { get; set; }
+
         public virtual School School { get; set; }
         public virtual Job Job { get; set; }
         public ICollection<Application> Applications { get; set; }

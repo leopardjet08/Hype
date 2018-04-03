@@ -54,12 +54,59 @@
 
         protected override void Seed(FinalProject.DAL.JobPostingCFEntities context)
         {
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //var qualification = new List<Qualification>()
+            //{
+            //    new Qualification{ QualificationSet="Qualification1"},
+            //    new Qualification{ QualificationSet="Qualification2"},
+            //    new Qualification{ QualificationSet="Qualification3"},
+            //    new Qualification{ QualificationSet="Qualification4"},
+            //    new Qualification{ QualificationSet="Qualification5"},
+            //    new Qualification{ QualificationSet="Qualification6"},
+            //    new Qualification{ QualificationSet="Qualification7"},
+            //};
+            //qualification.ForEach(a => context.Qualifications.AddOrUpdate(n => n.QualificationSet, a));
+            //SaveChanges(context);
 
+            //var requirements = new List<Requirement>()
+            //{
+            //    new Requirement{ RequirementName="Diploma"},
+            //    new Requirement{ RequirementName="Certificate"},
+            //    new Requirement{ RequirementName="Book"},
+            //    new Requirement{ RequirementName="Pencil"},
+            //    new Requirement{ RequirementName="Shoes"},
+            //    new Requirement{ RequirementName="T-shirt"},
+            //    new Requirement{ RequirementName="Hat"},
+            //};
+            //requirements.ForEach(a => context.Requirements.AddOrUpdate(n => n.RequirementName, a));
+            //SaveChanges(context);
+
+
+            //// Seeding Jobs individually to manually put Qualification and Requirement Seed Data
+            //var job1 = new Job { Qualifications = new List<Qualification>(), Requirements = new List<Requirement>(), JobTitle = "Math Teacher", JobSummary = "Math teacher should be good as me. She/he knows how to add,subtract,multiplication and divide. He also know how to do statistic." };
+            //var job2 = new Job { Qualifications = new List<Qualification>(), Requirements = new List<Requirement>(), JobTitle = "Librarian", JobSummary = "She knows how to read and write. Good reading skills and very knowlegable as me." };
+            //var job3 = new Job { Qualifications = new List<Qualification>(), Requirements = new List<Requirement>(), JobTitle = "Janitor", JobSummary = "Very good at handling mops and brushes. He should always be around who can adpat very fast in the environment" };
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            // Requirement and Qualification Seed Data is in the Job Seed data itself
             var jobs = new List<Job>
             {
-                new Job {  JobTitle="Math Teacher",JobSummary="Math teacher should be good as me. She/he knows how to add,subtract,multiplication and divide. He also know how to do statistic."},
-                new Job {  JobTitle="Librarian",JobSummary="She knows how to read and write. Good reading skills and very knowlegable as me."},
-                new Job {  JobTitle="Janitor",JobSummary="Very good at handling mops and brushes. He should always be around who can adpat very fast in the environment"}
+                new Job { JobCode="MATR", SkillQualification=false, Qualifications = new List<Qualification> { new Qualification { QualificationSet = "Qualification Set 1"}, new Qualification { QualificationSet = "Qualification Set 2"} },
+                    Skills = new List<Skill> { new Skill { SkillName = "Skill 1"}, new Skill { SkillName = "Skill 2"} },
+                    Requirements = new List<Requirement> { new Requirement { RequirementName = "Critical Thinking" }, new Requirement { RequirementName = "Adaptability" } },
+                    JobTitle ="Math Teacher",JobSummary="Math teacher should be good as me. She/he knows how to add,subtract,multiplication and divide. He also know how to do statistic."},
+
+
+                new Job { JobCode="LIR",SkillQualification=true, Qualifications = new List<Qualification> { new Qualification { QualificationSet = "Qualification Set 3"}, new Qualification { QualificationSet = "Qualification Set 4"} },
+                    Skills = new List<Skill> { new Skill { SkillName = "Skill 22"}, new Skill { SkillName = "Skill 5"}, new Skill { SkillName = "Skill 9"} },
+                    Requirements = new List<Requirement> {new Requirement { RequirementName = "Charismatic" }, new Requirement { RequirementName = "Integrity" } },
+                    JobTitle ="Librarian",JobSummary="She knows how to read and write. Good reading skills and very knowlegable as me."},
+
+                new Job { JobCode="JAT",SkillQualification=true, Qualifications = new List<Qualification> { new Qualification { QualificationSet = "Qualification Set 5"} },
+                    Skills = new List<Skill> { new Skill { SkillName = "Skill 13"}, new Skill { SkillName = "Skill 24"} },
+                    Requirements = new List<Requirement> {new Requirement { RequirementName = "Punctuality" } },
+                    JobTitle ="Janitor",JobSummary="Very good at handling mops and brushes. He should always be around who can adpat very fast in the environment"}
 
             };
             jobs.ForEach(a => context.Jobs.AddOrUpdate(n => n.JobTitle, a));
@@ -82,17 +129,17 @@
 
             var city = new List<City>
             {
-                new City { CityName="Welland"},
-                new City { CityName="St. Catharines"},
-                new City { CityName="Niagara Falls"},
-                new City { CityName="Thorold"},
-                new City { CityName="Grimsby"},
-                new City { CityName="Fort Erie"},
-                new City { CityName="Pelham"},
-                new City { CityName="Lincoln & W. Lincoln"},
-                new City { CityName="Wainfleet"},
-                new City { CityName="Port Colborne"},
-                new City { CityName="Niagara-on-the-Lake"}
+                new City { ID=1, CityName="Welland"},
+                new City { ID=2,CityName="St. Catharines"},
+                new City { ID=3,CityName="Niagara Falls"},
+                new City { ID=4,CityName="Thorold"},
+                new City { ID=5,CityName="Grimsby"},
+                new City { ID=6,CityName="Fort Erie"},
+                new City { ID=7,CityName="Pelham"},
+                new City { ID=8,CityName="Lincoln & W. Lincoln"},
+                new City { ID=9,CityName="Wainfleet"},
+                new City { ID=10,CityName="Port Colborne"},
+                new City { ID=11,CityName="Niagara-on-the-Lake"}
             };
             city.ForEach(a => context.Cities.AddOrUpdate(n => n.CityName, a));
             SaveChanges(context);
@@ -104,6 +151,14 @@
                 new ApplicationStatus { Status = "Accepted" }
             };
             applicationStatuses.ForEach(a => context.ApplicationStatus.AddOrUpdate(n => n.Status, a));
+            SaveChanges(context);
+
+            var postingStatus = new List<PostingStatus>
+            {
+                new PostingStatus { Status = "Active" },
+                new PostingStatus { Status = "InActive" }
+            };
+            postingStatus.ForEach(a => context.PostingStatus.AddOrUpdate(n => n.Status, a));
             SaveChanges(context);
 
             var schoolLevels = new List<SchoolLevel>
@@ -131,43 +186,18 @@
             schoolFamilies.ForEach(a => context.SchoolFamilies.AddOrUpdate(n => n.FamilyName, a));
             SaveChanges(context);
 
-            var qualification = new List<Qualification>()
-            {
-                new Qualification{ QualificationSet="Qualification1"},
-                new Qualification{ QualificationSet="Qualification2"},
-                new Qualification{ QualificationSet="Qualification3"},
-                new Qualification{ QualificationSet="Qualification4"},
-                new Qualification{ QualificationSet="Qualification5"},
-                new Qualification{ QualificationSet="Qualification6"},
-                new Qualification{ QualificationSet="Qualification7"},
-            };
-            qualification.ForEach(a => context.Qualifications.AddOrUpdate(n => n.QualificationSet, a));
-            SaveChanges(context);
-
-            var requirements = new List<Requirement>()
-            {
-                new Requirement{ RequirementName="Diploma",JobID=1},
-                new Requirement{ RequirementName="Certificate",JobID=1},
-                new Requirement{ RequirementName="Book",JobID=2},
-                new Requirement{ RequirementName="Pencil",JobID=2},
-                new Requirement{ RequirementName="Shoes",JobID=3},
-                new Requirement{ RequirementName="T-shirt",JobID=3},
-                new Requirement{ RequirementName="Hat",JobID=3},
-            };
-            requirements.ForEach(a => context.Requirements.AddOrUpdate(n => n.RequirementName, a));
-            SaveChanges(context);
 
             var school = new List<School>
             {
                 new School { SchoolName="Alexander Kuska",SchoolLevelID=1,CityID=1,SchoolFamilyID=1},
-                new School { SchoolName="Assumption",SchoolLevelID=1,CityID=2,SchoolFamilyID=2},
+                new School { SchoolName="Assumption",SchoolLevelID=1,CityID=2,SchoolFamilyID=2},//2
                 new School { SchoolName="Canadian Martyrs",SchoolLevelID=1,CityID=2,SchoolFamilyID=2},
                 new School { SchoolName="Cardinal Newman",SchoolLevelID=1,CityID=3,SchoolFamilyID=3},
-                new School { SchoolName="Father Hennepin",SchoolLevelID=1,CityID=3,SchoolFamilyID=4},
+                new School { SchoolName="Father Hennepin",SchoolLevelID=1,CityID=3,SchoolFamilyID=4},//3
                 new School { SchoolName="Holy Name",SchoolLevelID=1,CityID=1,SchoolFamilyID=1},
                 new School { SchoolName="Loretto Catholic",SchoolLevelID=1,CityID=3,SchoolFamilyID=4},
                 new School { SchoolName="Mary Ward",SchoolLevelID=1,CityID=3,SchoolFamilyID=3},
-                new School { SchoolName="Monsignor Clancy",SchoolLevelID=1,CityID=4,SchoolFamilyID=6},
+                new School { SchoolName="Monsignor Clancy",SchoolLevelID=1,CityID=4,SchoolFamilyID=6},//4
                 new School { SchoolName="Mother Teresa",SchoolLevelID=1,CityID=2,SchoolFamilyID=7},
                 new School { SchoolName="Notre Dame",SchoolLevelID=1,CityID=3,SchoolFamilyID=3},
                 new School { SchoolName="Our Lady of Fatima",SchoolLevelID=1,CityID=5,SchoolFamilyID=8},
@@ -213,30 +243,35 @@
             school.ForEach(a => context.Schools.AddOrUpdate(n => n.SchoolName, a));
             SaveChanges(context);
 
-
-
-
             var applicants = new List<Applicant>
             {
-                new Applicant { FName = "Alex", MName = "Ark",  LName = "Axibeg", eMail="aaxibeg@outlook.com", Address="45 road street", ProvinceID=1,CityID=2},
-                new Applicant { FName = "Boris", MName = "Boyle",  LName = "Burnsworth", eMail="bburnsworth@outlook.com", Address="55 street", ProvinceID=3,CityID=1},
-                new Applicant { FName = "Cathy", LName = "Carlisle", eMail="ccarlisle@outlook.com" , Address="11 street", ProvinceID=2,CityID=4},
-                new Applicant { FName = "Derrick", MName = "Dee",  LName = "DaVinci", eMail="ddavincis@outlook.com", Address="88 street", ProvinceID=4,CityID=2}
+                new Applicant { FName = "Alex", MName = "Ark",  LName = "Axibeg", PhoneNumber=9053707878, EMail="aaxibeg@outlook.com", Address="45 road street", ProvinceID=1,CityID=2},
+                new Applicant { FName = "Boris", MName = "Boyle",  LName = "Burnsworth", PhoneNumber=9055669878, EMail="bburnsworth@outlook.com", Address="55 street", ProvinceID=3,CityID=1},
+                new Applicant { FName = "Cathy", LName = "Carlisle",PhoneNumber=9053557878,  EMail="ccarlisle@outlook.com" , Address="11 street", ProvinceID=2,CityID=4},
+                new Applicant { FName = "Derrick", MName = "Dee",  LName = "DaVinci", PhoneNumber=9053741184, EMail="ddavincis@outlook.com", Address="88 street", ProvinceID=4,CityID=2}
             };
-            applicants.ForEach(a => context.Applicants.AddOrUpdate(n => n.eMail, a));
+            applicants.ForEach(a => context.Applicants.AddOrUpdate(n => n.EMail, a));
             SaveChanges(context);
 
             var postings = new List<Posting>
             {
-                new Posting {  NumberOpen=2,ClosingDate=DateTime.Parse("2018-02-20"),StartDate=DateTime.Parse("2018-01-02"),
-                PostingDescription="First posting Description. made by yours trully jetson. spelling is wrong. i suck.", SchoolID=2,
-                JobID=2},
-                new Posting {  NumberOpen=1,ClosingDate=DateTime.Parse("2018-05-10"),StartDate=DateTime.Parse("2018-04-02"),
-                PostingDescription="Second posting Description. dasdsadsadsa.", SchoolID=5,
-                JobID=1},
-                new Posting {  NumberOpen=3,ClosingDate=DateTime.Parse("2018-09-09"),StartDate=DateTime.Parse("2018-08-06"),
-                PostingDescription="Third posting Description. made by yours trully jetson. spelling is wrong. i suck.", SchoolID=9,
-                JobID=3}
+                new Posting {
+
+                    NumberOpen =2,ClosingDate=DateTime.Parse("2019-02-20"),StartDate=DateTime.Parse("2020-01-02"),JobEndDate=DateTime.Parse("2021-01-02"),
+                PostingDescription="Math teachers work with students of all ages in classrooms around the United States. Typically, they teach children and teens, but some math teachers may also teach adults, or continue their careers at community colleges or universities. Their goal is to help pupils develop critical-thinking abilities by gaining an understanding of mathematic concepts.", SchoolID=2,
+                JobID=2, Fte = 0.4, JobCode="MATR",SkillQualification=false,PostingStatusID=2},
+
+                new Posting { 
+
+                    NumberOpen =1,ClosingDate=DateTime.Parse("2019-05-10"),StartDate=DateTime.Parse("2020-04-02"),JobEndDate=DateTime.Parse("2022-05-02"),
+                PostingDescription="Librarians evaluate books and other informational resources for consideration as additions to collections.They organize resources so that patrons can easily find the material that they desire. Librarians assess the research needs of individual visitors and identify the necessary resources.Librarians arrange speakers, entertainers and workshops to educate and entertain patrons.They publicize services to their constituency and endeavor to expand the use of library resources.", SchoolID=5,
+                JobID=1, Fte=0.7, JobCode="LIR",SkillQualification=true,PostingStatusID=1},
+
+                new Posting { 
+
+                    NumberOpen =3,ClosingDate=DateTime.Parse("2019-09-09"),StartDate=DateTime.Parse("2020-08-06"),JobEndDate=DateTime.Parse("2023-01-02"),
+                PostingDescription="Keep buildings in clean and orderly condition. Perform heavy cleaning duties, such as cleaning floors, shampooing rugs, washing walls and glass, and removing rubbish. Duties may include tending furnace and boiler, performing routine maintenance activities, notifying management of need for repairs, and cleaning snow or debris from sidewalk.", SchoolID=9,
+                JobID=3, Fte=1.3, JobCode="JAT",SkillQualification=true,PostingStatusID=1}
 
             };
             postings.ForEach(a => context.Postings.AddOrUpdate(n => n.ClosingDate, a));
@@ -246,11 +281,11 @@
 
             var applications = new List<Application>
             {
-                new Application {  ApplicantID=(context.Applicants.Where(p=>p.eMail=="aaxibeg@outlook.com").SingleOrDefault().ID),
+                new Application {  ApplicantID=(context.Applicants.Where(p=>p.EMail=="aaxibeg@outlook.com").SingleOrDefault().ID),
                     PostingID =(context.Postings.Where(p=>p.NumberOpen==2).SingleOrDefault().ID), ApplicationStatusID=1 },
-                new Application {  ApplicantID=(context.Applicants.Where(p=>p.eMail=="bburnsworth@outlook.com").SingleOrDefault().ID),
+                new Application {  ApplicantID=(context.Applicants.Where(p=>p.EMail=="bburnsworth@outlook.com").SingleOrDefault().ID),
                     PostingID =(context.Postings.Where(p=>p.NumberOpen==3).SingleOrDefault().ID), ApplicationStatusID=2 },
-                new Application {  ApplicantID=(context.Applicants.Where(p=>p.eMail=="ccarlisle@outlook.com").SingleOrDefault().ID),
+                new Application {  ApplicantID=(context.Applicants.Where(p=>p.EMail=="ccarlisle@outlook.com").SingleOrDefault().ID),
                     PostingID =(context.Postings.Where(p=>p.NumberOpen==1).SingleOrDefault().ID), ApplicationStatusID=3 }
             };
             applications.ForEach(a => context.Applications.AddOrUpdate(n => n.ApplicantID, a));
@@ -266,8 +301,8 @@
 
             var savePosting = new List<SavedPosting>()
             {
-                new SavedPosting{ ApplicantID=1},
-                new SavedPosting{ ApplicantID=2}
+                new SavedPosting{ ApplicantID=1, PostingID=1},
+                new SavedPosting{ ApplicantID=2, PostingID=2}
             };
             savePosting.ForEach(a => context.SavedPostings.AddOrUpdate(n => n.ApplicantID, a));
             SaveChanges(context);
@@ -278,3 +313,4 @@
 
     }
 }
+

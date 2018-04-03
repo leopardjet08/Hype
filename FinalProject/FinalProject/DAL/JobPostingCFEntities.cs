@@ -3,6 +3,7 @@ using FinalProject.Models.DataModel;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Web;
@@ -28,13 +29,18 @@ namespace FinalProject.DAL
         public DbSet<SavedPosting> SavedPostings { get; set; }
         public DbSet<aFile> Files { get; set; }
         public DbSet<PostingStatus> PostingStatus { get; set; }
+        public DbSet<ArchiveApplication> ArchiveApplications { get; set; }
+        public DbSet<Archiveposting> Archivepostings { get; set; }
+        public DbSet<Appliedposting> Appliedpostings { get; set; }
+        public DbSet<ExpiredPosting> ExpiredPostings { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
 
-            modelBuilder.HasDefaultSchema("Job");
+            //modelBuilder.HasDefaultSchema("Job");
 
 
             //Added for cascade delete for applicant image profile picture
@@ -54,21 +60,17 @@ namespace FinalProject.DAL
                 .WithRequired(p => p.Applicant)
                 .WillCascadeOnDelete(true);
 
-            modelBuilder.Entity<Applicant>()
-               .HasMany(a => a.Applications)
-               .WithRequired(p => p.Applicant)
-               .WillCascadeOnDelete(true);
+            //modelBuilder.Entity<Applicant>()
+            //   .HasMany(a => a.Applications)
+            //   .WithRequired(p => p.Applicant)
+            //   .WillCascadeOnDelete(true);
 
-            //Added for cascade delete for File Content with File
-            modelBuilder.Entity<aFile>()
-                .HasOptional(w => w.FileContent)
-                .WithRequired(p => p.aFile)
-                .WillCascadeOnDelete(true);
+            ////Added for cascade delete for File Content with File
+            //modelBuilder.Entity<aFile>()
+            //    .HasOptional(w => w.FileContent)
+            //    .WithRequired(p => p.aFile)
+            //    .WillCascadeOnDelete(true);
 
-            //modelBuilder.Entity<City>()
-            //    .HasMany(w => w.Schools)
-            //    .WithRequired(p => p.City)
-            //    .WillCascadeOnDelete(false);
 
             //modelBuilder.Entity<City>()
             // .HasMany(w => w.Applicants)
@@ -85,6 +87,37 @@ namespace FinalProject.DAL
             //.WithRequired(p => p.School)
             //.WillCascadeOnDelete(true);
 
+        }
+
+        public override int SaveChanges()
+        {
+            //Get Audit Values if not supplied
+            string auditUser = "Anonymous";
+            try //Need to try becuase HttpContext might not exist
+            {
+                if (HttpContext.Current.User.Identity.IsAuthenticated)
+                    auditUser = HttpContext.Current.User.Identity.Name;
+            }
+            catch (Exception)
+            { }
+
+            DateTime auditDate = DateTime.UtcNow;
+            foreach (DbEntityEntry<IAuditable> entry in ChangeTracker.Entries<IAuditable>())
+            {
+                if (entry.State == EntityState.Added)
+                {
+                    entry.Entity.CreatedOn = auditDate;
+                    entry.Entity.CreatedBy = auditUser;
+                    entry.Entity.UpdatedOn = auditDate;
+                    entry.Entity.UpdatedBy = auditUser;
+                }
+                else if (entry.State == EntityState.Modified)
+                {
+                    entry.Entity.UpdatedOn = auditDate;
+                    entry.Entity.UpdatedBy = auditUser;
+                }
+            }
+            return base.SaveChanges();
         }
 
         public System.Data.Entity.DbSet<FinalProject.Models.DataModel.ApplicantImage> ApplicantImages { get; set; }
