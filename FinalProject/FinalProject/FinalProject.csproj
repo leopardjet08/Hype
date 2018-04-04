@@ -209,6 +209,7 @@
     <Compile Include="Controllers\ApplicantController.cs" />
     <Compile Include="Controllers\ApplicantsController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
+    <Compile Include="Controllers\AapplyController.cs" />
     <Compile Include="Controllers\ApplyController.cs" />
     <Compile Include="Controllers\ArchiveController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -388,12 +389,15 @@
     <Content Include="Views\Apply\Create.cshtml" />
     <Content Include="Views\Apply\Index.cshtml" />
     <Content Include="Views\Posting\IndexExpired.cshtml" />
-    <Content Include="Views\Apply\createe.cshtml" />
     <Content Include="Views\Applicants\Create.cshtml" />
     <Content Include="Views\Applicants\Delete.cshtml" />
     <Content Include="Views\Applicants\Details.cshtml" />
     <Content Include="Views\Applicants\Edit.cshtml" />
     <Content Include="Views\Applicants\Index.cshtml" />
+    <Content Include="Views\Apply\Delete.cshtml" />
+    <Content Include="Views\Apply\Details.cshtml" />
+    <Content Include="Views\Apply\Edit.cshtml" />
+    <Content Include="Views\Posting\AppliedView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

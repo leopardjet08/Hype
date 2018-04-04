@@ -1,0 +1,100 @@
+﻿@model FinalProject.Models.Posting
+
+<div>
+    <h4>Posting</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Job.JobCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Job.JobCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PostingStatus.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostingStatus.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.School.SchoolName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.School.SchoolName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOpen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberOpen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClosingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClosingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobEndDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobEndDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PostingDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostingDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fte)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fte)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SkillQualification)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SkillQualification)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

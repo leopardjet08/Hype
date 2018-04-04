@@ -532,7 +532,7 @@ namespace FinalProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ArchiveConfirmed(int? id)
         {
- 
+
 
             if (id == null)
             {
@@ -554,7 +554,7 @@ namespace FinalProject.Controllers
                 {
                     ModelState.AddModelError("", "Unable to save changes after multiple attempts. Try again, and if the problem persists, see your system administrator.");
                 }
-               
+
                 catch (DataException)
                 {
                     ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
@@ -890,5 +890,24 @@ namespace FinalProject.Controllers
             base.Dispose(disposing);
         }
 
+        //details controller
+        public ActionResult AppliedView(int? id, string message)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            //get all posting data
+            Posting posting = db.Postings
+                .Where(p => p.ID == id).SingleOrDefault();
+            if (posting == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.Message = message;
+            ViewBag.Closed = posting.ClosingDate < DateTime.Today;
+            return View(posting);
+
+        }
     }
 }
