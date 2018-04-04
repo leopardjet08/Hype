@@ -38,12 +38,23 @@ namespace FinalProject.Controllers
         }
 
         // GET: Apply/Create
-        public ActionResult Create()
+        public ActionResult Create(int?id)
         {
+            Posting posting = db.Postings
+               .Where(p => p.ID == id)
+               .SingleOrDefault();
+
+            if (posting == null)
+            {
+                ModelState.AddModelError("", "Something got wrong");
+                return View("Index");
+            }
+
             ViewBag.ApplicantID = new SelectList(db.Applicants, "ID", "FName");
             ViewBag.ApplicationStatusID = new SelectList(db.ApplicationStatus, "ID", "Status");
             ViewBag.PostingID = new SelectList(db.Postings, "ID", "PostingDescription");
-            return View();
+
+            return View("Create", posting);
         }
 
         // POST: Apply/Create
