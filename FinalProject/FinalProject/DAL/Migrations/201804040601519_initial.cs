@@ -64,8 +64,8 @@ namespace FinalProject.DAL.Migrations
                 .ForeignKey("dbo.Posting", t => t.PostingID)
                 .ForeignKey("dbo.School", t => t.School_ID)
                 .ForeignKey("dbo.Archiveposting", t => t.Archiveposting_ID)
-                .Index(t => t.PostingID, unique: true, name: "IX_Unique_Posting")
-                .Index(t => t.ApplicantID, unique: true, name: "IX_Unique_Application")
+                .Index(t => t.PostingID)
+                .Index(t => t.ApplicantID)
                 .Index(t => t.ApplicationStatusID)
                 .Index(t => t.School_ID)
                 .Index(t => t.Archiveposting_ID);
@@ -198,7 +198,6 @@ namespace FinalProject.DAL.Migrations
                         SchoolFamilyID = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
-                //.ForeignKey("dbo.City", t => t.CityID)
                 .ForeignKey("dbo.SchoolFamily", t => t.SchoolFamilyID)
                 .ForeignKey("dbo.SchoolLevel", t => t.SchoolLevelID)
                 .Index(t => t.SchoolLevelID)
@@ -518,8 +517,8 @@ namespace FinalProject.DAL.Migrations
             DropIndex("dbo.Application", new[] { "Archiveposting_ID" });
             DropIndex("dbo.Application", new[] { "School_ID" });
             DropIndex("dbo.Application", new[] { "ApplicationStatusID" });
-            DropIndex("dbo.Application", "IX_Unique_Application");
-            DropIndex("dbo.Application", "IX_Unique_Posting");
+            DropIndex("dbo.Application", new[] { "ApplicantID" });
+            DropIndex("dbo.Application", new[] { "PostingID" });
             DropIndex("dbo.Applicant", new[] { "CityID" });
             DropIndex("dbo.Applicant", new[] { "ProvinceID" });
             DropIndex("dbo.Applicant", "IX_Unique_Applicant_email");

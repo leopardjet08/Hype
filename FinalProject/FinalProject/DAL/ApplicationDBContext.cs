@@ -32,5 +32,6 @@ namespace FinalProject.DAL
         public System.Data.Entity.DbSet<FinalProject.Models.Province> Provinces { get; set; }
 
         public System.Data.Entity.DbSet<FinalProject.Models.Job> Jobs { get; set; }
+        
     }
 }

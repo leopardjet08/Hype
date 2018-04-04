@@ -6,8 +6,11 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using FinalProject.DAL;
 using FinalProject.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace FinalProject.Controllers
 {
@@ -40,21 +43,40 @@ namespace FinalProject.Controllers
         // GET: Apply/Create
         public ActionResult Create(int?id)
         {
-            Posting posting = db.Postings
-               .Where(p => p.ID == id)
+            ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>()
+                .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+
+            Application application = db.Applications
+               .Where(p => p.PostingID == id)
                .SingleOrDefault();
 
-            if (posting == null)
+            //if (User.Identity.IsAuthenticated)
+            //{
+            //     Membership.GetUser().Email;
+            //}
+            ViewBag.name = User.Identity.Name;
+
+            Applicant q = db.Applicants
+               .Where(p => p.EMail == User.Identity.Name)
+               .SingleOrDefault();
+
+           
+
+            if (application == null)
             {
                 ModelState.AddModelError("", "Something got wrong");
-                return View("Index");
+                return View();
+            }
+            if (q == null)
+            {
+                ModelState.AddModelError("", "Empty applicant");
             }
 
             ViewBag.ApplicantID = new SelectList(db.Applicants, "ID", "FName");
             ViewBag.ApplicationStatusID = new SelectList(db.ApplicationStatus, "ID", "Status");
-            ViewBag.PostingID = new SelectList(db.Postings, "ID", "PostingDescription");
+            ViewBag.PostingID = new SelectList(db.Postings, "ID", "JobTitle", application?.ID);
 
-            return View("Create", posting);
+            return View(application);
         }
 
         // POST: Apply/Create
@@ -64,6 +86,10 @@ namespace FinalProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,PostingID,ApplicantID,SubmissionDate,ApplicationStatusID,Comment")] Application application)
         {
+
+
+
+
             if (ModelState.IsValid)
             {
                 db.Applications.Add(application);

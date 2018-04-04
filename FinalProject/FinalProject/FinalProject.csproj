@@ -223,14 +223,14 @@
     <Compile Include="Controllers\SkillsController.cs" />
     <Compile Include="DAL\ApplicationDBContext.cs" />
     <Compile Include="DAL\JobPostingCFEntities.cs" />
-    <Compile Include="DAL\Migrations\201804031741102_initial.cs" />
-    <Compile Include="DAL\Migrations\201804031741102_initial.Designer.cs">
-      <DependentUpon>201804031741102_initial.cs</DependentUpon>
+    <Compile Include="DAL\Migrations\201804040601519_initial.cs" />
+    <Compile Include="DAL\Migrations\201804040601519_initial.Designer.cs">
+      <DependentUpon>201804040601519_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\Migrations\Configuration.cs" />
-    <Compile Include="DAL\SecurityMigration\201804031744235_security.cs" />
-    <Compile Include="DAL\SecurityMigration\201804031744235_security.Designer.cs">
-      <DependentUpon>201804031744235_security.cs</DependentUpon>
+    <Compile Include="DAL\SecurityMigration\201804040602212_security.cs" />
+    <Compile Include="DAL\SecurityMigration\201804040602212_security.Designer.cs">
+      <DependentUpon>201804040602212_security.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\SecurityMigration\Configuration.cs" />
     <Compile Include="Global.asax.cs">
@@ -421,11 +421,11 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DAL\Migrations\201804031741102_initial.resx">
-      <DependentUpon>201804031741102_initial.cs</DependentUpon>
+    <EmbeddedResource Include="DAL\Migrations\201804040601519_initial.resx">
+      <DependentUpon>201804040601519_initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DAL\SecurityMigration\201804031744235_security.resx">
-      <DependentUpon>201804031744235_security.cs</DependentUpon>
+    <EmbeddedResource Include="DAL\SecurityMigration\201804040602212_security.resx">
+      <DependentUpon>201804040602212_security.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
