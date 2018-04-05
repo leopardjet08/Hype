@@ -161,6 +161,16 @@ namespace FinalProject.DAL.Migrations
             postingStatus.ForEach(a => context.PostingStatus.AddOrUpdate(n => n.Status, a));
             SaveChanges(context);
 
+            var postingType = new List<PostingType>
+            {
+                new PostingType { Type = "Part-Time" },
+                new PostingType { Type = "Full-Time" }
+            };
+            postingType.ForEach(a => context.PostingTypes.AddOrUpdate(n => n.Type, a));
+            SaveChanges(context);
+
+         
+
             var schoolLevels = new List<SchoolLevel>
             {
                 new SchoolLevel { LevelName="Elementary Schools"},
@@ -289,6 +299,13 @@ namespace FinalProject.DAL.Migrations
                     PostingID =(context.Postings.Where(p=>p.NumberOpen==1).SingleOrDefault().ID), ApplicationStatusID=3 }
             };
             applications.ForEach(a => context.Applications.AddOrUpdate(n => n.ApplicantID, a));
+            SaveChanges(context);
+
+            var applicationComment = new List<ApplicationComment>
+            {
+                new ApplicationComment { Comments = "Part-Time",ApplicationID=2 },
+            };
+            applicationComment.ForEach(a => context.ApplicationComments.AddOrUpdate(n => n.Comments, a));
             SaveChanges(context);
 
             var bestCandiate = new List<BestCandidate>

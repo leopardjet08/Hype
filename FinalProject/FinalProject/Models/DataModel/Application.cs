@@ -28,8 +28,6 @@ namespace FinalProject.Models
         // Value 1 default ID for Pending status
         public int ApplicationStatusID { get; set; } = 1;
 
-        public string Comment { get; set; }
-
         public virtual Applicant Applicant { get; set; }
         public virtual Posting Posting { get; set; }
         public virtual ApplicationStatus ApplicationStatus { get; set; }

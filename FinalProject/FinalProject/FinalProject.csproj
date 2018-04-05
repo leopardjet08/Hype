@@ -223,15 +223,7 @@
     <Compile Include="Controllers\SkillsController.cs" />
     <Compile Include="DAL\ApplicationDBContext.cs" />
     <Compile Include="DAL\JobPostingCFEntities.cs" />
-    <Compile Include="DAL\Migrations\201804040601519_initial.cs" />
-    <Compile Include="DAL\Migrations\201804040601519_initial.Designer.cs">
-      <DependentUpon>201804040601519_initial.cs</DependentUpon>
-    </Compile>
     <Compile Include="DAL\Migrations\Configuration.cs" />
-    <Compile Include="DAL\SecurityMigration\201804040602212_security.cs" />
-    <Compile Include="DAL\SecurityMigration\201804040602212_security.Designer.cs">
-      <DependentUpon>201804040602212_security.cs</DependentUpon>
-    </Compile>
     <Compile Include="DAL\SecurityMigration\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -241,6 +233,7 @@
     <Compile Include="Models\DataModel\Applicant.cs" />
     <Compile Include="Models\DataModel\ApplicantImage.cs" />
     <Compile Include="Models\DataModel\Application.cs" />
+    <Compile Include="Models\DataModel\ApplicationComment.cs" />
     <Compile Include="Models\DataModel\ApplicationStatus.cs" />
     <Compile Include="Models\DataModel\Appliedposting.cs" />
     <Compile Include="Models\DataModel\ArchiveApplication.cs" />
@@ -252,6 +245,7 @@
     <Compile Include="Models\DataModel\FileContent.cs" />
     <Compile Include="Models\DataModel\IAuditable.cs" />
     <Compile Include="Models\DataModel\PostingStatus.cs" />
+    <Compile Include="Models\DataModel\PostingType.cs" />
     <Compile Include="Models\DataModel\Requirement.cs" />
     <Compile Include="Models\DataModel\Skill.cs" />
     <Compile Include="Models\DataModel\SavedPosting.cs" />
@@ -419,14 +413,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="DAL\Migrations\201804040601519_initial.resx">
-      <DependentUpon>201804040601519_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DAL\SecurityMigration\201804040602212_security.resx">
-      <DependentUpon>201804040602212_security.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

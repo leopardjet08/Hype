@@ -287,7 +287,8 @@ namespace FinalProject.Controllers
                 Requirements = job.Requirements,
                 Qualifications = job.Qualifications,
                 SkillQualification = job.SkillQualification,
-                PostingStatusID = 1
+                PostingStatusID = 1,
+                PostingTypesID=1
             };
 
             PopulateAssignedSkillData(posting);
@@ -714,6 +715,7 @@ namespace FinalProject.Controllers
             //ViewBag.Qual = new SelectList("", "");
             //ViewBag.Skill = new SelectList("", "");
             ViewBag.SchoolID = new SelectList(db.Schools.OrderBy(p => p.SchoolName), "ID", "SchoolName", posting?.SchoolID);
+            ViewBag.TypeID = new SelectList(db.PostingTypes.OrderBy(p => p.Type), "ID", "Type", posting?.PostingTypesID);
         }
 
         [HttpGet]

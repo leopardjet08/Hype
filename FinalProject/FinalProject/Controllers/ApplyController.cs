@@ -93,8 +93,7 @@ namespace FinalProject.Controllers
                 PostingID = posting.ID,
                 Posting =posting,
                 Applicant=q,
-                ApplicantID = q.ID,
-               Comment = ""
+                ApplicantID = q.ID
             };
 
             return View("Create",application);

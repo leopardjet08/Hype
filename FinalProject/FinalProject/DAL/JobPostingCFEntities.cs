@@ -33,6 +33,8 @@ namespace FinalProject.DAL
         public DbSet<Archiveposting> Archivepostings { get; set; }
         public DbSet<Appliedposting> Appliedpostings { get; set; }
         public DbSet<ExpiredPosting> ExpiredPostings { get; set; }
+        public DbSet<ApplicationComment> ApplicationComments { get; set; }
+        public DbSet<PostingType> PostingTypes { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
