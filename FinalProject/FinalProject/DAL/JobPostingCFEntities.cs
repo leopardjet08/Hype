@@ -24,7 +24,7 @@ namespace FinalProject.DAL
         public DbSet<School> Schools { get; set; }
         public DbSet<Applicant> Applicants { get; set; }
         public DbSet<Posting> Postings { get; set; }
-        public DbSet<Application> Applications { get; set; }
+        public DbSet<Application> applications { get; set; }
         public DbSet<BestCandidate> BestCandidates { get; set; }
         public DbSet<SavedPosting> SavedPostings { get; set; }
         public DbSet<aFile> Files { get; set; }

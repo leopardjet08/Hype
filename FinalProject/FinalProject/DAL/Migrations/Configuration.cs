@@ -318,7 +318,13 @@ namespace FinalProject.DAL.Migrations
 
                     NumberOpen =3,ClosingDate=DateTime.Parse("2019-09-09"),StartDate=DateTime.Parse("2020-08-06"),JobEndDate=DateTime.Parse("2023-01-02"),
                 PostingDescription="Keep buildings in clean and orderly condition. Perform heavy cleaning duties, such as cleaning floors, shampooing rugs, washing walls and glass, and removing rubbish. Duties may include tending furnace and boiler, performing routine maintenance activities, notifying management of need for repairs, and cleaning snow or debris from sidewalk.", SchoolID=9,
-                JobID=3, Fte=1.3, JobCode="JAT",SkillQualification=true,PostingStatusID=1}
+                JobID=3, Fte=1.3, JobCode="JAT",SkillQualification=true,PostingStatusID=1},
+
+                new Posting {
+
+                    NumberOpen =5,ClosingDate=DateTime.Parse("2018-03-09"),StartDate=DateTime.Parse("2018-08-06"),JobEndDate=DateTime.Parse("2019-01-02"),
+                PostingDescription="Keep buildings in clean and orderly condition. Perform heavy cleaning duties, such as cleaning floors, shampooing rugs, washing walls and glass, and removing rubbish. Duties may include tending furnace and boiler, performing routine maintenance activities, notifying management of need for repairs, and cleaning snow or debris from sidewalk.", SchoolID=19,
+                JobID=3, Fte=1.2, JobCode="JAT",SkillQualification=true,PostingStatusID=2}
 
             };
             postings.ForEach(a => context.Postings.AddOrUpdate(n => n.ClosingDate, a));
@@ -335,7 +341,7 @@ namespace FinalProject.DAL.Migrations
                 new Application {  ApplicantID=(context.Applicants.Where(p=>p.EMail=="ccarlisle@outlook.com").SingleOrDefault().ID),
                     PostingID =(context.Postings.Where(p=>p.NumberOpen==1).SingleOrDefault().ID), ApplicationStatusID=3 }
             };
-            applications.ForEach(a => context.Applications.AddOrUpdate(n => n.ApplicantID, a));
+            applications.ForEach(a => context.applications.AddOrUpdate(n => n.ApplicantID, a));
             SaveChanges(context);
 
             var applicationComment = new List<ApplicationComment>
@@ -356,9 +362,61 @@ namespace FinalProject.DAL.Migrations
             var savePosting = new List<SavedPosting>()
             {
                 new SavedPosting{ ApplicantID=1, PostingID=1},
-                new SavedPosting{ ApplicantID=2, PostingID=2}
+                new SavedPosting{ ApplicantID=2, PostingID=1},
+                new SavedPosting{ ApplicantID=3, PostingID=1},
+                new SavedPosting{ ApplicantID=4, PostingID=1},
+                new SavedPosting{ ApplicantID=5, PostingID=1},
+                new SavedPosting{ ApplicantID=6, PostingID=1},
+                new SavedPosting{ ApplicantID=1, PostingID=2},
+                new SavedPosting{ ApplicantID=2, PostingID=2},
+                new SavedPosting{ ApplicantID=3, PostingID=2},
+                new SavedPosting{ ApplicantID=4, PostingID=2},
+                new SavedPosting{ ApplicantID=5, PostingID=2},
+                new SavedPosting{ ApplicantID=6, PostingID=2},
+                new SavedPosting{ ApplicantID=1, PostingID=3},
+                new SavedPosting{ ApplicantID=2, PostingID=3},
+                new SavedPosting{ ApplicantID=3, PostingID=3},
+                new SavedPosting{ ApplicantID=4, PostingID=3},
+                new SavedPosting{ ApplicantID=5, PostingID=3},
+                new SavedPosting{ ApplicantID=6, PostingID=3}
             };
             savePosting.ForEach(a => context.SavedPostings.AddOrUpdate(n => n.ApplicantID, a));
+            SaveChanges(context);
+
+            var appliedPosting = new List<Appliedposting>()
+            {
+                new Appliedposting{ ApplicantID=1, PostingID=1},
+                new Appliedposting{ ApplicantID=2, PostingID=1},
+                new Appliedposting{ ApplicantID=3, PostingID=1},
+                new Appliedposting{ ApplicantID=4, PostingID=1},
+                new Appliedposting{ ApplicantID=5, PostingID=1},
+                new Appliedposting{ ApplicantID=6, PostingID=1},
+                new Appliedposting{ ApplicantID=1, PostingID=2},
+                new Appliedposting{ ApplicantID=2, PostingID=2},
+                new Appliedposting{ ApplicantID=3, PostingID=2},
+                new Appliedposting{ ApplicantID=4, PostingID=2},
+                new Appliedposting{ ApplicantID=5, PostingID=2},
+                new Appliedposting{ ApplicantID=6, PostingID=2},
+                new Appliedposting{ ApplicantID=1, PostingID=3},
+                new Appliedposting{ ApplicantID=2, PostingID=3},
+                new Appliedposting{ ApplicantID=3, PostingID=3},
+                new Appliedposting{ ApplicantID=4, PostingID=3},
+                new Appliedposting{ ApplicantID=5, PostingID=3},
+                new Appliedposting{ ApplicantID=6, PostingID=3}
+            };
+            appliedPosting.ForEach(a => context.Appliedpostings.AddOrUpdate(n => n.ApplicantID, a));
+            SaveChanges(context);
+
+            var expiredPosting = new List<ExpiredPosting>()
+            {
+                new ExpiredPosting{ ApplicantID=1, PostingID=4,ExpiredOn=DateTime.Parse("2018-03-09")},
+                new ExpiredPosting{ ApplicantID=2, PostingID=4,ExpiredOn=DateTime.Parse("2018-03-09")},
+                new ExpiredPosting{ ApplicantID=3, PostingID=4,ExpiredOn=DateTime.Parse("2018-03-09")},
+                new ExpiredPosting{ ApplicantID=4, PostingID=4,ExpiredOn=DateTime.Parse("2018-03-09")},
+                new ExpiredPosting{ ApplicantID=5, PostingID=4,ExpiredOn=DateTime.Parse("2018-03-09")},
+                new ExpiredPosting{ ApplicantID=6, PostingID=4,ExpiredOn=DateTime.Parse("2018-03-09")}
+            };
+            expiredPosting.ForEach(a => context.ExpiredPostings.AddOrUpdate(n => n.ApplicantID, a));
             SaveChanges(context);
 
             var archiveposting = new List<Archiveposting>

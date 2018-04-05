@@ -209,7 +209,6 @@
     <Compile Include="Controllers\ApplicantController.cs" />
     <Compile Include="Controllers\ApplicantsController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
-    <Compile Include="Controllers\AapplyController.cs" />
     <Compile Include="Controllers\ApplyController.cs" />
     <Compile Include="Controllers\ArchiveController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -400,6 +399,7 @@
     <Content Include="Views\Apply\Details.cshtml" />
     <Content Include="Views\Apply\Edit.cshtml" />
     <Content Include="Views\Apply\AppliedView.cshtml" />
+    <Content Include="Views\Applicant\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

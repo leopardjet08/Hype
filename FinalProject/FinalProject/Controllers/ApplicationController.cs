@@ -22,7 +22,7 @@ namespace FinalProject.Controllers
             PopulateDropDownLists();
             ViewBag.Filtering = "";
 
-            var application = from s in db.Applications select s;
+            var application = from s in db.applications select s;
 
 
 
@@ -130,7 +130,7 @@ namespace FinalProject.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             //get all posting data
-            Application application = db.Applications
+            Application application = db.applications
                 .Where(p => p.ID == id).SingleOrDefault();
             if (application == null)
             {
@@ -146,7 +146,7 @@ namespace FinalProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Application application = db.Applications.Find(id);
+            Application application = db.applications.Find(id);
             if (application == null)
             {
                 return HttpNotFound();
@@ -160,10 +160,10 @@ namespace FinalProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Application application = db.Applications.Find(id);
+            Application application = db.applications.Find(id);
             try
             {
-                db.Applications.Remove(application);
+                db.applications.Remove(application);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

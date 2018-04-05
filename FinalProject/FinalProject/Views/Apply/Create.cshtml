@@ -23,6 +23,8 @@
         </div>
     </div>
 
+
+
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -97,6 +99,7 @@
             </div>
         </div>
     </div>
+    
     }
 
     <div>
@@ -104,3 +107,5 @@
     </div>
 
 </div>
+
+ @Html.Raw(TempData["msg"])

@@ -83,10 +83,7 @@ namespace FinalProject.Models
         // Validation for date
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (ClosingDate < DateTime.Today)
-            {
-                yield return new ValidationResult("The closing date cannot be in the past.", new[] { "ClosingDate" });
-            }
+            
             if (StartDate.GetValueOrDefault() < ClosingDate)
             {
                 yield return new ValidationResult("The start date for the posting cannot be before the closing date.", new[] { "StartDate" });

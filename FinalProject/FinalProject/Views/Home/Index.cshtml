@@ -114,6 +114,7 @@
 
             </div>
         </div>
+        
     }
     <br />
     <div style="text-align:center; font-weight:bold; font-size:16px; color:#00a203"> Total Jobs Posted: @ViewBag.total </div>
@@ -232,3 +233,5 @@
             background-color: lightgrey;
         }
     </style>
+
+@Html.Raw(TempData["msg"])
