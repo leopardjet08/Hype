@@ -104,7 +104,7 @@ namespace FinalProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,PostingID,ApplicantID,SubmissionDate,ApplicationStatusID,Comment")] Application application)
+        public ActionResult Create([Bind(Include = "ID,PostingID,ApplicantID,ApplicationStatusID")] Application application)
         {
             Applicant q = db.Applicants
                .Where(p => p.EMail == User.Identity.Name)
@@ -116,7 +116,7 @@ namespace FinalProject.Controllers
             {
                 db.Applications.Add(application);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Home");
             }
 
             ViewBag.ApplicantID = new SelectList(db.Applicants, "ID", "FName", q.ID);
