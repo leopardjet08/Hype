@@ -21,7 +21,7 @@ namespace FinalProject.Controllers
         // GET: Apply
         public ActionResult Index()
         {
-            var applications = db.Applications.Include(a => a.Applicant).Include(a => a.ApplicationStatus).Include(a => a.Posting);
+            var applications = db.applications.Include(a => a.Applicant).Include(a => a.ApplicationStatus).Include(a => a.Posting);
             return View(applications.ToList());
         }
 
@@ -32,7 +32,7 @@ namespace FinalProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Application application = db.Applications.Find(id);
+            Application application = db.applications.Find(id);
             if (application == null)
             {
                 return HttpNotFound();
@@ -88,6 +88,13 @@ namespace FinalProject.Controllers
                 return View("AppliedView");
             }
 
+            if (q == null)
+            {
+                ModelState.AddModelError("", "You need to login First");
+                return RedirectToAction("Login", "Account");
+            }
+
+
             var application = new Application()
             {
                 PostingID = posting.ID,
@@ -114,14 +121,18 @@ namespace FinalProject.Controllers
 
             if (ModelState.IsValid)
             {
-                db.Applications.Add(application);
+                db.applications.Add(application);
                 db.SaveChanges();
+
+                TempData["msg"] = "<script>alert('Submit Application Successfully');</script>";
                 return RedirectToAction("Index","Home");
             }
 
             ViewBag.ApplicantID = new SelectList(db.Applicants, "ID", "FName", q.ID);
             ViewBag.ApplicationStatusID = new SelectList(db.ApplicationStatus, "ID", "Status", application.ApplicationStatusID);
             ViewBag.PostingID = new SelectList(db.Postings, "ID", "PostingDescription", application.PostingID);
+
+            TempData["msg"] = "<script>alert('Submit Application Failed');</script>";
             return View(application);
         }
 
@@ -132,7 +143,7 @@ namespace FinalProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Application application = db.Applications.Find(id);
+            Application application = db.applications.Find(id);
             if (application == null)
             {
                 return HttpNotFound();
@@ -169,7 +180,7 @@ namespace FinalProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Application application = db.Applications.Find(id);
+            Application application = db.applications.Find(id);
             if (application == null)
             {
                 return HttpNotFound();
@@ -182,8 +193,8 @@ namespace FinalProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Application application = db.Applications.Find(id);
-            db.Applications.Remove(application);
+            Application application = db.applications.Find(id);
+            db.applications.Remove(application);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

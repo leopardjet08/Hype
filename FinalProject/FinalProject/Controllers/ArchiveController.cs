@@ -20,7 +20,7 @@ namespace FinalProject.Controllers
             PopulateDropDownLists();
             ViewBag.Filtering = "";
 
-            var application = from s in db.Applications select s;
+            var application = from s in db.applications select s;
 
 
 

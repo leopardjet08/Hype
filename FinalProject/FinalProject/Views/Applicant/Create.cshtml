@@ -1,12 +1,12 @@
 ﻿@model FinalProject.Models.Applicant
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Create";
 }
 
-<h2>Edit</h2>
+<h2>Create</h2>
 
-@using (Html.BeginForm("Edit", "Applicants", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
@@ -14,20 +14,7 @@
         <h4>Applicant</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ID)
 
-
-        <div>
-            @{
-                if (Model.ApplicantImage != null)
-                {
-                    string imageBase64 = Convert.ToBase64String(Model.ApplicantImage.ImageContent);
-                    string imageSrc = string.Format("data:" + Model.ApplicantImage.ImageMimeType + ";base64,{0}", imageBase64);
-                    <img src="@imageSrc" style="max-height: 500px; max-width: 600px" class="img-responsive img-rounded" /><br />
-                    <input type="checkbox" id="chkRemoveImage" name="chkRemoveImage" /> <strong>Check to remove Picture</strong>
-                }
-            }
-        </div>
         <div class="form-group">
             <label class="control-label col-md-2">Profile Picture:</label>
             <div class="col-md-10">
@@ -98,20 +85,9 @@
                 @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2"> Current Documents:</label>
-            <div class="col-md-10">
-                @foreach (var doc in Model.Files)
-                {
-                    @doc.fileName <br />
-                }
-            </div>
-        </div>
-
         <div class="form-group">
             <label class="control-label col-md-2">
-                Additional Uploads:
+                Upload Resumes/Letters:
             </label>
             <div class="col-md-10">
                 <input type="file" class="" name="theFiles" multiple="multiple" /><br />
@@ -120,7 +96,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
