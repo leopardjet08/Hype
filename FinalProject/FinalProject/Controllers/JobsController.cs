@@ -64,15 +64,16 @@ namespace FinalProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,JobTitle,JobCode,JobSummary,SkillQualification")] Job job, string[] selectedRequirements, string[] selectedSkills, string[] selectedQualifications)
+        public ActionResult Create([Bind(Include = "ID,JobTitle,JobCode,JobSummary,SkillQualification")] Job job, string[] selectedRequirments, string[] selectedSkills, string[] selectedQualifications)
         {
             try
             {
                 //Add the selected requirement
-                if (selectedRequirements != null)
+                if (selectedRequirments != null)
                 {
                     job.Requirements = new List<Requirement>();
-                    foreach (var requirement in selectedRequirements)
+                    foreach (var requirement in selectedRequirments)
+                                                
                     {
                         var requirementToAdd = db.Requirements.Find(int.Parse(requirement));
                         job.Requirements.Add(requirementToAdd);
