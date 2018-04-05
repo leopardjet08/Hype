@@ -890,24 +890,6 @@ namespace FinalProject.Controllers
             base.Dispose(disposing);
         }
 
-        //details controller
-        public ActionResult AppliedView(int? id, string message)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            //get all posting data
-            Posting posting = db.Postings
-                .Where(p => p.ID == id).SingleOrDefault();
-            if (posting == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.Message = message;
-            ViewBag.Closed = posting.ClosingDate < DateTime.Today;
-            return View(posting);
-
-        }
+       
     }
 }

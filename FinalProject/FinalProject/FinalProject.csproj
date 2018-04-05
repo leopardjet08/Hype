@@ -397,7 +397,7 @@
     <Content Include="Views\Apply\Delete.cshtml" />
     <Content Include="Views\Apply\Details.cshtml" />
     <Content Include="Views\Apply\Edit.cshtml" />
-    <Content Include="Views\Posting\AppliedView.cshtml" />
+    <Content Include="Views\Apply\AppliedView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

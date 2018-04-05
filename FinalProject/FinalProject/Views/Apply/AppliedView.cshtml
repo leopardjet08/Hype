@@ -32,7 +32,9 @@
                 </div>
             </div>
         </div>*@
-
+        @using (Html.BeginForm("Create", "Apply", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
             <div style="margin:0 auto" ;>
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <h3 style="text-align:center; padding-bottom:30px">
@@ -143,7 +145,9 @@
                     <div style="margin:0 auto; text-align:center">
                         <div style="margin-top:30px; margin-bottom:50px;">
                             @*<button ID="btnConfirmApply" data-target="#applyModal" data-toggle="modal" style="background-color:#00a203; margin:0 auto; border:none" class="btn btn-primary btn-large" type="submit">Submit Application</button>*@
-                            @Html.ActionLink("Apply", "Create", "Apply", new { id = Model.ID }, new { @class = "btn btn-primary btn-sm", @style = "border:none; font-weight:bold; background-color:#00a203" })
+                            @*@Html.ActionLink("Apply", "Create", "Apply", new { id = Model.ID }, new { @class = "btn btn-primary btn-sm", @style = "border:none; font-weight:bold; background-color:#00a203" })*@
+                            @*<input type="submit" value="Next Step" class="btn btn-default" />*@
+                            <a href="~/Apply/Create?PostingID=@Model.ID" class="btn btn-default">Select</a>
                             <br />
                             <br />
                             <a href="javascript:void(0);" onclick="history.go(-1);">Back</a>
@@ -153,5 +157,6 @@
                 </div>
 
             </div>
+            }
     </div>
 </div>

@@ -40,14 +40,34 @@ namespace FinalProject.Controllers
             return View(application);
         }
 
+        //details controller
+        public ActionResult AppliedView(int? id, string message)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            //get all posting data
+            Posting posting = db.Postings
+                .Where(p => p.ID == id).SingleOrDefault();
+            if (posting == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.Message = message;
+            ViewBag.Closed = posting.ClosingDate < DateTime.Today;
+            return View(posting);
+
+        }
         // GET: Apply/Create
-        public ActionResult Create(int?id)
+        public ActionResult Create(int? PostingID)
         {
             ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>()
                 .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
 
-            Application application = db.Applications
-               .Where(p => p.PostingID == id)
+            Posting posting = db.Postings
+               .Where(p => p.ID == PostingID)
                .SingleOrDefault();
 
             //if (User.Identity.IsAuthenticated)
@@ -60,23 +80,24 @@ namespace FinalProject.Controllers
                .Where(p => p.EMail == User.Identity.Name)
                .SingleOrDefault();
 
-           
 
-            if (application == null)
+
+            if (posting == null)
             {
                 ModelState.AddModelError("", "Something got wrong");
-                return View();
+                return View("AppliedView");
             }
-            if (q == null)
+
+            var application = new Application()
             {
-                ModelState.AddModelError("", "Empty applicant");
-            }
+                PostingID = posting.ID,
+                Posting =posting,
+                Applicant=q,
+                ApplicantID = q.ID,
+               Comment = ""
+            };
 
-            ViewBag.ApplicantID = new SelectList(db.Applicants, "ID", "FName");
-            ViewBag.ApplicationStatusID = new SelectList(db.ApplicationStatus, "ID", "Status");
-            ViewBag.PostingID = new SelectList(db.Postings, "ID", "JobTitle", application?.ID);
-
-            return View(application);
+            return View("Create",application);
         }
 
         // POST: Apply/Create
@@ -86,7 +107,9 @@ namespace FinalProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,PostingID,ApplicantID,SubmissionDate,ApplicationStatusID,Comment")] Application application)
         {
-
+            Applicant q = db.Applicants
+               .Where(p => p.EMail == User.Identity.Name)
+               .SingleOrDefault();
 
 
 
@@ -97,7 +120,7 @@ namespace FinalProject.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ApplicantID = new SelectList(db.Applicants, "ID", "FName", application.ApplicantID);
+            ViewBag.ApplicantID = new SelectList(db.Applicants, "ID", "FName", q.ID);
             ViewBag.ApplicationStatusID = new SelectList(db.ApplicationStatus, "ID", "Status", application.ApplicationStatusID);
             ViewBag.PostingID = new SelectList(db.Postings, "ID", "PostingDescription", application.PostingID);
             return View(application);
