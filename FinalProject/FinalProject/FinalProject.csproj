@@ -209,6 +209,7 @@
     <Compile Include="Controllers\ApplicantController.cs" />
     <Compile Include="Controllers\ApplicantsController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
+    <Compile Include="Controllers\AapplyController.cs" />
     <Compile Include="Controllers\ApplyController.cs" />
     <Compile Include="Controllers\ArchiveController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -222,14 +223,14 @@
     <Compile Include="Controllers\SkillsController.cs" />
     <Compile Include="DAL\ApplicationDBContext.cs" />
     <Compile Include="DAL\JobPostingCFEntities.cs" />
-    <Compile Include="DAL\Migrations\201804031741102_initial.cs" />
-    <Compile Include="DAL\Migrations\201804031741102_initial.Designer.cs">
-      <DependentUpon>201804031741102_initial.cs</DependentUpon>
+    <Compile Include="DAL\Migrations\201804050839114_initial.cs" />
+    <Compile Include="DAL\Migrations\201804050839114_initial.Designer.cs">
+      <DependentUpon>201804050839114_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\Migrations\Configuration.cs" />
-    <Compile Include="DAL\SecurityMigration\201804031744235_security.cs" />
-    <Compile Include="DAL\SecurityMigration\201804031744235_security.Designer.cs">
-      <DependentUpon>201804031744235_security.cs</DependentUpon>
+    <Compile Include="DAL\SecurityMigration\201804050835166_security.cs" />
+    <Compile Include="DAL\SecurityMigration\201804050835166_security.Designer.cs">
+      <DependentUpon>201804050835166_security.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\SecurityMigration\Configuration.cs" />
     <Compile Include="Global.asax.cs">
@@ -240,6 +241,7 @@
     <Compile Include="Models\DataModel\Applicant.cs" />
     <Compile Include="Models\DataModel\ApplicantImage.cs" />
     <Compile Include="Models\DataModel\Application.cs" />
+    <Compile Include="Models\DataModel\ApplicationComment.cs" />
     <Compile Include="Models\DataModel\ApplicationStatus.cs" />
     <Compile Include="Models\DataModel\Appliedposting.cs" />
     <Compile Include="Models\DataModel\ArchiveApplication.cs" />
@@ -251,6 +253,7 @@
     <Compile Include="Models\DataModel\FileContent.cs" />
     <Compile Include="Models\DataModel\IAuditable.cs" />
     <Compile Include="Models\DataModel\PostingStatus.cs" />
+    <Compile Include="Models\DataModel\PostingType.cs" />
     <Compile Include="Models\DataModel\Requirement.cs" />
     <Compile Include="Models\DataModel\Skill.cs" />
     <Compile Include="Models\DataModel\SavedPosting.cs" />
@@ -388,12 +391,15 @@
     <Content Include="Views\Apply\Create.cshtml" />
     <Content Include="Views\Apply\Index.cshtml" />
     <Content Include="Views\Posting\IndexExpired.cshtml" />
-    <Content Include="Views\Apply\createe.cshtml" />
     <Content Include="Views\Applicants\Create.cshtml" />
     <Content Include="Views\Applicants\Delete.cshtml" />
     <Content Include="Views\Applicants\Details.cshtml" />
     <Content Include="Views\Applicants\Edit.cshtml" />
     <Content Include="Views\Applicants\Index.cshtml" />
+    <Content Include="Views\Apply\Delete.cshtml" />
+    <Content Include="Views\Apply\Details.cshtml" />
+    <Content Include="Views\Apply\Edit.cshtml" />
+    <Content Include="Views\Apply\AppliedView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -417,11 +423,11 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DAL\Migrations\201804031741102_initial.resx">
-      <DependentUpon>201804031741102_initial.cs</DependentUpon>
+    <EmbeddedResource Include="DAL\Migrations\201804050839114_initial.resx">
+      <DependentUpon>201804050839114_initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DAL\SecurityMigration\201804031744235_security.resx">
-      <DependentUpon>201804031744235_security.cs</DependentUpon>
+    <EmbeddedResource Include="DAL\SecurityMigration\201804050835166_security.resx">
+      <DependentUpon>201804050835166_security.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

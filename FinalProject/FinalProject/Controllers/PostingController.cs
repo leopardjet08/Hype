@@ -287,7 +287,8 @@ namespace FinalProject.Controllers
                 Requirements = job.Requirements,
                 Qualifications = job.Qualifications,
                 SkillQualification = job.SkillQualification,
-                PostingStatusID = 1
+                PostingStatusID = 1,
+                PostingTypesID=1
             };
 
             PopulateAssignedSkillData(posting);
@@ -532,7 +533,7 @@ namespace FinalProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ArchiveConfirmed(int? id)
         {
- 
+
 
             if (id == null)
             {
@@ -554,7 +555,7 @@ namespace FinalProject.Controllers
                 {
                     ModelState.AddModelError("", "Unable to save changes after multiple attempts. Try again, and if the problem persists, see your system administrator.");
                 }
-               
+
                 catch (DataException)
                 {
                     ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
@@ -714,6 +715,7 @@ namespace FinalProject.Controllers
             //ViewBag.Qual = new SelectList("", "");
             //ViewBag.Skill = new SelectList("", "");
             ViewBag.SchoolID = new SelectList(db.Schools.OrderBy(p => p.SchoolName), "ID", "SchoolName", posting?.SchoolID);
+            ViewBag.TypeID = new SelectList(db.PostingTypes.OrderBy(p => p.Type), "ID", "Type", posting?.PostingTypesID);
         }
 
         [HttpGet]
@@ -890,5 +892,6 @@ namespace FinalProject.Controllers
             base.Dispose(disposing);
         }
 
+       
     }
 }

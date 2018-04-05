@@ -12,12 +12,9 @@ namespace FinalProject.Models
     {
         public int ID { get; set; }
 
-        [Required(ErrorMessage = "Please specify the job posting applied for.")]
-        [Index("IX_Unique_Posting", Order = 1, IsUnique = true)]
         public int PostingID { get; set; }
 
-        [Required(ErrorMessage = "Please specify the applicant applying for the job posting.")]
-        [Index("IX_Unique_Application", Order = 2, IsUnique = true)]
+
         public int ApplicantID { get; set; }
 
         public Application()
@@ -30,8 +27,6 @@ namespace FinalProject.Models
 
         // Value 1 default ID for Pending status
         public int ApplicationStatusID { get; set; } = 1;
-
-        public string Comment { get; set; }
 
         public virtual Applicant Applicant { get; set; }
         public virtual Posting Posting { get; set; }

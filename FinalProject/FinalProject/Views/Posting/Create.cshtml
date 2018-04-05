@@ -78,16 +78,15 @@
                                </td>
                             </tr>
 
-                            @*<tr>
+                            <tr>
                                 <td style="padding-bottom:15px; color:#02388a; ">
-                                    <h4 style="display:inline-block">@Html.LabelFor(model => model.School.City, "City: ")</h4>
+                                    <h4 style="display:inline-block">@Html.LabelFor(model => model.PostingTypes.Type, "Type: ")</h4>
                                 </td>
                                 <td style="padding-bottom:15px;">
-                                    @Html.ValidationMessageFor(model => model.SchoolID, "", new { @class = "text-danger" })
-                                    <input type="text" class="form-control" id="City" readonly="readonly" />
-
+                                    @Html.ValidationMessageFor(model => model.PostingTypes.Type, "", new { @class = "text-danger" })
+                                    @Html.DropDownList("TypeID", null, "Select a Type", htmlAttributes: new { @class = "form-control" })
                                 </td>
-                            </tr>*@
+                            </tr>
                             <tr>
                                 <td style="padding-bottom:15px; color:#02388a; ">
                                     <h4>@Html.LabelFor(model => model.Fte, "FTE: ")</h4>

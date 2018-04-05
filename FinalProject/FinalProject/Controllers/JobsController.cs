@@ -120,8 +120,6 @@ namespace FinalProject.Controllers
                 ModelState.AddModelError("", "Its a null daw yawa ");
             }
 
-            PopulateDropDownLists(job);
-
             PopulateAssignedRequirmentData(job);
             PopulateAssignedSkillData(job);
             PopulateAssignedQualificationData(job);

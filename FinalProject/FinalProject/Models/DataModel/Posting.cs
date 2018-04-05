@@ -62,12 +62,14 @@ namespace FinalProject.Models
         [Required(ErrorMessage = "Choose Type.")]
         public bool SkillQualification { get; set; }
 
-        public int PostingStatusID { get; set; } = 0;
+        public int PostingStatusID { get; set; } = 1;
+        public int PostingTypesID { get; set; } = 1;
 
         public virtual School School { get; set; }
         public virtual Job Job { get; set; }
 
         public virtual PostingStatus PostingStatus { get; set; }
+        public virtual PostingType PostingTypes { get; set; }
 
 
         public ICollection<Application> Applications { get; set; }

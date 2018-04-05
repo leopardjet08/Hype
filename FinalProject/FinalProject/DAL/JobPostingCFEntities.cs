@@ -33,6 +33,9 @@ namespace FinalProject.DAL
         public DbSet<Archiveposting> Archivepostings { get; set; }
         public DbSet<Appliedposting> Appliedpostings { get; set; }
         public DbSet<ExpiredPosting> ExpiredPostings { get; set; }
+        public DbSet<ApplicationComment> ApplicationComments { get; set; }
+        public DbSet<PostingType> PostingTypes { get; set; }
+        public System.Data.Entity.DbSet<FinalProject.Models.DataModel.ApplicantImage> ApplicantImages { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -120,7 +123,7 @@ namespace FinalProject.DAL
             return base.SaveChanges();
         }
 
-        public System.Data.Entity.DbSet<FinalProject.Models.DataModel.ApplicantImage> ApplicantImages { get; set; }
+       
     }
         
     }
