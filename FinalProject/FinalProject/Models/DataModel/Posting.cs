@@ -63,7 +63,7 @@ namespace FinalProject.Models
         public bool SkillQualification { get; set; }
 
         public int PostingStatusID { get; set; } = 1;
-        public int PostingTypesID { get; set; } 
+        public int PostingTypesID { get; set; } = 1;
 
         public virtual School School { get; set; }
         public virtual Job Job { get; set; }

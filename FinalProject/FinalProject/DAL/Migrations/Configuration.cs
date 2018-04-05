@@ -7,6 +7,8 @@ namespace FinalProject.DAL.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Data.Entity.Validation;
+    using System.Drawing;
+    using System.IO;
     using System.Linq;
     using System.Text;
 
@@ -92,21 +94,30 @@ namespace FinalProject.DAL.Migrations
             // Requirement and Qualification Seed Data is in the Job Seed data itself
             var jobs = new List<Job>
             {
-                new Job { JobCode="MATR", SkillQualification=false, Qualifications = new List<Qualification> { new Qualification { QualificationSet = "Qualification Set 1"}, new Qualification { QualificationSet = "Qualification Set 2"} },
-                    Skills = new List<Skill> { new Skill { SkillName = "Skill 1"}, new Skill { SkillName = "Skill 2"} },
-                    Requirements = new List<Requirement> { new Requirement { RequirementName = "Critical Thinking" }, new Requirement { RequirementName = "Adaptability" } },
+                new Job { JobCode="MATR", SkillQualification=false, Qualifications = new List<Qualification> { new Qualification { QualificationSet = "Qualification Set 1"}, new Qualification { QualificationSet = "Qualification Set 2"}
+                , new Qualification { QualificationSet = "Qualification Set 3"}, new Qualification { QualificationSet = "Qualification Set 4"}, new Qualification { QualificationSet = "Qualification Set 5"}, new Qualification { QualificationSet = "Qualification Set 6"}},
+                    Requirements = new List<Requirement> { new Requirement { RequirementName = "Requirement 1" }, new Requirement { RequirementName = "Requirement 2" } },
                     JobTitle ="Math Teacher",JobSummary="Math teacher should be good as me. She/he knows how to add,subtract,multiplication and divide. He also know how to do statistic."},
 
 
-                new Job { JobCode="LIR",SkillQualification=true, Qualifications = new List<Qualification> { new Qualification { QualificationSet = "Qualification Set 3"}, new Qualification { QualificationSet = "Qualification Set 4"} },
-                    Skills = new List<Skill> { new Skill { SkillName = "Skill 22"}, new Skill { SkillName = "Skill 5"}, new Skill { SkillName = "Skill 9"} },
-                    Requirements = new List<Requirement> {new Requirement { RequirementName = "Charismatic" }, new Requirement { RequirementName = "Integrity" } },
+                new Job { JobCode="LIR",SkillQualification=true, 
+                    Skills = new List<Skill> { new Skill { SkillName = "Skill 1"}, new Skill { SkillName = "Skill 2"}, new Skill { SkillName = "Skill 3"} },
+                    Requirements = new List<Requirement> {new Requirement { RequirementName = "Requirement 3" }, new Requirement { RequirementName = "Requirement 4" } },
                     JobTitle ="Librarian",JobSummary="She knows how to read and write. Good reading skills and very knowlegable as me."},
 
-                new Job { JobCode="JAT",SkillQualification=true, Qualifications = new List<Qualification> { new Qualification { QualificationSet = "Qualification Set 5"} },
-                    Skills = new List<Skill> { new Skill { SkillName = "Skill 13"}, new Skill { SkillName = "Skill 24"} },
-                    Requirements = new List<Requirement> {new Requirement { RequirementName = "Punctuality" } },
-                    JobTitle ="Janitor",JobSummary="Very good at handling mops and brushes. He should always be around who can adpat very fast in the environment"}
+                new Job { JobCode="JAT",SkillQualification=true, 
+                    Skills = new List<Skill> { new Skill { SkillName = "Skill 4"}, new Skill { SkillName = "Skill 5"} },
+                    Requirements = new List<Requirement> {new Requirement { RequirementName = "Requirement 5" } },
+                    JobTitle ="Janitor",JobSummary="Very good at handling mops and brushes. He should always be around who can adpat very fast in the environment"},
+
+                new Job { JobCode="DRV",SkillQualification=true,
+                    Skills = new List<Skill> { new Skill { SkillName = "Skill 6" }, new Skill { SkillName = "Skill 7" } },
+                    Requirements = new List<Requirement> {new Requirement { RequirementName = "Requirement 6" },new Requirement { RequirementName = "Requirement 7" } },
+                    JobTitle ="Driver",JobSummary="Very good at Driving in the Road. He can drive 200 km/h. "},
+
+                new Job { JobCode="PrPAL",SkillQualification=false, Qualifications = new List<Qualification> { new Qualification { QualificationSet = "Qualification 7"} },
+                    Requirements = new List<Requirement> {new Requirement { RequirementName = "Requirement 8" } },
+                    JobTitle ="Principal",JobSummary="Very good handling corrupted teacher. Good at counting money and maintaining the school"}
 
             };
             jobs.ForEach(a => context.Jobs.AddOrUpdate(n => n.JobTitle, a));
@@ -258,10 +269,26 @@ namespace FinalProject.DAL.Migrations
                 new Applicant { FName = "Alex", MName = "Ark",  LName = "Axibeg", PhoneNumber=9053707878, EMail="aaxibeg@outlook.com", Address="45 road street", ProvinceID=1,CityID=2},
                 new Applicant { FName = "Boris", MName = "Boyle",  LName = "Burnsworth", PhoneNumber=9055669878, EMail="bburnsworth@outlook.com", Address="55 street", ProvinceID=3,CityID=1},
                 new Applicant { FName = "Cathy", LName = "Carlisle",PhoneNumber=9053557878,  EMail="ccarlisle@outlook.com" , Address="11 street", ProvinceID=2,CityID=4},
-                new Applicant { FName = "Derrick", MName = "Dee",  LName = "DaVinci", PhoneNumber=9053741184, EMail="ddavincis@outlook.com", Address="88 street", ProvinceID=4,CityID=2}
+                new Applicant { FName = "Derrick", MName = "Dee",  LName = "DaVinci", PhoneNumber=9053741184, EMail="ddavincis@outlook.com", Address="88 street", ProvinceID=4,CityID=2},
+                new Applicant { FName = "Admin", MName = "Admin",  LName = "Admin", PhoneNumber=9053749999, EMail="admin@outlook.com", Address="Admin street", ProvinceID=1,CityID=6},
+                new Applicant { FName = "Jet", MName = "Jet",  LName = "Jet", PhoneNumber=9053748888, EMail="jet@outlook.com", Address="jet street", ProvinceID=1,CityID=5}
             };
             applicants.ForEach(a => context.Applicants.AddOrUpdate(n => n.EMail, a));
             SaveChanges(context);
+
+
+            var applicantImage = new List<ApplicantImage>
+            {
+                //The ImageToArray method will return the byte[] of an image
+                 new ApplicantImage {ApplicantImageID=1, ImageContent =  ImageToArray(@"C:\Users\raldj\Desktop\1.jpg"),ImageMimeType="1.jpg" },
+                 new ApplicantImage {ApplicantImageID=2, ImageContent =  ImageToArray(@"C:\Users\raldj\Desktop\3.jpg"),ImageMimeType="3.jpg" },
+                 new ApplicantImage {ApplicantImageID=3, ImageContent =  ImageToArray(@"C:\Users\raldj\Desktop\2.jpg"),ImageMimeType="2.jpg" },
+                 new ApplicantImage {ApplicantImageID=4, ImageContent =  ImageToArray(@"C:\Users\raldj\Desktop\4.jpg"),ImageMimeType="4.jpg" },
+                 new ApplicantImage {ApplicantImageID=5, ImageContent =  ImageToArray(@"C:\Users\raldj\Desktop\5.jpg"),ImageMimeType="5.jpg" },
+                 new ApplicantImage {ApplicantImageID=6, ImageContent =  ImageToArray(@"C:\Users\raldj\Desktop\6.jpg"),ImageMimeType="6.jpg" }
+
+            };
+            applicantImage.ForEach(s => context.ApplicantImages.AddOrUpdate(p => p.ApplicantImageID, s));
 
             var postings = new List<Posting>
             {
@@ -360,6 +387,29 @@ namespace FinalProject.DAL.Migrations
             Archiveapplication.ForEach(a => context.ArchiveApplications.AddOrUpdate(n => n.ApplicantID, a));
             SaveChanges(context);
 
+        }
+
+        //to get the image content and convert it to memory stream to save in the database
+        public byte[] ImageToArray(String s)
+        {
+            Image img = Image.FromFile(s);
+            byte[] arr;
+            using (MemoryStream ms = new MemoryStream())
+            {
+                img.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                arr = ms.ToArray();
+            }
+            return arr;
+        }
+        //get the file type fro the databse
+        private string GetMimeType(String filename)
+        {
+            string mimeType = "application/unknown";
+            string ext = System.IO.Path.GetExtension(filename).ToLower();
+            Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(ext);
+            if (regKey != null && regKey.GetValue("Content Type") != null)
+                mimeType = regKey.GetValue("Content Type").ToString();
+            return mimeType;
         }
 
     }

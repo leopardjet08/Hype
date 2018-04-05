@@ -1,4 +1,4 @@
-﻿namespace FinalProject.DAL.Migrations
+namespace FinalProject.DAL.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
