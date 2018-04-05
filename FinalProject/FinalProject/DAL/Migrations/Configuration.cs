@@ -277,18 +277,28 @@ namespace FinalProject.DAL.Migrations
             SaveChanges(context);
 
 
-            var applicantImage = new List<ApplicantImage>
-            {
-                //The ImageToArray method will return the byte[] of an image
-                 new ApplicantImage {ApplicantImageID=1, ImageContent =  ImageToArray(@"C:\Users\raldj\Desktop\1.jpg"),ImageMimeType="1.jpg" },
-                 new ApplicantImage {ApplicantImageID=2, ImageContent =  ImageToArray(@"C:\Users\raldj\Desktop\3.jpg"),ImageMimeType="3.jpg" },
-                 new ApplicantImage {ApplicantImageID=3, ImageContent =  ImageToArray(@"C:\Users\raldj\Desktop\2.jpg"),ImageMimeType="2.jpg" },
-                 new ApplicantImage {ApplicantImageID=4, ImageContent =  ImageToArray(@"C:\Users\raldj\Desktop\4.jpg"),ImageMimeType="4.jpg" },
-                 new ApplicantImage {ApplicantImageID=5, ImageContent =  ImageToArray(@"C:\Users\raldj\Desktop\5.jpg"),ImageMimeType="5.jpg" },
-                 new ApplicantImage {ApplicantImageID=6, ImageContent =  ImageToArray(@"C:\Users\raldj\Desktop\6.jpg"),ImageMimeType="6.jpg" }
 
-            };
-            applicantImage.ForEach(s => context.ApplicantImages.AddOrUpdate(p => p.ApplicantImageID, s));
+
+            //For applicant image to save in the database. 
+            //uncomment this out and choose your path what image u want to save in database.
+
+            //var applicantImage = new List<ApplicantImage>
+            //{
+            //    //The ImageToArray method will return the byte[] of an image
+            //     new ApplicantImage {ApplicantImageID=1, ImageContent =  ImageToArray(@"C:\Users\raldj\Desktop\1.jpg"),ImageMimeType="1.jpg" },
+            //     new ApplicantImage {ApplicantImageID=2, ImageContent =  ImageToArray(@"C:\Users\raldj\Desktop\3.jpg"),ImageMimeType="3.jpg" },
+            //     new ApplicantImage {ApplicantImageID=3, ImageContent =  ImageToArray(@"C:\Users\raldj\Desktop\2.jpg"),ImageMimeType="2.jpg" },
+            //     new ApplicantImage {ApplicantImageID=4, ImageContent =  ImageToArray(@"C:\Users\raldj\Desktop\4.jpg"),ImageMimeType="4.jpg" },
+            //     new ApplicantImage {ApplicantImageID=5, ImageContent =  ImageToArray(@"C:\Users\raldj\Desktop\5.jpg"),ImageMimeType="5.jpg" },
+            //     new ApplicantImage {ApplicantImageID=6, ImageContent =  ImageToArray(@"C:\Users\raldj\Desktop\6.jpg"),ImageMimeType="6.jpg" }
+
+            //};
+            //applicantImage.ForEach(s => context.ApplicantImages.AddOrUpdate(p => p.ApplicantImageID, s));
+
+
+
+
+
 
             var postings = new List<Posting>
             {
