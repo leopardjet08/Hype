@@ -63,18 +63,11 @@ namespace FinalProject.Controllers
         // GET: Apply/Create
         public ActionResult Create(int? PostingID)
         {
-            ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>()
-                .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
-
             Posting posting = db.Postings
                .Where(p => p.ID == PostingID)
                .SingleOrDefault();
 
-            //if (User.Identity.IsAuthenticated)
-            //{
-            //     Membership.GetUser().Email;
-            //}
-            ViewBag.name = User.Identity.Name;
+           
 
             Applicant q = db.Applicants
                .Where(p => p.EMail == User.Identity.Name)

@@ -883,10 +883,15 @@ namespace FinalProject.Controllers
         }
 
         //create controller
-        public ActionResult SavePosting(int? PostingID)
+        public ActionResult SavePosting(int id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             Posting posting = db.Postings
-               .Where(p => p.ID == PostingID)
+               .Where(p => p.ID == id)
                .SingleOrDefault();
 
 
@@ -899,7 +904,7 @@ namespace FinalProject.Controllers
             if (posting == null)
             {
                 ModelState.AddModelError("", "Something got wrong");
-                return RedirectToAction("Index", "Portfolio");
+                return RedirectToAction("Index", "Home");
             }
 
             if (q == null)
@@ -913,6 +918,7 @@ namespace FinalProject.Controllers
             {
                 PostingID = posting.ID,
                 Applicant=q,
+                Postings = posting,
                 ApplicantID = q.ID
             };
 
