@@ -85,6 +85,8 @@ namespace FinalProject.Models
         public virtual City City { get; set; }
         public ICollection<Application> Applications { get; set; }
         public ICollection<SavedPosting> SavedPostings { get; set; }
+        public ICollection<Appliedposting> Appliedpostings { get; set; }
+        public ICollection<ExpiredPosting> ExpiredPostings { get; set; }
 
         //Added to hold picture of applicant
         public virtual ApplicantImage ApplicantImage { get; set; }
