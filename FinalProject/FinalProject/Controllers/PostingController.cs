@@ -882,6 +882,72 @@ namespace FinalProject.Controllers
             ViewBag.Qualifications = viewModel;
         }
 
+        //create controller
+        public ActionResult SavePosting(int? PostingID)
+        {
+            Posting posting = db.Postings
+               .Where(p => p.ID == PostingID)
+               .SingleOrDefault();
+
+
+            Applicant q = db.Applicants
+               .Where(p => p.EMail == User.Identity.Name)
+               .SingleOrDefault();
+
+
+
+            if (posting == null)
+            {
+                ModelState.AddModelError("", "Something got wrong");
+                return RedirectToAction("Index", "Portfolio");
+            }
+
+            if (q == null)
+            {
+                ModelState.AddModelError("", "You need to login First");
+                return RedirectToAction("Login", "Account");
+            }
+
+
+            var savePost = new SavedPosting()
+            {
+                PostingID = posting.ID,
+                Applicant=q,
+                ApplicantID = q.ID
+            };
+
+            return View("SavePosting", savePost);
+        }
+
+        // POST: Postings/Create
+        //For protection against hacker!!! 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SavePosting([Bind(Include = "ID,ApplicantID,PostingID")] SavedPosting savePosting)
+        {
+            try
+            {
+                
+                if (ModelState.IsValid)
+                {
+                    db.SavedPostings.Add(savePosting);
+                    db.SaveChanges();
+                    return RedirectToAction("Index", "Portfolio");
+                }
+            }
+            catch (RetryLimitExceededException /* dex */)
+            {
+                ModelState.AddModelError("", "Unable to save changes after multiple attempts. Try again, and if the problem persists, see your system administrator.");
+            }
+            catch (DataException)
+            {
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+
+
+            return View(savePosting);
+        }
+
 
         protected override void Dispose(bool disposing)
         {

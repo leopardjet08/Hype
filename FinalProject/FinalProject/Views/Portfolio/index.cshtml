@@ -121,26 +121,15 @@
 
                 <h3>Jobs Applied For:</h3>
                 <hr />
-                <span style="text-decoration: underline;">
-                    <Strong> Janitor FullTime</Strong>
-                </span>
-                <br />
-                <p><Strong>Niagara College</Strong></p>
-                <input type="button" value="View" class="btn btn-default" style="border:1px solid gray; color:green" />
-
-                <hr />
-                <span style="text-decoration: underline;">
-                    <Strong> Teacher FullTime</Strong>
-                </span>
-                <p><Strong>Brook College</Strong></p>
-                <input type="button" value="View" class="btn btn-default" style="border:1px solid gray; color:green" />
-
-                <hr />
-                <span style="text-decoration: underline;">
-                    <Strong> Principal FullTime</Strong>
-                </span>
-                <p><Strong>Welland Elementary</Strong></p>
-                <input type="button" value="View" class="btn btn-default" style="border:1px solid gray; color:green" />
+                                    @{
+                                        foreach (var f in Model.Appliedpostings)
+                                        {
+                                            @: <font color="blue"><Strong><u>@Html.DisplayFor(modelItem => f.Postings.Job.JobTitle)</u></Strong></font> <br />
+                                                <Strong> @Html.DisplayFor(modelItem => f.Postings.School.SchoolName ) </Strong> <br /><br />
+                                            @:  @Html.ActionLink("View", "Details", "Posting", new { id = f.PostingID }, new { @class= "btn btn-default", @style = "border:2px solid gray; color:red" }) 
+                                            @:  @Html.ActionLink("Delete", "Delete", new { id = f.ID }, new { @class = "btn btn-default", @style = "border:2px solid gray; color:green" }) <br /><br /><br />
+                                        }
+                                    }
 
             </div>
 
@@ -148,28 +137,15 @@
 
                 <h3>Saved Jobs:</h3>
                 <hr />
-                <span style="text-decoration: underline;">
-                    <Strong> Programmer Part-Time</Strong>
-                </span>
-                <p><Strong>Rose Highschool</Strong></p>
-                <input type="button" value="Apply" class="btn btn-default" style="border:1px solid gray; color:green" />
-                <input type="button" value="Delete" class="btn btn-default" style="border:1px solid gray; color:red" />
-
-                <hr />
-                <span style="text-decoration: underline;">
-                    <Strong> PE Coach</Strong>
-                </span>
-                <p><Strong>Broks Elementary School</Strong></p>
-                <input type="button" value="Apply" class="btn btn-default" style="border:1px solid gray; color:green" />
-                <input type="button" value="Delete" class="btn btn-default" style="border:1px solid gray; color:red" />
-
-                <hr />
-                <span style="text-decoration: underline;">
-                    <Strong> Vice-Principal Full-Time</Strong>
-                </span>
-                <p><Strong>West elementary</Strong></p>
-                <input type="button" value="Apply" class="btn btn-default" style="border:1px solid gray; color:green" />
-                <input type="button" value="Delete" class="btn btn-default" style="border:1px solid gray; color:red" />
+                                   @{
+                                        foreach (var f in Model.SavedPostings)
+                                        {
+                                            @: <font color="blue"><Strong><u>@Html.DisplayFor(modelItem => f.Postings.Job.JobTitle)</u></Strong></font> <br />
+                                                <Strong> @Html.DisplayFor(modelItem => f.Postings.School.SchoolName ) </Strong> <br /><br />
+                                            @:  @Html.ActionLink("Apply", "AppliedView", "Apply", new { id = f.PostingID }, new { @class= "btn btn-default", @style = "border:2px solid gray; color:red" }) 
+                                            @:  @Html.ActionLink("Delete", "Delete", new { id = f.ID }, new { @class = "btn btn-default", @style = "border:2px solid gray; color:green" }) <br /><br /><br />
+                                        }
+                                    }
 
             </div>
 
@@ -177,31 +153,16 @@
 
 
                 <h3>Expired Jobs:</h3>
-                <input type="button" value="Clear All" class="btn btn-default" />
                 <hr />
-                <hr />
-                <span style="text-decoration: underline;">
-                    <Strong> Designer Part-Time</Strong>
-                </span>
-                <p><Strong>North Highschool</Strong></p>
-                <input type="button" value="View" class="btn btn-default" style="border:1px solid gray; color:green" />
-                <input type="button" value="Delete" class="btn btn-default" style="border:1px solid gray; color:red" />
-
-                <hr />
-                <span style="text-decoration: underline;">
-                    <Strong> Database designer</Strong>
-                </span>
-                <p><Strong>August Elementary School</Strong></p>
-                <input type="button" value="View" class="btn btn-default" style="border:1px solid gray; color:green" />
-                <input type="button" value="Delete" class="btn btn-default" style="border:1px solid gray; color:red" />
-
-                <hr />
-                <span style="text-decoration: underline;">
-                    <Strong> Professor Full-Time</Strong>
-                </span>
-                <p><Strong>Side Elementary</Strong></p>
-                <input type="button" value="View" class="btn btn-default" style="border:1px solid gray; color:green" />
-                <input type="button" value="Delete" class="btn btn-default" style="border:1px solid gray; color:red" />
+                                  @{
+                                        foreach (var f in Model.ExpiredPostings)
+                                        {
+                                            @: <font color="blue"><Strong><u>@Html.DisplayFor(modelItem => f.Postings.Job.JobTitle)</u></Strong></font> <br />
+                                                <Strong> @Html.DisplayFor(modelItem => f.Postings.School.SchoolName ) </Strong> <br /><br />
+                                            @:  @Html.ActionLink("View", "Details", "Posting", new { id = f.PostingID }, new { @class= "btn btn-default", @style = "border:2px solid gray; color:red" }) 
+                                            @:  @Html.ActionLink("Delete", "Delete", new { id = f.ID }, new { @class = "btn btn-default", @style = "border:2px solid gray; color:green" }) <br /><br /><br />
+                                        }
+                                    }
 
             </div>
 

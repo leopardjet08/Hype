@@ -222,14 +222,14 @@
     <Compile Include="Controllers\SkillsController.cs" />
     <Compile Include="DAL\ApplicationDBContext.cs" />
     <Compile Include="DAL\JobPostingCFEntities.cs" />
-    <Compile Include="DAL\Migrations\201804050839114_initial.cs" />
-    <Compile Include="DAL\Migrations\201804050839114_initial.Designer.cs">
-      <DependentUpon>201804050839114_initial.cs</DependentUpon>
+    <Compile Include="DAL\Migrations\201804060014217_initial.cs" />
+    <Compile Include="DAL\Migrations\201804060014217_initial.Designer.cs">
+      <DependentUpon>201804060014217_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\Migrations\Configuration.cs" />
-    <Compile Include="DAL\SecurityMigration\201804050835166_security.cs" />
-    <Compile Include="DAL\SecurityMigration\201804050835166_security.Designer.cs">
-      <DependentUpon>201804050835166_security.cs</DependentUpon>
+    <Compile Include="DAL\SecurityMigration\201804060015591_security.cs" />
+    <Compile Include="DAL\SecurityMigration\201804060015591_security.Designer.cs">
+      <DependentUpon>201804060015591_security.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\SecurityMigration\Configuration.cs" />
     <Compile Include="Global.asax.cs">
@@ -400,6 +400,8 @@
     <Content Include="Views\Apply\Edit.cshtml" />
     <Content Include="Views\Apply\AppliedView.cshtml" />
     <Content Include="Views\Applicant\Create.cshtml" />
+    <Content Include="Views\Portfolio\Delete.cshtml" />
+    <Content Include="Views\Posting\SavePosting.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -423,11 +425,11 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DAL\Migrations\201804050839114_initial.resx">
-      <DependentUpon>201804050839114_initial.cs</DependentUpon>
+    <EmbeddedResource Include="DAL\Migrations\201804060014217_initial.resx">
+      <DependentUpon>201804060014217_initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DAL\SecurityMigration\201804050835166_security.resx">
-      <DependentUpon>201804050835166_security.cs</DependentUpon>
+    <EmbeddedResource Include="DAL\SecurityMigration\201804060015591_security.resx">
+      <DependentUpon>201804060015591_security.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

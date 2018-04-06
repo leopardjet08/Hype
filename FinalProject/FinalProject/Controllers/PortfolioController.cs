@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using FinalProject.DAL;
 using FinalProject.Models;
+using FinalProject.Models.DataModel;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 
@@ -22,6 +23,9 @@ namespace FinalProject.Controllers
         {
             var applicant = db.Applicants
                 .Include(a =>a.Files)
+                .Include(a => a.SavedPostings)
+                .Include(a => a.Appliedpostings)
+                .Include(a=>a.ExpiredPostings)
                 .Where(a =>a.EMail == User.Identity.Name).SingleOrDefault();
 
             if (applicant == null) {
@@ -30,6 +34,15 @@ namespace FinalProject.Controllers
             }
 
             return View(applicant);
+        }
+
+
+        public ActionResult Delete(int id)
+        {
+            Appliedposting applied = db.Appliedpostings.Find(id);
+            db.Appliedpostings.Remove(applied);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
 
