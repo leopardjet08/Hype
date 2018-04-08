@@ -11,7 +11,7 @@ namespace FinalProject.Models.DataModel
     {
         public int ID { get; set; }
 
-        public int PostingID { get; set; }
+        public int ApplicationID { get; set; }
 
         public int ApplicantID { get; set; }
 
@@ -19,7 +19,6 @@ namespace FinalProject.Models.DataModel
 
         public DateTime ArchiveDate { get; set; }
 
-        public virtual Applicant Applicant { get; set; }
-        public virtual Posting Posting { get; set; }
+        public virtual Application Applications { get; set; }
     }
 }

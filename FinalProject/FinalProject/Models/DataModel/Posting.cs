@@ -73,7 +73,9 @@ namespace FinalProject.Models
 
 
         public ICollection<Application> Applications { get; set; }
+        public ICollection<Appliedposting> AppliedPostings { get; set; }
         public ICollection<SavedPosting> SavedPostings { get; set; }
+        public ICollection<ExpiredPosting> ExpiredPostings { get; set; }
 
         //many to many of posting to skill,requirment,qualification
         public virtual ICollection<Skill> Skills { get; set; }

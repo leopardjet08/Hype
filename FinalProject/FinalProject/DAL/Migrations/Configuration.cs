@@ -443,18 +443,6 @@ namespace FinalProject.DAL.Migrations
             archiveposting.ForEach(a => context.Archivepostings.AddOrUpdate(n => n.ClosingDate, a));
             SaveChanges(context);
 
-            var Archiveapplication = new List<ArchiveApplication>
-            {
-                new ArchiveApplication {  ApplicantID=(context.Applicants.Where(p=>p.EMail=="aaxibeg@outlook.com").SingleOrDefault().ID),
-                    PostingID =(context.Postings.Where(p=>p.NumberOpen==1).SingleOrDefault().ID),SubmissionDate=DateTime.Parse("2014-01-20"),ArchiveDate=DateTime.Parse("2014-02-20") },
-                new ArchiveApplication {  ApplicantID=(context.Applicants.Where(p=>p.EMail=="bburnsworth@outlook.com").SingleOrDefault().ID),
-                    PostingID =(context.Postings.Where(p=>p.NumberOpen==2).SingleOrDefault().ID),SubmissionDate=DateTime.Parse("2015-01-20"),ArchiveDate=DateTime.Parse("2015-02-20") },
-                new ArchiveApplication {  ApplicantID=(context.Applicants.Where(p=>p.EMail=="ccarlisle@outlook.com").SingleOrDefault().ID),
-                    PostingID =(context.Postings.Where(p=>p.NumberOpen==3).SingleOrDefault().ID),SubmissionDate=DateTime.Parse("2016-01-20"),ArchiveDate=DateTime.Parse("2016-02-20")}
-            };
-            Archiveapplication.ForEach(a => context.ArchiveApplications.AddOrUpdate(n => n.ApplicantID, a));
-            SaveChanges(context);
-
         }
 
         //to get the image content and convert it to memory stream to save in the database

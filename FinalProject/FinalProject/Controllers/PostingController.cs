@@ -350,10 +350,7 @@ namespace FinalProject.Controllers
             {
                 ModelState.AddModelError("", "Unable to save changes after multiple attempts. Try again, and if the problem persists, see your system administrator.");
             }
-            catch (DataException)
-            {
-                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
-            }
+            
             catch (NullReferenceException)
             {
                 ModelState.AddModelError("", "Its a null daw yawa ");
@@ -515,15 +512,11 @@ namespace FinalProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            Posting posting = db.Postings
-               .Where(p => p.ID == id).SingleOrDefault();
-
+            Posting posting = db.Postings.Find(id);
             if (posting == null)
             {
                 return HttpNotFound();
             }
-
             return View(posting);
         }
 
@@ -531,42 +524,28 @@ namespace FinalProject.Controllers
         // POST: Postings/Delete
         [HttpPost, ActionName("Archive")]
         [ValidateAntiForgeryToken]
-        public ActionResult ArchiveConfirmed(int? id)
+        public ActionResult ArchiveConfirmed(int id)
         {
 
-
-            if (id == null)
+            Posting posting = db.Postings.Find(id);
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                db.Postings.Remove(posting);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            var postingToUpdate = db.Postings
-                .Where(p => p.ID == id).SingleOrDefault();
-
-            if (TryUpdateModel(postingToUpdate, "",
-               new string[] { "NumberOpen", "ClosingDate", "StartDate", "JobEndDate", "PostingDescription", "Fte", "SchoolID", "JobID", "JobCode", "PostingStatusID" }))
+            catch (DataException dex)
             {
-                try
+                if (dex.InnerException.InnerException.Message.Contains("FK_"))
                 {
-
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    ModelState.AddModelError("", "You cannot delete this Posting.");
                 }
-                catch (RetryLimitExceededException /* dex */)
-                {
-                    ModelState.AddModelError("", "Unable to save changes after multiple attempts. Try again, and if the problem persists, see your system administrator.");
-                }
-
-                catch (DataException)
+                else
                 {
                     ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
                 }
             }
-
-            PopulateDropDownLists(postingToUpdate);
-
-
-
-            return View(postingToUpdate);
+            return View(posting);
 
         }
         private void UpdatePostingSkills(string[] selectedSkills, Posting postingToUpdate)

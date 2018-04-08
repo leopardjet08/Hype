@@ -110,7 +110,7 @@ namespace FinalProject.Controllers
             PopulateDropDownLists();
             ViewBag.Filtering = "";
 
-            var postings = from s in db.Postings where ((DateTime)s.ClosingDate < DateTime.Today) select s;
+            var archivePostings = from s in db.Archivepostings   select s;
 
 
 
@@ -118,7 +118,7 @@ namespace FinalProject.Controllers
 
             if (!String.IsNullOrEmpty(searchName))
             {
-                postings = postings.Where(p => p.Job.JobTitle.ToUpper().Contains(searchName.ToUpper()));
+                archivePostings = archivePostings.Where(p => p.Job.JobTitle.ToUpper().Contains(searchName.ToUpper()));
                 ViewBag.Filtering = " in";
                 ViewBag.searchName = searchName;
             }
@@ -142,12 +142,12 @@ namespace FinalProject.Controllers
             {
                 if (String.IsNullOrEmpty(sortDirection))
                 {
-                    postings = postings
+                    archivePostings = archivePostings
                         .OrderBy(p => p.NumberOpen);
                 }
                 else
                 {
-                    postings = postings
+                    archivePostings = archivePostings
                         .OrderByDescending(p => p.NumberOpen);
                 }
             }
@@ -155,12 +155,12 @@ namespace FinalProject.Controllers
             {
                 if (String.IsNullOrEmpty(sortDirection))
                 {
-                    postings = postings
+                    archivePostings = archivePostings
                         .OrderBy(p => p.ClosingDate);
                 }
                 else
                 {
-                    postings = postings
+                    archivePostings = archivePostings
                         .OrderByDescending(p => p.ClosingDate);
                 }
             }
@@ -168,12 +168,12 @@ namespace FinalProject.Controllers
             {
                 if (String.IsNullOrEmpty(sortDirection))
                 {
-                    postings = postings
+                    archivePostings = archivePostings
                         .OrderBy(p => p.StartDate);
                 }
                 else
                 {
-                    postings = postings
+                    archivePostings = archivePostings
                         .OrderByDescending(p => p.StartDate);
                 }
             }
@@ -181,12 +181,12 @@ namespace FinalProject.Controllers
             {
                 if (String.IsNullOrEmpty(sortDirection))
                 {
-                    postings = postings
+                    archivePostings = archivePostings
                         .OrderBy(p => p.PostingDescription);
                 }
                 else   //Sorting by Posting description
                 {
-                    postings = postings
+                    archivePostings = archivePostings
                         .OrderByDescending(p => p.PostingDescription);
                 }
             }
@@ -194,12 +194,12 @@ namespace FinalProject.Controllers
             {
                 if (String.IsNullOrEmpty(sortDirection))
                 {
-                    postings = postings
+                    archivePostings = archivePostings
                         .OrderBy(p => p.Job.JobTitle);
                 }
                 else
                 {
-                    postings = postings
+                    archivePostings = archivePostings
                         .OrderByDescending(p => p.Job.JobTitle);
                 }
             }
@@ -212,7 +212,7 @@ namespace FinalProject.Controllers
             int pageSize = 9;
             int pageNumber = (page ?? 1);
 
-            return View(postings.ToPagedList(pageNumber, pageSize));
+            return View(archivePostings.ToPagedList(pageNumber, pageSize));
         }
 
         private void PopulateDropDownLists(Application app = null)

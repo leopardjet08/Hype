@@ -31,6 +31,7 @@ namespace FinalProject.Models
         public virtual Applicant Applicant { get; set; }
         public virtual Posting Posting { get; set; }
         public virtual ApplicationStatus ApplicationStatus { get; set; }
-
+        public virtual BestCandidate BestCandidates { get; set; }
+        public virtual ApplicationComment Comment { get; set; }
     }
 }
