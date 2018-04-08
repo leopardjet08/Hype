@@ -15,9 +15,6 @@ namespace FinalProject.Models.DataModel
         public string Comments { get; set; }
 
 
-        public virtual Application Applications { get; set; }
-
-
 
     }
 }

@@ -60,7 +60,7 @@
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.Applicant", t => t.ApplicantID)
                 .ForeignKey("dbo.ApplicationStatus", t => t.ApplicationStatusID)
-                .ForeignKey("dbo.Posting", t => t.PostingID)
+                .ForeignKey("dbo.Posting", t => t.PostingID, cascadeDelete: true)
                 .ForeignKey("dbo.School", t => t.School_ID)
                 .ForeignKey("dbo.Archiveposting", t => t.Archiveposting_ID)
                 .Index(t => t.PostingID)
@@ -77,6 +77,29 @@
                         Status = c.String(),
                     })
                 .PrimaryKey(t => t.ID);
+            
+            CreateTable(
+                "dbo.BestCandidate",
+                c => new
+                    {
+                        ID = c.Int(nullable: false),
+                        ApplicationID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.Application", t => t.ID, cascadeDelete: true)
+                .Index(t => t.ID);
+            
+            CreateTable(
+                "dbo.ApplicationComment",
+                c => new
+                    {
+                        ID = c.Int(nullable: false),
+                        ApplicationID = c.Int(nullable: false),
+                        Comments = c.String(),
+                    })
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.Application", t => t.ID, cascadeDelete: true)
+                .Index(t => t.ID);
             
             CreateTable(
                 "dbo.Posting",
@@ -110,6 +133,20 @@
                 .Index(t => t.JobID)
                 .Index(t => t.PostingStatusID)
                 .Index(t => t.PostingTypesID);
+            
+            CreateTable(
+                "dbo.Appliedposting",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        ApplicantID = c.Int(nullable: false),
+                        PostingID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.Posting", t => t.PostingID, cascadeDelete: true)
+                .ForeignKey("dbo.Applicant", t => t.ApplicantID, cascadeDelete: true)
+                .Index(t => t.ApplicantID)
+                .Index(t => t.PostingID);
             
             CreateTable(
                 "dbo.Job",
@@ -191,7 +228,7 @@
                         Archiveposting_ID = c.Int(),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Posting", t => t.PostingID)
+                .ForeignKey("dbo.Posting", t => t.PostingID, cascadeDelete: true)
                 .ForeignKey("dbo.Applicant", t => t.ApplicantID, cascadeDelete: true)
                 .ForeignKey("dbo.Archiveposting", t => t.Archiveposting_ID)
                 .Index(t => t.ApplicantID)
@@ -245,17 +282,19 @@
                 .Index(t => t.LevelName, unique: true, name: "IX_Unique_LevelName");
             
             CreateTable(
-                "dbo.Appliedposting",
+                "dbo.ArchiveApplication",
                 c => new
                     {
-                        ID = c.Int(nullable: false, identity: true),
-                        ApplicantID = c.Int(nullable: false),
+                        ID = c.Int(nullable: false),
                         PostingID = c.Int(nullable: false),
+                        ApplicantID = c.Int(nullable: false),
+                        SubmissionDate = c.DateTime(nullable: false),
+                        ArchiveDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Applicant", t => t.ApplicantID)
                 .ForeignKey("dbo.Posting", t => t.PostingID)
-                .Index(t => t.ApplicantID)
+                .ForeignKey("dbo.Applicant", t => t.ID)
+                .Index(t => t.ID)
                 .Index(t => t.PostingID);
             
             CreateTable(
@@ -268,8 +307,8 @@
                         ExpiredOn = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Applicant", t => t.ApplicantID)
                 .ForeignKey("dbo.Posting", t => t.PostingID)
+                .ForeignKey("dbo.Applicant", t => t.ApplicantID, cascadeDelete: true)
                 .Index(t => t.ApplicantID)
                 .Index(t => t.PostingID);
             
@@ -309,34 +348,6 @@
                 .Index(t => t.ProvinceName, unique: true, name: "IX_Unique_Province");
             
             CreateTable(
-                "dbo.ApplicationComment",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        ApplicationID = c.Int(nullable: false),
-                        Comments = c.String(),
-                    })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Application", t => t.ApplicationID)
-                .Index(t => t.ApplicationID);
-            
-            CreateTable(
-                "dbo.ArchiveApplication",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        PostingID = c.Int(nullable: false),
-                        ApplicantID = c.Int(nullable: false),
-                        SubmissionDate = c.DateTime(nullable: false),
-                        ArchiveDate = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Applicant", t => t.ApplicantID)
-                .ForeignKey("dbo.Posting", t => t.PostingID)
-                .Index(t => t.PostingID)
-                .Index(t => t.ApplicantID);
-            
-            CreateTable(
                 "dbo.Archiveposting",
                 c => new
                     {
@@ -358,17 +369,6 @@
                 .ForeignKey("dbo.School", t => t.SchoolID)
                 .Index(t => t.SchoolID)
                 .Index(t => t.JobID);
-            
-            CreateTable(
-                "dbo.BestCandidate",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        ApplicationID = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Application", t => t.ApplicationID)
-                .Index(t => t.ApplicationID);
             
             CreateTable(
                 "dbo.QualificationJob",
@@ -452,7 +452,6 @@
         
         public override void Down()
         {
-            DropForeignKey("dbo.BestCandidate", "ApplicationID", "dbo.Application");
             DropForeignKey("dbo.Skill", "Archiveposting_ID", "dbo.Archiveposting");
             DropForeignKey("dbo.Archiveposting", "SchoolID", "dbo.School");
             DropForeignKey("dbo.SavedPosting", "Archiveposting_ID", "dbo.Archiveposting");
@@ -460,16 +459,14 @@
             DropForeignKey("dbo.Qualification", "Archiveposting_ID", "dbo.Archiveposting");
             DropForeignKey("dbo.Archiveposting", "JobID", "dbo.Job");
             DropForeignKey("dbo.Application", "Archiveposting_ID", "dbo.Archiveposting");
-            DropForeignKey("dbo.ArchiveApplication", "PostingID", "dbo.Posting");
-            DropForeignKey("dbo.ArchiveApplication", "ApplicantID", "dbo.Applicant");
-            DropForeignKey("dbo.ApplicationComment", "ApplicationID", "dbo.Application");
             DropForeignKey("dbo.SavedPosting", "ApplicantID", "dbo.Applicant");
             DropForeignKey("dbo.Applicant", "ProvinceID", "dbo.Province");
             DropForeignKey("dbo.aFile", "ApplicantID", "dbo.Applicant");
             DropForeignKey("dbo.FileContent", "FileContentID", "dbo.aFile");
-            DropForeignKey("dbo.ExpiredPosting", "PostingID", "dbo.Posting");
             DropForeignKey("dbo.ExpiredPosting", "ApplicantID", "dbo.Applicant");
-            DropForeignKey("dbo.Appliedposting", "PostingID", "dbo.Posting");
+            DropForeignKey("dbo.ExpiredPosting", "PostingID", "dbo.Posting");
+            DropForeignKey("dbo.ArchiveApplication", "ID", "dbo.Applicant");
+            DropForeignKey("dbo.ArchiveApplication", "PostingID", "dbo.Posting");
             DropForeignKey("dbo.Appliedposting", "ApplicantID", "dbo.Applicant");
             DropForeignKey("dbo.School", "SchoolLevelID", "dbo.SchoolLevel");
             DropForeignKey("dbo.School", "SchoolFamilyID", "dbo.SchoolFamily");
@@ -493,7 +490,10 @@
             DropForeignKey("dbo.QualificationJob", "Job_ID", "dbo.Job");
             DropForeignKey("dbo.QualificationJob", "Qualification_ID", "dbo.Qualification");
             DropForeignKey("dbo.Posting", "JobID", "dbo.Job");
+            DropForeignKey("dbo.Appliedposting", "PostingID", "dbo.Posting");
             DropForeignKey("dbo.Application", "PostingID", "dbo.Posting");
+            DropForeignKey("dbo.ApplicationComment", "ID", "dbo.Application");
+            DropForeignKey("dbo.BestCandidate", "ID", "dbo.Application");
             DropForeignKey("dbo.Application", "ApplicationStatusID", "dbo.ApplicationStatus");
             DropForeignKey("dbo.Application", "ApplicantID", "dbo.Applicant");
             DropForeignKey("dbo.ApplicantImage", "ApplicantImageID", "dbo.Applicant");
@@ -509,19 +509,15 @@
             DropIndex("dbo.QualificationPosting", new[] { "Qualification_ID" });
             DropIndex("dbo.QualificationJob", new[] { "Job_ID" });
             DropIndex("dbo.QualificationJob", new[] { "Qualification_ID" });
-            DropIndex("dbo.BestCandidate", new[] { "ApplicationID" });
             DropIndex("dbo.Archiveposting", new[] { "JobID" });
             DropIndex("dbo.Archiveposting", new[] { "SchoolID" });
-            DropIndex("dbo.ArchiveApplication", new[] { "ApplicantID" });
-            DropIndex("dbo.ArchiveApplication", new[] { "PostingID" });
-            DropIndex("dbo.ApplicationComment", new[] { "ApplicationID" });
             DropIndex("dbo.Province", "IX_Unique_Province");
             DropIndex("dbo.FileContent", new[] { "FileContentID" });
             DropIndex("dbo.aFile", new[] { "ApplicantID" });
             DropIndex("dbo.ExpiredPosting", new[] { "PostingID" });
             DropIndex("dbo.ExpiredPosting", new[] { "ApplicantID" });
-            DropIndex("dbo.Appliedposting", new[] { "PostingID" });
-            DropIndex("dbo.Appliedposting", new[] { "ApplicantID" });
+            DropIndex("dbo.ArchiveApplication", new[] { "PostingID" });
+            DropIndex("dbo.ArchiveApplication", new[] { "ID" });
             DropIndex("dbo.SchoolLevel", "IX_Unique_LevelName");
             DropIndex("dbo.SchoolFamily", "IX_Unique_FamilyName");
             DropIndex("dbo.School", new[] { "SchoolFamilyID" });
@@ -537,10 +533,14 @@
             DropIndex("dbo.Qualification", new[] { "Archiveposting_ID" });
             DropIndex("dbo.Qualification", "IX_Unique_qual");
             DropIndex("dbo.Job", "IX_Unique_JobCode");
+            DropIndex("dbo.Appliedposting", new[] { "PostingID" });
+            DropIndex("dbo.Appliedposting", new[] { "ApplicantID" });
             DropIndex("dbo.Posting", new[] { "PostingTypesID" });
             DropIndex("dbo.Posting", new[] { "PostingStatusID" });
             DropIndex("dbo.Posting", new[] { "JobID" });
             DropIndex("dbo.Posting", new[] { "SchoolID" });
+            DropIndex("dbo.ApplicationComment", new[] { "ID" });
+            DropIndex("dbo.BestCandidate", new[] { "ID" });
             DropIndex("dbo.Application", new[] { "Archiveposting_ID" });
             DropIndex("dbo.Application", new[] { "School_ID" });
             DropIndex("dbo.Application", new[] { "ApplicationStatusID" });
@@ -556,15 +556,12 @@
             DropTable("dbo.RequirementJob");
             DropTable("dbo.QualificationPosting");
             DropTable("dbo.QualificationJob");
-            DropTable("dbo.BestCandidate");
             DropTable("dbo.Archiveposting");
-            DropTable("dbo.ArchiveApplication");
-            DropTable("dbo.ApplicationComment");
             DropTable("dbo.Province");
             DropTable("dbo.FileContent");
             DropTable("dbo.aFile");
             DropTable("dbo.ExpiredPosting");
-            DropTable("dbo.Appliedposting");
+            DropTable("dbo.ArchiveApplication");
             DropTable("dbo.SchoolLevel");
             DropTable("dbo.SchoolFamily");
             DropTable("dbo.City");
@@ -576,7 +573,10 @@
             DropTable("dbo.Requirement");
             DropTable("dbo.Qualification");
             DropTable("dbo.Job");
+            DropTable("dbo.Appliedposting");
             DropTable("dbo.Posting");
+            DropTable("dbo.ApplicationComment");
+            DropTable("dbo.BestCandidate");
             DropTable("dbo.ApplicationStatus");
             DropTable("dbo.Application");
             DropTable("dbo.Applicant");
