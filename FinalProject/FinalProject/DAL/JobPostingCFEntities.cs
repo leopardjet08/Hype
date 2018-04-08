@@ -35,7 +35,7 @@ namespace FinalProject.DAL
         public DbSet<ExpiredPosting> ExpiredPostings { get; set; }
         public DbSet<ApplicationComment> ApplicationComments { get; set; }
         public DbSet<PostingType> PostingTypes { get; set; }
-        public System.Data.Entity.DbSet<FinalProject.Models.DataModel.ApplicantImage> ApplicantImages { get; set; }
+        public DbSet<ApplicantImage> ApplicantImages { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -46,13 +46,14 @@ namespace FinalProject.DAL
             //modelBuilder.HasDefaultSchema("Job");
 
 
-            //Added for cascade delete for applicant image profile picture
+            
             modelBuilder.Entity<Applicant>()
                 .HasOptional(w => w.ApplicantImage)
                 .WithRequired(p => p.Applicant)
                 .WillCascadeOnDelete(true);
 
-            //Added for cascade delte for all Files with Applicant
+
+            //Added for cascade delete for Applicant
             modelBuilder.Entity<Applicant>()
                 .HasMany(a => a.Files)
                 .WithRequired(p => p.Applicant)
@@ -63,32 +64,41 @@ namespace FinalProject.DAL
                 .WithRequired(p => p.Applicant)
                 .WillCascadeOnDelete(true);
 
-            //modelBuilder.Entity<Applicant>()
-            //   .HasMany(a => a.Applications)
-            //   .WithRequired(p => p.Applicant)
-            //   .WillCascadeOnDelete(true);
+            modelBuilder.Entity<Applicant>()
+                .HasMany(a => a.Appliedpostings)
+                .WithRequired(p => p.Applicant)
+                .WillCascadeOnDelete(true);
 
-            ////Added for cascade delete for File Content with File
-            //modelBuilder.Entity<aFile>()
-            //    .HasOptional(w => w.FileContent)
-            //    .WithRequired(p => p.aFile)
-            //    .WillCascadeOnDelete(true);
+            modelBuilder.Entity<Applicant>()
+                .HasMany(a => a.ExpiredPostings)
+                .WithRequired(p => p.Applicant)
+                .WillCascadeOnDelete(true);
+
+            // for posting cascade delete
+            modelBuilder.Entity<Posting>()
+               .HasMany(a => a.Applications)
+               .WithRequired(p => p.Posting)
+               .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Posting>()
+              .HasMany(a => a.SavedPostings)
+              .WithRequired(p => p.Postings)
+              .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Posting>()
+              .HasMany(a => a.AppliedPostings)
+              .WithRequired(p => p.Postings)
+              .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Posting>()
+              .HasMany(a => a.ExpiredPostings)
+              .WithRequired(p => p.Postings)
+              .WillCascadeOnDelete(false);
 
 
-            //modelBuilder.Entity<City>()
-            // .HasMany(w => w.Applicants)
-            // .WithRequired(p => p.City)
-            // .WillCascadeOnDelete(false);
 
-            //modelBuilder.Entity<School>()
-            //.HasMany(w => w.Postings)
-            //.WithRequired(p => p.School)
-            //.WillCascadeOnDelete(true);
+            //application cascade
 
-            //modelBuilder.Entity<School>()
-            //.HasMany(w => w.Postings)
-            //.WithRequired(p => p.School)
-            //.WillCascadeOnDelete(true);
 
         }
 

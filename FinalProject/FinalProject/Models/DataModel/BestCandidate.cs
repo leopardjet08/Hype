@@ -11,7 +11,5 @@ namespace FinalProject.Models.DataModel
 
         public int ApplicationID { get; set; }
         
-        public virtual Application Application { get; set; }
-
     }
 }

@@ -54,18 +54,24 @@ namespace FinalProject.DAL.Migrations
                         ApplicantID = c.Int(nullable: false),
                         SubmissionDate = c.DateTime(nullable: false),
                         ApplicationStatusID = c.Int(nullable: false),
+                        BestCandidates_ID = c.Int(),
+                        Comment_ID = c.Int(),
                         School_ID = c.Int(),
                         Archiveposting_ID = c.Int(),
                     })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.Applicant", t => t.ApplicantID)
                 .ForeignKey("dbo.ApplicationStatus", t => t.ApplicationStatusID)
-                .ForeignKey("dbo.Posting", t => t.PostingID)
+                .ForeignKey("dbo.BestCandidate", t => t.BestCandidates_ID)
+                .ForeignKey("dbo.ApplicationComment", t => t.Comment_ID)
+                .ForeignKey("dbo.Posting", t => t.PostingID, cascadeDelete: true)
                 .ForeignKey("dbo.School", t => t.School_ID)
                 .ForeignKey("dbo.Archiveposting", t => t.Archiveposting_ID)
                 .Index(t => t.PostingID)
                 .Index(t => t.ApplicantID)
                 .Index(t => t.ApplicationStatusID)
+                .Index(t => t.BestCandidates_ID)
+                .Index(t => t.Comment_ID)
                 .Index(t => t.School_ID)
                 .Index(t => t.Archiveposting_ID);
             
@@ -75,6 +81,25 @@ namespace FinalProject.DAL.Migrations
                     {
                         ID = c.Int(nullable: false, identity: true),
                         Status = c.String(),
+                    })
+                .PrimaryKey(t => t.ID);
+            
+            CreateTable(
+                "dbo.BestCandidate",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        ApplicationID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.ID);
+            
+            CreateTable(
+                "dbo.ApplicationComment",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        ApplicationID = c.Int(nullable: false),
+                        Comments = c.String(),
                     })
                 .PrimaryKey(t => t.ID);
             
@@ -110,6 +135,35 @@ namespace FinalProject.DAL.Migrations
                 .Index(t => t.JobID)
                 .Index(t => t.PostingStatusID)
                 .Index(t => t.PostingTypesID);
+            
+            CreateTable(
+                "dbo.Appliedposting",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        ApplicantID = c.Int(nullable: false),
+                        PostingID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.Posting", t => t.PostingID, cascadeDelete: true)
+                .ForeignKey("dbo.Applicant", t => t.ApplicantID, cascadeDelete: true)
+                .Index(t => t.ApplicantID)
+                .Index(t => t.PostingID);
+            
+            CreateTable(
+                "dbo.ExpiredPosting",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        ApplicantID = c.Int(nullable: false),
+                        PostingID = c.Int(nullable: false),
+                        ExpiredOn = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.ID)
+                .ForeignKey("dbo.Posting", t => t.PostingID)
+                .ForeignKey("dbo.Applicant", t => t.ApplicantID, cascadeDelete: true)
+                .Index(t => t.ApplicantID)
+                .Index(t => t.PostingID);
             
             CreateTable(
                 "dbo.Job",
@@ -191,7 +245,7 @@ namespace FinalProject.DAL.Migrations
                         Archiveposting_ID = c.Int(),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Posting", t => t.PostingID)
+                .ForeignKey("dbo.Posting", t => t.PostingID, cascadeDelete: true)
                 .ForeignKey("dbo.Applicant", t => t.ApplicantID, cascadeDelete: true)
                 .ForeignKey("dbo.Archiveposting", t => t.Archiveposting_ID)
                 .Index(t => t.ApplicantID)
@@ -245,35 +299,6 @@ namespace FinalProject.DAL.Migrations
                 .Index(t => t.LevelName, unique: true, name: "IX_Unique_LevelName");
             
             CreateTable(
-                "dbo.Appliedposting",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        ApplicantID = c.Int(nullable: false),
-                        PostingID = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Applicant", t => t.ApplicantID)
-                .ForeignKey("dbo.Posting", t => t.PostingID)
-                .Index(t => t.ApplicantID)
-                .Index(t => t.PostingID);
-            
-            CreateTable(
-                "dbo.ExpiredPosting",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        ApplicantID = c.Int(nullable: false),
-                        PostingID = c.Int(nullable: false),
-                        ExpiredOn = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Applicant", t => t.ApplicantID)
-                .ForeignKey("dbo.Posting", t => t.PostingID)
-                .Index(t => t.ApplicantID)
-                .Index(t => t.PostingID);
-            
-            CreateTable(
                 "dbo.aFile",
                 c => new
                     {
@@ -309,32 +334,18 @@ namespace FinalProject.DAL.Migrations
                 .Index(t => t.ProvinceName, unique: true, name: "IX_Unique_Province");
             
             CreateTable(
-                "dbo.ApplicationComment",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        ApplicationID = c.Int(nullable: false),
-                        Comments = c.String(),
-                    })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Application", t => t.ApplicationID)
-                .Index(t => t.ApplicationID);
-            
-            CreateTable(
                 "dbo.ArchiveApplication",
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        PostingID = c.Int(nullable: false),
+                        ApplicationID = c.Int(nullable: false),
                         ApplicantID = c.Int(nullable: false),
                         SubmissionDate = c.DateTime(nullable: false),
                         ArchiveDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Applicant", t => t.ApplicantID)
-                .ForeignKey("dbo.Posting", t => t.PostingID)
-                .Index(t => t.PostingID)
-                .Index(t => t.ApplicantID);
+                .ForeignKey("dbo.Application", t => t.ApplicationID)
+                .Index(t => t.ApplicationID);
             
             CreateTable(
                 "dbo.Archiveposting",
@@ -358,17 +369,6 @@ namespace FinalProject.DAL.Migrations
                 .ForeignKey("dbo.School", t => t.SchoolID)
                 .Index(t => t.SchoolID)
                 .Index(t => t.JobID);
-            
-            CreateTable(
-                "dbo.BestCandidate",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        ApplicationID = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Application", t => t.ApplicationID)
-                .Index(t => t.ApplicationID);
             
             CreateTable(
                 "dbo.QualificationJob",
@@ -452,7 +452,6 @@ namespace FinalProject.DAL.Migrations
         
         public override void Down()
         {
-            DropForeignKey("dbo.BestCandidate", "ApplicationID", "dbo.Application");
             DropForeignKey("dbo.Skill", "Archiveposting_ID", "dbo.Archiveposting");
             DropForeignKey("dbo.Archiveposting", "SchoolID", "dbo.School");
             DropForeignKey("dbo.SavedPosting", "Archiveposting_ID", "dbo.Archiveposting");
@@ -460,16 +459,12 @@ namespace FinalProject.DAL.Migrations
             DropForeignKey("dbo.Qualification", "Archiveposting_ID", "dbo.Archiveposting");
             DropForeignKey("dbo.Archiveposting", "JobID", "dbo.Job");
             DropForeignKey("dbo.Application", "Archiveposting_ID", "dbo.Archiveposting");
-            DropForeignKey("dbo.ArchiveApplication", "PostingID", "dbo.Posting");
-            DropForeignKey("dbo.ArchiveApplication", "ApplicantID", "dbo.Applicant");
-            DropForeignKey("dbo.ApplicationComment", "ApplicationID", "dbo.Application");
+            DropForeignKey("dbo.ArchiveApplication", "ApplicationID", "dbo.Application");
             DropForeignKey("dbo.SavedPosting", "ApplicantID", "dbo.Applicant");
             DropForeignKey("dbo.Applicant", "ProvinceID", "dbo.Province");
             DropForeignKey("dbo.aFile", "ApplicantID", "dbo.Applicant");
             DropForeignKey("dbo.FileContent", "FileContentID", "dbo.aFile");
-            DropForeignKey("dbo.ExpiredPosting", "PostingID", "dbo.Posting");
             DropForeignKey("dbo.ExpiredPosting", "ApplicantID", "dbo.Applicant");
-            DropForeignKey("dbo.Appliedposting", "PostingID", "dbo.Posting");
             DropForeignKey("dbo.Appliedposting", "ApplicantID", "dbo.Applicant");
             DropForeignKey("dbo.School", "SchoolLevelID", "dbo.SchoolLevel");
             DropForeignKey("dbo.School", "SchoolFamilyID", "dbo.SchoolFamily");
@@ -493,7 +488,11 @@ namespace FinalProject.DAL.Migrations
             DropForeignKey("dbo.QualificationJob", "Job_ID", "dbo.Job");
             DropForeignKey("dbo.QualificationJob", "Qualification_ID", "dbo.Qualification");
             DropForeignKey("dbo.Posting", "JobID", "dbo.Job");
+            DropForeignKey("dbo.ExpiredPosting", "PostingID", "dbo.Posting");
+            DropForeignKey("dbo.Appliedposting", "PostingID", "dbo.Posting");
             DropForeignKey("dbo.Application", "PostingID", "dbo.Posting");
+            DropForeignKey("dbo.Application", "Comment_ID", "dbo.ApplicationComment");
+            DropForeignKey("dbo.Application", "BestCandidates_ID", "dbo.BestCandidate");
             DropForeignKey("dbo.Application", "ApplicationStatusID", "dbo.ApplicationStatus");
             DropForeignKey("dbo.Application", "ApplicantID", "dbo.Applicant");
             DropForeignKey("dbo.ApplicantImage", "ApplicantImageID", "dbo.Applicant");
@@ -509,19 +508,12 @@ namespace FinalProject.DAL.Migrations
             DropIndex("dbo.QualificationPosting", new[] { "Qualification_ID" });
             DropIndex("dbo.QualificationJob", new[] { "Job_ID" });
             DropIndex("dbo.QualificationJob", new[] { "Qualification_ID" });
-            DropIndex("dbo.BestCandidate", new[] { "ApplicationID" });
             DropIndex("dbo.Archiveposting", new[] { "JobID" });
             DropIndex("dbo.Archiveposting", new[] { "SchoolID" });
-            DropIndex("dbo.ArchiveApplication", new[] { "ApplicantID" });
-            DropIndex("dbo.ArchiveApplication", new[] { "PostingID" });
-            DropIndex("dbo.ApplicationComment", new[] { "ApplicationID" });
+            DropIndex("dbo.ArchiveApplication", new[] { "ApplicationID" });
             DropIndex("dbo.Province", "IX_Unique_Province");
             DropIndex("dbo.FileContent", new[] { "FileContentID" });
             DropIndex("dbo.aFile", new[] { "ApplicantID" });
-            DropIndex("dbo.ExpiredPosting", new[] { "PostingID" });
-            DropIndex("dbo.ExpiredPosting", new[] { "ApplicantID" });
-            DropIndex("dbo.Appliedposting", new[] { "PostingID" });
-            DropIndex("dbo.Appliedposting", new[] { "ApplicantID" });
             DropIndex("dbo.SchoolLevel", "IX_Unique_LevelName");
             DropIndex("dbo.SchoolFamily", "IX_Unique_FamilyName");
             DropIndex("dbo.School", new[] { "SchoolFamilyID" });
@@ -537,12 +529,18 @@ namespace FinalProject.DAL.Migrations
             DropIndex("dbo.Qualification", new[] { "Archiveposting_ID" });
             DropIndex("dbo.Qualification", "IX_Unique_qual");
             DropIndex("dbo.Job", "IX_Unique_JobCode");
+            DropIndex("dbo.ExpiredPosting", new[] { "PostingID" });
+            DropIndex("dbo.ExpiredPosting", new[] { "ApplicantID" });
+            DropIndex("dbo.Appliedposting", new[] { "PostingID" });
+            DropIndex("dbo.Appliedposting", new[] { "ApplicantID" });
             DropIndex("dbo.Posting", new[] { "PostingTypesID" });
             DropIndex("dbo.Posting", new[] { "PostingStatusID" });
             DropIndex("dbo.Posting", new[] { "JobID" });
             DropIndex("dbo.Posting", new[] { "SchoolID" });
             DropIndex("dbo.Application", new[] { "Archiveposting_ID" });
             DropIndex("dbo.Application", new[] { "School_ID" });
+            DropIndex("dbo.Application", new[] { "Comment_ID" });
+            DropIndex("dbo.Application", new[] { "BestCandidates_ID" });
             DropIndex("dbo.Application", new[] { "ApplicationStatusID" });
             DropIndex("dbo.Application", new[] { "ApplicantID" });
             DropIndex("dbo.Application", new[] { "PostingID" });
@@ -556,15 +554,11 @@ namespace FinalProject.DAL.Migrations
             DropTable("dbo.RequirementJob");
             DropTable("dbo.QualificationPosting");
             DropTable("dbo.QualificationJob");
-            DropTable("dbo.BestCandidate");
             DropTable("dbo.Archiveposting");
             DropTable("dbo.ArchiveApplication");
-            DropTable("dbo.ApplicationComment");
             DropTable("dbo.Province");
             DropTable("dbo.FileContent");
             DropTable("dbo.aFile");
-            DropTable("dbo.ExpiredPosting");
-            DropTable("dbo.Appliedposting");
             DropTable("dbo.SchoolLevel");
             DropTable("dbo.SchoolFamily");
             DropTable("dbo.City");
@@ -576,7 +570,11 @@ namespace FinalProject.DAL.Migrations
             DropTable("dbo.Requirement");
             DropTable("dbo.Qualification");
             DropTable("dbo.Job");
+            DropTable("dbo.ExpiredPosting");
+            DropTable("dbo.Appliedposting");
             DropTable("dbo.Posting");
+            DropTable("dbo.ApplicationComment");
+            DropTable("dbo.BestCandidate");
             DropTable("dbo.ApplicationStatus");
             DropTable("dbo.Application");
             DropTable("dbo.Applicant");
