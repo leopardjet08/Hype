@@ -1,6 +1,6 @@
 ﻿@using PagedList;
 @using PagedList.Mvc;
-@model IPagedList<FinalProject.Models.Application>
+@model IPagedList<FinalProject.Models.DataModel.ArchiveApplication>
 
 @{
     ViewBag.Title = "Archived Applications";
@@ -69,16 +69,16 @@
 
                                 </td>
                                 <td style="text-align:center;">
-                                    @Html.DisplayFor(modelItem => item.Posting.Job.JobTitle)
+                                    @Html.DisplayFor(modelItem => item.Applications.Posting.Job.JobTitle)
                                 </td>
                                 <td class="company" style="text-align:center;">
-                                    @Html.DisplayFor(modelItem => item.Posting.School.SchoolName)
+                                    @Html.DisplayFor(modelItem => item.Applications.Posting.School.SchoolName)
                                 </td>
                                 <td style="text-align:center;">
-                                    @Html.DisplayFor(modelItem => item.Applicant.FullName)
+                                    @Html.DisplayFor(modelItem => item.Applications.Applicant.FullName)
                                 </td>
                                 <td style="text-align:center;" class="appStatus">
-                                    @Html.DisplayFor(modelItem => item.ApplicationStatus.Status)
+                                    @Html.DisplayFor(modelItem => item.Applications.ApplicationStatus.Status)
                                 </td>
 
                                 @* Buttons in the table *@
