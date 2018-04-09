@@ -3,38 +3,84 @@
 @{
     ViewBag.Title = "Posting Details";
 }
+   
+<div class="container well well-lg" style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
 
+      <p style="text-align:center; margin-top:20px; margin-bottom:15px; font-size:30px; color:#02388a;"> Niagara Catholic District School Board</p>
+      <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
+      <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
+         
+      <br />
 
-    <div> 
-        <div class="container well well-lg" style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
-
-            <p style="text-align:center; margin-top:20px; margin-bottom:15px; font-size:30px; color:#02388a;"> Niagara Catholic District School Board</p>
-            <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
-            <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
-            <br />
-
-            <div style="margin:0 auto" ; id="postingDetail">
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+      <div class="borderVibe" style="border:1px solid #d5d2d2; background-color:white; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">   
+          <div style="margin:0 auto" ;>
+          @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <h3 style="text-align:center; padding-bottom:30px">
                     ∙ &nbsp; Posting Details &nbsp; ∙
                 </h3>&nbsp;&nbsp;
 
-                <table style="width:70%; margin:0 auto; font-size:18px">
-                    <tr>
-                        <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.Job.JobTitle)  :  </b></h4></td>
-                        <td>@Html.DisplayFor(model => model.Job.JobTitle)</td>
-                        <td style="width:10px"></td>
-                        <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.ClosingDate)  :  </b></h4></td>
-                        <td>@Html.DisplayFor(model => model.ClosingDate)</td>
+
+                <table style="text-align: left; width:70%; margin:0 auto;">
+                   <tr>
+                      <td style="color:#02388a">
+                         <h4><b>@Html.DisplayNameFor(model => model.NumberOpen)  :  </b></h4>
+                      </td>
+                      <td>
+                         @Html.DisplayFor(model => model.NumberOpen)
+                      </td>
+                            </tr>
+                            <tr>
+                                <td style="color:#02388a">
+                                    <h4><b>@Html.DisplayNameFor(model => model.Job.JobTitle)  :  </b></h4>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => model.Job.JobTitle)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="color:#02388a">
+                                    <h4><b>@Html.DisplayNameFor(model => model.Job.JobCode)  :  </b></h4>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => model.Job.JobCode)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="color:#02388a">
+                                    <h4><b>@Html.DisplayNameFor(model => model.School.SchoolName) :  </b></h4>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => model.School.SchoolName)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="color:#02388a">
+                                    <h4><b>@Html.DisplayNameFor(model => model.School.SchoolFamily)  :  </b></h4>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => model.School.SchoolFamily.FamilyName)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td >
+                                    <h4 style="color:#02388a"><b>@Html.DisplayNameFor(model => model.School.City.CityName)  :  </b></h4>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => model.School.City.CityName)
+                                </td>
+                            </tr>
+                        </table>
+                   
+                <table style="text-align: left; width:70%; margin:0 auto; font-size:18px">
+                    <tr style="color:#02388a">
+                       <td>
+                          <h4><b>@Html.DisplayNameFor(model => model.PostingTypes.Type)  :  </b></h4>
+                       </td>
+                        <td>
+                            @Html.DisplayFor(model => model.PostingTypes.Type)
+                        </td>
                     </tr>
 
-                    <tr style="height:60px">
-                        <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.School.SchoolName) :  </b></h4></td>
-                        <td>@Html.DisplayFor(model => model.School.SchoolName)</td>
-                        <td style="width:10px"></td>
-                        <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.StartDate)  :  </b></h4></td>
-                        <td>@Html.DisplayFor(model => model.StartDate)</td>
-                    </tr>
                     <tr>
                         <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.School.SchoolFamily)  :  </b></h4></td>
                         <td>@Html.DisplayFor(model => model.School.SchoolFamily.FamilyName)</td>
@@ -49,37 +95,69 @@
                             }
                         </td>
                     </tr>
+
                     <tr style="height:60px">
-                        <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.School.City.CityName)  :  </b></h4></td>
-                        <td>@Html.DisplayFor(model => model.School.City.CityName)</td>
-                        <td style="width:10px"></td>
-                        <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.Requirements)  :  </b></h4></td>
+                        <td style="color:#02388a">
+                            <h4><b>@Html.DisplayNameFor(model => model.StartDate)  :  </b></h4>
+                        </td>
                         <td>
-                            @{
+                            @Html.DisplayFor(model => model.StartDate)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color:#02388a">
+                            <h4><b>@Html.DisplayNameFor(model => model.JobEndDate)  :  </b></h4>
+                        </td>    
+                        <td>
+                            @Html.DisplayFor(model => model.JobEndDate)
+                        </td>
+                    </tr>
+               </table>
+            <br />
+
+     <div style="width:700px; text-align:center; font-size:16px; margin:0 auto" id="Summary">
+     </div>    
+         
+         <br />         <br />         <br />
+
+
+     <div class="row" style="width:900px; text-align:center; margin:0 auto" ;>
+         <div class="col-md-4">
+            <div>
+                <h4 style="color:#02388a"><b>@Html.DisplayNameFor(model => model.Requirements) </b></h4>        
+                 @{
                     foreach (var requirments in Model.Requirements)
                     {
                         @:  @requirments.RequirementName <br />
-        }
-                            }
-                        </td>
-                    </tr>
+                    }
+                  }
+            </div>
+         </div>
+         <div class="col-md-4">
+             <div>
+                 <h4 style="color:#02388a"><b>@Html.DisplayNameFor(model => model.Qualifications)  </b></h4>  
+                  @{
+                    foreach (var qualification in Model.Qualifications)
+                    {
+                        @:  @qualification.QualificationSet <br />
+                    }
+                   }
+             </div>
+         </div>
+         <div class="col-md-4">
+              <div>
+                    <h4 style="color:#02388a"><b>@Html.DisplayNameFor(model => model.Skills) </b></h4>     
+                   @{
 
-
-                    <tr style="height:50px">
-                        <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.NumberOpen)  :  </b></h4></td>
-                        <td>@Html.DisplayFor(model => model.NumberOpen)</td>
-                        <td style="color:#f5f5f5; width:10px"></td>
-                        <td style="color:#02388a" class="skillH"><h4><b>@Html.DisplayNameFor(model => model.Skills)  :</b></h4></td>
-                        <td class="skillC">
-                            @{
                     foreach (var skills in Model.Skills)
                     {
                         @:  @skills.SkillName <br />
-        }
-                            }
-                        </td>
-                    </tr>
-                </table><br />
+                        }
+                   }
+              </div>
+         </div>
+     </div>
+    
                 <div style="margin-left:186px">
                     <h4 style="color:#02388a"><b>@Html.DisplayNameFor(model => model.PostingDescription)  :  </b></h4>
                     <p style="width:900px;  font-size:18px">
@@ -89,8 +167,10 @@
 
                 <div style="margin-top:30px; margin-left:550px">
 
-                    @*&nbsp;@Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "btn btn-primary btn-large", @style = "border:none; background-color:#00a203; padding-right:50px; padding-left:50px; margin-right:50px;" })*@
-                    @*&nbsp;@Html.ActionLink("Archive", "Archive", new { id = Model.ID }, new { @class = "btn btn-danger btn-large", @style = "border:none;  padding-right:50px; padding-left:50px; margin-right:50px;" })*@
+
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "btn btn-primary btn-large", @style = "border:none; background-color:#00a203; padding-right:50px; padding-left:50px; margin-right:50px;" })
+                    &nbsp;@Html.ActionLink("Archive", "Archive", new { id = Model.ID }, new { @class = "btn btn-danger btn-large", @style = "border:none;  padding-right:50px; padding-left:50px; margin-right:50px;" })
+
                     <a href="javascript:void(0);" onclick="history.go(-1);">Back</a>
                 </div>
             </div>
@@ -129,4 +209,3 @@
               }
               skillOrQual("postingDetail");
           </script>
-
