@@ -92,8 +92,7 @@
                         <br />
                         <br />
                         @Html.ActionLink("Apply", "AppliedView", "Apply", new { id = item.ID }, new { @class = "btn btn-primary btn-sm", @style = "border:none; font-weight:bold; background-color:#00a203" })
-                        @*@Html.ActionLink("Save", "Details", "", new { id = item.ID }, new { @class = "btn btn-primary btn-sm", @style = "border:none; font-weight:bold; background-color:#012e72" })*@
-                        &nbsp; &nbsp; @Html.ActionLink("Bookmark", "SavePosting", "Posting", new { id = item.ID }, new { @style = "color:#012e72; font-size:14px" })
+                        &nbsp; &nbsp; @Html.ActionLink("Bookmark", "SavePosting", "Posting", new { id = item.ID }, new {@class = "btn btn-primary btn-sm", @style = "color:#012e72; font-size:13px; background-color:#c2b200;border:none" })
                     </div>
                     <br />
                     <br />
