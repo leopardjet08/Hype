@@ -4,6 +4,18 @@
     ViewBag.Title = "Delete";
 }
 
+
+<div class="container well well-lg" style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
+
+    <p style="text-align:center; margin-top:20px; margin-bottom:15px; font-size:30px; color:#02388a;"> Niagara Catholic District School Board</p>
+    <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
+    <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
+    <br />
+
+     <h3 style="padding-bottom:30px">
+        ∙ &nbsp; Archive this Job &nbsp; ∙
+    </h3>&nbsp;&nbsp;
+
 <h2>Delete</h2>
 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 <h3>Are you sure you want to delete this?</h3>
@@ -38,4 +50,6 @@
             @Html.ActionLink("Back to List", "Index")
         </div>
     }
+</div>
+
 </div>

@@ -22,14 +22,6 @@
         <b>Application Status:</b>
     </h4>
 
-    <h4 style="text-align:center; display:inline; margin-bottom:70px;" class="appStatus">
-        @Html.DisplayFor(model => model.ApplicationStatus.Status)
-
-    @*@if(this.Model.ApplicationStatus.Status.ToString() == "Pending")
-    {
-        this.Model.ApplicationStatus.Status. Style.Color = "#c2b200";
-    }*@
-
     <h4 class="test" style="text-align:center; color:green; display:inline; margin-bottom:70px;">
         @Html.DisplayFor(model => model.ApplicationStatus.Status)
     </h4>

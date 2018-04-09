@@ -4,7 +4,17 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+
+<div class="container well well-lg" style=" text-align:center; width:1288px; padding-bottom:75px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
+
+    <p style="text-align:center; margin-top:20px; margin-bottom:15px; font-size:30px; color:#02388a;"> Niagara Catholic District School Board</p>
+    <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
+    <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
+    <br />
+
+    <h3 style="padding-bottom:30px">
+        ∙ &nbsp; Edit Job &nbsp; ∙
+    </h3>&nbsp;&nbsp;
 
 
 @using (Html.BeginForm())
@@ -40,8 +50,6 @@
             @Html.ValidationMessageFor(model => model.JobSummary, "", new { @class = "text-danger" })
         </div>
     </div>
-
-
 
     <div class="col-md-6" style="margin-top:30px;">
                     <div class="form-horizontal">
@@ -122,30 +130,26 @@
                                         @:</td>
                                     }
                                     @:</tr>
-                            }
-
-                             
-                            
+                            }           
                         </table>
                     </div>
-
                 </div>
 
-
-
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
         </div>
     </div>
-</div>
-}
+    }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
