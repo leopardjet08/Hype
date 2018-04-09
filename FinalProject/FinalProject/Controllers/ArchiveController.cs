@@ -1,11 +1,9 @@
 ﻿using FinalProject.DAL;
 using FinalProject.Models;
-using FinalProject.Models.DataModel;
 using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -22,7 +20,7 @@ namespace FinalProject.Controllers
             PopulateDropDownLists();
             ViewBag.Filtering = "";
 
-            var Archiveapplication = from s in db.ArchiveApplications select s;
+            var application = from s in db.applications select s;
 
 
 
@@ -30,7 +28,7 @@ namespace FinalProject.Controllers
 
             if (!String.IsNullOrEmpty(searchName))
             {
-                Archiveapplication = Archiveapplication.Where(p => p.Applications.Posting.Job.JobTitle.ToUpper().Contains(searchName.ToUpper()));
+                application = application.Where(p => p.Posting.Job.JobTitle.ToUpper().Contains(searchName.ToUpper()));
                 ViewBag.Filtering = " in";
                 ViewBag.searchName = searchName;
             }
@@ -54,13 +52,13 @@ namespace FinalProject.Controllers
             {
                 if (String.IsNullOrEmpty(sortDirection))
                 {
-                    Archiveapplication = Archiveapplication
-                        .OrderBy(p => p.Applications.Posting.Job.JobTitle);
+                    application = application
+                        .OrderBy(p => p.Posting.Job.JobTitle);
                 }
                 else
                 {
-                    Archiveapplication = Archiveapplication
-                         .OrderByDescending(p => p.Applications.Posting.Job.JobTitle);
+                    application = application
+                         .OrderByDescending(p => p.Posting.Job.JobTitle);
                 }
             }
 
@@ -68,13 +66,13 @@ namespace FinalProject.Controllers
             {
                 if (String.IsNullOrEmpty(sortDirection))
                 {
-                    Archiveapplication = Archiveapplication
-                        .OrderBy(p => p.Applications.Posting.School.SchoolName);
+                    application = application
+                        .OrderBy(p => p.Posting.School.SchoolName);
                 }
                 else
 
-                    Archiveapplication = Archiveapplication
-                        .OrderByDescending(p => p.Applications.Posting.School.SchoolName);
+                    application = application
+                        .OrderByDescending(p => p.Posting.School.SchoolName);
 
 
             }
@@ -83,13 +81,13 @@ namespace FinalProject.Controllers
             {
                 if (String.IsNullOrEmpty(sortDirection))
                 {
-                    Archiveapplication = Archiveapplication
-                        .OrderBy(p => p.Applications.Posting.Job.JobTitle);
+                    application = application
+                        .OrderBy(p => p.Posting.Job.JobTitle);
                 }
                 else
                 {
-                    Archiveapplication = Archiveapplication
-                         .OrderByDescending(p => p.Applications.Posting.Job.JobTitle);
+                    application = application
+                         .OrderByDescending(p => p.Posting.Job.JobTitle);
                 }
             }
 
@@ -102,7 +100,7 @@ namespace FinalProject.Controllers
             int pageSize = 9;
             int pageNumber = (page ?? 1);
 
-            return View(Archiveapplication.ToPagedList(pageNumber, pageSize));
+            return View(application.ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult IndexPostings(string sortDirection, string sortField,
@@ -221,23 +219,6 @@ namespace FinalProject.Controllers
         {
 
         }
-         public ActionResult ArchivePostingDetails(int? id) {
-
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            //get all posting data
-            Archiveposting archiveposting = db.Archivepostings
-                .Where(p => p.ID == id).SingleOrDefault();
-
-            if (archiveposting == null)
-            {
-                return HttpNotFound();
-            }
-            return View(archiveposting);
-        }
-
 
     }
 }

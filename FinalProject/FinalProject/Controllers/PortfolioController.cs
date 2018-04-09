@@ -36,12 +36,6 @@ namespace FinalProject.Controllers
             return View(applicant);
         }
 
-        public FileContentResult Download(int id)
-        {
-            var theFile = db.Files.Include(f => f.FileContent).Where(f => f.ID == id).SingleOrDefault();
-            return File(theFile.FileContent.Content, theFile.FileContent.MimeType, theFile.fileName);
-        }
-
 
         public ActionResult Delete(int id)
         {
