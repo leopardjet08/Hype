@@ -4,8 +4,7 @@
 {
     @Html.AntiForgeryToken()
     
-<div class="form-horizontal" style="text-align:center">
-    <h4>SavedPosting</h4>
+<div class="form-horizontal">
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -24,43 +23,45 @@
         </div>
     </div>
 
-    <div class="form-group" style=" font-size:x-large">
-        Are you sure you want to save this Posting
+    <div class="form-group" style=" font-size:x-large; width:100%">
+        <div style="margin-left:80px">
+            Are you sure you want to save this Posting?
+        </div>
     </div>
+    <div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Postings.Job.JobTitle, "Job Title: ", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10" style=" padding-top:6px">
+                @Html.DisplayFor(model => model.Postings.Job.JobTitle, new { htmlAttributes = new { @class = "form-control", @style = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Postings.Job.JobTitle, "", new { @class = "text-danger"})
+            </div>
+        </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Postings.Job.JobTitle, "Job Title: ", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Postings.Job.JobTitle, new { htmlAttributes = new { @class = "form-control", @style = "width:200px" } })
-            @Html.ValidationMessageFor(model => model.Postings.Job.JobTitle, "", new { @class = "text-danger" })
+        <div class="form-group" style="text-align:left">
+            @Html.LabelFor(model => model.Postings.JobCode, "Job Code: ", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10" style=" padding-top:6px">
+                @Html.DisplayFor(model => model.Postings.JobCode, new { htmlAttributes = new { @class = "form-control", @style = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Postings.JobCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group" style="text-align:left">
+            @Html.LabelFor(model => model.Postings.ClosingDate, "Expires On: ", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10" style=" padding-top:6px">
+                @Html.DisplayFor(model => model.Postings.ClosingDate, new { htmlAttributes = new { @class = "form-control", @style = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Postings.ClosingDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group" style="text-align:left">
+            @Html.LabelFor(model => model.Postings.School.SchoolName, "School: ", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10" style=" padding-top:6px">
+                @Html.DisplayFor(model => model.Postings.School.SchoolName, new { htmlAttributes = new { @class = "form-control", @style = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Postings.School.SchoolName, "", new { @class = "text-danger" })
+            </div>
         </div>
     </div>
-
-    <div class="form-group" style="text-align:center">
-        @Html.LabelFor(model => model.Postings.JobCode, "Job Code: ", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Postings.JobCode, new { htmlAttributes = new { @class = "form-control", @style = "width:200px" } })
-            @Html.ValidationMessageFor(model => model.Postings.JobCode, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group" style="text-align:center">
-        @Html.LabelFor(model => model.Postings.ClosingDate, "Expired On: ", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Postings.ClosingDate, new { htmlAttributes = new { @class = "form-control", @style = "width:200px" } })
-            @Html.ValidationMessageFor(model => model.Postings.ClosingDate, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group" style="text-align:center">
-        @Html.LabelFor(model => model.Postings.School.SchoolName, "School: ", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Postings.School.SchoolName, new { htmlAttributes = new { @class = "form-control", @style = "width:200px" } })
-            @Html.ValidationMessageFor(model => model.Postings.School.SchoolName, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group" style="text-align:center">
-    
-            <input type="submit" value="Save" class="btn btn-default" />
+    <div class="form-group" style="text-align:center; padding-right:300px;">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class = "btn btn-primary btn-sm", style = "border:none; font-weight:bold; background-color:#00a203" }/>
             @Html.ActionLink("Back to List", "Index", new { @class = "btn btn-default" })
         
     </div>
