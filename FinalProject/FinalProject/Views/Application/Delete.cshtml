@@ -1,7 +1,7 @@
 ﻿@model FinalProject.Models.Application
 
 @{
-    ViewBag.Title = "Delete Application";
+    ViewBag.Title = "Archive Application";
 }
 
 <div class="container well well-lg" style=" text-align:center; width:1288px; padding-bottom:75px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
@@ -12,40 +12,42 @@
     <br />
 
     <h3 style="padding-bottom:30px">
-        ∙ &nbsp; Delete Application &nbsp; ∙
+        ∙ &nbsp; Archive Application &nbsp; ∙
     </h3>&nbsp;&nbsp;
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <h3>Are you sure you want to delete the following application?</h3>
+    <h3>Are you sure you want to move this application to Archives?</h3>
     <br />
     <div style="font-size:18px; margin-top:10px; margin-bottom:30px">
 
         <table style="width:35%; margin:0 auto; text-align:left">
             <tr>
-                <td style="color:#02388a"><b>Application Number:</b></td>
-                <td><b>@Html.DisplayFor(model => model.ID)</b></td>
+                <td style="color:#02388a"><b>Job Title:</b></td>
+                <td><b>@Html.DisplayFor(model => model.Posting.Job.JobTitle)</b></td>
             </tr>
             <tr>
                 <td style="color:#02388a"><b>Applicant Name:</b></td>
                 <td><b>@Html.DisplayFor(model => model.Applicant.FullName)</b></td>
             </tr>
             <tr>
-                <td style="color:#02388a"><b>Job ID:</b></td>
-                <td><b>@Html.DisplayFor(model => model.Posting.Job.ID)</b></td>
+                <td style="color:#02388a"><b>Application Number:</b></td>
+                <td><b>@Html.DisplayFor(model => model.ID)</b></td>
             </tr>
             <tr>
-                <td style="color:#02388a"><b>Job Title:</b></td>
-                <td><b>@Html.DisplayFor(model => model.Posting.Job.JobTitle)</b></td>
+                <td style="color:#02388a"><b>Posting ID:</b></td>
+                <td><b>@Html.DisplayFor(model => model.Posting.ID)</b></td>
             </tr>
+
         </table>
     </div>
 
-    <br />
+    <br /><br />
 
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
 
-        <input type="submit" style="margin-right:30px; " value="Delete" class="btn btn-danger btn-large" />
+        <input type="submit" style="border:none; background-color:#00a203" value="Move to Archives" class="btn btn-primary btn-large" />
+        <br /><br />
         @Html.ActionLink("Cancel", "Index")
     }
 </div>
