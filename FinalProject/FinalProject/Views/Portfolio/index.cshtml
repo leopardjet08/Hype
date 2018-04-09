@@ -127,7 +127,7 @@
                                             @: <font color="blue"><Strong><u>@Html.DisplayFor(modelItem => f.Postings.Job.JobTitle)</u></Strong></font> <br />
                                                 <Strong> @Html.DisplayFor(modelItem => f.Postings.School.SchoolName ) </Strong> <br /><br />
                                             @:  @Html.ActionLink("View", "Details", "Posting", new { id = f.PostingID }, new { @class= "btn btn-default", @style = "border:2px solid gray; color:green" }) 
-                                            @:  @Html.ActionLink("Delete", "Delete", new { id = f.ID }, new { @class = "btn btn-default", @style = "border:2px solid gray; color:red" }) <br /><br /><br />
+                                            @:  @Html.ActionLink("Delete", "DeleteApplied", new { id = f.ID }, new { @class = "btn btn-default", @style = "border:2px solid gray; color:red" }) <br /><br /><br />
                                         }
                                     }
 
@@ -143,7 +143,7 @@
                                             @: <font color="blue"><Strong><u>@Html.DisplayFor(modelItem => f.Postings.Job.JobTitle)</u></Strong></font> <br />
                                                 <Strong> @Html.DisplayFor(modelItem => f.Postings.School.SchoolName ) </Strong> <br /><br />
                                             @:  @Html.ActionLink("Apply", "AppliedView", "Apply", new { id = f.PostingID }, new { @class= "btn btn-default", @style = "border:2px solid gray; color:green" }) 
-                                            @:  @Html.ActionLink("Delete", "Delete", new { id = f.ID }, new { @class = "btn btn-default", @style = "border:2px solid gray; color:red" }) <br /><br /><br />
+                                            @:  @Html.ActionLink("Delete", "DeleteSaved", new { id = f.ID }, new { @class = "btn btn-default", @style = "border:2px solid gray; color:red" }) <br /><br /><br />
                                         }
                                     }
 
@@ -160,7 +160,7 @@
                                             @: <font color="blue"><Strong><u>@Html.DisplayFor(modelItem => f.Postings.Job.JobTitle)</u></Strong></font> <br />
                                                 <Strong> @Html.DisplayFor(modelItem => f.Postings.School.SchoolName ) </Strong> <br /><br />
                                             @:  @Html.ActionLink("View", "Details", "Posting", new { id = f.PostingID }, new { @class= "btn btn-default", @style = "border:2px solid gray; color:green" }) 
-                                            @:  @Html.ActionLink("Delete", "Delete", new { id = f.ID }, new { @class = "btn btn-default", @style = "border:2px solid gray; color:red" }) <br /><br /><br />
+                                            @:  @Html.ActionLink("Delete", "DeleteExpired", new { id = f.ID }, new { @class = "btn btn-default", @style = "border:2px solid gray; color:red" }) <br /><br /><br />
                                         }
                                     }
 
