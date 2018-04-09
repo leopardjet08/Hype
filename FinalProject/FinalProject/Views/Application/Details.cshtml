@@ -7,7 +7,7 @@
 
 
 
-<div class="container well well-lg" style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
+<div id="AppStatus" class="container well well-lg" style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
 
     <p style="text-align:center; margin-top:20px; margin-bottom:15px; font-size:30px; color:#02388a;"> Niagara Catholic District School Board</p>
     <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
@@ -22,6 +22,9 @@
         <b>Application Status:</b>
     </h4>
 
+    <h4 style="text-align:center; display:inline; margin-bottom:70px;" class="appStatus">
+        @Html.DisplayFor(model => model.ApplicationStatus.Status)
+
     @*@if(this.Model.ApplicationStatus.Status.ToString() == "Pending")
     {
         this.Model.ApplicationStatus.Status. Style.Color = "#c2b200";
@@ -30,7 +33,6 @@
     <h4 class="test" style="text-align:center; color:green; display:inline; margin-bottom:70px;">
         @Html.DisplayFor(model => model.ApplicationStatus.Status)
     </h4>
-         
     <br />
 
 
@@ -201,7 +203,7 @@
                                 Phone:
                             </td>
                             <td style="padding-left:20px; padding-bottom:24px">
-                                @Html.Label("pho", "Not in database")
+                                @Html.DisplayFor(model => model.Applicant.PhoneNumber)
                             </td>
                         </tr>
                         <tr>
@@ -216,8 +218,9 @@
                             <td style="padding-bottom:20px; color:#02388a">
                                 Resume:
                             </td>
-                            <td style="padding-left:20px; font-size:14px">
-                                <a href="https://omextemplates.content.office.net/support/templates/en-us/tf00002110.docx" download="Download Resume"><img src="http://pluspng.com/img-png/resume-png-resume-icon-png-1024.png" height="42" width="42" />&nbsp; Download</a>
+                            <td style="padding-left:20px;">
+                                <a href="https://omextemplates.content.office.net/support/templates/en-us/tf00002110.docx" download="Download Resume"><img src="http://pluspng.com/img-png/resume-png-resume-icon-png-1024.png" height="42" width="42" />Download Resume.</a>
+
                                 
                             </td>
                         </tr>
@@ -259,4 +262,20 @@
 
         </style>
 
+<script>
+    function appStatusColor() {
 
+        var appS = document.getElementsByClassName('appStatus');
+
+        for (i = 0; i < appS.length; i++) {
+            console.log(appS[i].innerText);
+            if (appS[i].innerText == "Declined") {
+                appS[i].style.color = "red";
+            } else if (appS[i].innerText == "Pending") {
+                appS[i].style.color = "#c2b200";
+            } else if (appS[i].innerText == "Accepted") {
+                appS[i].style.color = "green";
+            }
+        }
+    }
+    appStatusColor('AppStatus');

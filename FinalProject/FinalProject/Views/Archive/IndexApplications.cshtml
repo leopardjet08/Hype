@@ -9,6 +9,8 @@
 
 @using (Html.BeginForm())
 {
+    
+   
 
     <div class="container well well-lg" style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
         <br />
@@ -56,35 +58,36 @@
                         </tr>
                     </thead>
                     <tbody id="tableColor" style="font-size:17px; text-align:left">
+
                         @* Data in the table *@
                         @foreach (var item in Model)
-                        {
-    
-                            <tr>
-                                <td style="text-align:center;">
-                                    @Html.DisplayFor(modelItem => item.SubmissionDate)
+                {
 
-                                </td>
-                                <td style="text-align:center;">
-                                    @Html.DisplayFor(modelItem => item.Posting.Job.JobTitle)
-                                </td>
-                                <td class="company" style="text-align:center;">
-                                    @Html.DisplayFor(modelItem => item.Posting.School.SchoolName)
-                                </td>
-                                <td style="text-align:center;">
-                                    @Html.DisplayFor(modelItem => item.Applicant.FullName)
-                                </td>
-                                <td style="text-align:center;" class="appStatus">
-                                    @Html.DisplayFor(modelItem => item.ApplicationStatus.Status)
-                                </td>
+                    <tr>
+                        <td style="text-align:center;">
+                            @Html.DisplayFor(modelItem => item.SubmissionDate)
 
-                                @* Buttons in the table *@
-                                <td style="text-align:center; font-size:14px">
-                                    @Html.ActionLink("View", "Details", "Application", new { id = item.ID }, new { @style = "border:0px;" })
-                                    &nbsp;@Html.ActionLink("Delete", "Delete", "Application", new { id = item.ID }, new { @style = "border:0px; " })
-                                </td>
-                            </tr>
-                        }
+                        </td>
+                        <td style="text-align:center;">
+                            @Html.DisplayFor(modelItem => item.Posting.Job.JobTitle)
+                        </td>
+                        <td class="company" style="text-align:center;">
+                            @Html.DisplayFor(modelItem => item.Posting.School.SchoolName)
+                        </td>
+                        <td style="text-align:center;">
+                            @Html.DisplayFor(modelItem => item.Applicant.FullName)
+                        </td>
+                        <td style="text-align:center;" class="appStatus">
+                            @Html.DisplayFor(modelItem => item.ApplicationStatus.Status)
+                        </td>
+
+                        @* Buttons in the table *@
+                        <td style="text-align:center; font-size:14px">
+                            @Html.ActionLink("View", "Details", "Application", new { id = item.ID }, new { @style = "border:0px;" })
+                            &nbsp;@Html.ActionLink("Delete", "Delete", "Application", new { id = item.ID }, new { @style = "border:0px; " })
+                        </td>
+                    </tr>
+        }
                     </tbody>
                 </table>
 
@@ -97,16 +100,32 @@
 
 
                 @Html.PagedListPager(Model, page => Url.Action("Index",
-  new
-  {
-      page,
-      sortDirection = ViewBag.sortDirection,
-      sortField = ViewBag.sortField,
-      searchName = ViewBag.searchName
-  }))
+ new
+ {
+     page,
+     sortDirection = ViewBag.sortDirection,
+     sortField = ViewBag.sortField,
+     searchName = ViewBag.searchName
+ }))
 
             </div>
+            <script>
+                function appStatusColor() {
 
+                    var appS = document.getElementsByClassName('appStatus');
+
+                    for (i = 0; i < appS.length; i++) {
+                        if (appS[i].innerText == "Declined") {
+                            appS[i].style.color = "red";
+                        } else if (appS[i].innerText == "Pending") {
+                            appS[i].style.color = "#c2b200";
+                        } else if (appS[i].innerText == "Accepted") {
+                            appS[i].style.color = "green";
+                        }
+                    }
+                }
+                appStatusColor('tableColor');
+            </script>      
         </div>
     </div>
 
