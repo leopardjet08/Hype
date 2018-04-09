@@ -6,6 +6,7 @@
 }
 
 
+
 <div class="container well well-lg" style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
 
     <p style="text-align:center; margin-top:20px; margin-bottom:15px; font-size:30px; color:#02388a;"> Niagara Catholic District School Board</p>
@@ -20,11 +21,16 @@
     <h4 style="text-align:center; margin-left:18px; color:#02388a; display:inline; padding-bottom:30px; padding-right: 10px">
         <b>Application Status:</b>
     </h4>
-    <h4 style="text-align:center; display:inline; margin-bottom:70px; color:red">
-        @Html.DisplayFor(model => model.ApplicationStatus.Status)
 
+    @*@if(this.Model.ApplicationStatus.Status.ToString() == "Pending")
+    {
+        this.Model.ApplicationStatus.Status. Style.Color = "#c2b200";
+    }*@
+
+    <h4 class="test" style="text-align:center; color:green; display:inline; margin-bottom:70px;">
+        @Html.DisplayFor(model => model.ApplicationStatus.Status)
     </h4>
-         Need to change color based on status!!!
+         
     <br />
 
 
@@ -33,19 +39,28 @@
     <div class="modal-body row">
 
         @* Posting Details *@
-        <div class="col-md-6" style="margin-top:30px">
-            <div class="container well well-lg">
+     
+        <div class="col-md-6" style="margin-top:30px;">
+            <div class="container well well-lg" style="background-color:white; margin:0 auto; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
 
                 <div class="form-horizontal">
-                    <p style="font-size:20px; color:#02388a; text-align:center; margin-top:20px; margin-bottom:50px"><u>Posting Details</u></p>
+                    <p style="font-size:20px; color:#02388a; text-align:center; margin-top:20px; margin-bottom:50px">∙ &nbsp; Posting Details &nbsp; ∙</p>
 
-                    <table style="width:100%; margin:0 auto; font-size:18px">
+                    <table style="width:50%; margin:0 auto; font-size:18px">
                         <tr>
                             <td style="padding-bottom:10px; color:#02388a">
                                 <h4 style="display:inline-block">Job Title:</h4>
                             </td>
                             <td style="padding-bottom:10px;">
                                 @Html.DisplayFor(model => model.Posting.Job.JobTitle)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style=" color:#02388a">
+                                <h4 style="display:inline-block">Openings:</h4>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model.Posting.NumberOpen)
                             </td>
                         </tr>
                         <tr>
@@ -65,66 +80,95 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="color:#02388a">
-                                <h4 style="display:inline-block">Requirement:</h4>
+                            <td style="padding-bottom:10px; color:#02388a">
+                                <h4 style="display:inline-block">Start Date:</h4>
                             </td>
+                            <td style="padding-bottom:10px;">
+                                @Html.DisplayFor(model => model.Posting.StartDate)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-bottom:10px; color:#02388a">
+                                <h4 style="display:inline-block">End Date:</h4>
+                            </td>
+                            <td style="padding-bottom:10px;">
+                                @Html.DisplayFor(model => model.Posting.JobEndDate)
+                            </td>
+                        </tr>
+                    </table>
+                  
+                    <table style="width:50%; margin:0 auto; font-size:18px; display:none" id="hideTable">
+                        <tr>
+                            <td style="color:#02388a">
+                                <h4 style="display:inline-block">Requirements:</h4>
+                            </td>
+                        </tr>
+                        <tr>
                             <td>
-                                @{
+                                 @{
                                     foreach (var requirment in Model.Posting.Job.Requirements)
                                     {
                                         @:  @requirment.RequirementName <br />
+                                     }
                                     }
+                            </td>
+                        </tr>
+                        <tr> 
+                            <td style="color:#02388a">
+                                <br />
+                                <h4 style="display:inline-block">Qualifications:</h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                 <br />
+                                 @{
+                                foreach (var qualification in Model.Posting.Job.Qualifications)
+                                {
+                                    @:  @qualification.QualificationSet <br />
+                                }
                                 }
                             </td>
                         </tr>
                         <tr>
                             <td style="color:#02388a">
-                                <h4 style="display:inline-block">Description:</h4>
+                                <h4 style="display:inline-block">Skills:</h4>
                             </td>
+                        </tr>
+                        <tr>
+                            <td>
+                               
+                                 @{
+                                foreach (var skill in Model.Posting.Job.Skills)
+                                {
+                                    @:  @skill.SkillName <br />
+                                }
+                                }
+                            </td>
+                        </tr>
+                        <tr>
                             <td>
                                 <br />
+                                <h4 style="color:#02388a; display:inline-block">Description:</h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 @Html.DisplayFor(model => model.Posting.PostingDescription)
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td style="color:#02388a">
-                                <h4 style="display:inline-block">Qualification:</h4>
-                            </td>
-                            <td>
-                                <br />
-                                @{
-                                    foreach (var qualification in Model.Posting.Job.Qualifications)
-                                    {
-                                        @:  @qualification.QualificationSet <br />
-                                    }
-                                }
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style=" color:#02388a">
-                                <h4 style="display:inline-block">Number of Openings:</h4>
-                            </td>
-                            <td>
-                                @Html.DisplayFor(model => model.Posting.NumberOpen)
                             </td>
                         </tr>
                     </table>
 
                 </div>
-
-
-            </div>
-
+                <a href="javascript:void(0);" style="margin-left:30px; padding-right:20px" onclick="$('#hideTable').show();">Show more...</a>
+            </div>       
         </div>
+      
         <div class="col-md-6" style="margin-top:30px">
-            <div class="container well well-lg">
+            <div class="container well well-lg" style="background-color:white; margin:0 auto; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
                 @* Applicant Details *@
-
-
-
                 <div class="form-horizontal">
-                    <p style="font-size:20px; color:#02388a; text-align:center; margin-top:20px; margin-bottom:50px"><u>Applicant Details</u></p>
+                    <p style="font-size:20px; color:#02388a; text-align:center; margin-top:20px; margin-bottom:50px">∙ &nbsp; Applicant Details &nbsp; ∙</p>
 
                     <table style="width:50%; margin:0 auto; font-size:18px">
                         <tr>
@@ -172,38 +216,36 @@
                             <td style="padding-bottom:20px; color:#02388a">
                                 Resume:
                             </td>
-                            <td style="padding-left:20px;">
-                                <a href="https://omextemplates.content.office.net/support/templates/en-us/tf00002110.docx" download="Download Resume"><img src="http://pluspng.com/img-png/resume-png-resume-icon-png-1024.png" height="42" width="42" />Download Resume.</a>
-                                Not in Database
+                            <td style="padding-left:20px; font-size:14px">
+                                <a href="https://omextemplates.content.office.net/support/templates/en-us/tf00002110.docx" download="Download Resume"><img src="http://pluspng.com/img-png/resume-png-resume-icon-png-1024.png" height="42" width="42" />&nbsp; Download</a>
+                                
                             </td>
                         </tr>
                     </table>
+                  <br />
+               </div>
+            </div>
+            <div style="margin-bottom:50px; text-align:center; margin-top:50px">
+                @Html.ActionLink("Schedule Interview", "IndexOld", "Application", null, new { @class = "btn btn-primary btn-large", @style = "border:none; background-color:#00a203; width:150px; margin-left: 12px; margin-right:20px" })
 
-                    <br />
-
-                </div>
-
+                @Html.ActionLink("Decline", "IndexOld", "Application", null, new { @class = "btn btn-danger btn-large", @style = "width:150px;" })
             </div>
         </div>
-        <br />
 
-        <div style="margin-bottom:50px; margin-top:150px">
-            @Html.ActionLink("Accept", "IndexOld", "Application", null, new { @class = "btn btn-primary btn-large", @style = "background-color:#00a203; width:150px; margin-left: 12px; margin-right:20px" })
-            @Html.ActionLink("Decline", "IndexOld", "Application", null, new { @class = "btn btn-danger btn-large", @style = "width:150px;" })
-        </div>
-
-
+       
+      
     </div>
 
     <div style="font-size:16px; text-align:center; margin-bottom:50px; margin-top:20px">
         <a href="javascript:void(0);" style="margin-left:30px; padding-right:20px" onclick="history.go(-1);">Back</a>
-        @Html.ActionLink("Archive Application", "Delete", "Application", null, new { @style = "border:0px; color:red; background-color:#f5f5f5" })
+        <br /><br />
+        @Html.ActionLink("Archive this Application", "Delete", new { @style = "border:0px; color:#438bc9; background-color:#f5f5f5" })
     </div>
 
 </div>
 
         <style>
-            .q {
+            .q{
                 color: white;
                 font-size: 1.2em;
                 margin: 0 10% 5px 10%;
@@ -211,4 +253,10 @@
                 box-sizing: border-box;
                 background-color: red;
             }
+
+
+
+
         </style>
+
+

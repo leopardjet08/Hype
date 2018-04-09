@@ -37,10 +37,10 @@
                         @* Title in the table *@
                         <thead style="background-color:#012e72;">
                             <tr>
-                                <th style="text-align:center;">
+                                <th style="padding:0px; padding-bottom:6px">
                                     <input style="color:white; font-size:18px; font-weight:bold" type="submit" name="actionButton" value="Submission Date" class="btn btn-link" />
                                 </th>
-                                <th style="text-align:center;">
+                                <th style="padding: 0px; padding-bottom:6px">
                                     <input style="color:white; font-size:18px; font-weight:bold" type="submit" name="actionButton" value="Job Applied For" class="btn btn-link" />
                                 </th>
                                 <th style="text-align:center;">
@@ -58,7 +58,7 @@
                         <tbody id="tableColor" style="font-size:17px; text-align:left">
                             @* Data in the table *@
                             @foreach (var item in Model)
-                {
+                         {
 
                     <tr>
                         <td class="company" style="text-align:center;">
@@ -80,7 +80,7 @@
                             &nbsp;@Html.ActionLink("Archive", "Delete", new { id = item.ID }, new { @style = "border:0px; " })
                         </td>
                     </tr>
-    }
+                        }
                         </tbody>
                     </table>
                     @* Page counts  *@
