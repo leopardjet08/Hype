@@ -37,7 +37,7 @@
                         @* Title in the table *@
                         <thead style="background-color:#012e72;">
                             <tr>
-                                <th style="padding:0px; padding-bottom:6px">
+                                <th style="padding:0px; padding-bottom:6px;" width="20%">
                                     <input style="color:white; font-size:18px; font-weight:bold" type="submit" name="actionButton" value="Submission Date" class="btn btn-link" />
                                 </th>
                                 <th style=" text-align:center" >
@@ -46,7 +46,7 @@
                                 <th style="text-align:center;">
                                     <input style="color:white; font-size:18px; font-weight:bold" type="submit" name="actionButton" value="School" class="btn btn-link" />
                                 </th>
-                                <th style="text-align:center;" width="20%">
+                                <th style="text-align:center;" width="18%">
                                     <input style="color:white; font-size:18px; font-weight:bold" type="submit" name="actionButton" value="Applicant" class="btn btn-link" />
                                 </th>
                                 <th style="text-align:center;">
@@ -65,7 +65,7 @@
 
                                 <tr>
                                     <td class="company" style="text-align:center;">
-                                        @Html.DisplayFor(modelItem => item.SubmissionDate).ToString().Substring(0, 13)
+                                        @Html.DisplayFor(modelItem => item.SubmissionDate).ToString()
                                     </td>
                                     <td style="text-align:center;">
                                         @Html.DisplayFor(modelItem => item.Posting.Job.JobTitle)
