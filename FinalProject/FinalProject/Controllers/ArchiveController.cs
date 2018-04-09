@@ -17,12 +17,12 @@ namespace FinalProject.Controllers
 
 
         public ActionResult IndexApplications(string sortDirection, string sortField,
-            string actionButton, string searchName, int? page)
+           string actionButton, string searchName, int? page)
         {
             PopulateDropDownLists();
             ViewBag.Filtering = "";
 
-            var Archiveapplication = from s in db.ArchiveApplications select s;
+            var application = from s in db.ArchiveApplications select s;
 
 
 
@@ -30,7 +30,7 @@ namespace FinalProject.Controllers
 
             if (!String.IsNullOrEmpty(searchName))
             {
-                Archiveapplication = Archiveapplication.Where(p => p.Applications.Posting.Job.JobTitle.ToUpper().Contains(searchName.ToUpper()));
+                application = application.Where(p => p.Applications.Posting.Job.JobTitle.ToUpper().Contains(searchName.ToUpper()));
                 ViewBag.Filtering = " in";
                 ViewBag.searchName = searchName;
             }
@@ -50,45 +50,48 @@ namespace FinalProject.Controllers
                 }
             }
 
-            if (sortField == "Job Title")//Sorting by Job title
+            if (sortField == "Job Applied For")//Sorting by Job title
             {
                 if (String.IsNullOrEmpty(sortDirection))
                 {
-                    Archiveapplication = Archiveapplication
+                    application = application
                         .OrderBy(p => p.Applications.Posting.Job.JobTitle);
                 }
                 else
                 {
-                    Archiveapplication = Archiveapplication
+                    application = application
                          .OrderByDescending(p => p.Applications.Posting.Job.JobTitle);
                 }
             }
-
-            else if (sortField == "Employer")//Sorting by School
+            else if (sortField == "Submission Date")
             {
-                if (String.IsNullOrEmpty(sortDirection))
+                if (sortField == "Submission Date")//Sorting by Submission DATE
                 {
-                    Archiveapplication = Archiveapplication
-                        .OrderBy(p => p.Applications.Posting.School.SchoolName);
+                    if (String.IsNullOrEmpty(sortDirection))
+                    {
+                        application = application
+                            .OrderBy(p => p.SubmissionDate);
+                    }
+                    else
+                    {
+                        application = application
+                             .OrderByDescending(p => p.SubmissionDate);
+                    }
                 }
-                else
-
-                    Archiveapplication = Archiveapplication
-                        .OrderByDescending(p => p.Applications.Posting.School.SchoolName);
-
-
             }
+
+            
 
             else //By default sort by Job title 
             {
                 if (String.IsNullOrEmpty(sortDirection))
                 {
-                    Archiveapplication = Archiveapplication
+                    application = application
                         .OrderBy(p => p.Applications.Posting.Job.JobTitle);
                 }
                 else
                 {
-                    Archiveapplication = Archiveapplication
+                    application = application
                          .OrderByDescending(p => p.Applications.Posting.Job.JobTitle);
                 }
             }
@@ -102,7 +105,7 @@ namespace FinalProject.Controllers
             int pageSize = 9;
             int pageNumber = (page ?? 1);
 
-            return View(Archiveapplication.ToPagedList(pageNumber, pageSize));
+            return View(application.ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult IndexPostings(string sortDirection, string sortField,

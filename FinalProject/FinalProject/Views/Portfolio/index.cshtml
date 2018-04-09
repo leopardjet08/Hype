@@ -253,8 +253,8 @@
                             </tr>
                             
                             <tr>
-                                <td style="padding-bottom:20px; color:#02388a">
-                                    <input type="button" value="Edit Profile" class="btn btn-default" />
+                                <td style="padding-bottom:20px; color:#02388a; text-align:center">
+                                    @Html.ActionLink("Edit Profile", "Edit","Applicants", new { id = Model.ID }, new { @class = "btn btn-primary btn-sm", @style = "border:none; font-weight:bold; background-color:#00a203" })
                                 </td>
                             </tr>
 
