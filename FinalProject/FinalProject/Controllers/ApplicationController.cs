@@ -63,7 +63,8 @@ namespace FinalProject.Controllers
                          .OrderByDescending(p => p.Posting.Job.JobTitle);
                 }
             }
-            else if (sortField == "Submission Date") {
+            else if (sortField == "Submission Date")
+            {
                 if (sortField == "Submission Date")//Sorting by Submission DATE
                 {
                     if (String.IsNullOrEmpty(sortDirection))
@@ -78,7 +79,7 @@ namespace FinalProject.Controllers
                     }
                 }
             }
-           
+
             else if (sortField == "School")//Sorting by School
             {
                 if (String.IsNullOrEmpty(sortDirection))
@@ -120,7 +121,7 @@ namespace FinalProject.Controllers
             return View(application.ToPagedList(pageNumber, pageSize));
         }
 
-        
+
 
 
         public ActionResult Details(int? id, string message)
@@ -184,7 +185,40 @@ namespace FinalProject.Controllers
 
         private void PopulateDropDownLists(Application app = null)
         {
-            
+
         }
+
+        // POST: Postings/Edit/5
+        public ActionResult AcceptEdit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var ApplicationtoUpdate = db.applications
+                .Where(p => p.ID == id).SingleOrDefault();
+
+            ApplicationtoUpdate.ApplicationStatusID = 3;
+            db.SaveChanges();
+            return RedirectToAction("Index"); 
+                
+          }
+
+        public ActionResult DeclineEdit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var ApplicationtoUpdate = db.applications
+                .Where(p => p.ID == id).SingleOrDefault();
+
+            ApplicationtoUpdate.ApplicationStatusID = 2;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+
+        }
+
+
     }
 }

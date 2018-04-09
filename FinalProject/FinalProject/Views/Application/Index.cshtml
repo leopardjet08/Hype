@@ -32,22 +32,25 @@
                     </div>
 
                     @* Posting list in the table *@
-                    <table class="table table-bordered" style=" table-layout:fixed; width:70%; margin:0 auto">
+                    <table class="table table-bordered" style=" table-layout:fixed; width:90%; margin:0 auto">
 
                         @* Title in the table *@
                         <thead style="background-color:#012e72;">
                             <tr>
-                                <th style="padding:0px; padding-bottom:6px">
+                                <th style="padding:0px; padding-bottom:6px;" width="20%">
                                     <input style="color:white; font-size:18px; font-weight:bold" type="submit" name="actionButton" value="Submission Date" class="btn btn-link" />
                                 </th>
-                                <th style="padding: 0px; padding-bottom:6px">
-                                    <input style="color:white; font-size:18px; font-weight:bold" type="submit" name="actionButton" value="Job Applied For" class="btn btn-link" />
+                                <th style=" text-align:center" >
+                                    <input style="color:white; font-size:18px; font-weight:bold" type="submit" name="actionButton" value="Applied Job" class="btn btn-link" />
                                 </th>
                                 <th style="text-align:center;">
                                     <input style="color:white; font-size:18px; font-weight:bold" type="submit" name="actionButton" value="School" class="btn btn-link" />
                                 </th>
-                                <th style="text-align:center;">
+                                <th style="text-align:center;" width="18%">
                                     <input style="color:white; font-size:18px; font-weight:bold" type="submit" name="actionButton" value="Applicant" class="btn btn-link" />
+                                </th>
+                                <th style="text-align:center;">
+                                    <input style="color:white; text-decoration:none; font-size:18px; font-weight:bold" ; type="submit" value="Status" class="btn btn-link" />
                                 </th>
                                 <th style="text-align:center;">
                                     <input style="color:white; text-decoration:none; font-size:18px; font-weight:bold" ; type="submit" value="Action" class="btn btn-link" />
@@ -58,29 +61,32 @@
                         <tbody id="tableColor" style="font-size:17px; text-align:left">
                             @* Data in the table *@
                             @foreach (var item in Model)
-                         {
+                            {
 
-                    <tr>
-                        <td class="company" style="text-align:center;">
-                            @Html.DisplayFor(modelItem => item.SubmissionDate).ToString().Substring(0, 13)
-                        </td>
-                        <td style="text-align:center;">
-                            @Html.DisplayFor(modelItem => item.Posting.Job.JobTitle)
-                        </td>
-                        <td style="text-align:center;">
-                            @Html.DisplayFor(modelItem => item.Posting.School.SchoolName)
-                        </td>
-                        <td style="text-align:center;">
-                            @Html.DisplayFor(modelItem => item.Applicant.FormalName)
-                        </td>
+                                <tr>
+                                    <td class="company" style="text-align:center;">
+                                        @Html.DisplayFor(modelItem => item.SubmissionDate).ToString()
+                                    </td>
+                                    <td style="text-align:center;">
+                                        @Html.DisplayFor(modelItem => item.Posting.Job.JobTitle)
+                                    </td>
+                                    <td style="text-align:center;">
+                                        @Html.DisplayFor(modelItem => item.Posting.School.SchoolName)
+                                    </td>
+                                    <td style="text-align:center;">
+                                        @Html.DisplayFor(modelItem => item.Applicant.FormalName)
+                                    </td>
+                                    <td style="text-align:center;" class="appStatus">
+                                        @Html.DisplayFor(modelItem => item.ApplicationStatus.Status)
+                                    </td>
 
-                        @* Buttons in the table *@
-                        <td style="text-align:center; font-size:14px">
-                            @Html.ActionLink("View", "Details", new { id = item.ID }, new { @style = "border:0px;" })
-                            &nbsp;@Html.ActionLink("Archive", "Delete", new { id = item.ID }, new { @style = "border:0px; " })
-                        </td>
-                    </tr>
-                        }
+                                    @* Buttons in the table *@
+                                    <td style="text-align:center; font-size:14px">
+                                        @Html.ActionLink("View", "Details", new { id = item.ID }, new { @style = "border:0px;" })
+                                        &nbsp;@Html.ActionLink("Archive", "Delete", new { id = item.ID }, new { @style = "border:0px; " })
+                                    </td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                     @* Page counts  *@
@@ -92,13 +98,13 @@
 
 
                     @Html.PagedListPager(Model, page => Url.Action("Index",
-new
-{
-page,
-sortDirection = ViewBag.sortDirection,
-sortField = ViewBag.sortField,
-searchName = ViewBag.searchName
-}))
+     new
+     {
+         page,
+         sortDirection = ViewBag.sortDirection,
+         sortField = ViewBag.sortField,
+         searchName = ViewBag.searchName
+     }))
 
                 </div>
             </div>
@@ -118,3 +124,20 @@ searchName = ViewBag.searchName
 </style>
 
 
+<script>
+    function appStatusColor() {
+
+        var appS = document.getElementsByClassName('appStatus');
+
+        for (i = 0; i < appS.length; i++) {
+            if (appS[i].innerText == "Declined") {
+                appS[i].style.color = "red";
+            } else if (appS[i].innerText == "Pending") {
+                appS[i].style.color = "#c2b200";
+            } else if (appS[i].innerText == "Accepted") {
+                appS[i].style.color = "green";
+            }
+        }
+    }
+    appStatusColor('tableColor');
+</script>  

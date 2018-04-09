@@ -1,9 +1,11 @@
 ﻿using FinalProject.DAL;
 using FinalProject.Models;
+using FinalProject.Models.DataModel;
 using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,15 +14,15 @@ namespace FinalProject.Controllers
     public class ArchiveController : Controller
     {
         private JobPostingCFEntities db = new JobPostingCFEntities();
-        
+
 
         public ActionResult IndexApplications(string sortDirection, string sortField,
-            string actionButton, string searchName, int? page)
+           string actionButton, string searchName, int? page)
         {
             PopulateDropDownLists();
             ViewBag.Filtering = "";
 
-            var application = from s in db.applications select s;
+            var application = from s in db.ArchiveApplications select s;
 
 
 
@@ -28,7 +30,7 @@ namespace FinalProject.Controllers
 
             if (!String.IsNullOrEmpty(searchName))
             {
-                application = application.Where(p => p.Posting.Job.JobTitle.ToUpper().Contains(searchName.ToUpper()));
+                application = application.Where(p => p.Applications.Posting.Job.JobTitle.ToUpper().Contains(searchName.ToUpper()));
                 ViewBag.Filtering = " in";
                 ViewBag.searchName = searchName;
             }
@@ -48,46 +50,49 @@ namespace FinalProject.Controllers
                 }
             }
 
-            if (sortField == "Job Title")//Sorting by Job title
+            if (sortField == "Job Applied For")//Sorting by Job title
             {
                 if (String.IsNullOrEmpty(sortDirection))
                 {
                     application = application
-                        .OrderBy(p => p.Posting.Job.JobTitle);
+                        .OrderBy(p => p.Applications.Posting.Job.JobTitle);
                 }
                 else
                 {
                     application = application
-                         .OrderByDescending(p => p.Posting.Job.JobTitle);
+                         .OrderByDescending(p => p.Applications.Posting.Job.JobTitle);
                 }
             }
-
-            else if (sortField == "Employer")//Sorting by School
+            else if (sortField == "Submission Date")
             {
-                if (String.IsNullOrEmpty(sortDirection))
+                if (sortField == "Submission Date")//Sorting by Submission DATE
                 {
-                    application = application
-                        .OrderBy(p => p.Posting.School.SchoolName);
+                    if (String.IsNullOrEmpty(sortDirection))
+                    {
+                        application = application
+                            .OrderBy(p => p.SubmissionDate);
+                    }
+                    else
+                    {
+                        application = application
+                             .OrderByDescending(p => p.SubmissionDate);
+                    }
                 }
-                else
-
-                    application = application
-                        .OrderByDescending(p => p.Posting.School.SchoolName);
-
-
             }
+
+            
 
             else //By default sort by Job title 
             {
                 if (String.IsNullOrEmpty(sortDirection))
                 {
                     application = application
-                        .OrderBy(p => p.Posting.Job.JobTitle);
+                        .OrderBy(p => p.Applications.Posting.Job.JobTitle);
                 }
                 else
                 {
                     application = application
-                         .OrderByDescending(p => p.Posting.Job.JobTitle);
+                         .OrderByDescending(p => p.Applications.Posting.Job.JobTitle);
                 }
             }
 
@@ -110,7 +115,7 @@ namespace FinalProject.Controllers
             PopulateDropDownLists();
             ViewBag.Filtering = "";
 
-            var archivePostings = from s in db.Archivepostings   select s;
+            var archivePostings = from s in db.Archivepostings select s;
 
 
 
@@ -219,6 +224,24 @@ namespace FinalProject.Controllers
         {
 
         }
+        public ActionResult ArchivePostingDetails(int? id)
+        {
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            //get all posting data
+            Archiveposting archiveposting = db.Archivepostings
+                .Where(p => p.ID == id).SingleOrDefault();
+
+            if (archiveposting == null)
+            {
+                return HttpNotFound();
+            }
+            return View(archiveposting);
+        }
+
 
     }
 }

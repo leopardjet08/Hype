@@ -80,12 +80,19 @@
                             @Html.DisplayFor(model => model.PostingTypes.Type)
                         </td>
                     </tr>
-                    <tr> 
-                        <td style="color:#02388a">
-                            <h4><b>@Html.DisplayNameFor(model => model.ClosingDate)  :  </b></h4>
-                        </td>
-                        <td>
-                            @Html.DisplayFor(model => model.ClosingDate)
+
+                    <tr>
+                        <td style="color:#02388a"><h4><b>@Html.DisplayNameFor(model => model.School.SchoolFamily)  :  </b></h4></td>
+                        <td>@Html.DisplayFor(model => model.School.SchoolFamily.FamilyName)</td>
+                        <td style="width:10px"></td>
+                        <td style="color:#02388a" class="qualH"><h4><b>@Html.DisplayNameFor(model => model.Qualifications)  :  </b></h4></td>
+                        <td  class="qualC">
+                            @{
+                    foreach (var qualification in Model.Qualifications)
+                    {
+                        @:  @qualification.QualificationSet <br />
+        }
+                            }
                         </td>
                     </tr>
 
@@ -112,6 +119,7 @@
      </div>    
          
          <br />         <br />         <br />
+
 
      <div class="row" style="width:900px; text-align:center; margin:0 auto" ;>
          <div class="col-md-4">
@@ -140,6 +148,7 @@
               <div>
                     <h4 style="color:#02388a"><b>@Html.DisplayNameFor(model => model.Skills) </b></h4>     
                    @{
+
                     foreach (var skills in Model.Skills)
                     {
                         @:  @skills.SkillName <br />
@@ -158,12 +167,45 @@
 
                 <div style="margin-top:30px; margin-left:550px">
 
+
                     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "btn btn-primary btn-large", @style = "border:none; background-color:#00a203; padding-right:50px; padding-left:50px; margin-right:50px;" })
                     &nbsp;@Html.ActionLink("Archive", "Archive", new { id = Model.ID }, new { @class = "btn btn-danger btn-large", @style = "border:none;  padding-right:50px; padding-left:50px; margin-right:50px;" })
+
                     <a href="javascript:void(0);" onclick="history.go(-1);">Back</a>
                 </div>
             </div>
          </div>
      </div>
-          
+          <script>
+              function skillOrQual() {
 
+                  var contentS = document.getElementsByClassName("skillC");
+                  var contentQ = document.getElementsByClassName("qualC");
+                  var labelS = document.getElementsByClassName("skillH");
+                  var labelQ = document.getElementsByClassName("qualH")
+
+                  // Skills
+                  for (var i = 0; i < contentS.length; i++) {
+                      console.log(contentS[i].innerText);
+                      for (var j = 0; j < labelQ.length; j++) {
+                          console.log(labelQ[j].innerText)
+                          var labelQual = labelQ[j].innerText;
+                          
+                      }
+
+                      if (contentS[i].innerText == "" && labelQual == "Qualifications :") {
+                          labelQual.innerText = "";
+                          
+                      }
+                  }
+
+                  // Qualifications
+                  for (var k = 0; k < contentQ.length; k++) {
+                      console.log(contentQ[k].innerText);
+                      if (contentQ[k].innerText == "") {
+                          contentQ[k].style.visibility = "hidden";
+                      }
+                  }
+              }
+              skillOrQual("postingDetail");
+          </script>

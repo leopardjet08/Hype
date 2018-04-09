@@ -126,8 +126,8 @@
                                         {
                                             @: <font color="blue"><Strong><u>@Html.DisplayFor(modelItem => f.Postings.Job.JobTitle)</u></Strong></font> <br />
                                                 <Strong> @Html.DisplayFor(modelItem => f.Postings.School.SchoolName ) </Strong> <br /><br />
-                                            @:  @Html.ActionLink("View", "Details", "Posting", new { id = f.PostingID }, new { @class= "btn btn-default", @style = "border:2px solid gray; color:red" }) 
-                                            @:  @Html.ActionLink("Delete", "Delete", new { id = f.ID }, new { @class = "btn btn-default", @style = "border:2px solid gray; color:green" }) <br /><br /><br />
+                                            @:  @Html.ActionLink("View", "Details", "Posting", new { id = f.PostingID }, new { @class= "btn btn-default", @style = "border:2px solid gray; color:green" }) 
+                                            @:  @Html.ActionLink("Delete", "DeleteApplied", new { id = f.ID }, new { @class = "btn btn-default", @style = "border:2px solid gray; color:red" }) <br /><br /><br />
                                         }
                                     }
 
@@ -142,8 +142,8 @@
                                         {
                                             @: <font color="blue"><Strong><u>@Html.DisplayFor(modelItem => f.Postings.Job.JobTitle)</u></Strong></font> <br />
                                                 <Strong> @Html.DisplayFor(modelItem => f.Postings.School.SchoolName ) </Strong> <br /><br />
-                                            @:  @Html.ActionLink("Apply", "AppliedView", "Apply", new { id = f.PostingID }, new { @class= "btn btn-default", @style = "border:2px solid gray; color:red" }) 
-                                            @:  @Html.ActionLink("Delete", "Delete", new { id = f.ID }, new { @class = "btn btn-default", @style = "border:2px solid gray; color:green" }) <br /><br /><br />
+                                            @:  @Html.ActionLink("Apply", "AppliedView", "Apply", new { id = f.PostingID }, new { @class= "btn btn-default", @style = "border:2px solid gray; color:green" }) 
+                                            @:  @Html.ActionLink("Delete", "DeleteSaved", new { id = f.ID }, new { @class = "btn btn-default", @style = "border:2px solid gray; color:red" }) <br /><br /><br />
                                         }
                                     }
 
@@ -159,8 +159,8 @@
                                         {
                                             @: <font color="blue"><Strong><u>@Html.DisplayFor(modelItem => f.Postings.Job.JobTitle)</u></Strong></font> <br />
                                                 <Strong> @Html.DisplayFor(modelItem => f.Postings.School.SchoolName ) </Strong> <br /><br />
-                                            @:  @Html.ActionLink("View", "Details", "Posting", new { id = f.PostingID }, new { @class= "btn btn-default", @style = "border:2px solid gray; color:red" }) 
-                                            @:  @Html.ActionLink("Delete", "Delete", new { id = f.ID }, new { @class = "btn btn-default", @style = "border:2px solid gray; color:green" }) <br /><br /><br />
+                                            @:  @Html.ActionLink("View", "Details", "Posting", new { id = f.PostingID }, new { @class= "btn btn-default", @style = "border:2px solid gray; color:green" }) 
+                                            @:  @Html.ActionLink("Delete", "DeleteExpired", new { id = f.ID }, new { @class = "btn btn-default", @style = "border:2px solid gray; color:red" }) <br /><br /><br />
                                         }
                                     }
 
@@ -253,8 +253,8 @@
                             </tr>
                             
                             <tr>
-                                <td style="padding-bottom:20px; color:#02388a">
-                                    <input type="button" value="Edit Profile" class="btn btn-default" />
+                                <td style="padding-bottom:20px; color:#02388a; text-align:center">
+                                    @Html.ActionLink("Edit Profile", "Edit","Applicants", new { id = Model.ID }, new { @class = "btn btn-primary btn-sm", @style = "border:none; font-weight:bold; background-color:#00a203" })
                                 </td>
                             </tr>
 
