@@ -1,5 +1,4 @@
-﻿
-@using PagedList;
+﻿@using PagedList;
 @using PagedList.Mvc;
 @model IPagedList<FinalProject.Models.DataModel.Archiveposting>
 <link href="~/Content/PagedList.css" rel="stylesheet" />
@@ -66,7 +65,7 @@
 
                                 <tr>
                                     <td style="text-align:center;">
-                                        @Html.ActionLink(item.Job.JobTitle, "Details", new { id = item.ID })
+                                        @Html.ActionLink(item.Job.JobTitle, "ArchivePostingDetails", new { id = item.ID })
 
                                     </td>
                                     <td style="text-align:center;">
@@ -84,9 +83,7 @@
 
                                     @* Buttons in the table *@
                                     <td style="text-align:center; font-size:14px">
-                                        @Html.ActionLink("View", "Details", new { id = item.ID }, new { @style = "border:0px;" })
-                                        &nbsp;@Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @style = "border:0px;" })
-                                        &nbsp;@Html.ActionLink("Archive", "Delete", new { id = item.ID }, new { @style = "border:0px;" })
+                                        @Html.ActionLink("View", "ArchivePostingDetails", "Archive", new { id = item.ID }, new { @style = "border:0px;" })
 
                                     </td>
                                 </tr>
@@ -102,13 +99,13 @@
 
 
                     @Html.PagedListPager(Model, page => Url.Action("Index",
-     new
-     {
-         page,
-         sortDirection = ViewBag.sortDirection,
-         sortField = ViewBag.sortField,
-         searchName = ViewBag.searchName
-     }))
+               new
+               {
+                   page,
+                   sortDirection = ViewBag.sortDirection,
+                   sortField = ViewBag.sortField,
+                   searchName = ViewBag.searchName
+               }))
 
                 </div>
             </div>
@@ -126,6 +123,7 @@
         text-indent: -9999px;
     }
 </style>
+
 
 
 
