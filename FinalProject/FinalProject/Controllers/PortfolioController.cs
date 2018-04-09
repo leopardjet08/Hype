@@ -37,10 +37,25 @@ namespace FinalProject.Controllers
         }
 
 
-        public ActionResult Delete(int id)
+        public ActionResult DeleteApplied(int? id)
         {
             Appliedposting applied = db.Appliedpostings.Find(id);
             db.Appliedpostings.Remove(applied);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public ActionResult DeleteSaved(int? id)
+        {
+            SavedPosting saved = db.SavedPostings.Find(id);
+            db.SavedPostings.Remove(saved);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult DeleteExpired(int? id)
+        {
+            ExpiredPosting expired = db.ExpiredPostings.Find(id);
+            db.ExpiredPostings.Remove(expired);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
