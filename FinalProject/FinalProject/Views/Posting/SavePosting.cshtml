@@ -1,16 +1,94 @@
 ﻿@model FinalProject.Models.DataModel.SavedPosting
 
 
-
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
 
-         <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<div class="container well well-lg" style="width:1288px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
 
-        <div class="form-group" style="visibility:hidden">
+    <p style="text-align:center; margin-top:20px; margin-bottom:15px; font-size:30px; color:#02388a;"> Niagara Catholic District School Board</p>
+    <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
+    <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
+    <br />
+
+    <h3 style="text-align:center; margin-bottom:50px">∙ &nbsp;Bookmark this Posting &nbsp; ∙</h3> 
+  
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+     <div class="borderVibe" style="border:1px solid #d5d2d2; margin:0 auto; width:50%; background-color:white; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
+        <div style="font-size:18px; margin-bottom:30px">
+            <table style="visibility:hidden; width:70%; margin:0 auto; text-align:left">
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.PostingID, "PostingID:", htmlAttributes: new { @class = "" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.PostingID, new { htmlAttributes = new { @class = "form-control", @style = "width:200px" } })
+                        @Html.ValidationMessageFor(model => model.PostingID, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.ApplicantID, "ApplicantID: ", htmlAttributes: new { @class = "" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.ApplicantID, new { htmlAttributes = new { @class = "form-control", @style = "width:200px" } })
+                        @Html.ValidationMessageFor(model => model.ApplicantID, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+            </table>
+
+            <table style="width:60%; margin-left:180px">
+                <tr >
+                    <td >
+                        @Html.LabelFor(model => model.Postings.Job.JobTitle, "Job Title: ", htmlAttributes: new { @style = "color:#02388a;" })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Postings.Job.JobTitle, new { htmlAttributes = new { @class = "", @style = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.Postings.Job.JobTitle, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>  
+                    <td>
+                        <br />
+                        @Html.LabelFor(model => model.Postings.JobCode, "Job Code: ", htmlAttributes: new { @style = "color:#02388a;" })
+                    </td>
+                    <td>
+                        <br />
+                        @Html.DisplayFor(model => model.Postings.JobCode, new { htmlAttributes = new { @class = "", @style = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.Postings.JobCode, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <br />
+                        @Html.LabelFor(model => model.Postings.ClosingDate, "Expires on: ", htmlAttributes: new { @style = "color:#02388a;" })
+                    </td>
+                    <td>
+                        <br />
+                        @Html.DisplayFor(model => model.Postings.ClosingDate, new { htmlAttributes = new { @class = "form-control", @style = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.Postings.ClosingDate, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <br />
+                        @Html.LabelFor(model => model.Postings.School.SchoolName, "School: ", htmlAttributes: new { @style = "color:#02388a;" })
+                    </td>
+                    <td>
+                        <br />
+                        @Html.DisplayFor(model => model.Postings.School.SchoolName, new { htmlAttributes = new { @class = "", @style = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.Postings.School.SchoolName, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+            </table>
+            <br />
+        </div>
+      </div>
+  
+
+    @*<div class="form-group"style="visibility:hidden" >
             @Html.LabelFor(model => model.PostingID, "PostingID:", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.PostingID, new { htmlAttributes = new { @class = "form-control", @style = "width:200px" } })
@@ -23,57 +101,21 @@
                 @Html.EditorFor(model => model.ApplicantID, new { htmlAttributes = new { @class = "form-control", @style = "width:200px" } })
                 @Html.ValidationMessageFor(model => model.ApplicantID, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
-        <div class="form-group" style=" font-size:x-large; width:100%">
-            <div style="margin-left:80px">
-                Are you sure you want to save this Posting?
-            </div>
-        </div>
-        <div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.Postings.Job.JobTitle, "Job Title: ", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10" style=" padding-top:6px">
-                    @Html.DisplayFor(model => model.Postings.Job.JobTitle, new { htmlAttributes = new { @class = "form-control", @style = "readonly" } })
-                    @Html.ValidationMessageFor(model => model.Postings.Job.JobTitle, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group" style="text-align:left">
-                @Html.LabelFor(model => model.Postings.JobCode, "Job Code: ", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10" style=" padding-top:6px">
-                    @Html.DisplayFor(model => model.Postings.JobCode, new { htmlAttributes = new { @class = "form-control", @style = "readonly" } })
-                    @Html.ValidationMessageFor(model => model.Postings.JobCode, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group" style="text-align:left">
-                @Html.LabelFor(model => model.Postings.ClosingDate, "Expires On: ", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10" style=" padding-top:6px">
-                    @Html.DisplayFor(model => model.Postings.ClosingDate, new { htmlAttributes = new { @class = "form-control", @style = "readonly" } })
-                    @Html.ValidationMessageFor(model => model.Postings.ClosingDate, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group" style="text-align:left">
-                @Html.LabelFor(model => model.Postings.School.SchoolName, "School: ", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10" style=" padding-top:6px">
-                    @Html.DisplayFor(model => model.Postings.School.SchoolName, new { htmlAttributes = new { @class = "form-control", @style = "readonly" } })
-                    @Html.ValidationMessageFor(model => model.Postings.School.SchoolName, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-        <div class="form-group" style="text-align:center; padding-right:300px;">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-primary btn-sm" , style="border:none; font-weight:bold; background-color:#00a203" } />
-                @Html.ActionLink("Back to List", "Index", new { @class = "btn btn-default" })
-
-            </div>
-        </div>
-       
-
-
+    <br />
+    <div style="text-align:center;">
+        <input type="submit" value="Save to Bookmarks" class="btn btn-primary btn-large" , style="border:none;  background-color:#00a203" } />
+        <br /><br />
+        <a href="javascript:void(0);" onclick="history.go(-1);">Cancel</a>
     </div>
+    <br />
+    <br />
+</div>
 
-    }
+<br />
+
+}
 
    
 

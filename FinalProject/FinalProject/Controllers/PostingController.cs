@@ -882,7 +882,7 @@ namespace FinalProject.Controllers
 
             if (posting == null)
             {
-                ModelState.AddModelError("", "Something got wrong");
+                ModelState.AddModelError("", "Something went wrong");
                 return RedirectToAction("Index", "Home");
             }
 

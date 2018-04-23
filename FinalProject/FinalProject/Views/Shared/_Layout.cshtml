@@ -45,7 +45,16 @@
                         </ul>
                     </li>
 
-                    <li id="portfolio">@Html.ActionLink("My Portfolio", "Index", "Portfolio")</li>
+                     <li id="portfolio" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Portfolio</a>
+                        <ul class="dropdown-menu">
+                            <li style="font-size:18px">@Html.ActionLink("My Profile", "Profile", "Portfolio")</li>
+                            <li style="font-size:18px">@Html.ActionLink("Bookmarks", "Index", "Portfolio")</li>
+                            <li style="font-size:18px">@Html.ActionLink("Expired", "Index", "Portfolio")</li>
+                            <li style="font-size:18px">@Html.ActionLink("My Jobs", "Index", "Portfolio")</li>
+                            <li style="font-size:18px">@Html.ActionLink("Applied For", "Index", "Portfolio")</li>
+                        </ul>
+                    </li>
 
                     <li id="archives" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Archives</a>

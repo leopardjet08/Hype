@@ -6,150 +6,172 @@
 
 
 <div class="container well well-lg" style=" text-align:center; width:1288px; padding-bottom:75px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
-
-    <p style="text-align:center; margin-top:20px; margin-bottom:15px; font-size:30px; color:#02388a;"> Niagara Catholic District School Board</p>
+    <br />
+    <p style="text-align:center; margin-top:20px; margin-bottom:15px; font-size:30px; color:#02388a;"> ∙ &nbsp; Edit Job Details&nbsp; ∙</p>
     <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
     <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
-    <br />
+    <br /><br />
 
-    <h3 style="padding-bottom:30px">
-        ∙ &nbsp; Edit Job &nbsp; ∙
-    </h3>&nbsp;&nbsp;
+    <div class="borderVibe" style="border:1px solid #d5d2d2; margin:0 auto; width:90%; background-color:white; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
+        <div style="font-size:18px; margin-bottom:30px">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    
+   <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+        <br /><br />
+
+        <table style=" width: 50%">
+            <tr>
+                <td style="color:#02388a;">
+                    @Html.LabelFor(model => model.JobCode, htmlAttributes: new { @class = "" })
+                </td>
+                <td>
+                     @Html.EditorFor(model => model.JobCode, new { htmlAttributes = new { @class = "form-control" } })
+                     @Html.ValidationMessageFor(model => model.JobCode, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td style="color:#02388a;">
+                    <br />
+                    @Html.LabelFor(model => model.JobTitle, htmlAttributes: new { @class = "" })
+                </td>
+                <td>
+                    <br />
+                    @Html.EditorFor(model => model.JobTitle, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.JobTitle, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+        </table>
+
+            <br />
+
+        <table style="margin-left:400px">
+            <tr>
+                <td style="color:#02388a">
+                    @Html.LabelFor(model => model.JobSummary, htmlAttributes: new { @class = "" })
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.JobSummary, new { htmlAttributes = new { @class = "form-control", @style="width:400px" } })
+                    @Html.ValidationMessageFor(model => model.JobSummary, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                   
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    
 
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-<div class="form-horizontal">
-    <h4>Job</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.ID)
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.JobCode, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.JobCode, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.JobCode, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.JobTitle, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.JobTitle, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.JobTitle, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.JobSummary, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.JobSummary, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.JobSummary, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="col-md-6" style="margin-top:30px;">
-                    <div class="form-horizontal">
-                        <table style="text-align: left; width:60%; margin:0 auto";>
+        <div class="col-md-6" style="margin-top:30px;">
+                        <div class="form-horizontal">
+                            <table style="text-align: left; width:60%; margin:0 auto";>
                             
-                            <tr>
-                                <td>
-                                    <h4>Skills:</h4>
-                                </td>
-                                <td>
-                                    <tr>
-                                                                    @{
-                            int cnts2 = 0;
-                            List<FinalProject.ViewModels.AssignedSkillVM> skills = ViewBag.Skills;
-                            foreach (var skill in skills)
-                            {
-                                if (cnts2++ % 3 == 0)
+                                <tr>
+                                    <td>
+                                        <h4>Skills:</h4>
+                                    </td>
+                                    <td>
+                                        <tr>
+                                                                        @{
+                                int cnts2 = 0;
+                                List<FinalProject.ViewModels.AssignedSkillVM> skills = ViewBag.Skills;
+                                foreach (var skill in skills)
                                 {
-                                    @:</tr><tr>
-                                    }
-                                    @:<td>
-                                        <input type="checkbox"
-                                               name="selectedSkills"
-                                               value="@skill.SkillID"
-                                               @(Html.Raw(skill.Assigned ? "checked=\"checked\"" : "")) />
-                                        @skill.SkillName @:&nbsp;&nbsp;
-                                        @:</td>
-                                    }
-                                    @:</tr>
-                            }
+                                    if (cnts2++ % 3 == 0)
+                                    {
+                                        @:</tr><tr>
+                                        }
+                                        @:<td>
+                                            <input type="checkbox"
+                                                   name="selectedSkills"
+                                                   value="@skill.SkillID"
+                                                   @(Html.Raw(skill.Assigned ? "checked=\"checked\"" : "")) />
+                                            @skill.SkillName @:&nbsp;&nbsp;
+                                            @:</td>
+                                        }
+                                        @:</tr>
+                                }
                                 
                            
-                            <tr>
-                                <td>
-                                    <h4>Qualifications:</h4>
-                                </td>
-                                <td>
-                                                                    @{
-                            int cnts = 0;
-                            List<FinalProject.ViewModels.AssignedQualificationVM> qualifications = ViewBag.Qualifications;
-                            foreach (var qualification in qualifications)
-                            {
-                                if (cnts++ % 3 == 0)
+                                <tr>
+                                    <td>
+                                        <h4>Qualifications:</h4>
+                                    </td>
+                                    <td>
+                                                                        @{
+                                int cnts = 0;
+                                List<FinalProject.ViewModels.AssignedQualificationVM> qualifications = ViewBag.Qualifications;
+                                foreach (var qualification in qualifications)
                                 {
-                                    @:</tr><tr>
-                                    }
-                                    @:<td>
-                                        <input type="checkbox"
-                                               name="selectedQuals"
-                                               value="@qualification.QualificationID"
-                                               @(Html.Raw(qualification.Assigned ? "checked=\"checked\"" : "")) />
-                                        @qualification.QualificationSet @:&nbsp;&nbsp;
-                                        @:</td>
-                                    }
-                                    @:</tr>
-                            }
+                                    if (cnts++ % 3 == 0)
+                                    {
+                                        @:</tr><tr>
+                                        }
+                                        @:<td>
+                                            <input type="checkbox"
+                                                   name="selectedQuals"
+                                                   value="@qualification.QualificationID"
+                                                   @(Html.Raw(qualification.Assigned ? "checked=\"checked\"" : "")) />
+                                            @qualification.QualificationSet @:&nbsp;&nbsp;
+                                            @:</td>
+                                        }
+                                        @:</tr>
+                                }
 
-                            <tr>
-                                <td>
-                                    <h4>Requirements:</h4>
-                                </td>
-                                <td>
-                                                                    @{
-                            int cnt = 0;
-                            List<FinalProject.ViewModels.AssignedRequirmentVM> requirements = ViewBag.Requirements;
-                            foreach (var requirement in requirements)
-                            {
-                                if (cnt++ % 3 == 0)
+                                <tr>
+                                    <td>
+                                        <h4>Requirements:</h4>
+                                    </td>
+                                    <td>
+                                                                        @{
+                                int cnt = 0;
+                                List<FinalProject.ViewModels.AssignedRequirmentVM> requirements = ViewBag.Requirements;
+                                foreach (var requirement in requirements)
                                 {
-                                    @:</tr><tr>
-                                    }
-                                    @:<td>
-                                        <input type="checkbox"
-                                               name="selectedReqs"
-                                               value="@requirement.RequirmentID"
-                                               @(Html.Raw(requirement.Assigned ? "checked=\"checked\"" : "")) />
-                                        @requirement.RequirementName @:&nbsp;&nbsp;
-                                        @:</td>
-                                    }
-                                    @:</tr>
-                            }           
-                        </table>
+                                    if (cnt++ % 3 == 0)
+                                    {
+                                        @:</tr><tr>
+                                        }
+                                        @:<td>
+                                            <input type="checkbox"
+                                                   name="selectedReqs"
+                                                   value="@requirement.RequirmentID"
+                                                   @(Html.Raw(requirement.Assigned ? "checked=\"checked\"" : "")) />
+                                            @requirement.RequirementName @:&nbsp;&nbsp;
+                                            @:</td>
+                                        }
+                                        @:</tr>
+                                }           
+                            </table>
+                        </div>
                     </div>
-                </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-success" />
+                </div>
             </div>
         </div>
+        }
+
+    </div></div>
+
+        <div>
+            <a href="javascript:void(0);" style="margin-left:30px; padding-right:20px" onclick="history.go(-1);">Cancel</a>
+        </div>
+
     </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
     }
-
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
-
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
 
