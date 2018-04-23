@@ -25,23 +25,19 @@
     @Scripts.Render("~/bundles/jqueryval")
 
     <div class="container well well-lg" style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
-
-        <p style="text-align:center; margin-top:20px; margin-bottom:15px; font-size:30px; color:#02388a;"> Niagara Catholic District School Board</p>
+        <br />
+        <p style="text-align:center; margin-top:20px; margin-bottom:15px; font-size:30px; color:#02388a;"> ∙ &nbsp; Archive this Posting &nbsp; ∙</p>
         <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
         <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
         <br />
-
-        <h3 style="padding-bottom:30px; text-align:center">
-            ∙ &nbsp; Archive this Posting &nbsp; ∙
-        </h3>&nbsp;&nbsp;
-
-
+        <br />
+       
             <h3 style="text-align:center">Are you sure you want to move this posting to Archives?</h3>
-            <br />
+            <br /><br />
 
             <div style="font-size:18px; margin-top:10px; margin-bottom:30px">
 
-                <table style="width:35%; margin:0 auto; text-align:left">
+                <table style="width:35%; margin-left:450px; text-align:left">
                     <tr>
                         <td style="color:#02388a"><b>Job Title:</b></td>
                         <td><b> @Html.DisplayNameFor(model => model.ID)</b></td>
@@ -69,7 +65,7 @@
             @Html.ValidationSummary()
 
             <div style="margin-top:30px; text-align:center; margin-bottom:30px">
-                <input type="submit" value="Move to Archives" style="background-color:#00a203; border:none;" class="btn btn-primary btn-large" />
+                <input type="submit" value="Move to Archives" style=" border:none;" class="btn btn-info btn-large" />
                 <br /><br />
                 <a href="javascript:void(0);" onclick="history.go(-1);">Cancel</a>
             </div>

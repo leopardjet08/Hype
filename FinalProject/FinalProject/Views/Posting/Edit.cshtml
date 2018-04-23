@@ -13,9 +13,7 @@
     <script type="text/javascript">
         function sliderChange(val) {
             document.getElementById('sliderStatus').innerHTML = val;
-
         }
-
     </script>
 
 
@@ -25,15 +23,12 @@
     @Scripts.Render("~/bundles/jqueryval")
 
     <div class="container well well-lg" style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
-
-        <p style="text-align:center; margin-top:20px; margin-bottom:15px; font-size:30px; color:#02388a;"> Niagara Catholic District School Board</p>
+        <br />
+        <p style="text-align:center; margin-top:20px; margin-bottom:15px; font-size:30px; color:#02388a;"> ∙ &nbsp; Edit Posting &nbsp; ∙</p>
         <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
         <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
         <br />
-
-        <h3 style="text-align:center; padding-bottom:30px">
-            ∙ &nbsp; Edit Posting &nbsp; ∙
-        </h3>&nbsp;&nbsp;
+        <br />
 
         @using (Html.BeginForm())
         {
@@ -42,7 +37,6 @@
 
             <div class="modal-body row">
                 <div class="col-md-6" style="margin-top:30px;">
-
 
                     <div class="form-horizontal">
                         <table style="margin:0 auto; width:60%;">
@@ -97,19 +91,26 @@
                                 <td style="padding-bottom:15px">
                                     <h4>Deadline:</h4>
                                 </td>
-                                <td>
+                                <td style="padding-bottom:15px;">
                                     @Html.EditorFor(model => model.ClosingDate, new { htmlAttributes = new { @class = "form-control", @style = "width:200px" } })
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                                <td style="padding-bottom:15px;">
                                     <h4>Start Date:</h4>
                                 </td>
-                                <td>
+                                <td style="padding-bottom:15px;">
                                     @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control", @style = "width:200px" } })
                                 </td>
                             </tr>
-
+                             <tr>
+                                <td>
+                                    <h4>End Date:</h4>
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.JobEndDate, new { htmlAttributes = new { @class = "form-control", @style = "width:200px" } })
+                                </td>
+                            </tr>
 
                         </table>
                     </div>
@@ -149,6 +150,7 @@
                            
                             <tr>
                                 <td>
+                                    <br /><br />
                                     <h4>Qualifications:</h4>
                                 </td>
                                 <td>
@@ -174,6 +176,7 @@
 
                             <tr>
                                 <td>
+                                    <br /><br />
                                     <h4>Requirements:</h4>
                                 </td>
                                 <td>
@@ -209,13 +212,14 @@
 
             <div>
                 <h4 style="margin-left:138px; padding-bottom:15px">Job Description:</h4>
-                @Html.EditorFor(model => model.PostingDescription, new { htmlAttributes = new { @class = "form-control", @rows = "2", @cols = "100", @style = "margin-left:138px; max-width:73%; height:200px;", @placeholder = "Enter Description here..." } })
+                @Html.EditorFor(model => model.PostingDescription, new { htmlAttributes = new { @class = "form-control", @rows = "2", @cols = "100", @style = "margin-left:138px; max-width:78%; height:100px;", @placeholder = "Enter Description here..." } })
             
             </div>                 
                              
-            <div class="col-md-offset-2 col-md-10" style="margin-top:30px; margin-bottom:30px">
-                <input type="submit" value="Save" style="background-color:#00a203; border:none; margin-left: 330px; margin-right:30px" class="btn btn-primary btn-large" />
-                <a href="javascript:void(0);" style="text-align:center" onclick="history.go(-1);">Back</a>
+            <div  style="text-align:center; margin-top:60px; margin-bottom:30px">
+                <input type="submit" value="Save Changes" style="background-color:#00a203; border:none; " class="btn btn-primary btn-large" />
+                <br /><br />
+                <a href="javascript:void(0);" style="text-align:center" onclick="history.go(-1);">Cancel</a>
             </div>
 
         }
@@ -225,3 +229,10 @@
     </div>
 </body>
 </html>
+
+<style>
+    h4 {
+        color: #02388a;
+    }
+</style>
+
