@@ -6,91 +6,100 @@
 
 
 <div class="container well well-lg" style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
-
-    <p style="text-align:center; margin-top:20px; margin-bottom:15px; font-size:30px; color:#02388a;"> Niagara Catholic District School Board</p>
+    <br />
+    <p style="text-align:center; margin-top:20px; margin-bottom:15px; font-size:30px; color:#02388a;">  ∙ &nbsp; Job Details &nbsp; ∙</p>
     <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
     <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
-    <br />
-
-     <h3 style="padding-bottom:30px">
-        ∙ &nbsp; Details &nbsp; ∙
-    </h3>&nbsp;&nbsp;
+    <br /><br />
 
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div>
-        <h4>Job</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.JobCode)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.JobCode)
-            </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.JobTitle)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.JobTitle)
-            </dd>
+          <div class="borderVibe" style="border:1px solid #d5d2d2; width:70%; margin:0 auto; background-color:white; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
 
-            <dt>
-                @Html.DisplayNameFor(model => model.JobSummary)
-            </dt>
+              <div style="margin-left:170px">
 
-            <dd>
-                @Html.DisplayFor(model => model.JobSummary)
-            </dd>
+                  <div style="font-size:18px">
+                      <div style="color:#02388a; margin-top:80px; margin-bottom:10px; font-weight:bold">
+                          @Html.DisplayNameFor(model => model.JobCode)
+                      </div>
+                      <div style="color:black">
+                          @Html.DisplayFor(model => model.JobCode)
+                      </div>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Qualifications)
-            </dt>
-            <dd>
+                      <br /><br />
 
+                      <div style="color:#02388a; margin-bottom:10px; font-weight:bold">
+                          @Html.DisplayNameFor(model => model.JobTitle)
+                      </div>
+                      <div style="color:black">
+                          @Html.DisplayFor(model => model.JobTitle)
+                      </div>
 
-                @{
+                      <br /><br />
+
+                      <div style="color:#02388a; margin-bottom:10px; font-weight:bold">
+                          @Html.DisplayNameFor(model => model.JobSummary)
+                      </div>
+                      <div style="color:black; width:500px">
+                          @Html.DisplayFor(model => model.JobSummary)
+                      </div>
+
+                      <br /><br />
+
+                      <div style="color:#02388a; margin-bottom:10px; font-weight:bold">
+                          @Html.DisplayNameFor(model => model.Qualifications)
+                      </div>
+                      <div style="color:black">
+                          @{
                     foreach (var qualification in Model.Qualifications)
                     {
-                        @:  @qualification.QualificationSet <br />
-                    }
-                }
+                      @:  @qualification.QualificationSet <br />
+                            }
+                          }
+                      </div>
 
-            </dd>
+                      <br /><br />
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Requirements)
-            </dt>
-            <dd>
-
-
-                @{
+                      <div style="color:#02388a; margin-bottom:10px; font-weight:bold">
+                          @Html.DisplayNameFor(model => model.Requirements)
+                      </div>
+                      <div style="color:black;">
+                          @{
                     foreach (var requirement in Model.Requirements)
                     {
-                        @:  @requirement.RequirementName <br />
-                    }
-                }
+                      @:  @requirement.RequirementName <br />
+                               }
+                          }
+                      </div>
 
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Skills)
-            </dt>
-            <dd>
+                      <br /><br />
 
+                      <div style="color:#02388a; margin-bottom:10px; font-weight:bold">
+                          @Html.DisplayNameFor(model => model.Skills)
+                      </div>
 
-                @{
+                      <div style="color:black;">
+                          @{
                     foreach (var skill in Model.Skills)
                     {
-                        @:  @skill.SkillName <br />
-                    }
-                }
+                      @:  @skill.SkillName <br />
+        }
+                          }
+                      </div>
+                  </div>
 
-            </dd>
 
-        </dl>
+              </div>
+              <p style="text-align:center; margin-top:70px">
+                  @Html.ActionLink("Edit Job", "Edit", new { id = Model.ID }, new { @class = "btn btn-primary btn-large", @style = "border:none; background-color:#00a203; width:150px" })
+              </p>
+              <br /><br />
+          </div>
+    <div style="text-align:center">
+        <a href="javascript:void(0);" style="" onclick="history.go(-1);">Back to List</a>
     </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-    </div>
+
+    <br />
+          
+</div>
+

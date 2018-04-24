@@ -6,50 +6,48 @@
 
 
 <div class="container well well-lg" style=" width:1288px; margin-bottom:50px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px">
-
-    <p style="text-align:center; margin-top:20px; margin-bottom:15px; font-size:30px; color:#02388a;"> Niagara Catholic District School Board</p>
+    <br />
+    <p style="text-align:center; margin-top:20px; margin-bottom:15px; font-size:30px; color:#02388a;"> ∙ &nbsp; Archive this Job  &nbsp; ∙ </p>
     <hr style="height:6px; width:600px; margin-bottom:0px;border:none;color:#012e72;background-color:#012e72;" />
     <hr style="height:4px; width:500px; margin-top:4px; border:none;color:#00a203;background-color:#00a203;" />
-    <br />
+    <br /><br />
 
-     <h3 style="padding-bottom:30px">
-        ∙ &nbsp; Archive this Job &nbsp; ∙
-    </h3>&nbsp;&nbsp;
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-<h2>Delete</h2>
-@Html.ValidationSummary(true, "", new { @class = "text-danger" })
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Job</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.JobTitle)
-        </dt>
+          <h3 style="text-align:center">Are you sure you want to move this Job to Archives?</h3>
+    <br /><br />
+    <div>
+        <div  style="font-size:16px; margin-left:470px">
+            <div style="color:#02388a; font-weight:bold">
+                @Html.DisplayNameFor(model => model.JobTitle):
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.JobTitle)
-        </dd>
+            <div>
+                @Html.DisplayFor(model => model.JobTitle)
+            </div>
+            <br />
+            <div style="color:#02388a; font-weight:bold">
+                @Html.DisplayNameFor(model => model.JobSummary):
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.JobSummary)
-        </dt>
+            <div style="width:300px">
+                @Html.DisplayFor(model => model.JobSummary)
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.JobSummary)
-        </dd>
-
-    </dl>
+        </div>
 
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+
+         <div style="margin-top:60px; text-align:center; margin-bottom:30px">
+                <input type="submit" value="Move to Archives" style=" border:none;" class="btn btn-info btn-large" />
+                <br /><br />
+                <a href="javascript:void(0);" onclick="history.go(-1);">Cancel</a>
+          </div>
     }
-</div>
+
+    </div>
 
 </div>
